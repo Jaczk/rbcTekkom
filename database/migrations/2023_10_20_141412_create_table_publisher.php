@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_publisher', function (Blueprint $table) {
+        Schema::create('publisher', function (Blueprint $table) {
             $table->id();
             $table->string('pub_name');
             $table->timestamps();
