@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Publisher;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PublisherController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class PublisherController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Publisher $publisher)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +42,7 @@ class PublisherController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Publisher $publisher)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +50,7 @@ class PublisherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Publisher $publisher)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +58,7 @@ class PublisherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Publisher $publisher)
+    public function destroy(string $id)
     {
         //
     }

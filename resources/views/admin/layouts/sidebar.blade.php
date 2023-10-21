@@ -39,28 +39,28 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.category') }}" class="nav-link">
+                    <a href="{{ route('admin.book') }}" class="nav-link">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>
-                            Kategori
+                            Buku
                         </p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.good') }}" class="nav-link">
+                    <a href="{{ route('admin.special') }}" class="nav-link">
                         <i class="nav-icon fas fa-laptop-house"></i>
                         <p>
-                            Daftar Barang
+                            Daftar Spesialisasi
                         </p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.user') }}" class="nav-link">
+                    <a href="{{ route('admin.specDetail') }}" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
-                            Pengguna
+                            Daftar Detail Spesialisasi
                         </p>
                     </a>
                 </li>
@@ -75,10 +75,28 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.procurement') }}" class="nav-link">
+                    <a href="{{ route('admin.publisher') }}" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
-                            Pengadaan Barang
+                            Daftar Penerbit
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.donate') }}" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>
+                            Daftar Buku Sumbangan
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.user') }}" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>
+                            Daftar Pengguna
                         </p>
                     </a>
                 </li>

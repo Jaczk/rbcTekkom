@@ -12,7 +12,7 @@ class Book extends Model
 
     protected $fillable = [
         'book_name',
-        'pub_id',
+        'publisher',
         'author',
         'isbn-issn',
         'condition',
@@ -39,8 +39,4 @@ class Book extends Model
         return $this->belongsTo(SpecDetail::class);
     }
 
-    public function publisher()
-    {
-        return $this->belongsTo(Publisher::class);
-    }
 }

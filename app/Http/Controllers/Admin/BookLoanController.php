@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\BookLoan;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class BookLoanController extends Controller
@@ -34,7 +34,7 @@ class BookLoanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BookLoan $bookLoan)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +42,7 @@ class BookLoanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BookLoan $bookLoan)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +50,7 @@ class BookLoanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BookLoan $bookLoan)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +58,7 @@ class BookLoanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BookLoan $bookLoan)
+    public function destroy(string $id)
     {
         //
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Loan;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -34,7 +34,7 @@ class LoanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Loan $loan)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +42,7 @@ class LoanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Loan $loan)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +50,7 @@ class LoanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Loan $loan)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +58,7 @@ class LoanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Loan $loan)
+    public function destroy(string $id)
     {
         //
     }

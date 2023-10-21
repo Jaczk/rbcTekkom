@@ -1,14 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\FineController;
-use App\Http\Controllers\LoanController;
-use App\Http\Controllers\DonateController;
-use App\Http\Controllers\PublisherController;
-use App\Http\Controllers\SpecDetailController;
-use App\Http\Controllers\SpecializationController;
+use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\FineController;
+use App\Http\Controllers\Admin\LoanController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\DonateController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PublisherController;
+use App\Http\Controllers\Admin\SpecDetailController;
+use App\Http\Controllers\Admin\SpecializationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,10 @@ use App\Http\Controllers\Admin\DashboardController;
 Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/chart/ajax/{period}', [DashboardController::class, 'procurementChartAjax'])->name('admin.chart.ajax');
 Route::get('/itemChart/ajax/{period}', [DashboardController::class, 'itemLoanChartAjax'])->name('admin.itemchart.ajax');
+
+Route::get('admin/login', [LoginController::class, 'index'])->name('admin.login');
+Route::post('admin/login', [LoginController::class, 'authenticate'])->name('admin.login.auth');
+Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 Route::group(['prefix' => 'fine'], function () {
     Route::get('/', [FineController::class, 'index'])->name('admin.fine');
@@ -72,4 +78,10 @@ Route::group(['prefix' => 'specDetail'], function () {
     Route::get('/', [SpecDetailController::class, 'index'])->name('admin.specDetail');
     Route::get('/edit', [SpecDetailController::class, 'edit'])->name('admin.specDetail.edit');
     Route::put('/update', [SpecDetailController::class, 'update'])->name('admin.specDetail.update');
+});
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/', [UserController::class, 'index'])->name('admin.user');
+    Route::get('/edit', [UserController::class, 'edit'])->name('admin.user.edit');
+    Route::put('/update', [UserController::class, 'update'])->name('admin.user.update');
 });

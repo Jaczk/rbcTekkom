@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Donate;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DonateController extends Controller
@@ -34,7 +34,7 @@ class DonateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Donate $donate)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +42,7 @@ class DonateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Donate $donate)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +50,7 @@ class DonateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Donate $donate)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +58,7 @@ class DonateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Donate $donate)
+    public function destroy(string $id)
     {
         //
     }

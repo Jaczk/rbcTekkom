@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('book', function (Blueprint $table) {
             $table->id();
             $table->string('book_name');
-            $table->integer('pub_id');
+            $table->string('publisher');
             $table->string('author');
             $table->string('isbn_issn');
             $table->enum('condition', ['broken', 'new', 'normal']);

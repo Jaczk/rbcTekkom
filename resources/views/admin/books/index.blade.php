@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('title', 'Daftar Barang')
+@section('title', 'Daftar Buku')
 
 @section('content')
 
@@ -48,12 +48,12 @@
                 </div> --}}
                 <div class="card card-primary">
                     <div class="card-header" style="background-color: #121F3E">
-                        <h3 class="card-title">Daftar Barang</h3>
+                        <h3 class="card-title">Daftar Buku</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-3 col-md-12">
-                                <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold">+ Barang</a>
+                                <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold">+ Buku</a>
                             </div>
                         </div>
 
@@ -82,27 +82,34 @@
                                         <tr>
                                             <th>#</th>
                                             {{-- <th>ID</th> --}}
-                                            <th>Nama</th>
-                                            <th>Kategori</th>
+                                            <th>Nama Buku</th>
+                                            <th>Spesialisasi</th>
+                                            <th>Detail Spesialisasi</th>
+                                            <th>Kode Perpus</th>
+                                            <th>Penerbit</th>
+                                            <th>Penulis</th>
                                             <th>Kondisi</th>
                                             <th>Ketersediaan</th>
-                                            <th>Deskripsi</th>
                                             <th>Gambar</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-                                        @foreach ($goods as $good)
+
+                                        @foreach ($books as $book)
                                             <tr>
                                                 <td></td>
                                                 {{-- <td>{{ $good->id }}</td> --}}
-                                                <td>{{ $good->goods_name }}</td>
-                                                <td>{{ $good->category->category_name ?? '-' }}</td>
+                                                <td>{{ $book->book_name }}</td>
+                                                <td>{{ $book->specialization->desc }}</td>
+                                                <td>{{ $book->specDetail->spec_detail }}</td>
+                                                <td>{{ $book->lib_book_code }}</td>
+                                                <td class="text-justify">{{ $book->publisher->pub_name ?? '-' }}</td>
+                                                <td>{{ $book->author }}</td>
                                                 <td>
-                                                    {{ $good->condition == 'new' ? 'BARU' : ($good->condition == 'used' ? 'NORMAL' : 'RUSAK') }}
+                                                    {{ $book->condition == 'new' ? 'BARU' : ($book->condition == 'used' ? 'NORMAL' : 'RUSAK') }}
                                                 </td>
-                                                @if ($good->is_available == 0)
+                                                @if ($book->is_available == 0)
                                                     <td class="text-center">
                                                         <p class="text-danger text-bold">Tidak Ada</p>
                                                     </td>
@@ -111,19 +118,18 @@
                                                         <p class="text-success text-bold">Ada</p>
                                                     </td>
                                                 @endif
-                                                {{-- <td>{{ $good->is_available == '0' ? "Not Available" : "Ready"}}</td> --}}
-                                                <td class="text-justify">{{ $good->description }}</td>
+                                                {{-- <td>{{ $book->is_available == '0' ? "Not Available" : "Ready"}}</td> --}}
                                                 <td class="text-center">
-                                                    <img src="{{ filter_var($good->image, FILTER_VALIDATE_URL) ? $good->image : asset('storage/images/' . $good->image) }}"
+                                                    <img src="{{ filter_var($book->image, FILTER_VALIDATE_URL) ? $book->image : asset('storage/images/' . $book->image) }}"
                                                         class="img-fluid" style="width: 180px" alt="Image">
                                                 </td>
                                                 <td class="flex-row d-flex">
-                                                    <a href="{{ route('admin.good.edit', Crypt::encryptString($good->id)) }}"
+                                                    <a href="{{ route('admin.book.edit', Crypt::encryptString($book->id)) }}"
                                                         class="btn btn-secondary">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <form method="post"
-                                                        action="{{ route('admin.good.destroy', $good->id) }}">
+                                                        action="{{ route('admin.book.destroy', $book->id) }}">
                                                         @method('delete')
                                                         @csrf
                                                         <button type="submit" class="mx-1 btn btn-danger delete-btn">
@@ -160,21 +166,21 @@
                         },
                         {
                             extend: 'excel',
-                            title: 'Daftar Barang Perkantas',
+                            title: 'Daftar Buku',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the Excel report
                             }
                         },
                         {
                             extend: 'pdf',
-                            title: 'Daftar Barang Perkantas',
+                            title: 'Daftar Buku',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the PDF report
                             }
                         },
                         {
                             extend: 'print',
-                            title: 'Daftar Barang Perkantas',
+                            title: 'Daftar Buku',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the printed report
                             }
@@ -214,7 +220,7 @@
                     // Show SweetAlert confirmation dialog
                     Swal.fire({
                         title: 'Apakah anda yakin?',
-                        text: 'Item yang telah dihapus tidak dapat dikembalikan!',
+                        text: 'Buku Akan Dihapus dari Tabel!',
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#e31231',
@@ -230,61 +236,6 @@
                 });
             });
             //-------------
-            //- PIE CHART -
-            //-------------
-            // Get context with jQuery - using jQuery's .get() method.
-            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-            // You can switch between pie and douhnut using the method below.
-            new Chart(pieChartCanvas, {
-                type: 'pie',
-                data: {
-                    labels: [
-                        'Tersedia',
-                        'Tidak Tersedia',
-                    ],
-                    datasets: [{
-                        data: [
-                            {{ $availableGoods }},
-                            {{ $unavailableGoods }},
-                        ],
-                        backgroundColor: ['#00a65a', '#f56954'],
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                }
-            })
-            //-------------
-            //- PIE CHART 2 -
-            //-------------
-            // Get context with jQuery - using jQuery's .get() method.
-            var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d');
-            // You can switch between pie and douhnut using the method below.
-            new Chart(pieChartCanvas2, {
-                type: 'pie',
-                data: {
-                    labels: [
-                        @foreach ($goodCategories as $goodCategory)
-                            '{{ $goodCategory->category_name }}',
-                        @endforeach
-                    ],
-                    datasets: [{
-                        data: [
-                            @foreach ($goodCategories as $goodCategory)
-                                {{ $goodCategory->total }},
-                            @endforeach
-                        ],
-                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de',
-                            '#9BE8D8', '#CBFFA9', '#9BCDD2', '#E1AEFF', '#0079FF', '#FDCEDF', '#B799FF',
-                            '#D25380', '#E3F2C1', '#6C9BCF', '#408E91'
-                        ],
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                }
-            });
+
         </script>
     @endsection
