@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('spec_detail_id');
             $table->string('lib_book_code');
             $table->integer('year_entry');
+            $table->integer('is_reccomended');
             $table->string('image');
             $table->timestamps();
             $table->softDeletes();
