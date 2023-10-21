@@ -39,13 +39,13 @@
                         </div>
                         <div class="form-group">
                             <label for="author">Penulis</label>
-                            <input type="text" class="form-control" id="author" name="author"
-                                placeholder="Suryadi" value="{{ $books->author }}">
+                            <input type="text" class="form-control" id="author" name="author" placeholder="Suryadi"
+                                value="{{ $books->author }}">
                         </div>
                         <div class="mb-3">
                             <label for="specialization" class="form-label">Peminatan</label>
-                            <select class="custom-select" name="specialization_id">
-                                @foreach ($specializations as $special)
+                            <select class="custom-select" name="spec_id">
+                                @foreach ($specialization as $special)
                                     <option value="{{ $special->id }}"
                                         {{ $books->spec_id == $special->id ? 'selected' : '' }}>
                                         {{ $special->desc }}</option>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="specDetail" class="form-label">Detail Peminatan</label>
-                            <select class="custom-select" name="specDetail_id">
+                            <select class="custom-select" name="spec_detail_code">
                                 @foreach ($specDetails as $specDetail)
                                     <option value="{{ $specDetail->id }}"
                                         {{ $books->spec_detail_code == $specDetail->id ? 'selected' : '' }}>
@@ -63,29 +63,46 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="yearEntry">Tahun Masuk</label>
-                            <input type="number" class="form-control" id="yearEntry" name="yearEntry"
-                                placeholder="2023" value="{{ $books->year_entry }}">
+                            <label for="year_entry">Tahun Masuk</label>
+                            <input type="number" class="form-control" id="year_entry" name="year_entry" placeholder="2023"
+                                value="{{ $books->year_entry }}">
                         </div>
                         <div class="form-group">
-                            <label for="libraryCode">Kode Perpustakaan</label>
-                            <input type="varchar" class="form-control" id="libraryCode" name="libraryCode"
+                            <label for="lib_book_code">Kode Perpustakaan</label>
+                            <input type="varchar" class="form-control" id="lib_book_code" name="lib_book_code"
                                 placeholder="P.21.22.001" value="{{ $books->lib_book_code }}">
                         </div>
                         <div class="form-group">
-                            <label for="isbn">ISBN / ISSN</label>
-                            <input type="varchar" class="form-control" id="isbn" name="isbn"
-                                placeholder="978-602-8758-52-9" value="{{ $books->isbn-issn }}">
+                            <label for="isbn_issn">ISBN / ISSN</label>
+                            <input type="varchar" class="form-control" id="isbn_issn" name="isbn_issn"
+                                placeholder="978-602-8758-52-9" value="{{ $books->isbn_issn }}">
                         </div>
                         <div class="mb-3">
                             <label for="condition" class="form-label">Kondisi Buku</label>
                             <select class="custom-select" name="condition">
                                 <option value="">Pilih Kondisi</option>
-                                <option value="new" @selected($books->condition == 'new') @class(['bg-warning text-white' => $books->condition == 'new'])>BARU
+                                <option value="new" @selected($books->condition == 'new')
+                                    @class(['bg-warning text-white' => $books->condition == 'new'])>BARU
                                 </option>
-                                <option value="used" @selected($books->condition == 'used') @class(['bg-warning text-white' => $books->condition == 'used'])>NORMAL
+                                <option value="used" @selected($books->condition == 'used')
+                                    @class(['bg-warning text-white' => $books->condition == 'used'])>NORMAL
                                 </option>
-                                <option value="broken" @selected($books->condition == 'broken') @class(['bg-warning text-white' => $books->condition == 'broken'])>RUSAK
+                                <option value="broken" @selected($books->condition == 'broken')
+                                    @class(['bg-warning text-white' => $books->condition == 'broken'])>RUSAK
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="is_reccomended">Rekomendasi</label>
+                            <input type="number" class="form-control" id="is_reccomended" name="is_reccomended" placeholder="2023"
+                                value="{{ $books->is_reccomended }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Ketersediaan</label>
+                            <select class="custom-select" name="is_available)">
+                                <option value="1" {{ old('is_available') === '1' ? 'selected' : '' }}>Tersedia
+                                </option>
+                                <option value="0" {{ old('is_available') === '0' ? 'selected' : '' }}>Tidak Tersedia
                                 </option>
                             </select>
                         </div>

@@ -14,7 +14,7 @@ class Book extends Model
         'book_name',
         'publisher',
         'author',
-        'isbn-issn',
+        'isbn_issn',
         'condition',
         'is_available',
         'spec_id',
