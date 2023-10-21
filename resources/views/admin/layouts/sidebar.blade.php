@@ -5,7 +5,7 @@
         <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-normal" style="color: #f89223">
-            PERKANTAS
+            Ruang Baca
             {{-- <img class ="w-50" src="{{ asset("images/perkantas.png") }}" alt=""> --}}
         </span>
     </a>
@@ -17,8 +17,11 @@
             <div class="image">
                 <img src="{{ asset('adminlte/dist/img/admin.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
-            <div class="info">
+            {{-- <div class="info">
                 <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+            </div> --}}
+            <div class="info">
+                <a href="#" class="d-block">Admin</a>
             </div>
         </div>
 

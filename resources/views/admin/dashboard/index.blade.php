@@ -106,7 +106,7 @@
     </div>
 @endsection
 
-@section('js')
+{{-- @section('js')
     <script>
         //----------------------------------------------------------------------------------------------------------------------------------
         //-------------
@@ -288,4 +288,4 @@
             fetchDataAndRenderChart2(selectedPeriod);
         }
     </script>
-@endsection
+@endsection --}}
