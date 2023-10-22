@@ -58,30 +58,30 @@ Route::group(['prefix' => 'loans'], function () {
 
 Route::group(['prefix' => 'donate'], function () {
     Route::get('/', [DonateController::class, 'index'])->name('admin.donate');
-    Route::get('/edit', [DonateController::class, 'edit'])->name('admin.donate.edit');
-    Route::put('/update', [DonateController::class, 'update'])->name('admin.donate.update');
+    Route::get('/edit/{id}', [DonateController::class, 'edit'])->name('admin.donate.edit');
+    Route::put('/update/{id}', [DonateController::class, 'update'])->name('admin.donate.update');
 });
 
 Route::group(['prefix' => 'special'], function () {
     Route::get('/', [SpecializationController::class, 'index'])->name('admin.special');
     Route::get('/create', [SpecializationController::class, 'create'])->name('admin.special.create');
-    Route::get('/edit', [SpecializationController::class, 'edit'])->name('admin.special.edit');
+    Route::get('/edit/{id}', [SpecializationController::class, 'edit'])->name('admin.special.edit');
     Route::post('/store', [SpecializationController::class, 'store'])->name('admin.special.store');
-    Route::put('/update', [SpecializationController::class, 'update'])->name('admin.special.update');
-    Route::delete('/destroy', [SpecializationController::class, 'destroy'])->name('admin.special.destroy');
+    Route::put('/update/{id}', [SpecializationController::class, 'update'])->name('admin.special.update');
+    Route::delete('/destroy/{id}', [SpecializationController::class, 'destroy'])->name('admin.special.destroy');
 });
 
 Route::group(['prefix' => 'specDetail'], function () {
     Route::get('/', [SpecDetailController::class, 'index'])->name('admin.specDetail');
-    Route::get('/edit', [SpecDetailController::class, 'edit'])->name('admin.specDetail.edit');
+    Route::get('/edit/{id}', [SpecDetailController::class, 'edit'])->name('admin.specDetail.edit');
     Route::post('/store', [SpecDetailController::class, 'store'])->name('admin.specDetail.store');
     Route::get('/create', [SpecDetailController::class, 'create'])->name('admin.specDetail.create');
-    Route::put('/update', [SpecDetailController::class, 'update'])->name('admin.specDetail.update');
-    Route::delete('/destroy', [SpecDetailController::class, 'destroy'])->name('admin.specDetail.destroy');
+    Route::put('/update/{id}', [SpecDetailController::class, 'update'])->name('admin.specDetail.update');
+    Route::delete('/destroy/{id}', [SpecDetailController::class, 'destroy'])->name('admin.specDetail.destroy');
 });
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', [UserController::class, 'index'])->name('admin.user');
-    Route::get('/edit', [UserController::class, 'edit'])->name('admin.user.edit');
-    Route::put('/update', [UserController::class, 'update'])->name('admin.user.update');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+    Route::put('/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
 });

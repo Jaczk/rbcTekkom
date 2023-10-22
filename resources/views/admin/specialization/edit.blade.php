@@ -24,14 +24,19 @@
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form enctype="multipart/form-data" method="POST"
-                    action="{{ route('admin.specDetails.update', $spec_details->id) }}">
+                    action="{{ route('admin.special.update', $specializations->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="title">Detail Peminatan</label>
-                            <input type="text" class="form-control" id="spec_details" name="spec_details"
-                                placeholder="Alat Musik" value="{{ $spec_details->spec_detail }}">
+                            <label for="title">Kode Peminatan</label>
+                            <input type="text" class="form-control" id="spec_char" name="spec_char"
+                                placeholder="{{ old('spec_char') }}" value="{{ $specializations->spec_char }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Deskripsi Peminatan</label>
+                            <input type="text" class="form-control" id="desc" name="desc"
+                                placeholder="{{ old('desc') }}" value="{{ $specializations->desc }}">
                         </div>
                     </div>
                     <!-- /.card-body -->
