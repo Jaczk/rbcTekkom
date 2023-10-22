@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Specialization;
+use App\Http\Controllers\Controller;
+use App\Models\Book;
+use Illuminate\Support\Facades\Crypt;
 
 class SpecializationController extends Controller
 {
@@ -12,7 +15,8 @@ class SpecializationController extends Controller
      */
     public function index()
     {
-        //
+        $specializations = Specialization::all();
+        return view('admin.specialization.index', ['specializations' => $specializations]);
     }
 
     /**
@@ -20,7 +24,8 @@ class SpecializationController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('admin.specialization.create');
     }
 
     /**
@@ -28,38 +33,59 @@ class SpecializationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $data = $request->except('_token');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $request->validate([
+            'spec_char' => 'required|string',
+            'desc' => 'required|string'
+        ]);
+
+        Specialization::create($data);
+        return redirect()->route('admin.special')->with('success', 'Peminatan berhasil dibuat');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $decryptId = Crypt::decryptString($id);
+        $special = Specialization::find($decryptId);
+        return view('admin.specialization.edit', ['specializations' => $special]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->except('_token');
+
+        $request->validate([
+            'spec_char' => 'required|string',
+            'desc' => 'required|string'
+        ]);
+
+        $special = Specialization::find($id);
+
+        $special->update($data);
+        return redirect()->route('admin.special')->with('success', 'Sukses memperbarui peminatan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $special = Specialization::find($id);
+
+        $hasActiveBook = Book::where('spec_id', $special->id)->exists();
+
+        if ($hasActiveBook) {
+            return redirect()->route('admin.special')->with('error', 'Peminatan tidak dapat dihapus karena masih memiliki buku aktif');
+        }
+
+        $special->delete();
+        return redirect()->route('admin.special')->with('success', 'Peminatan Berhasil Dihapus');
     }
 }

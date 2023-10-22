@@ -47,13 +47,13 @@
                     </div>
                 </div> --}}
                 <div class="card card-primary">
-                    <div class="card-header" style="background-color: #121F3E">
+                    <div class="card-header" style="background-color: #0779E4">
                         <h3 class="card-title">Daftar Buku</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-3 col-md-12">
-                                <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold">+ Buku</a>
+                                <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold"> <span><i class="fas fa-plus"></i></span> Buku</a>
                             </div>
                         </div>
 
@@ -82,9 +82,9 @@
                                         <tr>
                                             <th>#</th>
                                             {{-- <th>ID</th> --}}
-                                            <th>Nama Buku</th>
-                                            <th>Spesialisasi</th>
-                                            <th>Detail Spesialisasi</th>
+                                            <th>Nama</th>
+                                            <th>Peminatan</th>
+                                            <th>Detail Minat</th>
                                             <th>Kode Perpus</th>
                                             <th>Penerbit</th>
                                             <th>Penulis</th>

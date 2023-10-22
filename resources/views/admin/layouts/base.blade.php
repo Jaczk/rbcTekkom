@@ -7,8 +7,7 @@
     <title>RBC • @yield('title')</title>
     <link rel="icon" type="image/png" href="{{ asset('/assets/images/perkantas.png') }}">
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
@@ -41,9 +40,9 @@
     <div class="wrapper">
 
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('images/perkantas.png') }}" alt="" height="150">
-        </div>
+        {{-- <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="{{ asset('images/logo_rbc.png') }}" alt="" height="150">
+        </div> --}}
 
         {{-- navbar here --}}
         @include('admin.layouts.navbar')
@@ -124,9 +123,6 @@
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
     <script src="{{ asset('adminlte/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
-
-
-
 
     @yield('js')
 

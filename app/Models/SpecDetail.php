@@ -11,7 +11,8 @@ class SpecDetail extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'spec_detail'
+        'spec_detail_code',
+        'desc'
     ];
     
     public function book()

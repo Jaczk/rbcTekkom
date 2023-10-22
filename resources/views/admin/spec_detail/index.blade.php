@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('title', 'Peminatan')
+@section('title', 'Detail Peminatan')
 
 @section('content')
 
@@ -8,13 +8,13 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header" style="background-color: #121F3E">
-                    <h3 class="card-title">Daftar Peminatan</h3>
+                    <h3 class="card-title">Daftar Detail Peminatan</h3>
                 </div>
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <a href="{{ route('admin.special.create') }}" class="btn btn-primary text-bold">+ Peminatan</a>
+                        <div class="mb-3 col-md-12">
+                            <a href="{{ route('admin.specDetail.create') }}" class="btn btn-primary text-bold">+ Detail Peminatan</a>
                         </div>
                     </div>
 
@@ -38,34 +38,34 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <table id="specializations" class="table table-striped table-hover">
+                            <table id="spec_details" class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         {{-- <th>Id</th> --}}
-                                        <th>Kode Peminatan</th>
+                                        <th>Kode Detail Peminatan</th>
                                         <th>Deskripsi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     
-                                    @foreach ($specializations as $special)
+                                    @foreach ($spec_details as $spec_detail)
                                         <tr>
                                             <td></td>
                                             {{-- <td>{{ $category->id }} </td> --}}
-                                            <td>{{ $special->spec_char }} </td>
-                                            <td>{{ $special->desc }} </td>
+                                            <td>{{ $spec_detail->spec_detail_code}} </td>
+                                            <td>{{ $spec_detail->desc }}</td>
                                             <td class="flex-row d-flex">
-                                                <a href="{{ route('admin.special.edit', Crypt::encryptString($special->id)) }}"
+                                                <a href="{{ route('admin.specDetail.edit', Crypt::encryptString($spec_detail->id)) }}"
                                                     class="btn btn-secondary">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form method="post"
-                                                    action="{{ route('admin.special.destroy', $special->id) }}">
+                                                    action="{{ route('admin.specDetail.destroy', $spec_detail->id) }}">
                                                     @method('delete')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-danger mx-2 delete-btn">
+                                                    <button type="submit" class="mx-2 btn btn-danger delete-btn">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
@@ -86,7 +86,7 @@
     <script>
         $(document).ready(function() {
             // Initialize DataTable
-            var table = $('#specializations').DataTable();
+            var table = $('#spec_details').DataTable();
             table
                 .on('order.dt search.dt', function() {
                     var i = 1;
@@ -102,7 +102,7 @@
                 })
                 .draw();
             // Apply event listener to all delete buttons
-            $('#specializations').on('click', '.delete-btn', function(e) {
+            $('#spec_details').on('click', '.delete-btn', function(e) {
                 e.preventDefault();
                 var form = $(this).closest('form');
 

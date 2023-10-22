@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Book;
+use App\Models\SpecDetail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 
 class SpecDetailController extends Controller
 {
@@ -12,7 +15,8 @@ class SpecDetailController extends Controller
      */
     public function index()
     {
-        //
+        $specDetail = SpecDetail::all();
+        return view('admin.spec_detail.index', ['spec_details' => $specDetail]);
     }
 
     /**
@@ -20,7 +24,7 @@ class SpecDetailController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.spec_detail.create');
     }
 
     /**
@@ -28,38 +32,62 @@ class SpecDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $data = $request->except('_token');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $request->validate([
+            'spec_detail_code' => 'required|string',
+            'desc' => 'required|string',
+        ]);
+
+        SpecDetail::create($data);
+        return redirect()->route('admin.specDetail')->with('success', 'Detail Peminatan berhasil dibuat');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $decryptId = Crypt::decryptString($id);
+        $special = SpecDetail::find($decryptId);
+
+        return view('admin.spec_detail.edit', ['spec_details' => $special]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->except('_token');
+
+        $request->validate([
+            'spec_detail_code' => 'required|string',
+            'desc' => 'required|string',
+
+        ]);
+
+        $special = SpecDetail::find($id);
+
+        $special->update($data);
+        return redirect()->route('admin.specDetail')->with('success', 'Sukses memperbarui peminatan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $spec_detail = SpecDetail::find($id);
+
+        $hasActiveBook = Book::where('spec_detail_code', $spec_detail->id)->exists();
+
+        if ($hasActiveBook) {
+            return redirect()->route('admin.specDetail')->with('error', 'Detail Peminatan tidak dapat
+            dihapus karena masih memiliki buku aktif');
+        }
+
+        $spec_detail->delete();
+        return redirect()->route('admin.specDetail')->with('success', 'Detail Peminatan Berhasil Dihapus');
     }
 }

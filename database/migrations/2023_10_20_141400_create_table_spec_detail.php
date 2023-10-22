@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('spec_detail', function (Blueprint $table) {
+        Schema::create('spec_details', function (Blueprint $table) {
             $table->id();
-            $table->string('spec_detail');
+            $table->string('spec_detail_code');
+            $table->string('desc');
             $table->timestamps();
             $table->softDeletes();
         });

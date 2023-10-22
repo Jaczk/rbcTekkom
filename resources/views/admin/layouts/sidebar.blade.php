@@ -1,10 +1,10 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #121F3E">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #1AACAC">
     <!-- Brand Logo -->
     <a href="{{ route('admin.dashboard') }}" class="brand-link">
         <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-normal" style="color: #f89223">
+            class="brand-image img-circle" style="opacity: .8">
+        <span class="brand-text font-weight-semibold" style="color: #ffffff">
             Ruang Baca
             {{-- <img class ="w-50" src="{{ asset("images/perkantas.png") }}" alt=""> --}}
         </span>
@@ -21,7 +21,7 @@
                 <a href="#" class="d-block">{{ auth()->user()->name }}</a>
             </div> --}}
             <div class="info">
-                <a href="#" class="d-block">Admin</a>
+                <a href="#" class="d-block" style="color: #ffffff;">Admin</a>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link" style="color: #ffffff;">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dasbor
@@ -38,36 +38,36 @@
                     </a>
                 </li>
 
+                <!-- Add a style attribute to change the text color -->
                 <li class="nav-item">
-                    <a href="{{ route('admin.book') }}" class="nav-link">
-                        <i class="nav-icon fas fa-shopping-cart"></i>
+                    <a href="{{ route('admin.book') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-book"></i>
                         <p>
                             Buku
                         </p>
                     </a>
-                </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.special') }}" class="nav-link">
-                        <i class="nav-icon fas fa-laptop-house"></i>
+                    <a href="{{ route('admin.special') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
-                            Daftar Spesialisasi
+                            Peminatan
                         </p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.specDetail') }}" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                    <a href="{{ route('admin.specDetail') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-tasks"></i>
                         <p>
-                            Daftar Detail Spesialisasi
+                            Detail Peminatan
                         </p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.loans') }}" class="nav-link">
-                        <i class="nav-icon fas fa-people-carry"></i>
+                    <a href="{{ route('admin.loans') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-truck-loading"></i>
                         <p>
                             Peminjaman
                         </p>
@@ -75,34 +75,25 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.publisher') }}" class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
+                    <a href="{{ route('admin.donate') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-people-carry"></i>
                         <p>
-                            Daftar Penerbit
+                            Buku Sumbangan
                         </p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.donate') }}" class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
+                    <a href="{{ route('admin.user') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-user-circle"></i>
                         <p>
-                            Daftar Buku Sumbangan
+                            Pengguna
                         </p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.user') }}" class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
-                        <p>
-                            Daftar Pengguna
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.fine.edit') }}" class="nav-link">
+                    <a href="{{ route('admin.fine.edit') }}" class="nav-link" style="color: #ffffff;">
                         <i class="nav-icon fas fa-file-excel"></i>
                         <p>
                             Denda
@@ -116,7 +107,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="confirmLogout(event)">
+                    <a href="#" class="nav-link" style="color: #ffffff;" onclick="confirmLogout(event)">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>
                             Keluar
