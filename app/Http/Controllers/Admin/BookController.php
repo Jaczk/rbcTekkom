@@ -55,6 +55,7 @@ class BookController extends Controller
             'is_available' => 'nullable',
             'is_reccomended' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png|nullable',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
         if ($request->hasFile('image')) {
