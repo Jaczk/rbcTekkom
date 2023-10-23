@@ -85,7 +85,8 @@ class SpecializationController extends Controller
             return redirect()->route('admin.special')->with('error', 'Peminatan tidak dapat dihapus karena masih memiliki buku aktif');
         }
 
-        $special->delete();
+        $special->forceDelete();
+        
         return redirect()->route('admin.special')->with('success', 'Peminatan Berhasil Dihapus');
     }
 }
