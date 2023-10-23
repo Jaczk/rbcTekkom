@@ -54,10 +54,10 @@
                         <div class="mb-3">
                             <label for="specDetail" class="form-label">Detail Peminatan</label>
                             <select class="custom-select" name="spec_detail_id">
-                                @foreach ($specDetails as $specDetail)
-                                    <option value="{{ $specDetail->id }}"
-                                        {{ old('spec_detail_id') == $specDetail->id ? 'selected' : '' }}>
-                                        {{ $specDetail->desc }}</option>
+                                @foreach ($specDetail as $s)
+                                    <option value="{{ $s->id }}"
+                                        {{ old('spec_detail_id') == $s->id ? 'selected' : '' }}>
+                                        {{ $s->desc }}</option>
                                 @endforeach
                             </select>
                         </div>

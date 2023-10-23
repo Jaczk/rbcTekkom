@@ -35,7 +35,7 @@ class SpecDetailController extends Controller
         $data = $request->except('_token');
 
         $request->validate([
-            'spec_detail_code' => 'required|string',
+            'spec_detail_id' => 'required|string',
             'desc' => 'required|string',
         ]);
 
@@ -62,7 +62,7 @@ class SpecDetailController extends Controller
         $data = $request->except('_token');
 
         $request->validate([
-            'spec_detail_code' => 'required|string',
+            'spec_detail_id' => 'required|string',
             'desc' => 'required|string',
 
         ]);
@@ -80,7 +80,7 @@ class SpecDetailController extends Controller
     {
         $spec_detail = SpecDetail::find($id);
 
-        $hasActiveBook = Book::where('spec_detail_code', $spec_detail->id)->exists();
+        $hasActiveBook = Book::where('spec_detail_id', $spec_detail->id)->exists();
 
         if ($hasActiveBook) {
             return redirect()->route('admin.specDetail')->with('error', 'Detail Peminatan tidak dapat

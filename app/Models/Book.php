@@ -18,7 +18,7 @@ class Book extends Model
         'condition',
         'is_available',
         'spec_id',
-        'spec_detail_code',
+        'spec_detail_id',
         'lib_book_code',
         'year_entry',
         'image'
@@ -31,7 +31,7 @@ class Book extends Model
 
     public function specialization()
     {
-        return $this->belongsTo(Specialization::class);
+        return $this->belongsTo(Specialization::class, 'spec_id');
     }
 
     public function specDetail()

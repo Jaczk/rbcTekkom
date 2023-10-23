@@ -20,7 +20,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::with(['specialization', 'specDetail', 'publisher']);
+        $books = Book::with(['specialization', 'specDetail'])->get();
 
         return view('admin.books.index', ['books' => $books]);
     }
@@ -33,7 +33,7 @@ class BookController extends Controller
         $special = Specialization::all();
         $specDetail = SpecDetail::all();
 
-        return view('admin.books.create', ['specialization' => $special, 'specDetails' => $specDetail]);
+        return view('admin.books.create', ['specialization' => $special, 'specDetail' => $specDetail]);
     }
 
     /**
@@ -54,7 +54,7 @@ class BookController extends Controller
             'spec_detail_id' => 'required',
             'is_available' => 'nullable',
             'is_reccomended' => 'nullable',
-            'image' => 'image|mimes:jpg,jpeg,png',
+            'image' => 'image|mimes:jpg,jpeg,png|nullable',
         ]);
 
         if ($request->hasFile('image')) {
@@ -93,7 +93,7 @@ class BookController extends Controller
         return view('admin.books.edit', [
             'books' => $books,
             'specDetails' => $specDetail,
-            'specializations' => $special
+            'specialization' => $special
         ]);
     }
 
