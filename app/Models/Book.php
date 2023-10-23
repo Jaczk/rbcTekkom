@@ -18,7 +18,7 @@ class Book extends Model
         'condition',
         'is_available',
         'spec_id',
-        'spec_detail_code',
+        'spec_detail_id',
         'lib_book_code',
         'year_entry',
         'image'

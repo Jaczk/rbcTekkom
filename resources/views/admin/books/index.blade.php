@@ -101,10 +101,10 @@
                                                 <td></td>
                                                 {{-- <td>{{ $good->id }}</td> --}}
                                                 <td>{{ $book->book_name }}</td>
-                                                <td>{{ $book->specialization->desc }}</td>
-                                                <td>{{ $book->specDetail->spec_detail }}</td>
+                                                <td>{{ $book->specialization->id ?? '-' }}</td>
+                                                <td>{{ $book->specDetail->desc }}</td>
                                                 <td>{{ $book->lib_book_code }}</td>
-                                                <td class="text-justify">{{ $book->publisher->pub_name ?? '-' }}</td>
+                                                <td class="text-justify">{{ $book->publisher ?? '-' }}</td>
                                                 <td>{{ $book->author }}</td>
                                                 <td>
                                                     {{ $book->condition == 'new' ? 'BARU' : ($book->condition == 'used' ? 'NORMAL' : 'RUSAK') }}
