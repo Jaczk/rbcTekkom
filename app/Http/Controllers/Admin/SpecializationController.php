@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Book;
+use App\Models\SpecDetail;
 use Illuminate\Http\Request;
 use App\Models\Specialization;
 use App\Http\Controllers\Controller;
-use App\Models\Book;
 use Illuminate\Support\Facades\Crypt;
 
 class SpecializationController extends Controller
@@ -16,7 +17,8 @@ class SpecializationController extends Controller
     public function index()
     {
         $specializations = Specialization::all();
-        return view('admin.specialization.index', ['specializations' => $specializations]);
+        $specDetail = SpecDetail::all();
+        return view('admin.specialization.index', ['specializations' => $specializations,'spec_details'=>$specDetail]);
     }
 
     /**

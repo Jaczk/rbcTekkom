@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BookController;
@@ -32,7 +32,7 @@ Route::post('admin/login', [LoginController::class, 'authenticate'])->name('admi
 Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 Route::group(['prefix' => 'fine'], function () {
-    Route::get('/', [FineController::class, 'index'])->name('admin.fine');
+    // Route::get('/', [FineController::class, 'index'])->name('admin.fine');
     Route::get('/edit', [FineController::class, 'edit'])->name('admin.fine.edit');
     Route::put('/update', [FineController::class, 'update'])->name('admin.fine.update');
 });

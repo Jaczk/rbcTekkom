@@ -47,13 +47,14 @@
                     </div>
                 </div> --}}
                 <div class="card card-primary">
-                    <div class="card-header" style="background-color: #0779E4">
+                    <div class="card-header" style="background-color: #6998AB">
                         <h3 class="card-title">Daftar Buku</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-3 col-md-12">
-                                <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold"> <span><i class="fas fa-plus"></i></span> Buku</a>
+                                <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold"> <span><i
+                                            class="fas fa-plus"></i></span> Buku</a>
                             </div>
                         </div>
 
@@ -86,9 +87,10 @@
                                             <th>Peminatan</th>
                                             <th>Detail Minat</th>
                                             <th>Kode Perpus</th>
-                                            <th>Penerbit</th>
+                                            {{-- <th>Penerbit</th>
                                             <th>Penulis</th>
-                                            <th>Kondisi</th>
+                                            <th>Kondisi</th> --}}
+                                            <th>Rekomendasi</th>
                                             <th>Ketersediaan</th>
                                             <th>Gambar</th>
                                             <th>Aksi</th>
@@ -104,11 +106,21 @@
                                                 <td>{{ $book->specialization->desc ?? '-' }}</td>
                                                 <td>{{ $book->specDetail->desc }}</td>
                                                 <td>{{ $book->lib_book_code }}</td>
-                                                <td class="text-justify">{{ $book->publisher ?? '-' }}</td>
+                                                {{-- <td>{{ $book->publisher ?? '-' }}</td>
                                                 <td>{{ $book->author }}</td>
                                                 <td>
-                                                    {{ $book->condition == 'new' ? 'BARU' : ($book->condition == 'used' ? 'NORMAL' : 'RUSAK') }}
-                                                </td>
+                                                    {{ $book->condition == 'new' ? 'BARU' : ($book->condition == 'normal' ? 'NORMAL' : 'RUSAK') }}
+                                                </td> --}}
+                                                @if ($book->is_recommended == 0)
+                                                    <td class="text-center">
+                                                        <i class="fas fa-times fa-lg" style="color: #e00043;"></i>
+                                                    </td>
+                                                @else
+                                                    <td class="text-center text-success font-weight-bold">
+                                                        <i class="fas fa-check fa-lg" style="color: #19942e;"></i>
+                                                    </td>
+                                                @endif
+                                                
                                                 @if ($book->is_available == 0)
                                                     <td class="text-center">
                                                         <p class="text-danger text-bold">Tidak Ada</p>
@@ -236,6 +248,5 @@
                 });
             });
             //-------------
-
         </script>
     @endsection

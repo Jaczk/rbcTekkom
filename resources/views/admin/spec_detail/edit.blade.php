@@ -30,8 +30,8 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="title">Kode Detail Peminatan</label>
-                            <input type="text" class="form-control" id="spec_detail_code" name="spec_detail_code"
-                                placeholder="Linux" value="{{ $spec_details->spec_detail_code }}">
+                            <input type="text" class="form-control" id="spec_detail_id" name="spec_detail_id"
+                                placeholder="Linux" value="{{ $spec_details->spec_detail_id }}">
                         </div>
                         <div class="form-group">
                             <label for="title">Deskripsi Detail Peminatan</label>

@@ -100,9 +100,9 @@
                                 placeholder="2023" value="{{ old('is_reccomended') }}">
                         </div> --}}
 
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" value="" id="is_reccomended" name="is_reccomended">
-                            <label class="form-check-label font-weight-bold" for="myCheckbox" for="is_reccomended">
+                        <div class="mb-2 form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="is_recommended" name="is_recommended">
+                            <label class="form-check-label font-weight-bold" for="myCheckbox" for="is_recommended">
                                 Rekomendasi
                             </label>
                         </div>
@@ -125,12 +125,12 @@
 
 @section('js')
     <script>
-        document.getElementById('myCheckbox').addEventListener('change', function() {
+        document.getElementById('is_recommended').addEventListener('change', function() {
             // If the checkbox is checked, set the hidden input value to 1
             if (this.checked) {
-                document.getElementById('inputValue').value = 1;
+                document.getElementById('is_recommended').value = 1;
             } else {
-                document.getElementById('inputValue').value = 0;
+                document.getElementById('is_recommended').value = 0;
             }
         });
 

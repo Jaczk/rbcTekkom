@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #1AACAC">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #1A374D">
     <!-- Brand Logo -->
     <a href="{{ route('admin.dashboard') }}" class="brand-link">
         <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
@@ -39,6 +39,16 @@
                 </li>
 
                 <!-- Add a style attribute to change the text color -->
+                
+                <li class="nav-item">
+                    <a href="{{ route('admin.special') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>
+                            Kategori Peminatan
+                        </p>
+                    </a>
+                </li>
+                
                 <li class="nav-item">
                     <a href="{{ route('admin.book') }}" class="nav-link" style="color: #ffffff;">
                         <i class="nav-icon fas fa-book"></i>
@@ -46,25 +56,8 @@
                             Buku
                         </p>
                     </a>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.special') }}" class="nav-link" style="color: #ffffff;">
-                        <i class="nav-icon fas fa-clipboard-list"></i>
-                        <p>
-                            Peminatan
-                        </p>
-                    </a>
                 </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.specDetail') }}" class="nav-link" style="color: #ffffff;">
-                        <i class="nav-icon fas fa-tasks"></i>
-                        <p>
-                            Detail Peminatan
-                        </p>
-                    </a>
-                </li>
-
+                
                 <li class="nav-item">
                     <a href="{{ route('admin.loans') }}" class="nav-link" style="color: #ffffff;">
                         <i class="nav-icon fas fa-truck-loading"></i>

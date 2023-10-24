@@ -1,5 +1,5 @@
 <!-- /.content-wrapper -->
-<footer class="main-footer">
+<footer class="main-footer" style="background-color: #ffffff ">
     <strong>Copyright &copy; BWA Bootcamp</strong>
     All rights reserved. for Ruang Baca Departemen Teknik Komputer Universitas Diponegoro
     Made with &hearts; by Chris & Dzul

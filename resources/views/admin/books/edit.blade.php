@@ -81,25 +81,24 @@
                             <label for="condition" class="form-label">Kondisi Buku</label>
                             <select class="custom-select" name="condition">
                                 <option value="">Pilih Kondisi</option>
-                                <option value="new" @selected($books->condition == 'new')
-                                    @class(['bg-warning text-white' => $books->condition == 'new'])>BARU
+                                <option value="new" @selected($books->condition == 'new') @class(['bg-warning text-white' => $books->condition == 'new'])>BARU
                                 </option>
-                                <option value="used" @selected($books->condition == 'used')
-                                    @class(['bg-warning text-white' => $books->condition == 'used'])>NORMAL
+                                <option value="used" @selected($books->condition == 'used') @class(['bg-warning text-white' => $books->condition == 'used'])>NORMAL
                                 </option>
-                                <option value="broken" @selected($books->condition == 'broken')
-                                    @class(['bg-warning text-white' => $books->condition == 'broken'])>RUSAK
+                                <option value="broken" @selected($books->condition == 'broken') @class(['bg-warning text-white' => $books->condition == 'broken'])>RUSAK
                                 </option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="is_reccomended">Rekomendasi</label>
-                            <input type="number" class="form-control" id="is_reccomended" name="is_reccomended" placeholder="2023"
-                                value="{{ $books->is_reccomended }}">
+                        <div class="mb-2 form-check">
+                            <input class="form-check-input" type="checkbox" id="is_recommended" name="is_recommended" value="1" 
+                                @if ($books->is_recommended == 1) checked @endif>
+                            <label class="form-check-label font-weight-bold" for="is_recommended">
+                                Rekomendasi
+                            </label>
                         </div>
                         <div class="form-group">
                             <label>Ketersediaan</label>
-                            <select class="custom-select" name="is_available)">
+                            <select class="custom-select" name="is_available">
                                 <option value="1" {{ old('is_available') === '1' ? 'selected' : '' }}>Tersedia
                                 </option>
                                 <option value="0" {{ old('is_available') === '0' ? 'selected' : '' }}>Tidak Tersedia
@@ -155,6 +154,15 @@
             // Update the label text with the file name
             const labelElement = this.nextElementSibling;
             labelElement.innerText = fileName;
+        });
+
+        document.getElementById('is_recommended').addEventListener('change', function() {
+            // If the checkbox is checked, set the hidden input value to 1
+            if (this.checked) {
+                document.getElementById('is_recommended').value = 1;
+            } else {
+                document.getElementById('is_recommended').value = 0;
+            }
         });
     </script>
 @endsection

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('spec_details', function (Blueprint $table) {
             $table->id();
-            $table->string('spec_detail_code');
+            $table->string('spec_detail_id');
             $table->string('desc');
             $table->timestamps();
             $table->softDeletes();

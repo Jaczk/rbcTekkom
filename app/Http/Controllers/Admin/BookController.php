@@ -53,26 +53,26 @@ class BookController extends Controller
             'spec_id' => 'required',
             'spec_detail_id' => 'required',
             'is_available' => 'nullable',
-            'is_reccomended' => 'nullable',
+            'is_recommended' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png|nullable',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png',
+            
         ]);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $ogImageName = Str::random(8) . $image->getClientOriginalName();
-
+        
             // Compress and convert to WebP
             $compressedImage = Image::make($image)
                 ->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->encode('jpg', 75); // Adjust compression quality as needed
-
+                ->encode('webp', 75); // Convert to WebP format
+        
             // Save the compressed and converted image
             $compressedImage->save(storage_path('app/public/images/' . $ogImageName));
-
+        
             $data['image'] = $ogImageName;
         }
         Book::create($data);
@@ -115,7 +115,7 @@ class BookController extends Controller
             'spec_id' => 'required',
             'spec_detail_id' => 'required',
             'is_available' => 'nullable',
-            'is_reccomended' => 'nullable',
+            'is_recommended' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png',
         ]);
 
@@ -124,23 +124,26 @@ class BookController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $ogImageName = Str::random(8) . $image->getClientOriginalName();
-
+        
             // Compress and convert to WebP
             $compressedImage = Image::make($image)
                 ->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->encode('jpg', 75); // Adjust compression quality as needed
-
+                ->encode('webp', 75); // Convert to WebP format
+        
             // Save the compressed and converted image
             $compressedImage->save(storage_path('app/public/images/' . $ogImageName));
-
+        
             $data['image'] = $ogImageName;
-
+        
             // Delete the old image
             Storage::delete('public/images/' . $book->image);
         }
+        
+
+        $data['is_recommended'] = $request->has('is_recommended') ? 1 : 0;
 
         $book->update($data);
 
