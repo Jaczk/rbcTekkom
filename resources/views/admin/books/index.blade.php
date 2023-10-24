@@ -53,8 +53,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-3 col-md-12">
-                                <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold"> <span><i
-                                            class="fas fa-plus"></i></span> Buku</a>
+                                <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold">+ Buku</a>
                             </div>
                         </div>
 

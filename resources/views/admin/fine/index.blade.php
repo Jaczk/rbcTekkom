@@ -27,7 +27,7 @@
             @endif
 
             <div class="card card-primary">
-                <div class="card-header">
+                <div class="card-header" style="background-color: #6998AB">
                     <h3 class="card-title">Perbarui Denda</h3>
                 </div>
                 <!-- /.card-header -->
