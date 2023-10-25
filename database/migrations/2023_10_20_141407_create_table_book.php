@@ -21,7 +21,7 @@ return new class extends Migration
             $table->tinyInteger('is_available')->default(1);
             $table->integer('spec_id');
             $table->integer('spec_detail_id');
-            $table->string('lib_book_code');
+            $table->string('lib_book_code')->unique();
             $table->integer('year_entry');
             $table->tinyInteger('is_recommended')->default(0);
             $table->string('desc')->nullable();

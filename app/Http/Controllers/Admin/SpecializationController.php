@@ -38,7 +38,7 @@ class SpecializationController extends Controller
         $data = $request->except('_token');
 
         $request->validate([
-            'spec_char' => 'required|string',
+            'spec_char' => 'required|string|unique:specializations,spec_char',
             'desc' => 'required|string'
         ]);
 
@@ -64,7 +64,7 @@ class SpecializationController extends Controller
         $data = $request->except('_token');
 
         $request->validate([
-            'spec_char' => 'required|string',
+            'spec_char' => 'required|string|unique:specializations,spec_char',
             'desc' => 'required|string'
         ]);
 

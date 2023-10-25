@@ -35,12 +35,12 @@ class SpecDetailController extends Controller
         $data = $request->except('_token');
 
         $request->validate([
-            'spec_detail_id' => 'required|string',
+            'spec_detail_id' => 'required|string|unique:spec_details,spec_detail_id',
             'desc' => 'required|string',
         ]);
 
         SpecDetail::create($data);
-        return redirect()->route('admin.specDetail')->with('success', 'Detail Peminatan berhasil dibuat');
+        return redirect()->route('admin.special')->with('success2', 'Detail Peminatan berhasil dibuat');
     }
 
     /**
@@ -62,7 +62,7 @@ class SpecDetailController extends Controller
         $data = $request->except('_token');
 
         $request->validate([
-            'spec_detail_id' => 'required|string',
+            'spec_detail_id' => 'required|string|unique:spec_details,spec_detail_id',
             'desc' => 'required|string',
 
         ]);
@@ -70,7 +70,7 @@ class SpecDetailController extends Controller
         $special = SpecDetail::find($id);
 
         $special->update($data);
-        return redirect()->route('admin.specDetail')->with('success', 'Sukses memperbarui peminatan');
+        return redirect()->route('admin.special')->with('success2', 'Sukses memperbarui peminatan');
     }
 
     /**
@@ -88,6 +88,6 @@ class SpecDetailController extends Controller
         }
 
         $spec_detail->delete();
-        return redirect()->route('admin.specDetail')->with('success', 'Detail Peminatan Berhasil Dihapus');
+        return redirect()->route('admin.special')->with('success2', 'Detail Peminatan Berhasil Dihapus');
     }
 }

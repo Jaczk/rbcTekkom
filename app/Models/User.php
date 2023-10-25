@@ -19,11 +19,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'nim',
         'email',
         'password',
         'role_id',
         'is_loan',
-        'fine'
+        'fine',
+        'profile_image',
+        'ktm_image'
     ];
 
     /**
