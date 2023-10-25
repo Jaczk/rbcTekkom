@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Loan;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -12,7 +13,8 @@ class LoanController extends Controller
      */
     public function index()
     {
-        //
+        $loan = Loan::with(['user','loan'])->orderBy('created_at','desc')->get();
+        return view('admin.loan.index',['loans'=>$loan]);
     }
 
     /**

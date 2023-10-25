@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->unsigned();
+            $table->integer('book_id');
             $table->date('return_date')->nullable();
             $table->integer('period');
             $table->tinyInteger('is_returned')->default(0);

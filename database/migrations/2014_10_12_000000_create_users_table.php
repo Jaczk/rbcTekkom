@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('phone');
             $table->tinyInteger('is_loan')->default(0);
             $table->integer('fine')->default(0);
+            $table->string('profile_image')->nullable();
+            $table->string('ktm_image')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

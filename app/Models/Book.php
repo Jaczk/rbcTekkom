@@ -22,12 +22,13 @@ class Book extends Model
         'spec_detail_id',
         'lib_book_code',
         'year_entry',
+        'desc',
         'image'
     ];
 
-    public function bookLoans()
+    public function loan()
     {
-        return $this->hasMany(BookLoan::class);
+        return $this->hasMany(Loan::class);
     }
 
     public function specialization()

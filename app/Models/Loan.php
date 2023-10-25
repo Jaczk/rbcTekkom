@@ -11,15 +11,16 @@ class Loan extends Model
 
     protected $fillable = [
         'user_id',
+        'book_id',
         'return_date',
         'period',
         'is_returned',
         'fine'
     ];
 
-    public function bookLoan()
+    public function book()
     {
-        return $this->hasMany(BookLoan::class);
+        return $this->hasMany(Book::class);
     }
 
     public function user()

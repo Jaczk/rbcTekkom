@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('book_name');
             $table->integer('price');
             $table->string('image');
+            $table->string('desc')->nullable();
             $table->string('publisher');
             $table->string('author');
             $table->timestamps();

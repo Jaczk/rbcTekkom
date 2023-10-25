@@ -53,6 +53,7 @@ class BookController extends Controller
             'spec_id' => 'required',
             'spec_detail_id' => 'required',
             'is_available' => 'nullable',
+            'desc'=>'nullable',
             'is_recommended' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png|nullable',
             
@@ -113,6 +114,7 @@ class BookController extends Controller
             'lib_book_code' => 'required|string',
             'year_entry' => 'required|numeric',
             'spec_id' => 'required',
+            'desc'=>'nullable',
             'spec_detail_id' => 'required',
             'is_available' => 'nullable',
             'is_recommended' => 'nullable',
