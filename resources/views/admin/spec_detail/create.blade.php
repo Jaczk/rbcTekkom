@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
 
         {{-- Alert Here --}}
         @if ($errors->any())
@@ -28,12 +28,12 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="title">Kode Detail Peminatan</label>
-                        <input type="text" class="form-control w-50" id="spec_detail_id" name="spec_detail_id"
+                        <input type="text" class="form-control" id="spec_detail_id" name="spec_detail_id"
                             placeholder="01" value="{{ old('spec_detail_id') }}">
                     </div>
                     <div class="form-group">
                         <label for="title">Deskripsi Detail Peminatan</label>
-                        <input type="text" class="form-control w-50" id="desc" name="desc"
+                        <input type="text" class="form-control" id="desc" name="desc"
                             placeholder="Linux" value="{{ old('desc') }}">
                     </div>
                 </div>

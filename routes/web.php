@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\Admin\SpecDetailController;
 use App\Http\Controllers\Admin\SpecializationController;
+use App\Models\Donate;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,8 +61,11 @@ Route::group(['prefix' => 'loans'], function () {
 
 Route::group(['prefix' => 'donate'], function () {
     Route::get('/', [DonateController::class, 'index'])->name('admin.donate');
+    Route::get('/create', [DonateController::class, 'create'])->name('admin.donate.create');
+    Route::post('/store', [DonateController::class, 'store'])->name('admin.donate.store');
     Route::get('/edit/{id}', [DonateController::class, 'edit'])->name('admin.donate.edit');
     Route::put('/update/{id}', [DonateController::class, 'update'])->name('admin.donate.update');
+    Route::delete('/destroy/{id}', [DonateController::class, 'destroy'])->name('admin.donate.destroy');
 });
 
 Route::group(['prefix' => 'special'], function () {

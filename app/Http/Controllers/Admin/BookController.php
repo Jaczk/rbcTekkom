@@ -156,6 +156,10 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::find($id);
+
+        $book->forceDelete();
+
+        return redirect()->route('admin.donate')->with('success', 'Data berhasil dihapus');
     }
 }
