@@ -51,6 +51,8 @@ Route::group(['prefix' => 'book'], function () {
 
 Route::group(['prefix' => 'loans'], function () {
     Route::get('/', [LoanController::class, 'index'])->name('admin.loans');
+    Route::get('/create', [LoanController::class, 'create'])->name('admin.loans.create');
+    Route::post('/store', [LoanController::class, 'store'])->name('admin.loans.store');
     Route::put('/return/{id}', [LoanController::class, 'return'])->name('admin.loans.return');
     Route::get('/chart/loan/{period}', [LoanController::class, 'loanChartAjax'])->name('admin.chart.loan.ajax');
     Route::delete('/destroy/{id}', [LoanController::class, 'destroy'])->name('admin.loans.destroy');

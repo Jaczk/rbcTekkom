@@ -68,11 +68,6 @@
                                 value="{{ $books->year_entry }}">
                         </div>
                         <div class="form-group">
-                            <label for="lib_book_code">Kode Perpustakaan</label>
-                            <input type="varchar" class="form-control" id="lib_book_code" name="lib_book_code"
-                                placeholder="P.21.22.001" value="{{ $books->lib_book_code }}">
-                        </div>
-                        <div class="form-group">
                             <label for="isbn_issn">ISBN / ISSN</label>
                             <input type="varchar" class="form-control" id="isbn_issn" name="isbn_issn"
                                 placeholder="978-602-8758-52-9" value="{{ $books->isbn_issn }}">

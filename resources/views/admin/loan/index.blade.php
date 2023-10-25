@@ -9,34 +9,7 @@
     <div class="row">
         <div class="col-md-12">
             {{-- for Chart --}}
-            <div>
-                <div class="card card-danger">
-                    <div class="card-header">
-                        <h3 class="card-title">Peminjaman Buku</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-
-                        </div>
-                    </div>
-                    {{-- <div class="card-body">
-                        <canvas id="lineChart"
-                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between">
-                            <select name="loan_period" id="loan_period" onchange="updateLoanChart()">
-                                @foreach ($loanDrop as $loan)
-                                    <option value="{{ $loan->period }}" @if ($loan->period == $period) selected @endif>
-                                        {{ $loan->period }}</option>
-                                @endforeach
-                            </select>
-                            <input type="hidden" name="loan_type" id="loan_type" value="pinjam-kembali">
-                        </div>
-                    </div> --}}
-                </div>
-            </div>
+            
 
             <div class="card card-primary">
                 <div class="card-header" style="background-color: #121F3E">
@@ -44,6 +17,11 @@
                 </div>
 
                 <div class="card-body">
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <a href="{{ route('admin.loans.create') }}" class="btn btn-primary text-bold">+ Peminjaman</a>
+                        </div>
+                    </div>
 
                     @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -60,7 +38,6 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>No.Peminjaman</th>
                                         <th>Nama Peminjam</th>
                                         <th>Buku</th>
                                         <th>Tanggal Pinjam</th>
@@ -76,14 +53,9 @@
                                     @foreach ($loans as $lo)
                                         <tr>
                                             <td></td>
-                                            <td class="text-center">{{ $lo->id }}</td>
                                             <td>{{ $lo->user->name }}</td>
                                             <td>
-                                                @foreach ($lo['bookLoan'] as $item)
-                                                    <li>{{ $item->book->lib_book_code }} <br>
-                                                        {{ $item->book->book_name }} 
-                                                    </li>
-                                                @endforeach
+                                                {{$lo->book->book_name}}
                                             </td>
                                             <td class="text-bold">{{ date('F j, Y h:i A', strtotime($lo->created_at)) }}
 
@@ -221,75 +193,76 @@
                 });
             });
         });
-        $(document).ready(function() {
-            var lineChartCanvas = document.getElementById('lineChart').getContext('2d');
-            var currentPeriod = "{{ $period }}";
-            var myChart;
+        // $(document).ready(function() {
+        //     var lineChartCanvas = document.getElementById('lineChart').getContext('2d');
+        //     var currentPeriod = "period";
+        //     var myChart;
 
-            function fetchDataAndRenderChart(period) {
-                var url = "{{ route('admin.chart.loan.ajax', ':period') }}";
-                url = url.replace(':period', period);
+        //     function fetchDataAndRenderChart(period) {
+        //         var url = "{{ route('admin.chart.loan.ajax', ':period') }}";
+        //         url = url.replace(':period', period);
 
-                fetch(url)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not OK');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('Received data:', data);
+        //         fetch(url)
+        //             .then(response => {
+        //                 if (!response.ok) {
+        //                     throw new Error('Network response was not OK');
+        //                 }
+        //                 return response.json();
+        //             })
+        //             .then(data => {
+        //                 console.log('Received data:', data);
 
-                        var chartData = {
-                            labels: data.labels,
-                            datasets: data.datasets.map(dataset => ({
-                                label: dataset.label,
-                                data: dataset.data,
-                                backgroundColor: dataset.backgroundColor,
-                                borderColor: dataset.borderColor,
-                                fill: dataset.fill,
-                                type: dataset.type
-                            }))
-                        };
+        //                 var chartData = {
+        //                     labels: data.labels,
+        //                     datasets: data.datasets.map(dataset => ({
+        //                         label: dataset.label,
+        //                         data: dataset.data,
+        //                         backgroundColor: dataset.backgroundColor,
+        //                         borderColor: dataset.borderColor,
+        //                         fill: dataset.fill,
+        //                         type: dataset.type
+        //                     }))
+        //                 };
 
-                        // Destroy previous chart instance if exists
-                        if (myChart) {
-                            myChart.destroy();
-                        }
+        //                 // Destroy previous chart instance if exists
+        //                 if (myChart) {
+        //                     myChart.destroy();
+        //                 }
 
-                        // Render new chart
-                        myChart = new Chart(lineChartCanvas, {
-                            type: 'bar',
-                            data: chartData,
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    title: {
-                                        display: true,
-                                        text: 'Periode: ' + period
-                                    },
-                                    legend: {
-                                        display: true,
-                                        position: 'bottom'
-                                    }
-                                }
-                            }
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching chart data:', error);
-                    });
-            }
+        //                 // Render new chart
+        //                 myChart = new Chart(lineChartCanvas, {
+        //                     type: 'bar',
+        //                     data: chartData,
+        //                     options: {
+        //                         responsive: true,
+        //                         maintainAspectRatio: false,
+        //                         plugins: {
+        //                             title: {
+        //                                 display: true,
+        //                                 text: 'Periode: ' + period
+        //                             },
+        //                             legend: {
+        //                                 display: true,
+        //                                 position: 'bottom'
+        //                             }
+        //                         }
+        //                     }
+        //                 });
+        //             })
+        //             .catch(error => {
+        //                 console.error('Error fetching chart data:', error);
+        //             });
+        //     }
 
-            // Initial chart rendering
-            fetchDataAndRenderChart(currentPeriod);
+        //     // Initial chart rendering
+        //     fetchDataAndRenderChart(currentPeriod);
 
-            // Update chart when period changes
-            $('#loan_period').on('change', function() {
-                var selectedPeriod = $(this).val();
-                fetchDataAndRenderChart(selectedPeriod);
-            });
-        });
+        //     // Update chart when period changes
+        //     $('#loan_period').on('change', function() {
+        //         var selectedPeriod = $(this).val();
+        //         fetchDataAndRenderChart(selectedPeriod);
+        //     });
+        // });
     </script>
+    
 @endsection

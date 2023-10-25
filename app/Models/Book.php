@@ -28,8 +28,9 @@ class Book extends Model
 
     public function loan()
     {
-        return $this->hasMany(Loan::class);
+        return $this->hasOne(Loan::class, 'book_id');
     }
+
 
     public function specialization()
     {
@@ -40,5 +41,4 @@ class Book extends Model
     {
         return $this->belongsTo(SpecDetail::class);
     }
-
 }

@@ -23,18 +23,31 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form enctype="multipart/form-data" method="POST" action="{{ route('admin.book.store') }}">
+                <form enctype="multipart/form-data" method="POST" action="{{ route('admin.loans.store') }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="book_name">Nama Buku</label>
-                            <input type="text" class="form-control" id="book_name" name="book_name"
-                                placeholder="Python For Beginner" value="{{ old('book_name') }}">
+                            <label for="book_name">Nama Buku</label> <br>
+                            <select name="book_id" class="selectpicker" id="book_id" data-live-search="true"
+                                data-width="75%" data-size="6">
+                                @foreach ($bookDrops as $book)
+                                    <option value="{{ $book->id }}">
+                                        {{ old('book_id') == $book->id ? 'selected' : '' }}
+                                        {{ $book->book_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="publisher">Nama Peminjam</label>
-                            <input type="text" class="form-control" id="publisher" name="publisher"
-                                placeholder="PT. Elex Media Komputindo" value="{{ old('publisher') }}">
+                            <label for="publisher">Nama Peminjam</label> <br>
+                            <select name="user_id" class="selectpicker" id="user_id" data-live-search="true"
+                                data-width="75%" data-size="6">
+                                @foreach ($userDrops as $user)
+                                    <option value="{{ $user->id }}">
+                                        {{ old('user_id') == $user->id ? 'selected' : '' }}
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -47,25 +60,13 @@
 @endsection
 
 @section('js')
-    <script>
-        document.getElementById('is_recommended').addEventListener('change', function() {
-            // If the checkbox is checked, set the hidden input value to 1
-            if (this.checked) {
-                document.getElementById('is_recommended').value = 1;
-            } else {
-                document.getElementById('is_recommended').value = 0;
-            }
-        });
 
-        // Get the custom file input element
-        const customFileInput = document.getElementById('image');
-        // Add event listener to update the label text with the selected file name
-        customFileInput.addEventListener('change', function() {
-            // Get the file name from the input value
-            const fileName = this.value.split('\\').pop();
-            // Update the label text with the file name
-            const labelElement = this.nextElementSibling;
-            labelElement.innerText = fileName;
-        });
-    </script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 @endsection

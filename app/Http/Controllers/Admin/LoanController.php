@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Models\Book;
 use App\Models\Loan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LoanController extends Controller
 {
@@ -13,8 +16,8 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loan = Loan::with(['user','loan'])->orderBy('created_at','desc')->get();
-        return view('admin.loan.index',['loans'=>$loan]);
+        $loan = Loan::with(['user', 'book'])->orderBy('created_at', 'desc')->get();
+        return view('admin.loan.index', ['loans' => $loan]);
     }
 
     /**
@@ -22,7 +25,9 @@ class LoanController extends Controller
      */
     public function create()
     {
-        //
+        $bookDrops = Book::where('is_available', 1)->get();
+        $userDrops = User::where('is_loan', 0)->get();
+        return view('admin.loan.create', compact('bookDrops', 'userDrops'));
     }
 
     /**
@@ -30,16 +35,43 @@ class LoanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data  = $request->except('_token');
+
+        $request->validate([
+            'book_id' => 'required|numeric',
+            'user_id' => 'required|numeric',
+        ]);
+
+        Book::find($data['book_id'])->update(['is_available' => 0]);
+        User::find($data['user_id'])->update(['is_loan' => 1]);
+
+        $data['return_date'] = Carbon::now()->addDays(7);
+        $data['period'] = Carbon::now()->format('Ym');
+
+        Loan::create($data);
+        return redirect()->route('admin.loans')->with('success', 'Berhasil membuat Peminjaman');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function return($id)
     {
-        //
+        // Find a single loan record by its ID
+        $loan = Loan::with('book')->find($id);
+
+        if ($loan && $loan->is_returned === 0) {
+            // Update the related book and loan records
+            Book::find($loan->book->id)->update(['is_available' => 1]);
+            $loan->update(['is_returned' => 1]);
+            User::find($loan->user->id)->update(['is_loan' => 0]);
+
+            return redirect()->route('admin.loans')->with('success', 'Berhasil Menyelesaikan Peminjaman');
+        }
+
+        return redirect()->route('admin.loans')->with('error', 'Gagal Menyelesaikan Peminjaman');
     }
+
 
     /**
      * Show the form for editing the specified resource.
