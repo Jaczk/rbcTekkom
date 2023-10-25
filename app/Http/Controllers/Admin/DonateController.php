@@ -81,9 +81,9 @@ class DonateController extends Controller
     public function edit($id)
     {
         $decryptId = Crypt::decryptString($id);
-        $donates = Donate::find($decryptId);
+        $donate = Donate::find($decryptId);
         return view('admin.donate.edit', [
-            'donates' => $donates,
+            'donate' => $donate,
         ]);
     }
 

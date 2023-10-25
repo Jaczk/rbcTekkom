@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('title', 'Buku Sumbangan')
+@section('title', 'Tambah Buku Sumbangan')
 
 @section('content')
     <div class="row">
@@ -19,45 +19,63 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Tambah Buku</h3>
+                    <h3 class="card-title">Tambah Buku Sumbangan</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form enctype="multipart/form-data" method="POST" action="{{ route('admin.donate.store') }}">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="book_name">Nama Buku</label>
-                            <input type="text" class="form-control" id="book_name" name="book_name"
-                                placeholder="Python For Beginner" value="{{ old('book_name') }}">
+
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="book_name">Nama Buku</label>
+                                    <input type="text" class="form-control" id="book_name" name="book_name"
+                                        placeholder="Python For Beginner" value="{{ old('book_name') }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="title">Harga</label>
+                                    <input type="number" class="form-control" id="price" name="price"
+                                        placeholder="Harga buku dalam satuan ribuan rupiah. (contoh: 5000)"
+                                        value="{{ old('price') }}">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="title">Harga</label>
-                            <input type="number" class="form-control" id="price" name="price"
-                                placeholder="Harga buku" value="{{ old('price') }}">
-                            <p class="font-italic text-bold">
-                                Harga buku dalam satuan ribuan rupiah. (contoh: 5000)
-                            </p>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="publisher">Penerbit</label>
+                                    <input type="text" class="form-control" id="publisher" name="publisher"
+                                        placeholder="PT. Elex Media Komputindo" value="{{ old('publisher') }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="author">Penulis</label>
+                                    <input type="text" class="form-control" id="author" name="author"
+                                        placeholder="Suryadi" value="{{ old('author') }}">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="publisher">Penerbit</label>
-                            <input type="text" class="form-control" id="publisher" name="publisher"
-                                placeholder="PT. Elex Media Komputindo" value="{{ old('publisher') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="author">Penulis</label>
-                            <input type="text" class="form-control" id="author" name="author" placeholder="Suryadi"
-                                value="{{ old('author') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="isbn_issn">Deskripsi</label>
-                            <input type="varchar" class="form-control" id="desc" name="desc"
-                                placeholder="Buku ini membahas..." value="{{ old('desc') }}">
-                        </div>
-                        <label for="image">Gambar</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="image" name="image">
-                            <label class="custom-file-label" for="image">Choose file...</label>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="isbn_issn">Deskripsi</label>
+                                    <textarea class="form-control" name="desc" id="desc" rows="3" placeholder="Buku ini membahas...">{{ old('desc') }}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="image">Gambar</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <label class="custom-file-label" for="image">Choose file...</label>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
