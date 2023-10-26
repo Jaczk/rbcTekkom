@@ -19,7 +19,7 @@
         </div>
         <div class="p-0 mx-3 small-box bg-success col">
             <div class="inner">
-                <h3>{{ $loans }}</h3>
+                <h3>{{ $inLoans }}</h3>
                 <p>Peminjaman Berlangsung</p>
             </div>
             <div class="icon">
@@ -31,7 +31,7 @@
         </div>
         <div class="p-0 small-box bg-danger col">
             <div class="inner">
-                <h3>{{ $inLoans }}</h3>
+                <h3>{{ $lateLoans }}</h3>
                 <p>Peminjaman Terlambat</p>
             </div>
             <div class="icon">
@@ -86,7 +86,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
-                    <div class="card-header" style="background-color: #2b3a8f">
+                    <div class="card-header" style="background-color: #6998AB">
                         <h3 class="card-title">Tabel Buku</h3>
                     </div>
                     <div class="card-body">
@@ -99,7 +99,7 @@
     </div>
     <div class="m-2">
         <div class="card card-primary">
-            <div class="card-header" style="background-color: #2b3a8f">
+            <div class="card-header" style="background-color: #6998AB">
                 <h3 class="card-title">Frekuensi Peminjaman Buku per Periode</h3>
             </div>
             <div class="card-body">

@@ -20,7 +20,10 @@ class DashboardController extends Controller
     {
         $books = Book::count();
         $donates = Donate::count();
-        $loans = Loan::count();
+        $lateLoans = Loan::where('is_returned', 0)
+            ->where('fine', '>', 0)
+            ->where('return_date', '<', Carbon::now())
+            ->count();
 
         $inLoans = Loan::where('is_returned', 0)->count();
 
@@ -42,7 +45,7 @@ class DashboardController extends Controller
         return view('admin.dashboard.index', compact(
             'books',
             'donates',
-            'loans',
+            'lateLoans',
             'specBooks',
             'specBookChartData',
             'specBookDrop',

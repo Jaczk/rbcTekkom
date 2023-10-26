@@ -55,7 +55,8 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="specialization" class="form-label">Peminatan</label>
-                                    <select class="custom-select" name="spec_id">
+                                    <select class="selectpicker" name="spec_id" data-live-search="true"
+                                    data-width="100%" data-size="6">
                                         @foreach ($specialization as $special)
                                             <option value="{{ $special->id }}"
                                                 {{ $books->spec_id == $special->id ? 'selected' : '' }}>
@@ -68,7 +69,8 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="specDetail" class="form-label">Detail Peminatan</label>
-                                    <select class="custom-select" name="spec_detail_id">
+                                    <select class="selectpicker" name="spec_detail_id" data-live-search="true"
+                                    data-width="100%" data-size="6">
                                         @foreach ($specDetails as $specDetail)
                                             <option value="{{ $specDetail->id }}"
                                                 {{ $books->spec_detail_id == $specDetail->id ? 'selected' : '' }}>
@@ -218,4 +220,11 @@
             }
         });
     </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 @endsection

@@ -63,8 +63,9 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="specialization" class="form-label">Peminatan</label>
-                                    <select class="custom-select" name="spec_id">
+                                    <label for="specialization" class="form-label">Peminatan</label> <br>
+                                    <select class="selectpicker" name="spec_id" data-live-search="true"
+                                    data-width="100%" data-size="6">
                                         @foreach ($specialization as $special)
                                             <option value="{{ $special->id }}"
                                                 {{ old('spec_id') == $special->id ? 'selected' : '' }}>
@@ -75,8 +76,9 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="specDetail" class="form-label">Detail Peminatan</label>
-                                    <select class="custom-select" name="spec_detail_id">
+                                    <label for="specDetail" class="form-label">Detail Peminatan</label> <br>
+                                    <select class="selectpicker" name="spec_detail_id" data-live-search="true"
+                                    data-width="100%" data-size="6">
                                         @foreach ($specDetail as $s)
                                             <option value="{{ $s->id }}"
                                                 {{ old('spec_detail_id') == $s->id ? 'selected' : '' }}>
@@ -100,13 +102,6 @@
                                     <label for="isbn_issn">ISBN / ISSN</label>
                                     <input type="varchar" class="form-control" id="isbn_issn" name="isbn_issn"
                                         placeholder="978-602-8758-52-9" value="{{ old('isbn_issn') }}">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="lib_book_code">Kode Perpustakaan</label>
-                                    <input type="varchar" class="form-control" id="lib_book_code" name="lib_book_code"
-                                        placeholder="S.12.22.006" value="{{ old('lib_book_code') }}">
                                 </div>
                             </div>
                         </div>
@@ -156,13 +151,10 @@
 
                         <div class="form-row">
                             <div class="col">
-                                
-                                    <div class="form-group">
-                                        <label for="desc">Deskripsi</label>
-                                        <textarea class="form-control" name="desc" id="desc" rows="3"
-                                            placeholder="Buku ini membahas..."></textarea>
-                                    </div>
-                               
+                                <div class="form-group">
+                                    <label for="desc">Deskripsi</label>
+                                    <textarea class="form-control" name="desc" id="desc" rows="3" placeholder="Buku ini membahas..."></textarea>
+                                </div>
                             </div>
                             <div class="col">
                                 <label for="image">Gambar</label>
@@ -205,4 +197,12 @@
             labelElement.innerText = fileName;
         });
     </script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 @endsection
