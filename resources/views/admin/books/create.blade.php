@@ -102,10 +102,17 @@
                                         placeholder="978-602-8758-52-9" value="{{ old('isbn_issn') }}">
                                 </div>
                             </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="lib_book_code">Kode Perpustakaan</label>
+                                    <input type="varchar" class="form-control" id="lib_book_code" name="lib_book_code"
+                                        placeholder="S.12.22.006" value="{{ old('lib_book_code') }}">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="col">
+                            <div class="col-md-6">
 
                                 <div class="mb-3">
                                     <label for="condition" class="form-label">Kondisi Buku</label>
@@ -119,44 +126,50 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Ketersediaan</label>
-                                            <select class="custom-select" name="is_available)">
-                                                <option value="1" {{ old('is_available') === '1' ? 'selected' : '' }}>Tersedia
-                                                </option>
-                                                <option value="0" {{ old('is_available') === '0' ? 'selected' : '' }}>Tidak
-                                                    Tersedia
-                                                </option>
-                                            </select>
-                                        </div>
 
-                                    </div>
-                                    <div class="col">
-                                        <div class="mb-2 form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="is_recommended"
-                                                name="is_recommended">
-                                            <label class="form-check-label font-weight-bold" for="myCheckbox"
-                                                for="is_recommended">
-                                                Rekomendasi
-                                            </label>
-                                        </div>
-                                    </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Ketersediaan</label>
+                                    <select class="custom-select" name="is_available)">
+                                        <option value="1" {{ old('is_available') === '1' ? 'selected' : '' }}>
+                                            Tersedia
+                                        </option>
+                                        <option value="0" {{ old('is_available') === '0' ? 'selected' : '' }}>Tidak
+                                            Tersedia
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-2 form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="is_recommended"
+                                        name="is_recommended">
+                                    <label class="form-check-label font-weight-bold" for="myCheckbox"
+                                        for="is_recommended">
+                                        Rekomendasi
+                                    </label>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="form-row">
+                            <div class="col">
+                                
+                                    <div class="form-group">
+                                        <label for="desc">Deskripsi</label>
+                                        <textarea class="form-control" name="desc" id="desc" rows="3"
+                                            placeholder="Buku ini membahas..."></textarea>
+                                    </div>
+                               
+                            </div>
                             <div class="col">
                                 <label for="image">Gambar</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="image" name="image">
                                     <label class="custom-file-label" for="image">Choose file...</label>
                                 </div>
-                            </div>
-                            <div class="col">
                             </div>
                         </div>
                         <!-- /.card-body -->

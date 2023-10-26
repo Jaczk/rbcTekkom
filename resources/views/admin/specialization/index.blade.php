@@ -44,7 +44,7 @@
                                     <tr>
                                         <th>#</th>
                                         {{-- <th>Id</th> --}}
-                                        <th>Kode Peminatan</th>
+                                        <th>Kode Minat</th>
                                         <th>Deskripsi</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -118,7 +118,7 @@
                                     <tr>
                                         <th>#</th>
                                         {{-- <th>Id</th> --}}
-                                        <th>Kode Detail Peminatan</th>
+                                        <th>Kode Detail Minat</th>
                                         <th>Deskripsi</th>
                                         <th>Aksi</th>
                                     </tr>

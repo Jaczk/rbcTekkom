@@ -62,9 +62,8 @@ class SpecDetailController extends Controller
         $data = $request->except('_token');
 
         $request->validate([
-            'spec_detail_id' => 'required|string|unique:spec_details,spec_detail_id',
+            'spec_detail_id' => 'required|string|unique:spec_details,spec_detail_id,' . $id, // Add the exception
             'desc' => 'required|string',
-
         ]);
 
         $special = SpecDetail::find($id);

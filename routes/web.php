@@ -28,6 +28,7 @@ Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/chart/ajax/{period}', [DashboardController::class, 'procurementChartAjax'])->name('admin.chart.ajax');
 Route::get('/specChart/ajax/{period}', [DashboardController::class, 'specBookChartAjax'])->name('admin.specChart.ajax');
 
+
 Route::get('admin/login', [LoginController::class, 'index'])->name('admin.login');
 Route::post('admin/login', [LoginController::class, 'authenticate'])->name('admin.login.auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');

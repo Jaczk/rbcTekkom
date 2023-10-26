@@ -19,8 +19,8 @@
         </div>
         <div class="p-0 mx-3 small-box bg-success col">
             <div class="inner">
-                <h3>{{ $donates }}</h3>
-                <p>Sumbangan</p>
+                <h3>{{ $loans }}</h3>
+                <p>Peminjaman Berlangsung</p>
             </div>
             <div class="icon">
                 <i class="fas fa-file"></i>
@@ -29,10 +29,10 @@
                 More info <i class="fas fa-arrow-circle-right"></i>
             </a>
         </div>
-        <div class="p-0 small-box bg-warning col">
+        <div class="p-0 small-box bg-danger col">
             <div class="inner">
-                <h3>{{ $loans }}</h3>
-                <p>Peminjaman</p>
+                <h3>{{ $inLoans }}</h3>
+                <p>Peminjaman Terlambat</p>
             </div>
             <div class="icon">
                 <i class="fas fa-people-carry"></i>
@@ -43,9 +43,48 @@
         </div>
     </div>
 
+    <div class="d-flex row justify-content-between"> {{-- row 2 --}}
+        <div class="p-0 small-box bg-dark col">
+            <div class="inner">
+                <h3>{{ $brokenBook }}</h3>
+                <p>Buku Rusak</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-exchange-alt"></i>
+            </div>
+            <a href="{{ route('admin.book') }}" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+        <div class="p-0 mx-3 small-box bg-warning col">
+            <div class="inner">
+                <h3>{{ $donates }}</h3>
+                <p>Buku Sumbangan</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <a href="{{ route('admin.donate') }}" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+        <div class="p-0 small-box bg-info col">
+            <div class="inner">
+                <h3>1</h3>
+                <p>Pengguna (No Admin)</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-universal-access"></i>
+            </div>
+            <a href="{{ route('admin.loans') }}" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header" style="background-color: #2b3a8f">
                         <h3 class="card-title">Tabel Buku</h3>
@@ -55,38 +94,13 @@
                             style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                     </div>
                 </div>
-
-                {{-- card for chart js --}}
-            </div>
-            <div class="col-md-6">
-
-                <div class="card card-primary">
-                    <div class="card-header" style="background-color: #2b3a8f">
-                        <h3 class="card-title">Ringkasan Pengadaan Periode</h3>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="procChart"
-                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                    </div>
-                    <div class="card-footer ">
-                        <div class="d-flex justify-content-between">
-                            {{-- <select name="period" id="pp" onchange="updateChart(this)">
-                                @foreach ($procurementDrop as $proc)
-                                    <option value="{{ $proc->period }}" @if ($proc->period == $period) selected @endif>
-                                        {{ $proc->period }}</option>
-                                @endforeach
-                            </select> --}}
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <div class="m-2">
         <div class="card card-primary">
             <div class="card-header" style="background-color: #2b3a8f">
-                <h3 class="card-title">Frekuensi Peminjaman Barang per Periode</h3>
+                <h3 class="card-title">Frekuensi Peminjaman Buku per Periode</h3>
             </div>
             <div class="card-body">
                 <canvas id="freqChart"
@@ -94,12 +108,12 @@
             </div>
             <div class="card-footer ">
                 <div class="d-flex justify-content-between">
-                    {{-- <select name="period" id="pp" onchange="updateChart2(this)">
-                        @foreach ($itemDrop as $item)
+                    <select name="period" id="pp" onchange="updateChart2(this)">
+                        @foreach ($specBookDrop as $item)
                             <option value="{{ $item->period }}" @if ($item->period == $period) selected @endif>
                                 {{ $item->period }}</option>
                         @endforeach
-                    </select> --}}
+                    </select>
                 </div>
             </div>
         </div>
@@ -107,21 +121,27 @@
 @endsection
 
 @section('js')
-<script>
-    var conditionChartCanvas = $('#conditionChart').get(0).getContext('2d');
+    <script>
+        var conditionChartCanvas = $('#conditionChart').get(0).getContext('2d');
         var pieData = {
             labels: [
-                'Buku Baru',
-                'Buku Normal',
-                'Buku Rusak',
+                @foreach ($specBooks as $spec)
+                    '{{ $spec->desc }}', // Added single quotes and '->desc'
+                @endforeach
             ],
             datasets: [{
-                data: [{{ $newBook }}, {{ $normalBook }}, {{ $brokenBook }}],
-                backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                data: [
+                    @foreach ($specBooks as $spec)
+                        {{ $spec->count }}, // Added '->count'
+                    @endforeach
+                ],
+                backgroundColor: [
+                    '#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de',
+                ],
             }]
         };
-        //Create pie or douhnut chart
-        // You can switch between pie and douhnut using the method below.
+        // Create pie or doughnut chart
+        // You can switch between pie and doughnut using the method below.
         new Chart(conditionChartCanvas, {
             type: 'pie',
             data: pieData,
@@ -140,14 +160,15 @@
                 }
             }
         });
-</script>
-<script>
-    var ctx2 = document.getElementById('freqChart').getContext('2d');
+    </script>
+
+    <script>
+        var ctx2 = document.getElementById('freqChart').getContext('2d');
         var currentPeriod2 = "{{ $period }}";
         var myChart2;
 
         function fetchDataAndRenderChart2(period) {
-            fetch('admin/specChart/ajax/' + period)
+            fetch('specChart/ajax/' + period)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not OK');
@@ -208,5 +229,5 @@
             var selectedPeriod = option.value;
             fetchDataAndRenderChart2(selectedPeriod);
         }
-</script>
+    </script>
 @endsection

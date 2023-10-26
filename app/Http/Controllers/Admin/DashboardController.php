@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\Loan;
+use App\Models\User;
 use App\Models\Donate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,9 +22,16 @@ class DashboardController extends Controller
         $donates = Donate::count();
         $loans = Loan::count();
 
+        $inLoans = Loan::where('is_returned', 0)->count();
+
         $brokenBook = Book::where('condition', 'broken')->count();
-        $newBook = Book::where('condition', 'new')->count();
-        $normalBook = Book::where('condition', 'normal')->count();
+
+        $noAdmin = User::where('role_id', '!=', 1)->count();
+
+        $specBooks = Book::join('specializations', 'books.spec_id', '=', 'specializations.id')
+            ->groupBy('specializations.desc')
+            ->select('specializations.desc', DB::raw('COUNT(*) as count'))
+            ->get();
 
         $specBookChartData = $this->specBookChartAjax($request->period);
 
@@ -35,13 +43,13 @@ class DashboardController extends Controller
             'books',
             'donates',
             'loans',
-            'brokenBook',
-            'newBook',
-            'normalBook',
+            'specBooks',
             'specBookChartData',
             'specBookDrop',
-            'period'
-
+            'period',
+            'brokenBook',
+            'inLoans',
+            'noAdmin'
         ));
     }
 
@@ -54,15 +62,15 @@ class DashboardController extends Controller
 
     public static function specBookChart($period)
     {
-        $data =Loan::join('books', 'loans.book_id', '=', 'books.id')
-        ->where('period',$period)
-        ->join('specializations', 'books.spec_id', '=', 'specializations.id')
-        ->groupBy('specializations.desc')
-        ->select('specializations.desc', DB::raw('COUNT(*) as count'))
-        ->get();
+        $data = Loan::where('period', $period)
+            ->join('books', 'loans.book_id', '=', 'books.id')
+            ->join('specializations', 'books.spec_id', '=', 'specializations.id')
+            ->groupBy('specializations.desc')
+            ->select('specializations.desc', DB::raw('COUNT(*) as count'))
+            ->get();
 
         $specBookChartData = [
-            'labels' => $data->pluck('specializations.desc')->toArray(),
+            'labels' => $data->pluck('desc')->toArray(),
             'datasets' => [
                 [
                     'data' => $data->pluck('count')->toArray(),

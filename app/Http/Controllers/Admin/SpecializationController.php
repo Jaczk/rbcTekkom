@@ -16,8 +16,8 @@ class SpecializationController extends Controller
      */
     public function index()
     {
-        $specializations = Specialization::all();
-        $specDetail = SpecDetail::all();
+        $specializations = Specialization::orderBy('spec_char','asc')->get();
+        $specDetail = SpecDetail::orderBy('spec_detail_id','asc')->get();
         return view('admin.specialization.index', ['specializations' => $specializations,'spec_details'=>$specDetail]);
     }
 
@@ -64,7 +64,7 @@ class SpecializationController extends Controller
         $data = $request->except('_token');
 
         $request->validate([
-            'spec_char' => 'required|string|unique:specializations,spec_char',
+            'spec_char' => 'required|string|unique:specializations,spec_char'. $id,
             'desc' => 'required|string'
         ]);
 
