@@ -116,9 +116,15 @@
                                                 <form method="POST" action="{{ route('admin.loans.return', $lo->id) }}">
                                                     @method('PUT')
                                                     @csrf
+                                                    @if ($lo->is_returned === 0)
                                                     <button type="submit" class="mx-1 btn btn-primary return-btn">
                                                         <i class="fas fa-undo-alt"></i>
                                                     </button>
+                                                    @else
+                                                    <button disabled type="submit" class="mx-1 btn btn-primary return-btn">
+                                                        <i class="fas fa-undo-alt"></i>
+                                                    </button>
+                                                    @endif
                                                 </form>
                                                 {{-- <a href="https://wa.me/{{ $lo->user->phone }}" class="btn btn-success"
                                                     target="_blank">

@@ -171,14 +171,14 @@ class LoanController extends Controller
      */
     public function return($id)
     {
-        // Find a single loan record by its ID
-        $loan = Loan::with('book')->find($id);
+        // Find a single loan record by its ID and eager load the 'book' and 'user' relationships
+        $loan = Loan::with('book', 'user')->find($id);
 
         if ($loan && $loan->is_returned === 0) {
             // Update the related book and loan records
-            Book::find($loan->book->id)->update(['is_available' => 1]);
+            $loan->book->update(['is_available' => 1]);
             $loan->update(['is_returned' => 1]);
-            User::find($loan->user->id)->update(['is_loan' => 0]);
+            $loan->user->update(['is_loan' => 0]);
 
             return redirect()->route('admin.loans')->with('success', 'Berhasil Menyelesaikan Peminjaman');
         }
