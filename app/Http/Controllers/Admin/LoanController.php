@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\Book;
+use App\Models\Fine;
 use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,8 +17,33 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loan = Loan::with(['user', 'book'])->orderBy('created_at', 'desc')->get();
+        $loan = Loan::with(['user', 'book'])->orderBy('is_returned', 'asc')->get();
+
+        $filteredLoan = Loan::where('is_returned', 0)->get();
+
+        foreach ($filteredLoan as $floan) {
+            $floan->fine = $this->calculateFine($floan->return_date);
+            $floan->save();
+        }
+
         return view('admin.loan.index', ['loans' => $loan]);
+    }
+
+    public function calculateFine($returnDate)
+    {
+        $fine = 0;
+
+        $date = substr($returnDate, 0, 10);
+
+        $filteredReturnDate = $date . " 00:00:00";
+        $fineValue = Fine::where('fine_name', 'loan_fine')->first();
+
+        if ($filteredReturnDate < Carbon::today()) {
+            $diffInDays = Carbon::today()->diffInDays($filteredReturnDate);
+            $fine = ($diffInDays) * $fineValue->value;
+        }
+
+        return $fine;
     }
 
     /**

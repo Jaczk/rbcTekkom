@@ -12,7 +12,7 @@
             
 
             <div class="card card-primary">
-                <div class="card-header" style="background-color: #121F3E">
+                <div class="card-header" style="background-color: #6998AB">
                     <h3 class="card-title">Daftar Peminjaman</h3>
                 </div>
 
