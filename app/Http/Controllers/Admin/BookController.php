@@ -53,16 +53,16 @@ class BookController extends Controller
             'spec_id' => 'required',
             'spec_detail_id' => 'required',
             'is_available' => 'nullable',
-            'desc'=>'nullable',
+            'desc' => 'nullable',
             'is_recommended' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png|nullable',
-            
+
         ]);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $ogImageName = Str::random(8) . $image->getClientOriginalName();
-        
+
             // Compress and convert to WebP
             $compressedImage = Image::make($image)
                 ->resize(800, null, function ($constraint) {
@@ -70,10 +70,10 @@ class BookController extends Controller
                     $constraint->upsize();
                 })
                 ->encode('webp', 75); // Convert to WebP format
-        
+
             // Save the compressed and converted image
             $compressedImage->save(storage_path('app/public/images/' . $ogImageName));
-        
+
             $data['image'] = $ogImageName;
         }
         Book::create($data);
@@ -113,7 +113,7 @@ class BookController extends Controller
             'condition' => ['required', 'string', 'in:new,normal,broken'],
             'year_entry' => 'required|numeric',
             'spec_id' => 'required',
-            'desc'=>'nullable',
+            'desc' => 'nullable',
             'spec_detail_id' => 'required',
             'is_available' => 'nullable',
             'is_recommended' => 'nullable',
@@ -125,7 +125,7 @@ class BookController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $ogImageName = Str::random(8) . $image->getClientOriginalName();
-        
+
             // Compress and convert to WebP
             $compressedImage = Image::make($image)
                 ->resize(800, null, function ($constraint) {
@@ -133,16 +133,16 @@ class BookController extends Controller
                     $constraint->upsize();
                 })
                 ->encode('webp', 75); // Convert to WebP format
-        
+
             // Save the compressed and converted image
             $compressedImage->save(storage_path('app/public/images/' . $ogImageName));
-        
+
             $data['image'] = $ogImageName;
-        
+
             // Delete the old image
             Storage::delete('public/images/' . $book->image);
         }
-        
+
 
         $data['is_recommended'] = $request->has('is_recommended') ? 1 : 0;
 
@@ -157,6 +157,14 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $book = Book::find($id);
+
+        // Check if any associated Loan records have is_returned = 0
+        $hasActiveLoans = $book->loan()->where('is_returned', 0)->exists();
+
+        if ($hasActiveLoans) {
+            return redirect()->route('admin.book')
+                ->with('error', 'Gagal menghapus item barang. Item barang masih dipinjam.');
+        }
 
         $book->forceDelete();
 
