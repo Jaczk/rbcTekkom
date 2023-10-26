@@ -8,6 +8,7 @@ use App\Models\Fine;
 use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class LoanController extends Controller
@@ -15,7 +16,7 @@ class LoanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $loan = Loan::with(['user', 'book'])->orderBy('is_returned', 'asc')->get();
 
@@ -26,7 +27,17 @@ class LoanController extends Controller
             $floan->save();
         }
 
-        return view('admin.loan.index', ['loans' => $loan]);
+        $loanDrop = Loan::groupBy('period')->select('period')->get();
+        $period = $request->period ?? Carbon::now()->format('Ym');
+
+        $chartData = $this->loanChart($period);
+
+        return view('admin.loan.index', [
+            'loans' => $loan,
+            'chartData' => $chartData,
+            'period' => $period,
+            'loanDrop' => $loanDrop,
+        ]);
     }
 
     public function calculateFine($returnDate)
@@ -44,6 +55,83 @@ class LoanController extends Controller
         }
 
         return $fine;
+    }
+
+    public function loanChartAjax($period)
+    {
+        $chartData = $this->loanChart($period);
+
+        return response()->json($chartData);
+    }
+
+    public static function loanChart($period)
+    {
+        $loanChart = Loan::where('period', $period)
+            ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))
+            ->selectRaw('DATE_FORMAT(created_at, "%Y-%m-%d") as date, COUNT(*) as count')
+            ->get();
+
+        $returnChart = Loan::where('period', $period)
+            ->where('is_returned', 1)
+            ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'))
+            ->selectRaw('DATE_FORMAT(created_at, "%Y-%m-%d") as date, COUNT(*) as count')
+            ->get();
+
+        // Get distinct dates from both datasets
+        $dates = collect($returnChart->pluck('date'))
+            ->concat($loanChart->pluck('date'))
+            ->unique()
+            ->sortBy(function ($date) {
+                return Carbon::parse($date);
+            });
+
+        // Create an empty array to hold the chart data
+        $chartData = [
+            'labels' => [],
+            'datasets' => [
+                [
+                    'label' => 'Dikembalikan',
+                    'data' => [],
+                    'backgroundColor' => 'rgba(54, 162, 235, 1)',
+                    'borderColor' => 'rgba(54, 162, 235, 1)',
+                    'fill' => false,
+                    'type' => 'bar'
+                ],
+                [
+                    'label' => 'Dipinjam',
+                    'data' => [],
+                    'backgroundColor' => 'rgba(255, 99, 132, 1)',
+                    'borderColor' => 'rgba(255, 99, 132, 1)',
+                    'fill' => false,
+                    'type' => 'bar'
+                ]
+            ]
+        ];
+
+        // Populate the chart data with the available return and loan values
+        foreach ($dates as $date) {
+            $returnCount = $returnChart->firstWhere('date', $date);
+            $loanCount = $loanChart->firstWhere('date', $date);
+
+            // Add the date to the labels array
+            $chartData['labels'][] = $date;
+
+            // Add the return count or 0 if not available
+            if ($returnCount) {
+                $chartData['datasets'][0]['data'][] = $returnCount->count;
+            } else {
+                $chartData['datasets'][0]['data'][] = 0;
+            }
+
+            // Add the loan count or 0 if not available
+            if ($loanCount) {
+                $chartData['datasets'][1]['data'][] = $loanCount->count;
+            } else {
+                $chartData['datasets'][1]['data'][] = 0;
+            }
+        }
+
+        return $chartData;
     }
 
     /**
