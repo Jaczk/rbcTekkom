@@ -18,7 +18,7 @@ class LoanController extends Controller
      */
     public function index(Request $request)
     {
-        $loan = Loan::with(['user', 'book'])->orderBy('is_returned', 'asc')->get();
+        $loan = Loan::with(['user', 'book'])->orderBy('created_at', 'desc')->get();
 
         $filteredLoan = Loan::where('is_returned', 0)->get();
 

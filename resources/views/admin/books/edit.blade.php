@@ -78,15 +78,16 @@
                                 <option value="">Pilih Kondisi</option>
                                 <option value="new" @selected($books->condition == 'new') @class(['bg-warning text-white' => $books->condition == 'new'])>BARU
                                 </option>
-                                <option value="used" @selected($books->condition == 'used') @class(['bg-warning text-white' => $books->condition == 'used'])>NORMAL
+                                <option value="normal" @selected($books->condition == 'normal') @class(['bg-warning text-white' => $books->condition == 'normal'])>NORMAL
                                 </option>
                                 <option value="broken" @selected($books->condition == 'broken') @class(['bg-warning text-white' => $books->condition == 'broken'])>RUSAK
                                 </option>
+
                             </select>
                         </div>
                         <div class="mb-2 form-check">
-                            <input class="form-check-input" type="checkbox" id="is_recommended" name="is_recommended" value="1" 
-                                @if ($books->is_recommended == 1) checked @endif>
+                            <input class="form-check-input" type="checkbox" id="is_recommended" name="is_recommended"
+                                value="1" @if ($books->is_recommended == 1) checked @endif>
                             <label class="form-check-label font-weight-bold" for="is_recommended">
                                 Rekomendasi
                             </label>

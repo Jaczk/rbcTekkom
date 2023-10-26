@@ -10,8 +10,8 @@
         <div class="col-md-12">
             {{-- for Chart --}}
             <div>
-                <div class="card card-danger">
-                    <div class="card-header">
+                <div class="card card-secondary">
+                    <div class="card-header" style="background-color: #3B6978">
                         <h3 class="card-title">Ringkasan Tabel Peminjaman</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">

@@ -113,7 +113,7 @@
                                         <option value="new" @selected(old('condition') == 'new') @class(['bg-warning text-white' => old('condition') == 'new'])>
                                             BARU
                                         </option>
-                                        <option value="used" @selected(old('condition') == 'used') @class(['bg-warning text-white' => old('condition') == 'used'])>
+                                        <option value="normal" @selected(old('condition') == 'normal') @class(['bg-warning text-white' => old('condition') == 'normal'])>
                                             NORMAL
                                         </option>
                                     </select>
