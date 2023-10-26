@@ -55,8 +55,8 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="specialization" class="form-label">Peminatan</label>
-                                    <select class="selectpicker" name="spec_id" data-live-search="true"
-                                    data-width="100%" data-size="6">
+                                    <select class="selectpicker" name="spec_id" data-live-search="true" data-width="100%"
+                                        data-size="6">
                                         @foreach ($specialization as $special)
                                             <option value="{{ $special->id }}"
                                                 {{ $books->spec_id == $special->id ? 'selected' : '' }}>
@@ -70,7 +70,7 @@
                                 <div class="mb-3">
                                     <label for="specDetail" class="form-label">Detail Peminatan</label>
                                     <select class="selectpicker" name="spec_detail_id" data-live-search="true"
-                                    data-width="100%" data-size="6">
+                                        data-width="100%" data-size="6">
                                         @foreach ($specDetails as $specDetail)
                                             <option value="{{ $specDetail->id }}"
                                                 {{ $books->spec_detail_id == $specDetail->id ? 'selected' : '' }}>
@@ -157,10 +157,11 @@
                                 </div>
                             </div>
                             <div class="col">
-
                                 <label for="image">Gambar</label>
+                                <img class="img-fluid mb-2 d-flex" id="img-preview" style="max-width: 200px">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <input type="file" class="custom-file-input" id="image" name="image"
+                                        onchange="previewImage()">
                                     <label class="custom-file-label" for="image">Choose file...</label>
                                 </div>
                             </div>
@@ -219,6 +220,11 @@
                 document.getElementById('is_recommended').value = 0;
             }
         });
+
+        function previewImage() {
+            const image = document.getElementById('img-preview');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 

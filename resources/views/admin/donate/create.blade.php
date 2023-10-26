@@ -35,6 +35,7 @@
                                         placeholder="Python For Beginner" value="{{ old('book_name') }}">
                                 </div>
                             </div>
+
                             <div class="col">
                                 <div class="form-group">
                                     <label for="title">Harga</label>
@@ -53,6 +54,7 @@
                                         placeholder="PT. Elex Media Komputindo" value="{{ old('publisher') }}">
                                 </div>
                             </div>
+
                             <div class="col">
                                 <div class="form-group">
                                     <label for="author">Penulis</label>
@@ -71,20 +73,24 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="image">Gambar</label>
+                                <img class="img-fluid mb-2 d-flex" id="img-preview" style="max-width: 200px">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <input type="file" class="custom-file-input" id="image" name="image"
+                                        onchange="previewImage()">
                                     <label class="custom-file-label" for="image">Choose file...</label>
                                 </div>
                             </div>
+
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
+                    <!-- /.card-body -->
             </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+            </form>
         </div>
+    </div>
     </div>
 @endsection
 
@@ -99,6 +105,13 @@
             // Update the label text with the file name
             const labelElement = this.nextElementSibling;
             labelElement.innerText = fileName;
+
         });
+
+        // Preview Image
+        function previewImage() {
+            const image = document.getElementById('img-preview');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
     </script>
 @endsection
