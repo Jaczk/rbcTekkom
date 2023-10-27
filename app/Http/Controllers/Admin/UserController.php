@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Loan;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -74,7 +76,10 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $decryptId = Crypt::decryptString($id);
+        $user = User::find($decryptId);
+        $roles = Role::all();
+        return view('admin.user.edit', ['user' => $user, 'roles' => $roles]);
     }
 
     /**
@@ -82,7 +87,17 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->except('_token');
+        $request->validate([
+            'role_id'=> 'required',
+            'phone' => 'required|max:15|regex:/^\+62\d{0,}$/',
+        ]);
+
+        $user = User::find($id);
+
+        $user->update($data);
+        return redirect()->route('admin.user')->with('success', 'Berhasil memperbarui data pengguna');
+        
     }
 
     /**

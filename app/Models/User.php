@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'nim',
         'email',
+        'phone',
         'password',
         'role_id',
         'is_loan',
