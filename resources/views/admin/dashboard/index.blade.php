@@ -84,7 +84,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header" style="background-color: #6998AB">
                         <h3 class="card-title">Tabel Buku</h3>
@@ -93,28 +93,30 @@
                         <canvas id="conditionChart"
                             style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                     </div>
+                    
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="m-2">
-        <div class="card card-primary">
-            <div class="card-header" style="background-color: #6998AB">
-                <h3 class="card-title">Frekuensi Peminjaman Buku per Periode</h3>
-            </div>
-            <div class="card-body">
-                <canvas id="freqChart"
-                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-            </div>
-            <div class="card-footer ">
-                <div class="d-flex justify-content-between">
-                    <select name="period" id="pp" onchange="updateChart2(this)">
-                        @foreach ($specBookDrop as $item)
-                            <option value="{{ $item->period }}" @if ($item->period == $period) selected @endif>
-                                {{ $item->period }}</option>
-                        @endforeach
-                    </select>
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header" style="background-color: #6998AB">
+                        <h3 class="card-title">Frekuensi Peminjaman Buku per Periode</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="freqChart"
+                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                    <div class="card-footer ">
+                        <div class="d-flex justify-content-between">
+                            <select name="period" id="pp" onchange="updateChart2(this)" class="selectpicker"  data-width="20%">
+                                @foreach ($specBookDrop as $item)
+                                    <option value="{{ $item->period }}" @if ($item->period == $period) selected @endif>
+                                        {{ $item->period }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -230,4 +232,11 @@
             fetchDataAndRenderChart2(selectedPeriod);
         }
     </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 @endsection
