@@ -39,6 +39,6 @@ class Book extends Model
 
     public function specDetail()
     {
-        return $this->belongsTo(SpecDetail::class);
+        return $this->belongsTo(SpecDetail::class, 'spec_detail_id');
     }
 }

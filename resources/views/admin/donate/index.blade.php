@@ -103,6 +103,15 @@
                                                         class="img-fluid" style="width: 180px" alt="Image">
                                                 </td>
                                                 <td class="flex-row d-flex">
+                                                    <div class="mx-1">
+
+                                                        <a href="javascript:void(0)" class="btn btn-primary"
+                                                            id="show-detail"
+                                                            data-url="{{ route('admin.donate.show', $donate->id) }}">
+                                                            <i class="fas fa-eye" style="color: #ffffff;"></i>
+                                                        </a>
+
+                                                    </div>
                                                     <a href="{{ route('admin.donate.edit', Crypt::encryptString($donate->id)) }}"
                                                         class="btn btn-secondary">
                                                         <i class="fas fa-edit"></i>
@@ -127,92 +136,133 @@
                 </div>
             </div>
         </div>
-    @endsection
+        <!-- Modal -->
+        <div class="modal fade" id="userShowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Buku</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>Buku</th>
+                                    <td><span id="book-name"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>Deskripsi</th>
+                                    <td><span id="book-desc"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
-    @section('js')
+@section('js')
 
-        <script>
-            $(document).ready(function() {
-                // Initialize DataTable
-                var table = $('#book').DataTable({
-                    dom: 'lBfrtipl',
-                    buttons: [{
-                            extend: 'copy',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the copy report
-                            }
-                        },
-                        {
-                            extend: 'excel',
-                            title: 'Daftar Buku',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the Excel report
-                            }
-                        },
-                        {
-                            extend: 'pdf',
-                            title: 'Daftar Buku',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the PDF report
-                            }
-                        },
-                        {
-                            extend: 'print',
-                            title: 'Daftar Buku',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the printed report
-                            }
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            var table = $('#book').DataTable({
+                dom: 'lBfrtipl',
+                buttons: [{
+                        extend: 'copy',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the copy report
                         }
-                    ],
-                    columnDefs: [{
-                        searchable: false,
-                        orderable: false,
-                        targets: 0
-                    }],
-                    order: [
-                        [1, 'asc']
-                    ]
-                });
-
-                table
-                    .on('order.dt search.dt', function() {
-                        var i = 1;
-
-                        table
-                            .cells(null, 0, {
-                                search: 'applied',
-                                order: 'applied'
-                            })
-                            .every(function(cell) {
-                                this.data(i++);
-                            });
-                    })
-                    .draw();
-
-
-                // Apply event listener to all delete buttons
-                $('#book').on('click', '.delete-btn', function(e) {
-                    e.preventDefault();
-                    var form = $(this).closest('form');
-
-                    // Show SweetAlert confirmation dialog
-                    Swal.fire({
-                        title: 'Apakah anda yakin?',
-                        text: 'Buku Akan Dihapus dari Tabel!',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#e31231',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Ya, Hapus item!',
-                        cancelButtonText: 'Kembali'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Submit the form after confirmation
-                            form.submit();
+                    },
+                    {
+                        extend: 'excel',
+                        title: 'Daftar Buku',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the Excel report
                         }
-                    });
+                    },
+                    {
+                        extend: 'pdf',
+                        title: 'Daftar Buku',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the PDF report
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        title: 'Daftar Buku',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5] // Include columns 1 to 5 in the printed report
+                        }
+                    }
+                ],
+                columnDefs: [{
+                    searchable: false,
+                    orderable: false,
+                    targets: 0
+                }],
+                order: [
+                    [1, 'asc']
+                ]
+            });
+
+            table
+                .on('order.dt search.dt', function() {
+                    var i = 1;
+
+                    table
+                        .cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        })
+                        .every(function(cell) {
+                            this.data(i++);
+                        });
+                })
+                .draw();
+
+
+            // Apply event listener to all delete buttons
+            $('#book').on('click', '.delete-btn', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+
+                // Show SweetAlert confirmation dialog
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: 'Buku Akan Dihapus dari Tabel!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e31231',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, Hapus item!',
+                    cancelButtonText: 'Kembali'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Submit the form after confirmation
+                        form.submit();
+                    }
                 });
             });
-            //-------------
-        </script>
-    @endsection
+
+            //Modal dialog
+            $('body').on('click', '#show-detail', function() {
+                var userURL = $(this).data('url');
+                $.get(userURL, function(data) {
+                    $('#userShowModal').modal('show');
+                    $('#book-name').text(data.book_name);
+                    $('#book-desc').text(data.desc);
+                })
+            });
+        });
+        //-------------
+    </script>
+@endsection

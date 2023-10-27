@@ -44,6 +44,7 @@ Route::group(['prefix' => 'book'], function () {
     Route::get('/create', [BookController::class, 'create'])->name('admin.book.create');
     Route::post('/store', [BookController::class, 'store'])->name('admin.book.store');
     Route::get('/edit/{id}', [BookController::class, 'edit'])->name('admin.book.edit');
+    Route::get('/show/{id}', [BookController::class, 'show'])->name('admin.book.show');
     Route::put('/update/{id}', [BookController::class, 'update'])->name('admin.book.update');
     Route::delete('/destroy/{id}', [BookController::class, 'destroy'])->name('admin.book.destroy');
     // Route::get('/trash', [GoodController::class, 'trash'])->name('admin.good.trash');
@@ -65,6 +66,7 @@ Route::group(['prefix' => 'donate'], function () {
     Route::get('/create', [DonateController::class, 'create'])->name('admin.donate.create');
     Route::post('/store', [DonateController::class, 'store'])->name('admin.donate.store');
     Route::get('/edit/{id}', [DonateController::class, 'edit'])->name('admin.donate.edit');
+    Route::get('/show/{id}', [DonateController::class, 'show'])->name('admin.donate.show');
     Route::put('/update/{id}', [DonateController::class, 'update'])->name('admin.donate.update');
     Route::delete('/destroy/{id}', [DonateController::class, 'destroy'])->name('admin.donate.destroy');
 });

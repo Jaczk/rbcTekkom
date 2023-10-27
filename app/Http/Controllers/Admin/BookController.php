@@ -99,6 +99,11 @@ class BookController extends Controller
         ]);
     }
 
+    public function show($id){
+        $book = Book::with(['specialization', 'specDetail'])->find($id);
+        return response()->json($book);
+    }
+
     /**
      * Update the specified resource in storage.
      */

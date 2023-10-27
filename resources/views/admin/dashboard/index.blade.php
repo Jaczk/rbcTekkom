@@ -25,7 +25,7 @@
             <div class="icon">
                 <i class="fas fa-file"></i>
             </div>
-            <a href="{{ route('admin.donate') }}" class="small-box-footer">
+            <a href="{{ route('admin.loans') }}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -76,7 +76,7 @@
             <div class="icon">
                 <i class="fas fa-universal-access"></i>
             </div>
-            <a href="{{ route('admin.loans') }}" class="small-box-footer">
+            <a href="{{ route('admin.user') }}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -87,7 +87,7 @@
             <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header" style="background-color: #6998AB">
-                        <h3 class="card-title">Tabel Buku</h3>
+                        <h3 class="card-title">Pembagian Buku Tiap Peminatan</h3>
                     </div>
                     <div class="card-body">
                         <canvas id="conditionChart"
@@ -153,7 +153,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Ringkasan Tabel Kondisi Buku'
+                        text: 'Jumlah Buku'
                     },
                     legend: {
                         display: true,
