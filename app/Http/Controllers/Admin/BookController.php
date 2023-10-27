@@ -112,7 +112,7 @@ class BookController extends Controller
             'isbn_issn' => 'required',
             'condition' => ['required', 'string', 'in:new,normal,broken'],
             'year_entry' => 'required|numeric',
-            'lib_book_code' => 'required|string|unique:books,lib_book_code'. $id,
+            'lib_book_code' => 'required|string|unique:books,lib_book_code,' . $id,
             'spec_id' => 'required',
             'desc' => 'nullable',
             'spec_detail_id' => 'required',
