@@ -52,8 +52,13 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="mb-3 col-md-12">
+                            <div class="mx-2 mb-3">
                                 <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold">+ Buku</a>
+                            </div>
+                            <div class="mx-2 mb-3">
+                                <a href="#" class="btn btn-secondary text-bold" data-toggle="modal"
+                                    data-target="#selectBooksModal"><span><i class="fas fa-file-pdf">
+                                        </i></span> Label Buku</a>
                             </div>
                         </div>
 
@@ -132,28 +137,37 @@
                                                     <img src="{{ filter_var($book->image, FILTER_VALIDATE_URL) ? $book->image : asset('storage/images/' . $book->image) }}"
                                                         class="img-fluid" style="width: 180px" alt="Image">
                                                 </td>
-                                                <td class="flex-row d-flex">
-                                                    <div class="mx-1">
-
-                                                        <a href="javascript:void(0)" class="btn btn-primary"
-                                                            id="show-detail"
-                                                            data-url="{{ route('admin.book.show', $book->id) }}">
-                                                            <i class="fas fa-eye" style="color: #ffffff;"></i>
+                                                <td>
+                                                    <div class="flex-row d-flex">
+                                                        <div class="mx-1">
+                                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                                id="show-detail"
+                                                                data-url="{{ route('admin.book.show', $book->id) }}">
+                                                                <i class="fas fa-eye" style="color: #ffffff;"></i>
+                                                            </a>
+                                                        </div>
+                                                        <a href="{{ route('admin.book.edit', Crypt::encryptString($book->id)) }}"
+                                                            class="btn btn-secondary">
+                                                            <i class="fas fa-edit"></i>
                                                         </a>
-
+                                                        <form method="post"
+                                                            action="{{ route('admin.book.destroy', $book->id) }}">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button type="submit" class="mx-1 btn btn-danger delete-btn">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
                                                     </div>
-                                                    <a href="{{ route('admin.book.edit', Crypt::encryptString($book->id)) }}"
-                                                        class="btn btn-secondary">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form method="post"
-                                                        action="{{ route('admin.book.destroy', $book->id) }}">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button type="submit" class="mx-1 btn btn-danger delete-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
+                                                    <div class="flex-row mt-2 ml-1 d-flex">
+                                                        <a href="{{ route('admin.bookLabel.generateLabel', ['bookId' => $book->id]) }}"
+                                                            class="mr-2 btn-warning btn">
+                                                            <i class="fas fa-file-pdf"></i>
+                                                        </a>
+                                                        {{-- <a href="{{ route('admin.bookLabel.generateWordLabel', ['bookId' => $book->id]) }}" class="btn-warning btn">
+                                                            <i class="fas fa-file-word"></i>
+                                                        </a> --}}
+                                                    </div>
                                                 </td>
 
                                             </tr>
@@ -169,7 +183,7 @@
         </div>
         <!-- Modal -->
         <div class="modal fade" id="userShowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Detail Buku</h5>
@@ -222,13 +236,70 @@
                                 </tr>
                             </tbody>
                         </table>
-                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--Label Filtering Modal -->
+        <div class="modal fade" id="selectBooksModal" tabindex="-1" aria-labelledby="selectBooksModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="selectBooksModalLabel">Select Books for Labels</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Include a form for filtering and selecting books -->
+                        <form method="post" action="{{ route('admin.bookLabel.generateAllBookLabels') }}">
+                            @csrf
+                            <h5>Semua Buku? <span><input type="checkbox" value="1" id="all"
+                                        name="all"></span></h5>
+                            <h5>Buku Peminatan</h5>
+                            <select name="specID" id="specID">
+                                <option value="">Pilih Peminatan </option>
+                                @foreach ($specDrops as $spec)
+                                    <option value="{{ $spec->id }}">
+                                        {{ $spec->desc }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <h5>Buku Detail Peminatan</h5>
+                            <select name="specDetailID" id="specDetailID">
+                                <option value="">Pilih Detail Peminatan</option>
+                                @foreach ($specDetailDrops as $specd)
+                                    <option value="{{ $specd->id }}">
+                                        {{ $specd->desc }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <h5>Tahun Masuk</h5>
+                            <select name="yearEntry" id="yearEntry">
+                                <option value="">Pilih Tahun Masuk</option>
+                                @foreach ($yearEntries as $year)
+                                    <option value="{{ $year->year_entry }}">
+                                        {{ $year->year_entry }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <br> <br>
+                            <!-- Add form fields for filtering books, e.g., checkboxes or input fields -->
+                            <button type="submit" class="btn btn-primary">Generate Labels</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 @endsection
@@ -337,4 +408,34 @@
         });
         //-------------
     </script>
+
+    <script>
+        // Disable other inputs when the checkbox is checked
+        $('#all').change(function() {
+            if ($(this).is(':checked')) {
+                // Checkbox is checked, disable other inputs
+                $('#specID, #specDetailID, #yearEntry').prop('disabled', true);
+                $('#specID, #specDetailID, #yearEntry').selectpicker('refresh');
+            } else {
+                // Checkbox is unchecked, enable other inputs
+                $('#specID, #specDetailID, #yearEntry').prop('disabled', false);
+                $('#specID, #specDetailID, #yearEntry').selectpicker('refresh');
+            }
+        });
+
+        // Disable the checkbox and other dropdowns when a dropdown is selected
+        $('#specID, #specDetailID, #yearEntry').change(function() {
+            if ($(this).val() !== '') {
+                // Dropdown is selected, disable the checkbox and other dropdowns
+                $('#all, #specID, #specDetailID, #yearEntry').not(this).prop('disabled', true);
+                $('#all, #specID, #specDetailID, #yearEntry').selectpicker('refresh');
+            } else {
+                // Dropdown is cleared, enable the checkbox and other dropdowns
+                $('#all, #specID, #specDetailID, #yearEntry').prop('disabled', false);
+                $('#all, #specID, #specDetailID, #yearEntry').selectpicker('refresh');
+            }
+        });
+    </script>
+
+
 @endsection

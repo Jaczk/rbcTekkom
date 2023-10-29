@@ -22,7 +22,16 @@ class BookController extends Controller
     {
         $books = Book::with(['specialization', 'specDetail'])->get();
 
-        return view('admin.books.index', ['books' => $books]);
+        $specDrop = Specialization::all();
+        $specDetailDrop = SpecDetail::all();
+        $yearEntries = Book::select('year_entry')->distinct()->get();
+
+        return view('admin.books.index', [
+            'books' => $books,
+            'specDrops' => $specDrop,
+            'specDetailDrops' => $specDetailDrop,
+            'yearEntries' => $yearEntries
+        ]);
     }
 
     /**
@@ -99,7 +108,8 @@ class BookController extends Controller
         ]);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $book = Book::with(['specialization', 'specDetail'])->find($id);
         return response()->json($book);
     }
