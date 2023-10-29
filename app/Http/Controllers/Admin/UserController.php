@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
+use App\Models\Fine;
 use App\Models\Loan;
 use App\Models\Role;
 use App\Models\User;
@@ -18,33 +20,42 @@ class UserController extends Controller
     {
         $users = User::with('role')->get();
 
-        // foreach ($users as $user) {
+        foreach($users as $user){
+            $loans = Loan::where('user_id', $user->id)->get();
 
-        //     $loans = Loan::where('user_id', $user->id)->with('item_loan')->get();
+            $filteredLoan = $loans->filter(function ($loan) {
+                return $loan->is_returned === 0;
+            });
+    
+            foreach ($filteredLoan as $floan) {
+                $floan->fine = $this->calculateFine($floan->return_date);
+                $floan->save();
+            }
 
-        //     $filteredLoan = $loans->filter(function ($loan) {
-        //         return $loan->is_returned === 0;
-        //     });
+            $totalFine = $filteredLoan->sum('fine');
 
-        //     $filteredLoan->each(function ($loan) {
-
-        //         if ($loan->item_loan->isEmpty()) {
-        //             // Delete the loan
-        //             $loan->forceDelete();
-        //         }
-
-        //         $fine = $this->calculateFine($loan->return_date);
-        //         $loan->fine = $fine;
-        //         $loan->save();
-        //     });
-
-        //     $totalFine = $filteredLoan->sum('fine');
-
-        //     $user['total_fine'] = $totalFine;
-        //     $user->save();
-        // }
-
+            $user['fine'] = $totalFine;
+            $user->save();
+            
+        }
         return view('admin.user.index', ['users' => $users]);
+    }
+
+    public function calculateFine($returnDate)
+    {
+        $fine = 0;
+
+        $date = substr($returnDate, 0, 10);
+
+        $filteredReturnDate = $date . " 00:00:00";
+        $fineValue = Fine::where('fine_name', 'loan_fine')->first();
+
+        if ($filteredReturnDate < Carbon::today()) {
+            $diffInDays = Carbon::today()->diffInDays($filteredReturnDate);
+            $fine = ($diffInDays) * $fineValue->value;
+        }
+
+        return $fine;
     }
 
     /**

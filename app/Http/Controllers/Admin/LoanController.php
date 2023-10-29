@@ -20,11 +20,19 @@ class LoanController extends Controller
     {
         $loan = Loan::with(['user', 'book'])->orderBy('created_at', 'desc')->get();
 
-        $filteredLoan = Loan::where('is_returned', 0)->get();
+        $users = User::with('role')->get();
+        
+        foreach ($users as $user) {
+            $loans = Loan::where('user_id', $user->id)->get();
 
-        foreach ($filteredLoan as $floan) {
-            $floan->fine = $this->calculateFine($floan->return_date);
-            $floan->save();
+            $filteredLoan = $loans->filter(function ($loan) {
+                return $loan->is_returned === 0;
+            });
+
+            foreach ($filteredLoan as $floan) {
+                $floan->fine = $this->calculateFine($floan->return_date);
+                $floan->save();
+            }
         }
 
         $loanDrop = Loan::groupBy('period')->select('period')->get();
