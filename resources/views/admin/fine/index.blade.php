@@ -37,7 +37,7 @@
                     @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="title">Nilai Denda</label>
+                            <label for="title">Nilai Denda /Hari</label>
                             <input type="number" class="form-control" id="value" name="value"
                                 placeholder="Nilai Denda" value="{{ $fine->value }}">
                         </div>

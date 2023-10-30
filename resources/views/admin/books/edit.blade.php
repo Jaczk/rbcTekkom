@@ -35,8 +35,6 @@
                                         placeholder="Python For Beginner" value="{{ $books->book_name }}">
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="publisher">Penerbit</label>
@@ -44,6 +42,8 @@
                                         placeholder="PT. Elex Media Komputindo" value="{{ $books->publisher }}">
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="author">Penulis</label>
@@ -52,6 +52,21 @@
                                 </div>
                             </div>
 
+                            <div class="col">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="year_entry">Tahun Masuk</label>
+                                        <input type="number" class="form-control" id="year_entry" name="year_entry"
+                                            placeholder="2023" value="{{ $books->year_entry }}">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="form-row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="specialization" class="form-label">Peminatan</label>
@@ -79,10 +94,10 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                         <div class="form-row">
-                            <div class="col-md-5">
+                            <div class="col">
 
                                 <div class="form-group">
                                     <label for="isbn_issn">ISBN / ISSN</label>
@@ -90,29 +105,19 @@
                                         placeholder="978-602-8758-52-9" value="{{ $books->isbn_issn }}">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+
+                            <div class="col">
                                 <div class="form-group">
                                     <label for="lib_book_code">Kode Perpus</label>
                                     <input type="varchar" class="form-control" id="lib_book_code" name="lib_book_code"
                                         placeholder="978-602-8758-52-9" value="{{ $books->lib_book_code }}">
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Ketersediaan</label>
-                                    <select class="custom-select" name="is_available">
-                                        <option value="1" {{ old('is_available') === '1' ? 'selected' : '' }}>Tersedia
-                                        </option>
-                                        <option value="0" {{ old('is_available') === '0' ? 'selected' : '' }}>Tidak
-                                            Tersedia
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="form-row">
-                            <div class="col">
+                            <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="condition" class="form-label">Kondisi Buku</label>
                                     <select class="custom-select" name="condition">
@@ -130,16 +135,19 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="year_entry">Tahun Masuk</label>
-                                        <input type="number" class="form-control" id="year_entry" name="year_entry"
-                                            placeholder="2023" value="{{ $books->year_entry }}">
-                                    </div>
+                                <div class="form-group">
+                                    <label>Ketersediaan</label>
+                                    <select class="custom-select" name="is_available">
+                                        <option value="1" {{ old('is_available') === '1' ? 'selected' : '' }}>Tersedia
+                                        </option>
+                                        <option value="0" {{ old('is_available') === '0' ? 'selected' : '' }}>Tidak
+                                            Tersedia
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="mb-2 form-check">
+                            <div class="col d-flex align-items-center">
+                                <div class="mb-2 form-check mt-4">
                                     <input class="form-check-input" type="checkbox" id="is_recommended"
                                         name="is_recommended" value="1"
                                         @if ($books->is_recommended == 1) checked @endif>
@@ -149,13 +157,8 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="isbn_issn">Deskripsi</label>
-                                    <textarea class="form-control" name="desc" id="desc" rows="3" placeholder="Buku ini membahas...">{{ $books->desc }}</textarea>
-                                </div>
-                            </div>
                             <div class="col">
                                 <label for="image">Gambar</label>
                                 <img class="img-fluid mb-2 d-flex" id="img-preview" style="max-width: 200px">
@@ -163,6 +166,12 @@
                                     <input type="file" class="custom-file-input" id="image" name="image"
                                         onchange="previewImage()">
                                     <label class="custom-file-label" for="image">Choose file...</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="isbn_issn">Deskripsi</label>
+                                    <textarea class="form-control" name="desc" id="desc" rows="3" placeholder="Buku ini membahas...">{{ $books->desc }}</textarea>
                                 </div>
                             </div>
                         </div>

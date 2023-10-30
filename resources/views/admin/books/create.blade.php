@@ -136,8 +136,8 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-3">
-                                <div class="mb-2 form-check">
+                            <div class="col d-flex align-items-center">
+                                <div class="mb-2 form-check mt-4">
                                     <input class="form-check-input" type="checkbox" value="" id="is_recommended"
                                         name="is_recommended">
                                     <label class="form-check-label font-weight-bold" for="myCheckbox"
@@ -151,18 +151,18 @@
 
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group">
-                                    <label for="desc">Deskripsi</label>
-                                    <textarea class="form-control" name="desc" id="desc" rows="3" placeholder="Buku ini membahas..."></textarea>
-                                </div>
-                            </div>
-                            <div class="col">
                                 <label for="image">Gambar</label>
                                 <img class="img-fluid mb-2 d-flex" id="img-preview" style="max-width: 200px">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="image" name="image"
                                         onchange="previewImage()">
                                     <label class="custom-file-label" for="image">Choose file...</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="desc">Deskripsi</label>
+                                    <textarea class="form-control" name="desc" id="desc" rows="3" placeholder="Buku ini membahas..."></textarea>
                                 </div>
                             </div>
                         </div>

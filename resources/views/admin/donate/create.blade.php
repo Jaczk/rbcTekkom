@@ -66,18 +66,18 @@
 
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="isbn_issn">Deskripsi</label>
-                                    <textarea class="form-control" name="desc" id="desc" rows="3" placeholder="Buku ini membahas...">{{ old('desc') }}</textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
                                 <label for="image">Gambar</label>
                                 <img class="img-fluid mb-2 d-flex" id="img-preview" style="max-width: 200px">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="image" name="image"
                                         onchange="previewImage()">
                                     <label class="custom-file-label" for="image">Choose file...</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="isbn_issn">Deskripsi</label>
+                                    <textarea class="form-control" name="desc" id="desc" rows="3" placeholder="Buku ini membahas...">{{ old('desc') }}</textarea>
                                 </div>
                             </div>
 
