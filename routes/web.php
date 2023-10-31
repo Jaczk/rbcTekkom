@@ -7,6 +7,7 @@
     use App\Http\Controllers\Admin\LoanController;
     use App\Http\Controllers\Admin\UserController;
     use App\Http\Controllers\User\LoginController;
+    use App\Http\Controllers\User\RegisterController;
     use App\Http\Controllers\Admin\DonateController;
     use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\Admin\PublisherController;
@@ -25,19 +26,21 @@
 |
 */
 
+
     Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('auth/login', [LoginController::class, 'authenticate'])->name('login.auth');
+
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/chart/ajax/{period}', [DashboardController::class, 'procurementChartAjax'])->name('admin.chart.ajax');
     Route::get('/specChart/ajax/{period}', [DashboardController::class, 'specBookChartAjax'])->name('admin.specChart.ajax');
 
 
-    Route::get('admin/login', [LoginController::class, 'index'])->name('admin.login');
-    Route::post('admin/login', [LoginController::class, 'authenticate'])->name('admin.login.auth');
-    Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::group(['prefix' => 'fine'], function () {
-        // Route::get('/', [FineController::class, 'index'])->name('admin.fine');
         Route::get('/edit', [FineController::class, 'edit'])->name('admin.fine.edit');
         Route::put('/update', [FineController::class, 'update'])->name('admin.fine.update');
     });
@@ -50,9 +53,6 @@
         Route::get('/show/{id}', [BookController::class, 'show'])->name('admin.book.show');
         Route::put('/update/{id}', [BookController::class, 'update'])->name('admin.book.update');
         Route::delete('/destroy/{id}', [BookController::class, 'destroy'])->name('admin.book.destroy');
-        // Route::get('/trash', [GoodController::class, 'trash'])->name('admin.good.trash');
-        // Route::put('/restore/{id}', [GoodController::class, 'restore'])->name('admin.good.restore');
-        // Route::delete('/delete/{id}', [GoodController::class, 'forceDelete'])->name('admin.good.delete');
     });
 
     Route::group(['prefix' => 'bookLabel'], function () {

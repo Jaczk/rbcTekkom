@@ -33,6 +33,7 @@ class LoginController extends Controller
             }
         }
 
+
         return back()->withErrors([
             'error' => 'Login failed'
         ])->withInput();
@@ -46,6 +47,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('user.login');
+        return redirect()->route('login');
     }
 }

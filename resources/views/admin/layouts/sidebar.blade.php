@@ -100,7 +100,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link" style="color: #ffffff;" onclick="confirmLogout(event)">
+                    <a href="{{ route('logout')}}" class="nav-link" style="color: #ffffff;" onclick="confirmLogout(event)">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>
                             Keluar
@@ -131,7 +131,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // User confirmed, redirect to the logout route
-                window.location.href = "{{ route('admin.logout') }}";
+                window.location.href = "{{ route('logout') }}";
             }
         });
     }

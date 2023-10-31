@@ -42,9 +42,9 @@
 
                     <div class="px-5 pt-5 mt-5 d-flex align-items-center h-custom-2 ms-xl-4 pt-xl-0 mt-xl-n5">
 
-                        <form style="width: 23rem;" action="{{ route('login.auth') }}" method="post">
+                        <form style="width: 23rem;" action="{{ route('register.store') }}" method="post">
                             @csrf
-                            <h3 class="pb-3 mb-3 fw-normal" style="letter-spacing: 1px;">Log in</h3>
+                            <h3 class="pb-3 mb-3 fw-normal" style="letter-spacing: 1px;">Register</h3>
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -55,20 +55,37 @@
                                 </div>
                             @endif
                             <div class="mb-4 form-outline">
-                                <input name="email" type="email" class="form-control form-control-lg"
-                                    value="{{ old('email') }}" />
-                                <label class="form-label">Email address</label>
+                                <input name="name" type="text" class="form-control form-control-lg"
+                                    value="{{ old('name') }}" placeholder="Masukkan nama lengkap anda" />
+                                <label class="form-label">Nama</label>
                             </div>
                             <div class="mb-4 form-outline">
+                                <input name="email" type="email" class="form-control form-control-lg"
+                                    value="{{ old('email') }}" placeholder="Masukkan email yang ingin didaftarkan" />
+                                <label class="form-label">Email</label>
+                            </div>
+                            <div class="mb-4 form-outline">
+                                <input name="nim" type="text" class="form-control form-control-lg"
+                                    value="{{ old('nim') }}" placeholder="Masukkan NIM/NIP anda"  />
+                                <label class="form-label">NIM/NIP</label>
+                            </div>
+
+                            <div class="mb-4 form-outline">
+                                <input name="phone" type="text" class="form-control form-control-lg"
+                                    value="{{ old('phone') }}" placeholder="+628123456789"  />
+                                <label class="form-label">Nomor Telepon</label>
+                            </div>
+
+                            <div class="mb-4 form-outline">
                                 <input name="password" type="password" class="form-control form-control-lg"
-                                    value="{{ old('password') }}" />
+                                    value="{{ old('password') }}" placeholder="Masukkan kata sandi" />
                                 <label class="form-label">Password</label>
                             </div>
                             <div class="pt-1 mb-4">
-                                <button class="btn btn-info btn-lg btn-block" type="submit">Login</button>
+                                <button class="btn btn-info btn-lg btn-block" type="submit">register</button>
                             </div>
                             {{-- <p class="mb-5 small pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p> --}}
-                            <p>Tidak memiliki akun ? <a href="{{ route('register') }}" class="link-info">Daftar disini</a></p>
+                            <a href="{{ route('login') }}" class="link-info">Kembali ke halaman login</a>
 
                         </form>
 
