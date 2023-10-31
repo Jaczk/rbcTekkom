@@ -6,7 +6,7 @@
     use App\Http\Controllers\Admin\FineController;
     use App\Http\Controllers\Admin\LoanController;
     use App\Http\Controllers\Admin\UserController;
-    use App\Http\Controllers\Admin\LoginController;
+    use App\Http\Controllers\User\LoginController;
     use App\Http\Controllers\Admin\DonateController;
     use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\Admin\PublisherController;
@@ -24,6 +24,8 @@
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
 
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/chart/ajax/{period}', [DashboardController::class, 'procurementChartAjax'])->name('admin.chart.ajax');

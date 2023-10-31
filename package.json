@@ -16,6 +16,7 @@
     "dependencies": {
         "bootstrap-select": "^1.13.18",
         "chart.js": "^4.4.0",
+        "flowbite": "^2.0.0",
         "font-awesome": "^4.7.0",
         "sweetalert2": "^11.7.32"
     }
