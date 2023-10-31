@@ -37,7 +37,7 @@
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>Nomor Telepon</th>
-                                        <th>Pinjam ?</th>
+                                        <th>Dalam Peminjaman</th>
                                         <th>Tipe Pengguna</th>
                                         <th>Total Denda</th>
                                         <th>Aksi</th>
@@ -51,7 +51,7 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->phone }}</td>
-                                            @if ($user->is_loan == 0)
+                                            @if ($user->is_loan == 1)
                                                 <td class="text-center text-success font-weight-bold">
                                                     <i class="fas fa-check fa-lg" style="color: #19942e;"></i>
                                                 </td>

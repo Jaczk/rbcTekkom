@@ -27,3 +27,10 @@
     @endforeach
 </body>
 </html>
+<script type="text/javascript">
+    // Wait for the document to fully load
+    window.addEventListener('load', function () {
+        // Trigger the print dialog
+        window.print();
+    });
+</script>

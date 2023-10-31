@@ -57,7 +57,6 @@
         Route::get('/generate-all-label', [BookLabelController::class, 'generateAllBookLabels'])->name('admin.bookLabel.generateAllBookLabels');
         Route::post('/generate-all-label', [BookLabelController::class, 'generateAllBookLabels']); // Add a POST route for the same action
         Route::get('/generate-label/{bookId}', [BookLabelController::class, 'generateLabel'])->name('admin.bookLabel.generateLabel');
-        Route::get('/generateword-label/{bookId}', [BookLabelController::class, 'generateWordLabels'])->name('admin.bookLabel.generateWordLabel');
     });
 
     Route::group(['prefix' => 'loans'], function () {

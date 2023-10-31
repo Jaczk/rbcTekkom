@@ -8,44 +8,6 @@
         <div class="col-md-12">
             {{-- for Chart --}}
             <div>
-                {{-- <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card card-primary">
-                                <div class="card-header" style="background-color: #121F3E">
-                                    <h3 class="card-title">Tabel Ketersediaan Barang</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                        
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="pieChart"
-                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card card-primary">
-                                <div class="card-header" style="background-color: #121F3E">
-                                    <h3 class="card-title">Tabel Barang Berdasarkan Kategori</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                        
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="pieChart2"
-                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
                 <div class="card card-primary">
                     <div class="card-header" style="background-color: #6998AB">
                         <h3 class="card-title">Daftar Buku</h3>
@@ -56,7 +18,7 @@
                                 <a href="{{ route('admin.book.create') }}" class="btn btn-primary text-bold">+ Buku</a>
                             </div>
                             <div class="mx-2 mb-3">
-                                <a href="#" class="btn btn-secondary text-bold" data-toggle="modal"
+                                <a href="#" class="btn btn-warning text-bold" data-toggle="modal"
                                     data-target="#selectBooksModal"><span><i class="fas fa-file-pdf">
                                         </i></span> Label Buku</a>
                             </div>

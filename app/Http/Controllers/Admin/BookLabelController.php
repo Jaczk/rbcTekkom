@@ -68,83 +68,17 @@ class BookLabelController extends Controller
         // Define the filename for the generated PDF
         $pdfFileName = 'book_labels_' . time() . '.pdf';
 
-        // Return the PDF as a download response
-        return $pdf->download($pdfFileName);
+        // Save the PDF to a temporary file for printing
+        $tempPdfFilePath = storage_path('app/temp/' . $pdfFileName);
+        $pdf->save($tempPdfFilePath);
+
+        // Create a BinaryFileResponse with appropriate headers
+        $response = response()->file($tempPdfFilePath, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => "attachment; filename=$pdfFileName", // Download the PDF
+        ])->deleteFileAfterSend(true);
+
+        return $response;
     }
 
-
-
-    public function generateWordLabels($bookId)
-    {
-        // Retrieve the book by its ID
-        $book = Book::find($bookId);
-
-        // Create a new PHPWord instance
-        $phpWord = new PhpWord();
-
-        // Define a template file for the labels (you should have a template.docx with placeholders)
-        $templateFile = storage_path('app/templates/template.docx');
-
-        // Create a table for the labels
-        $table = $phpWord->addTable();
-        $table->addRow();
-        $cell = $table->addCell();
-        $cell->addText('Book Name');
-        $cell = $table->addCell();
-        $cell->addText('Library Code');
-        // Add more table headers as needed
-
-        $table->addRow();
-        $cell = $table->addCell();
-        $cell->addText($book->book_name);
-        $cell = $table->addCell();
-        $cell->addText($book->lib_book_code);
-        // Add more data as needed
-        // Save the labels to a Word (DOCX) file
-        $labelFileName = 'labels.docx';
-        $phpWord->save(storage_path('app/labels/' . $labelFileName));
-
-        // Provide the DOCX file for download
-        return response()->download(storage_path('app/labels/' . $labelFileName))->deleteFileAfterSend(true);
-    }
-    // public function generateWordLabels(Request $request)
-    // {
-    //     // Get input criteria from the request (you can adjust this based on your form fields)
-    //     $bookCriteria = $request->input('book_criteria');
-
-    //     // Query the database based on the criteria
-    //     $books = Book::whereIn('id', $bookCriteria)->get(); // Adjust the condition as per your needs
-
-    //     // Create a new PHPWord instance
-    //     $phpWord = new PhpWord();
-
-    //     // Define a template file for the labels (you should have a template.docx with placeholders)
-    //     $templateFile = storage_path('app/templates/template.docx');
-
-    //     // Create a table for the labels
-    //     $table = $phpWord->addTable();
-    //     $table->addRow();
-    //     $cell = $table->addCell();
-    //     $cell->addText('Book Name');
-    //     $cell = $table->addCell();
-    //     $cell->addText('Library Code');
-    //     // Add more table headers as needed
-
-    //     // Loop through each book and generate a label
-    //     foreach ($books as $book) {
-    //         $table->addRow();
-    //         $cell = $table->addCell();
-    //         $cell->addText($book->book_name);
-    //         $cell = $table->addCell();
-    //         $cell->addText($book->lib_book_code);
-    //         // Add more data as needed
-    //     }
-
-    //     // Save the labels to a Word (DOCX) file
-    //     $labelFileName = 'labels.docx';
-    //     $phpWord->save(storage_path('app/labels/' . $labelFileName));
-
-    //     // Provide the DOCX file for download
-    //     return response()->download(storage_path('app/labels/' . $labelFileName))->deleteFileAfterSend(true);
-    // }
 }
