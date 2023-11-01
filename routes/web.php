@@ -8,6 +8,7 @@
     use App\Http\Controllers\Admin\UserController;
     use App\Http\Controllers\User\LoginController;
     use App\Http\Controllers\User\RegisterController;
+    use App\Http\Controllers\User\HomeController;
     use App\Http\Controllers\Admin\DonateController;
     use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\Admin\PublisherController;
@@ -27,11 +28,13 @@
 */
 
 
+
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('auth/login', [LoginController::class, 'authenticate'])->name('login.auth');
-
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/chart/ajax/{period}', [DashboardController::class, 'procurementChartAjax'])->name('admin.chart.ajax');

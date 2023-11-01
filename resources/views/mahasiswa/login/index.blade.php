@@ -47,8 +47,8 @@
                     <div class="px-5 mt-5 d-flex justify-content-center align-items-center">
                         <img src="{{ asset('assets/images/himaskom.png') }}" class="mx-4" alt="logo ndip" style="max-width: 100px">
                         <div>
-                            <h3 class="mb-0">Ruang Baca Departemen Teknik Komputer</h3>
-                            <h5 class="mb-0">Universitas Diponegoro</h5>
+                            <h3 class="mb-0 text-dark">Ruang Baca Departemen Teknik Komputer</h3>
+                            <h5 class="mb-0 text-dark">Universitas Diponegoro</h5>
                         </div>
                     </div>
                     <div class="px-5 mt-5 d-flex justify-content-center h-custom-2">
