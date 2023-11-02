@@ -1,0 +1,7 @@
+.dropdown-menu > li > a:hover {
+    background-color: #001349;
+    color: #D8D8D8
+}
+.dropdown-menu a {
+    color: white;
+}

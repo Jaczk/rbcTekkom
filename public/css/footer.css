@@ -1,0 +1,25 @@
+
+.footer img {
+    width: 200px;
+}
+
+.footer p {
+    /* font-family: "Montserrat"; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    
+    color: #ffffff;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.footer h5 {
+    /* font-family: "Montserrat"; */
+    font-style: normal;
+    font-weight: 700;
+    color: #2EA3F2;
+}

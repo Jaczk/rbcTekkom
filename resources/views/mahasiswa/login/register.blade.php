@@ -60,9 +60,6 @@
             background-color: #009900;
         }
     </style>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'>
-    <script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js'></script>
 </head>
 
 <body>
@@ -72,11 +69,12 @@
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
                     <img src="https://images.unsplash.com/photo-1585779034823-7e9ac8faec70?auto=format&fit=crop&q=80&w=1935&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
-                </div>                
+                </div>
 
                 <div class="col-md-6">
                     <div class="px-5 mt-5 d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('assets/images/himaskom.png') }}" class="mx-4" alt="logo ndip" style="max-width: 100px">
+                        <img src="{{ asset('assets/images/himaskom.png') }}" class="mx-4" alt="logo ndip"
+                            style="max-width: 100px">
                         <div>
                             <h3 class="mb-0">Ruang Baca Departemen Teknik Komputer</h3>
                             <h5 class="mb-0">Universitas Diponegoro</h5>
@@ -86,7 +84,7 @@
                     <div class="px-5 mt-5 d-flex justify-content-center h-custom-2">
                         <form style="width: 23rem;" action="{{ route('register.store') }}" method="post">
                             @csrf
-                            <h3 class="pb-3 mb-3 fw-normal" style="letter-spacing: 1px;">Register</h3>
+                            <h3 class="pb-3 mb-3 fw-normal text-dark" style="letter-spacing: 1px;">Register</h3>
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -139,7 +137,7 @@
                                 <button class="btn btn-dark btn-lg btn-block" type="submit">register</button>
                             </div>
                             {{-- <p class="mb-5 small pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p> --}}
-                            <a href="{{ route('login') }}" class="link-dark">Kembali ke halaman login</a>
+                            <a href="{{ route('login') }}" class="link-dark "><u>Kembali ke halaman login</u></a>
 
                         </form>
 

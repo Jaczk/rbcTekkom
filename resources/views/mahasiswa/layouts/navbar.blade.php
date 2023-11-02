@@ -1,46 +1,67 @@
-{{-- Navbar --}}
-<nav class="navbar sticky-top navbar-expand-lg  navbar-light nav">
-    <a class="navbar-brand" href="/">
-        <img src="{{ asset('/assets/images/logo.png') }}">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
-        style="background-color: #FDFDFF">
-        <span class="navbar-toggler-icon "></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <div class="dropdown">
-                <li class="nav-item dropdown"><button class="dropbtn"> <span style="white-space:nowrap"> PROFIL <label
-                                class="arrow_down"></label></span></button></li>
-                <div class="dropdown-content">
-                    <a class="nav-link" href="#">Pustakawan</a>
-                    <a class="nav-link" href="#">Visi & Misi</a>
-                    <a class="nav-link" href="#">Jam Layanan </a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <li class="nav-item dropdown"> <button class="dropbtn"><span style="white-space:nowrap">KOLEKSI <label
-                                class="arrow_down"></label></span></button> </li>
-                <div class="dropdown-content">
-                    <a class="nav-link" aria-current="page" href="/buku">Koleksi Tercetak</a>
-                    <a class="nav-link" href="#">Tugas Akhir Digital</a>
-                    <a class="nav-link" href="#">Kerja Praktek Digital</a>
-                    <a class="nav-link" href="#">Karya Dosen Terindeks Scopus</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <li class="nav-item dropdown"> <button class="dropbtn"><span style="white-space:nowrap">FASILITAS<label
-                                class="arrow_down"></label></span></button> </li>
-                <div class="dropdown-content">
-                    <a class="nav-link" href="#">Ruang Baca</a>
-                    <a class="nav-link" href="#">Mobile App</a>
-                    <a class="nav-link" href="#">TaTa Tertib</a>
-                </div>
-            </div>
-            <li class="nav-item dropbtn"> <a href="/faq">FAQ</a> </li>
-            <button class="btn-primary float-right btn-login" type="submit" href="/">Login</button>
-        </ul>
+<nav class="p-3 navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #001349;">
+    <div class="container-fluid">
+        <img src="{{ asset('assets/images/logo.png') }}" height="45px" alt="">
+        {{-- <a class="navbar-brand fw-bold" href="#">RBC Tekkom</a> --}}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto ">
+                <li class="nav-item dropdown">
+                    <a class="mx-2 text-uppercase nav-link dropdown-toggle active fw-bold" href="#"
+                        id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profil
+                    </a>
+                    <ul class="mt-3 border-top border-info dropdown-menu border-3 rounded-0"
+                        style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0" href="#">Pustakawan</a></li>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Visi Misi</a></li>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Jam Layanan</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="mx-2 text-uppercase nav-link dropdown-toggle active fw-bold rounded-0" href="#"
+                        id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Koleksi
+                    </a>
+                    <ul class="mt-3 border-top border-info dropdown-menu border-3 rounded-0"
+                        style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Tugas Akhir Digital</a>
+                        </li>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Kerja Praktek Digital</a>
+                        </li>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Karya Dosen Terindeks
+                                Scopus</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="mx-2 text-uppercase nav-link dropdown-toggle active fw-bold rounded-0" href="#"
+                        id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Fasilitas
+                    </a>
+                    <ul class="mt-3 border-top border-info dropdown-menu border-3 rounded-0"
+                        style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Ruang Baca</a></li>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Tata Tertib</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="mx-2 text-uppercase nav-link active fw-bold" href="#">FAQ</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ms-auto d-none d-lg-inline-flex">
+                <li class="mx-3 nav-item">
+                    <a class="mx-2 text-uppercase nav-link active fw-bold" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class=" rounded-pill btn btn-light fw-bold fs-7">Get Started</button>
+                </li>
+
+            </ul>
+        </div>
     </div>
 </nav>
