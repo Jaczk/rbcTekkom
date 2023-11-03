@@ -22,6 +22,16 @@ class RegisterController extends Controller
             'phone' => 'required|max:15|regex:/^\+62[1-9][0-9]*$/',
             'email' => 'required|email',
             'password' => 'required|min:6'
+        ],[
+            'name.required' => 'Nama wajib diisi',
+            'nim.required' => 'NIM wajib diisi',
+            'nim.unique' => 'NIM sudah digunakan, silakan input NIM lain',
+            'phone.required'=>'Nomor telepon wajib diisi',
+            'phone.max'=>'Nomor telepon maksimal 15 karakter',
+            'phone.regex' => 'Penulisan nomor telepon diawali dengan +62',
+            'email.required' => 'Email harus diisi dan valid',
+            'password.required' => 'Password wajib diisi',
+            'password.min' => 'Password minimal 6 karakter'
         ]);
 
         $data = $request->except('_token');

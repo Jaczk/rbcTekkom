@@ -18,6 +18,9 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+        ], [
+            'email.required' => 'Email harus diisi',
+            'password.required' => 'Password harus diisi',
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -29,7 +32,7 @@ class LoginController extends Controller
                 return redirect()->route('admin.dashboard');
             } elseif (auth()->user()->role_id == 2) {
                 $request->session()->regenerate();
-                return redirect()->route('user.dashboard');
+                return redirect()->route('user.home');
             }
         }
 

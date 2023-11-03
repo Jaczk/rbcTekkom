@@ -10,4 +10,8 @@ class HomeController extends Controller
     public function index(){
         return view('mahasiswa.dashboard.index');
     }
+
+    public function access(){
+        return view('user-acc');
+    }
 }

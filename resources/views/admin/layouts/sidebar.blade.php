@@ -103,7 +103,7 @@
                     <a href="{{ route('logout')}}" class="nav-link" style="color: #ffffff;" onclick="confirmLogout(event)">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>
-                            Keluar
+                            Logout
                         </p>
                     </a>
                 </li>
@@ -121,12 +121,12 @@
 
         Swal.fire({
             title: 'Apakah anda yakin?',
-            text: 'Keluar',
+            text: 'Logout',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Ya, Keluar',
+            confirmButtonText: 'Ya, Logout',
             cancelButtonText: 'Kembali',
         }).then((result) => {
             if (result.isConfirmed) {
