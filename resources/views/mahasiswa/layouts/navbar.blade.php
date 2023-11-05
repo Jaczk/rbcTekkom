@@ -72,7 +72,7 @@
                                 </svg>
                                 {{ auth()->user()->name }}
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="mt-3 dropdown-menu rounded-0" style="background-color: #001349;">
                                 <li><a class="dropdown-item" href="#" onclick="confirmLogout(event)">Logout</a>
                                 </li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>

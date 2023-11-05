@@ -14,7 +14,8 @@
     use App\Http\Controllers\Admin\PublisherController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
-    use App\Models\Donate;
+use App\Http\Controllers\User\SpecBookController;
+use App\Models\Donate;
 
     /*
 |--------------------------------------------------------------------------
@@ -27,8 +28,7 @@
 |
 */
 
-    Route::view('/', 'mahasiswa.dashboard.index')->name('user.home');
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/access', [HomeController::class, 'access'])->name('access');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -37,12 +37,14 @@
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::group(['prefix'=>'admin', 'middleware'=>['user.auth','user.acc:1']], function(){
+    Route::get('/specBook', [SpecBookController::class, 'index'])->name('user.specBook');
+
+    Route::group(['prefix' => 'admin', 'middleware' => ['user.auth', 'user.acc:1']], function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/chart/ajax/{period}', [DashboardController::class, 'procurementChartAjax'])->name('admin.chart.ajax');
         Route::get('/specChart/ajax/{period}', [DashboardController::class, 'specBookChartAjax'])->name('admin.specChart.ajax');
-    
+
         Route::group(['prefix' => 'book'], function () {
             Route::get('/', [BookController::class, 'index'])->name('admin.book');
             Route::get('/create', [BookController::class, 'create'])->name('admin.book.create');
@@ -52,13 +54,13 @@
             Route::put('/update/{id}', [BookController::class, 'update'])->name('admin.book.update');
             Route::delete('/destroy/{id}', [BookController::class, 'destroy'])->name('admin.book.destroy');
         });
-        
+
         Route::group(['prefix' => 'bookLabel'], function () {
             Route::get('/generate-all-label', [BookLabelController::class, 'generateAllBookLabels'])->name('admin.bookLabel.generateAllBookLabels');
             Route::post('/generate-all-label', [BookLabelController::class, 'generateAllBookLabels']); // Add a POST route for the same action
             Route::get('/generate-label/{bookId}', [BookLabelController::class, 'generateLabel'])->name('admin.bookLabel.generateLabel');
         });
-    
+
         Route::group(['prefix' => 'loans'], function () {
             Route::get('/', [LoanController::class, 'index'])->name('admin.loans');
             Route::get('/create', [LoanController::class, 'create'])->name('admin.loans.create');
@@ -67,7 +69,7 @@
             Route::get('/chart/loan/{period}', [LoanController::class, 'loanChartAjax'])->name('admin.chart.loan.ajax');
             Route::delete('/destroy/{id}', [LoanController::class, 'destroy'])->name('admin.loans.destroy');
         });
-    
+
         Route::group(['prefix' => 'donate'], function () {
             Route::get('/', [DonateController::class, 'index'])->name('admin.donate');
             Route::get('/create', [DonateController::class, 'create'])->name('admin.donate.create');
@@ -77,7 +79,7 @@
             Route::put('/update/{id}', [DonateController::class, 'update'])->name('admin.donate.update');
             Route::delete('/destroy/{id}', [DonateController::class, 'destroy'])->name('admin.donate.destroy');
         });
-    
+
         Route::group(['prefix' => 'special'], function () {
             Route::get('/', [SpecializationController::class, 'index'])->name('admin.special');
             Route::get('/create', [SpecializationController::class, 'create'])->name('admin.special.create');
@@ -86,7 +88,7 @@
             Route::put('/update/{id}', [SpecializationController::class, 'update'])->name('admin.special.update');
             Route::delete('/destroy/{id}', [SpecializationController::class, 'destroy'])->name('admin.special.destroy');
         });
-    
+
         Route::group(['prefix' => 'specDetail'], function () {
             Route::get('/', [SpecDetailController::class, 'index'])->name('admin.specDetail');
             Route::get('/edit/{id}', [SpecDetailController::class, 'edit'])->name('admin.specDetail.edit');
@@ -95,18 +97,16 @@
             Route::put('/update/{id}', [SpecDetailController::class, 'update'])->name('admin.specDetail.update');
             Route::delete('/destroy/{id}', [SpecDetailController::class, 'destroy'])->name('admin.specDetail.destroy');
         });
-    
+
         Route::group(['prefix' => 'fine'], function () {
             Route::get('/edit', [FineController::class, 'edit'])->name('admin.fine.edit');
             Route::put('/update', [FineController::class, 'update'])->name('admin.fine.update');
         });
-    
+
         Route::group(['prefix' => 'user'], function () {
             Route::get('/', [UserController::class, 'index'])->name('admin.user');
             Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
             Route::put('/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
             Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
         });
-
     });
-

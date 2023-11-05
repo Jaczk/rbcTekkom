@@ -1,0 +1,23 @@
+/* CSS for screens larger than 1580px (adjust the width as needed) */
+@media (min-width: 1580px) {
+    .search-div {
+        display: none;
+    }
+}
+
+/* CSS for screens smaller than 1580px (adjust the width as needed) */
+@media (max-width: 1580px) {
+    .search-div {
+        display: block;
+    }
+}
+
+.card-container {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.poppins-text {
+    font-family: 'Poppins', sans-serif;
+}
