@@ -32,7 +32,7 @@ class LoginController extends Controller
                 return redirect()->route('admin.dashboard');
             } elseif (auth()->user()->role_id == 2) {
                 $request->session()->regenerate();
-                return redirect()->route('user.home');
+                return redirect()->route('home');
             }
         }
 

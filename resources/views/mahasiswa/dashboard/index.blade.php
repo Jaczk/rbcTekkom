@@ -79,8 +79,8 @@
             <div class="p-4 row" style="height: 400px; width: 100%;">
                 <div class="text-center col-sm-4 d-flex align-items-center justify-content-center">
                     <p class="text-black fs-1 fw-bold">
-                        Browse to Experience <br>
-                        Find Your Book
+                        Browse to <span style="color: #2A07FF">Experience</span> <br>
+                        Find Your <span style="color:#FF0000">Best</span> Book
                     </p>
                 </div>
                 <div class="col-sm-8 d-flex align-items-center">
@@ -105,17 +105,18 @@
                 <h2 class="mx-1 my-3 text-black m fw-semibold">Reccomended By Our Staff</h2>
                 <div class="mx-2 my-5 card-container">
                     @foreach ($books as $book)
-                    <div class="mx-3 text-black card bg-light" style="height: 400px; width:300px">
-                        <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img" style="height: 250px" alt="bookImage">
-                        <div class="bg-transparent card-footer">
-                            <p class="fw-semibold fs-5">
-                                {{ $book->book_name }}
-                            </p>
-                            <p class="fs-6">
-                                {{ $book->author }}
-                            </p>
+                        <div class="mx-3 text-black card bg-light" style="height: 400px; width:300px">
+                            <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img" style="height: 250px"
+                                alt="bookImage">
+                            <div class="bg-transparent card-footer">
+                                <p class="fw-semibold fs-5">
+                                    {{ $book->book_name }}
+                                </p>
+                                <p class="fs-6">
+                                    {{ $book->author }}
+                                </p>
+                            </div>
                         </div>
-                      </div>
                     @endforeach
                 </div>
             </div>
