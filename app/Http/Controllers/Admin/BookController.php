@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -63,7 +64,6 @@ class BookController extends Controller
             'spec_detail_id' => 'required',
             'is_available' => 'nullable',
             'desc' => 'nullable',
-            'is_recommended' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png|nullable',
 
         ]);
@@ -159,20 +159,26 @@ class BookController extends Controller
             // Delete the old image
             Storage::delete('public/images/' . $book->image);
         }
+        $data['is_recommended'] = $request->has('is_recommended') ? 1 : 0;
 
         $limitRecc = Book::where('is_recommended', 1)->count();
 
-        if ($limitRecc >= 5) {
-            return redirect()->route('admin.book')->with('error', 'Buku Rekomendasi Maksimal 5');
+        if ($limitRecc > 5) { //check if the book is recommended only 5
+            return back()->with('error', 'Buku Rekomendasi Maksimal 5')->withInput();
+        } else {
+            $book->update($data);
+
+            $updatedLimitRecc = Book::where('is_recommended', 1)->count();
+
+            if ($updatedLimitRecc > 5) {
+                $data['is_recommended'] = 0; // Set the book as not recommended
+                $book->update($data);
+                return back()->with('error', 'Buku Rekomendasi Maksimal 5')->withInput();
+            } else {
+                return redirect()->route('admin.book')->with('success', 'Sukses Memperbarui Data Buku');
+            }
         }
-
-        $data['is_recommended'] = $request->has('is_recommended') ? 1 : 0;
-
-        $book->update($data);
-
-        return redirect()->route('admin.book')->with('success', 'Sukses Memperbarui Data Buku');
     }
-
     /**
      * Remove the specified resource from storage.
      */

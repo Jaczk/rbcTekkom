@@ -17,6 +17,15 @@
                 </div>
             @endif
 
+            @if (session()->has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Tambah Buku</h3>
@@ -122,7 +131,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Ketersediaan</label>
                                     <select class="custom-select" name="is_available)">
@@ -135,16 +144,6 @@
                                     </select>
                                 </div>
 
-                            </div>
-                            <div class="col d-flex align-items-center">
-                                <div class="mb-2 form-check mt-4">
-                                    <input class="form-check-input" type="checkbox" value="" id="is_recommended"
-                                        name="is_recommended">
-                                    <label class="form-check-label font-weight-bold" for="myCheckbox"
-                                        for="is_recommended">
-                                        Rekomendasi
-                                    </label>
-                                </div>
                             </div>
 
                         </div>
