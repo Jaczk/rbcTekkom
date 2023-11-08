@@ -85,6 +85,7 @@ class BookController extends Controller
 
             $data['image'] = $ogImageName;
         }
+
         Book::create($data);
         Artisan::call('custom:storagelink');
 
@@ -159,6 +160,11 @@ class BookController extends Controller
             Storage::delete('public/images/' . $book->image);
         }
 
+        $limitRecc = Book::where('is_recommended', 1)->count();
+
+        if ($limitRecc >= 5) {
+            return redirect()->route('admin.book')->with('error', 'Buku Rekomendasi Maksimal 5');
+        }
 
         $data['is_recommended'] = $request->has('is_recommended') ? 1 : 0;
 

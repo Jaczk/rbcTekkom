@@ -1,0 +1,219 @@
+.box {
+  position: relative;
+  width: 1376px;
+  height: 424px;
+}
+
+.box .group {
+  position: fixed;
+  width: 1402px;
+  height: 424px;
+  top: 0;
+  left: 0;
+}
+
+.box .text-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 32px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .rectangle {
+  width: 195px;
+  top: 77px;
+  left: 0;
+  position: absolute;
+  height: 283px;
+}
+
+.box .img {
+  width: 195px;
+  top: 77px;
+  left: 237px;
+  position: absolute;
+  height: 283px;
+}
+
+.box .rectangle-2 {
+  width: 194px;
+  top: 77px;
+  left: 474px;
+  position: absolute;
+  height: 283px;
+}
+
+.box .rectangle-3 {
+  width: 194px;
+  top: 77px;
+  left: 710px;
+  position: absolute;
+  height: 283px;
+}
+
+.box .rectangle-4 {
+  width: 194px;
+  top: 81px;
+  left: 1182px;
+  object-fit: cover;
+  position: absolute;
+  height: 283px;
+}
+
+.box .rectangle-5 {
+  width: 194px;
+  top: 81px;
+  left: 946px;
+  object-fit: cover;
+  position: absolute;
+  height: 283px;
+}
+
+.box .div {
+  position: absolute;
+  top: 378px;
+  left: 0;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-2 {
+  position: absolute;
+  top: 378px;
+  left: 237px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-3 {
+  position: absolute;
+  top: 378px;
+  left: 474px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-4 {
+  left: 0;
+  position: absolute;
+  top: 404px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-5 {
+  left: 237px;
+  position: absolute;
+  top: 404px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-6 {
+  position: absolute;
+  top: 404px;
+  left: 474px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-7 {
+  left: 710px;
+  position: absolute;
+  top: 378px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-8 {
+  left: 948px;
+  position: absolute;
+  top: 378px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-9 {
+  position: absolute;
+  top: 378px;
+  left: 1185px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-10 {
+  left: 710px;
+  position: absolute;
+  top: 404px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-11 {
+  position: absolute;
+  top: 404px;
+  left: 948px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.box .text-wrapper-12 {
+  left: 1185px;
+  position: absolute;
+  top: 404px;
+  font-family: "Poppins-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+}

@@ -48,11 +48,11 @@
         </div> --}}
 
         <div class="hero" style="background-image: linear-gradient(45deg, #F9FACB, #63A4E0); height: 800px">
-            <img src="{{ asset('assets/images/hero.png') }}" class="position-absolute" style="top: 15%; right: 0"
-                alt="hero">
-            <img src="{{ asset('assets/images/hero2.png') }}" class="position-absolute" style="top: 17%; left: 0"
+            <img src="{{ asset('assets/images/hero2.png') }}"  style="top: 17%; left: 0"
                 alt="hero2">
-            <div class="input-group position-absolute z-1 search-div" style="width: 35%; top: 67%; left: 7%;">
+            <img src="{{ asset('assets/images/hero.png') }}" class="position-absolute"  style="top: 15%; right: 0"
+                alt="hero">
+            <div class="input-group position-absolute z-1 search-div" style="width: 35%; top: 70%; left: 7%;">
                 <input type="search" class="rounded form-control"
                     placeholder="Enter book title, ISBN, author or publishers" aria-label="Search"
                     aria-describedby="search-addon" style="height: 60px;" />
@@ -99,21 +99,19 @@
                 </div>
             </div>
         </div>
-
-        <div class="reccomended" style="height: 580px">
+        <div class="reccomended" style="overflow: hidden;">
             <div class="p-4">
-                <h2 class="mx-1 my-3 text-black m fw-semibold">Reccomended By Our Staff</h2>
-                <div class="mx-2 my-5 card-container">
+                <h2 class="my-3 text-black m fw-semibold">Recommended By Our Staff</h2>
+                <div class="container-fluid mx-2 mt-4 row d-flex flex-nowrap" style="overflow-x: auto;">
                     @foreach ($books as $book)
-                        <div class="mx-3 text-black card bg-light" style="height: 400px; width:300px">
-                            <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img" style="height: 250px"
-                                alt="bookImage">
-                            <div class="bg-transparent card-footer">
-                                <p class="fw-semibold fs-5">
-                                    {{ $book->book_name }}
-                                </p>
-                                <p class="fs-6">
-                                    {{ $book->author }}
+                        <div class="mx-3" style="width: 250px; height: 420px;">
+                            <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img rounded-4" style="height: 300px; width: 100%;" alt="bookImage">
+                            <div class="bg-transparent">
+                                <p class="fw-semibold">
+                                    {{ $book->book_name }} <br>
+                                    <span class="mt-1 fw-light">
+                                        {{ $book->author }}
+                                    </span>
                                 </p>
                             </div>
                         </div>
@@ -121,7 +119,7 @@
                 </div>
             </div>
         </div>
-
+        
     </div>
 
 @endsection
