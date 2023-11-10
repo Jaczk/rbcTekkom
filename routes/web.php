@@ -14,8 +14,9 @@
     use App\Http\Controllers\Admin\PublisherController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
-use App\Http\Controllers\User\SpecBookController;
-use App\Models\Donate;
+    use App\Http\Controllers\User\CatalogController;
+    use App\Http\Controllers\User\SpecBookController;
+    use App\Models\Donate;
 
     /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ use App\Models\Donate;
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/access', [HomeController::class, 'access'])->name('access');
     Route::get('/show/{id}', [HomeController::class, 'show'])->name('book.show');
+
+    Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('auth/login', [LoginController::class, 'authenticate'])->name('login.auth');

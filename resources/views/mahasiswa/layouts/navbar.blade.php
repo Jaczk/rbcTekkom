@@ -8,13 +8,23 @@
         </button>
 
         <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+            <style>
+                .drop2>li>a:hover {
+                    background-color: #001349;
+                    color: #D8D8D8
+                }
+
+                .drop2 a {
+                    color: white;
+                }
+            </style>
             <ul class="navbar-nav ms-auto ">
                 <li class="nav-item dropdown">
                     <a class="mx-2 text-uppercase nav-link dropdown-toggle active fw-bold" href="#"
                         id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Profil
                     </a>
-                    <ul class="mt-3 border-top border-info dropdown-menu border-3 rounded-0"
+                    <ul class="mt-3 border-top border-info dropdown-menu drop2 border-3 rounded-0"
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0" href="#">Pustakawan</a></li>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Visi Misi</a></li>
@@ -27,7 +37,7 @@
                         id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Koleksi
                     </a>
-                    <ul class="mt-3 border-top border-info dropdown-menu border-3 rounded-0"
+                    <ul class="mt-3 border-top border-info dropdown-menu drop2 border-3 rounded-0"
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Tugas Akhir
                                 Digital</a>
@@ -72,9 +82,10 @@
                                 </svg>
                                 {{ Str::limit(auth()->user()->name, 10, '...') }}
                             </button>
-                            <ul class="mt-3 dropdown-menu rounded-0 border-top border-info border-3" style="background-color: #001349;">
-                                @if(Auth::check() && Auth::user()->role_id == 1 )
-                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dasbor</a></li>
+                            <ul class="mt-3 dropdown-menu drop2 rounded-0 border-top border-info border-3"
+                                style="background-color: #001349;">
+                                @if (Auth::check() && Auth::user()->role_id == 1)
+                                    <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dasbor</a></li>
                                 @endif
                                 <li><a class="dropdown-item" href="#">Profil</a>
                                 </li>

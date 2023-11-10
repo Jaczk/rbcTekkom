@@ -51,7 +51,7 @@
             <img src="{{ asset('assets/images/hero2.png') }}" style="top: 17%; left: 0" alt="hero2">
             <img src="{{ asset('assets/images/hero.png') }}" class="position-absolute" style="top: 15%; right: 0"
                 alt="hero">
-            <div class="input-group position-absolute z-1 search-div" style="width: 35%; top: 70%; left: 7%;">
+            <div class="input-group position-absolute z-1 search-div" style="width: 35%; top: 60%; left: 7%;">
                 <input type="search" class="rounded form-control"
                     placeholder="Enter book title, ISBN, author or publishers" aria-label="Search"
                     aria-describedby="search-addon" style="height: 60px;" />
@@ -102,7 +102,7 @@
         <div class="reccomended" style="overflow: hidden;">
             <div class="p-4">
                 <h2 class="my-3 text-black m fw-semibold">Recommended By Our Staff</h2>
-                <div class="container-fluid mx-2 mt-4 row d-flex flex-nowrap" style="overflow-x: auto;">
+                <div class="mx-2 mt-4 container-fluid row d-flex flex-nowrap" style="overflow-x: auto;">
                     @foreach ($books as $book)
                     <a href="javascript:void(0)" class="" id="show-detail"
                         data-url="{{ route('book.show', $book->id) }}" style="width: 18rem; color: inherit;">
@@ -134,7 +134,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="text-center">
-                            <img alt="book" class="card-img rounded-4 mb-3" 
+                            <img alt="book" class="mb-3 card-img rounded-4" 
                             style="width: 250px; height: 300px;" id="book-image">
                         </div>
                         <div class="">

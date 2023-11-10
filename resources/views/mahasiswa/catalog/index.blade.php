@@ -9,18 +9,7 @@
             <div class="mt-4 title fs-2 ms-4">
                 Katalog Buku
             </div>
-            
-            <div class="form-groups">
-                <select name="spec_id" class="mt-4 selectpicker" id="spec_id" data-size="4">
-                    @foreach ($specs as $spec)
-                        <option value="{{ $spec->id }}">
-                            {{ old('spec_id') == $spec->id ? 'selected' : '' }}
-                            {{ $spec->desc }}
-                        </option>
-                    @endforeach
-                </select>
 
-            </div>
             <form action="" class="w-25 me-4">
                 <div class="p-1 my-4 border input-group rounded-2 w-100">
                     <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon3"
@@ -31,6 +20,61 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="filters">
+            <div class="mt-2 title fs-6 ms-5">
+                Filter Katalog
+            </div>
+            <div class="form-groups ms-3">
+                <select name="spec_id" class="m-2 selectpicker filt " data-live-search="true" id="spec_id" data-size="5"
+                    data-width="25%" title="Pilih Peminatan">
+                    <style>
+                        .filt-drop {
+                            background-color: #FFFFFF;
+                            color: black;
+                        }
+
+                        .filt-drop:hover {
+                            background-color: #D8D8D8;
+                            color: white;
+                        }
+                    </style>
+                    
+                    @foreach ($specs as $spec)
+                        <option value="{{ $spec->id }}" class="text-black filt-drop">
+                            {{ old('spec_id') == $spec->id ? 'selected' : '' }}
+                            {{ $spec->desc }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <select name="spec_detail_id" class="m-2 selectpicker filt " data-live-search="true" id="spec_detail_id"
+                    data-size="5" data-width="25%" title="Pilih Detail Peminatan">
+                    <style>
+                        .filt-drop {
+                            background-color: #FFFFFF;
+                            color: black;
+                        }
+
+                        .filt-drop:hover {
+                            background-color: #D8D8D8;
+                            color: white;
+                        }
+                    </style>
+                    <option value="">
+                        Detail Peminatan
+                    </option>
+                    @foreach ($specDetails as $sd)
+                        <option value="{{ $sd->id }}" class="text-black filt-drop">
+                            {{ old('spec_detail_id') == $sd->id ? 'selected' : '' }}
+                            {{ $sd->desc }}
+                        </option>
+                    @endforeach
+                </select>
+                <div class="mb-2 btn btn-primary" id="filterButton">
+                    Filter
+                </div>
+            </div>
         </div>
         <div class="catalog">
             <div class="mt-5 ms-3 container-fluid row d-flex">
@@ -64,35 +108,35 @@
 @section('js')
 
     <script>
-        // Add JavaScript to handle specialization link clicks
+        // Add JavaScript to handle filter button click
         document.addEventListener('DOMContentLoaded', function() {
-            const specLinks = document.querySelectorAll('.specBook a');
+            const specSelect = document.getElementById('spec_id');
+            const specDetailSelect = document.getElementById('spec_detail_id');
+            const filterButton = document.getElementById('filterButton');
 
-            specLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const specId = link.getAttribute('href').split('/').pop();
-                    reloadBooks(specId);
-                });
+            // Disable the first option when the dropdown is opened
+            specSelect.addEventListener('show.bs.select', function() {
+                specSelect.options[0].disabled = true;
             });
 
-            function reloadBooks(specId) {
-                // You can use AJAX to fetch books based on the selected specialization
-                // Update the URL and use it in your controller to filter books by specialization
-                const url = "{{ route('user.catalog') }}?spec=" + specId;
+            // Disable the first option when the dropdown is opened
+            specDetailSelect.addEventListener('show.bs.select', function() {
+                specDetailSelect.options[0].disabled = true;
+            });
 
-                // Perform AJAX request or navigate to the URL
-                // For example, you can use fetch or jQuery.ajax
-                // Update the displayed books after fetching data
-                // ...
+            filterButton.addEventListener('click', function() {
+                // Get selected values from the dropdowns
+                const specId = specSelect.value;
+                const specDetailId = specDetailSelect.value;
 
-                // For demonstration purposes, let's simulate a page reload
+                // Construct the URL with selected filter values
+                const url = "{{ route('user.catalog') }}?spec=" + specId + "&spec_detail=" + specDetailId;
+
+                // Perform a page reload with the updated URL
                 window.location.href = url;
-            }
+            });
         });
     </script>
-
-
 
 
 @endsection
