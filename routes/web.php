@@ -30,6 +30,7 @@ use App\Models\Donate;
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/access', [HomeController::class, 'access'])->name('access');
+    Route::get('/show/{id}', [HomeController::class, 'show'])->name('book.show');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('auth/login', [LoginController::class, 'authenticate'])->name('login.auth');

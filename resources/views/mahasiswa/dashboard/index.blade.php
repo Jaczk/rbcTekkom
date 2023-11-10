@@ -48,9 +48,8 @@
         </div> --}}
 
         <div class="hero" style="background-image: linear-gradient(45deg, #F9FACB, #63A4E0); height: 800px">
-            <img src="{{ asset('assets/images/hero2.png') }}"  style="top: 17%; left: 0"
-                alt="hero2">
-            <img src="{{ asset('assets/images/hero.png') }}" class="position-absolute"  style="top: 15%; right: 0"
+            <img src="{{ asset('assets/images/hero2.png') }}" style="top: 17%; left: 0" alt="hero2">
+            <img src="{{ asset('assets/images/hero.png') }}" class="position-absolute" style="top: 15%; right: 0"
                 alt="hero">
             <div class="input-group position-absolute z-1 search-div" style="width: 35%; top: 70%; left: 7%;">
                 <input type="search" class="rounded form-control"
@@ -104,8 +103,11 @@
                 <h2 class="my-3 text-black m fw-semibold">Recommended By Our Staff</h2>
                 <div class="container-fluid mx-2 mt-4 row d-flex flex-nowrap" style="overflow-x: auto;">
                     @foreach ($books as $book)
+                    <a href="javascript:void(0)" class="" id="show-detail"
+                        data-url="{{ route('book.show', $book->id) }}" style="width: 18rem; color: inherit;">
                         <div class="mx-3" style="width: 250px; height: 420px;">
-                            <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img rounded-4" style="height: 300px; width: 100%;" alt="bookImage">
+                            <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img rounded-4"
+                            style="height: 300px; width: 100%;" alt="bookImage">
                             <div class="bg-transparent">
                                 <p class="fw-semibold">
                                     {{ $book->book_name }} <br>
@@ -115,17 +117,107 @@
                                 </p>
                             </div>
                         </div>
+                    </a>
                     @endforeach
                 </div>
             </div>
         </div>
-        
+
+        <!-- Modal -->
+        <div class="modal fade" id="userShowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Buku</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <img alt="book" class="card-img rounded-4 mb-3" 
+                            style="width: 250px; height: 300px;" id="book-image">
+                        </div>
+                        <div class="">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Buku</th>
+                                            <td><span id="book-name"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Peminatan</th>
+                                            <td><span id="book-spec"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Detail Minat</th>
+                                            <td><span id="book-spec_detail"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kode Perpus</th>
+                                            <td><span id="book-lib"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Penerbit</th>
+                                            <td><span id="book-publisher"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Penulis</th>
+                                            <td><span id="book-author"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>ISBN-ISSN</th>
+                                            <td><span id="book-isbn_issn"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tahun Masuk</th>
+                                            <td><span id="book-year"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kondisi</th>
+                                            <td><span id="book-condition"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Deskripsi</th>
+                                            <td><span id="book-desc"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 @endsection
 
 
 @section('js')
+    <script>
+        //Modal dialog
+        $('body').on('click', '#show-detail', function() {
+            var userURL = $(this).data('url');
+            $.get(userURL, function(data) {
+                // var img = text("/storage/app/public/images/") + text(data.image);
+                $('#userShowModal').modal('show');
+                $('#book-name').text(data.book_name);
+                $('#book-publisher').text(data.publisher);
+                $('#book-author').text(data.author);
+                $('#book-isbn_issn').text(data.isbn_issn);
+                $('#book-condition').text(data.condition);
+                $('#book-year').text(data.year_entry);
+                $('#book-desc').text(data.desc);
+                $('#book-spec').text(data.specialization.desc);
+                $('#book-lib').text(data.lib_book_code);
+                $('#book-spec_detail').text(data.spec_detail.desc);
+                $('#book-image').attr("src", img);
+            })
+        });
+    </script>
     {{-- <script>
         // JavaScript to control the visibility of the search-div based on screen width
         function toggleSearchVisibility() {

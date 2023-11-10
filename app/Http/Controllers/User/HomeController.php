@@ -16,9 +16,14 @@ class HomeController extends Controller
         return view('mahasiswa.dashboard.index', compact('specializations', 'books'));
     }
 
-
     public function access()
     {
         return view('user-acc');
+    }
+
+    public function show($id)
+    {
+        $book = Book::with(['specialization', 'specDetail'])->find($id);
+        return response()->json($book);
     }
 }
