@@ -75,6 +75,7 @@
                     background-size: cover;
                 }
             </style>
+              
             <div class="p-4 row" style="height: 400px; width: 100%;">
                 <div class="text-center col-sm-4 d-flex align-items-center justify-content-center">
                     <p class="text-black fs-1 fw-bold">
