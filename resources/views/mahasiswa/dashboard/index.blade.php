@@ -51,7 +51,7 @@
             <img src="{{ asset('assets/images/hero2.png') }}" style="top: 17%; left: 0" alt="hero2">
             <img src="{{ asset('assets/images/hero.png') }}" class="position-absolute" style="top: 15%; right: 0"
                 alt="hero">
-            <div class="input-group position-absolute z-1 search-div" style="width: 35%; top: 60%; left: 7%;">
+            <div class="input-group position-absolute z-1 search-div" style="width: 35%; top: 63%; left: 7%;">
                 <input type="search" class="rounded form-control"
                     placeholder="Enter book title, ISBN, author or publishers" aria-label="Search"
                     aria-describedby="search-addon" style="height: 60px;" />

@@ -13,9 +13,9 @@
             <form action="" class="w-25 me-4">
                 <div class="p-1 my-4 border input-group rounded-2 w-100">
                     <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon3"
-                        class="border-0 form-control bg-none">
+                        class="border-0 form-control bg-none" id="search">
                     <div class="border-0 input-group-append">
-                        <button id="button-addon3" type="button" class="btn btn-link text-success"><i
+                        <button id="searchbtn" type="button" class="btn btn-link text-success"><i
                                 class="fa fa-search"></i></button>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                             color: white;
                         }
                     </style>
-                    
+
                     @foreach ($specs as $spec)
                         <option value="{{ $spec->id }}" class="text-black filt-drop">
                             {{ old('spec_id') == $spec->id ? 'selected' : '' }}
@@ -61,9 +61,7 @@
                             color: white;
                         }
                     </style>
-                    <option value="">
-                        Detail Peminatan
-                    </option>
+
                     @foreach ($specDetails as $sd)
                         <option value="{{ $sd->id }}" class="text-black filt-drop">
                             {{ old('spec_detail_id') == $sd->id ? 'selected' : '' }}
@@ -78,7 +76,7 @@
         </div>
         <div class="catalog">
             <div class="mt-5 ms-3 container-fluid row d-flex">
-                @foreach ($books as $book)
+                @forelse ($books as $book)
                     <div class="mx-3" style="width: 250px; height: 420px;">
                         <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img rounded-4 object-fit-cover"
                             style="height: 300px; width: 100%;" alt="bookImage">
@@ -98,9 +96,12 @@
                             </p>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <h2>Maaf Buku yang anda cari tidak ada...</h2>
+                @endforelse
             </div>
         </div>
+
     </div>
 
 @endsection
@@ -113,16 +114,8 @@
             const specSelect = document.getElementById('spec_id');
             const specDetailSelect = document.getElementById('spec_detail_id');
             const filterButton = document.getElementById('filterButton');
-
-            // Disable the first option when the dropdown is opened
-            specSelect.addEventListener('show.bs.select', function() {
-                specSelect.options[0].disabled = true;
-            });
-
-            // Disable the first option when the dropdown is opened
-            specDetailSelect.addEventListener('show.bs.select', function() {
-                specDetailSelect.options[0].disabled = true;
-            });
+            const searchInput = document.getElementById('search');
+            const searchButton = document.getElementById('searchbtn');
 
             filterButton.addEventListener('click', function() {
                 // Get selected values from the dropdowns
@@ -135,8 +128,37 @@
                 // Perform a page reload with the updated URL
                 window.location.href = url;
             });
+            // Add event listener for keypress events on the search input
+            searchInput.addEventListener('keypress', function(event) {
+                // Check if the pressed key is Enter (key code 13)
+                if (event.key === 'Enter') {
+                    // Prevent the default form submission behavior
+                    event.preventDefault();
+
+                    // Get the search input value
+                    const searchValue = event.target.value;
+
+                    // Construct the URL with the search filter value
+                    const url = "{{ route('user.catalog') }}?search=" + searchValue;
+
+                    // Perform a page reload with the updated URL
+                    window.location.href = url;
+                }
+            });
+
+            searchButton.addEventListener('click', function() {
+                //get search input value
+                const searchVal = searchInput.value;
+                // Construct the URL with selected filter values
+                const url = "{{ route('user.catalog') }}?search=" + searchVal;
+
+                // Perform a page reload with the updated URL
+                window.location.href = url;
+            })
+
         });
     </script>
+
 
 
 @endsection
