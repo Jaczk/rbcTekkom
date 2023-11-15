@@ -42,6 +42,7 @@
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/specBook', [SpecBookController::class, 'index'])->name('user.specBook');
+    Route::get('/book-spec/{id}', [SpecBookController::class, 'sortedBySpec'])->name('user.book.spec');
 
     Route::group(['prefix' => 'admin', 'middleware' => ['user.auth', 'user.acc:1']], function () {
 

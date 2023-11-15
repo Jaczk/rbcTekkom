@@ -86,7 +86,7 @@
                 <div class="col-sm-8 d-flex align-items-center">
                     <div class="card-container">
                         @foreach ($specializations as $specBook)
-                            <a href="{{ route('user.specBook', ['id' => $specBook->id]) }}" class="mx-2 card"
+                            <a href="{{ route('user.book.spec', $specBook->id) }}" class="mx-2 card"
                                 style="width: 18rem;">
                                 <img src="https://source.unsplash.com/1200x800?computer" class="card-img-top"
                                     alt="...">
