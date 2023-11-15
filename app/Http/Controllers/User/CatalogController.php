@@ -32,7 +32,10 @@ class CatalogController extends Controller
         }
 
         if ($searchInput) {
-            $query->where('book_name', 'like', "%{$searchInput}%");
+            $query->where(function ($subQuery) use ($searchInput) {
+                $subQuery->where('book_name', 'like', "%{$searchInput}%")
+                    ->orWhere('author', 'like', "%{$searchInput}%");
+            });
         }
 
         // Fetch the books
