@@ -12,7 +12,7 @@
 
             <form action="" class="w-25 me-4">
                 <div class="p-1 my-4 border input-group rounded-2 w-100">
-                    <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon3"
+                    <input type="search" placeholder="Enter book title, ISBN, author or publishers" aria-describedby="button-addon3"
                         class="border-0 form-control bg-none" id="search">
                     <div class="border-0 input-group-append">
                         <button id="searchbtn" type="button" class="btn btn-link text-success"><i
