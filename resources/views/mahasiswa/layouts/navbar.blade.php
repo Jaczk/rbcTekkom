@@ -1,6 +1,8 @@
 <nav class="p-3 navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #001349;">
     <div class="container-fluid">
-        <img src="{{ asset('assets/images/logo.png') }}" height="45px" alt="">
+        <a href="{{ route('home') }}">
+            <img src="{{ asset('assets/images/logo.png') }}" height="45px" alt="">
+        </a>
         {{-- <a class="navbar-brand fw-bold" href="#">RBC Tekkom</a> --}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +41,7 @@
                     </a>
                     <ul class="mt-3 border-top border-info dropdown-menu drop2 border-3 rounded-0"
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.catalog') }}">Koleksi Buku</a>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Tugas Akhir
                                 Digital</a>
                         </li>
@@ -55,13 +58,12 @@
                         id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Fasilitas
                     </a>
-                    <ul class="mt-3 border-top border-info dropdown-menu border-3 rounded-0"
+                    <ul class="mt-3 border-top border-info dropdown-menu drop2 border-3 rounded-0"
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Ruang Baca</a>
                         </li>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Tata Tertib</a>
                         </li>
-
                     </ul>
                 </li>
                 <li class="nav-item">
