@@ -12,8 +12,8 @@
 
             <form action="" class="w-25 me-4">
                 <div class="p-1 my-4 border input-group rounded-2 w-100">
-                    <input type="search" placeholder="Enter book title, ISBN, author or publishers" aria-describedby="button-addon3"
-                        class="border-0 form-control bg-none" id="search">
+                    <input type="search" placeholder="Enter book title, ISBN, author or publishers"
+                        aria-describedby="button-addon3" class="border-0 form-control bg-none" id="search">
                     <div class="border-0 input-group-append">
                         <button id="searchbtn" type="button" class="btn btn-link text-success"><i
                                 class="fa fa-search"></i></button>
@@ -77,28 +77,99 @@
         <div class="catalog">
             <div class="mt-5 ms-3 container-fluid row d-flex">
                 @forelse ($books as $book)
-                    <div class="mx-3" style="width: 250px; height: 420px;">
-                        <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img rounded-4 object-fit-cover"
-                            style="height: 300px; width: 100%;" alt="bookImage">
-                        <div class="bg-transparent">
-                            <p class="mt-2 fw-medium">
-                                @if (Str::length($book->book_name) < 35)
-                                    {{ $book->book_name }} <br>
-                                    <span class="mt-1 fw-light">
-                                        {{ $book->author }}
-                                    </span>
-                                @elseif(Str::length($book->book_name) >= 35)
-                                    {{ Str::limit($book->book_name, 35) . '...' }} <br>
-                                    <span class="mt-1 fw-light">
-                                        {{ $book->author }}
-                                    </span>
-                                @endif
-                            </p>
+                    <a href="javascript:void(0)" class="" id="show-detail"
+                        data-url="{{ route('book.show', $book->id) }}" style="width: 18rem; color: inherit;">
+                        <div class="mx-3" style="width: 250px; height: 420px;">
+                            <img src="{{ asset('storage/images/' . $book->image) }}"
+                                class="card-img rounded-4 object-fit-cover" style="height: 300px; width: 100%;"
+                                alt="bookImage">
+                            <div class="bg-transparent">
+                                <p class="mt-2 fw-medium">
+                                    @if (Str::length($book->book_name) < 35)
+                                        {{ $book->book_name }} <br>
+                                        <span class="mt-1 fw-light">
+                                            {{ $book->author }}
+                                        </span>
+                                    @elseif(Str::length($book->book_name) >= 35)
+                                        {{ Str::limit($book->book_name, 35) . '...' }} <br>
+                                        <span class="mt-1 fw-light">
+                                            {{ $book->author }}
+                                        </span>
+                                    @endif
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 @empty
                     <h2>Maaf Buku yang anda cari tidak ada...</h2>
                 @endforelse
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="userShowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Buku</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <img alt="book" class="mb-3 card-img rounded-4" style="width: 250px; height: 300px;"
+                                id="book-image">
+                        </div>
+                        <div class="">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Buku</th>
+                                        <td><span id="book-name"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Peminatan</th>
+                                        <td><span id="book-spec"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Detail Minat</th>
+                                        <td><span id="book-spec_detail"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kode Perpus</th>
+                                        <td><span id="book-lib"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Penerbit</th>
+                                        <td><span id="book-publisher"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Penulis</th>
+                                        <td><span id="book-author"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>ISBN-ISSN</th>
+                                        <td><span id="book-isbn_issn"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tahun Masuk</th>
+                                        <td><span id="book-year"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kondisi</th>
+                                        <td><span id="book-condition"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Deskripsi</th>
+                                        <td><span id="book-desc"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -159,6 +230,28 @@
         });
     </script>
 
-
+    <script>
+        //Modal dialog
+        $('body').on('click', '#show-detail', function() {
+            var userURL = $(this).data('url');
+            $.get(userURL, function(data) {
+                // var img = text("/storage/app/public/images/") + text(data.image);
+                $('#userShowModal').modal('show');
+                $('#book-name').text(data.book_name);
+                $('#book-publisher').text(data.publisher);
+                $('#book-author').text(data.author);
+                $('#book-isbn_issn').text(data.isbn_issn);
+                $('#book-condition').text(data.condition);
+                $('#book-year').text(data.year_entry);
+                $('#book-desc').text(data.desc);
+                $('#book-spec').text(data.specialization.desc);
+                $('#book-lib').text(data.lib_book_code);
+                $('#book-spec_detail').text(data.spec_detail.desc);
+                // Set the image source
+                var imagePath = "{{ asset('storage/images/') }}/" + data.image;
+                $('#book-image').attr("src", imagePath);
+            })
+        });
+    </script>
 
 @endsection

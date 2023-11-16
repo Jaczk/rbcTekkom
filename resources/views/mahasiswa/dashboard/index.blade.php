@@ -75,7 +75,7 @@
                     background-size: cover;
                 }
             </style>
-              
+
             <div class="p-4 row" style="height: 400px; width: 100%;">
                 <div class="text-center col-sm-4 d-flex align-items-center justify-content-center">
                     <p class="text-black fs-1 fw-bold">
@@ -86,8 +86,7 @@
                 <div class="col-sm-8 d-flex align-items-center">
                     <div class="card-container">
                         @foreach ($specializations as $specBook)
-                            <a href="{{ route('user.book.spec', $specBook->id) }}" class="mx-2 card"
-                                style="width: 18rem;">
+                            <a href="{{ route('user.book.spec', $specBook->id) }}" class="mx-2 card" style="width: 18rem;">
                                 <img src="https://source.unsplash.com/1200x800?computer" class="card-img-top"
                                     alt="...">
                                 <div class="card-body">
@@ -104,21 +103,21 @@
                 <h2 class="my-3 text-black m fw-semibold">Recommended By Our Staff</h2>
                 <div class="mx-2 mt-4 container-fluid row d-flex flex-nowrap" style="overflow-x: auto;">
                     @foreach ($books as $book)
-                    <a href="javascript:void(0)" class="" id="show-detail"
-                        data-url="{{ route('book.show', $book->id) }}" style="width: 18rem; color: inherit;">
-                        <div class="mx-3" style="width: 250px; height: 420px;">
-                            <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img rounded-4"
-                            style="height: 300px; width: 100%;" alt="bookImage">
-                            <div class="bg-transparent">
-                                <p class="fw-semibold">
-                                    {{ $book->book_name }} <br>
-                                    <span class="mt-1 fw-light">
-                                        {{ $book->author }}
-                                    </span>
-                                </p>
+                        <a href="javascript:void(0)" class="" id="show-detail"
+                            data-url="{{ route('book.show', $book->id) }}" style="width: 18rem; color: inherit;">
+                            <div class="mx-3" style="width: 250px; height: 420px;">
+                                <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img rounded-4"
+                                    style="height: 300px; width: 100%;" alt="bookImage">
+                                <div class="bg-transparent">
+                                    <p class="fw-semibold">
+                                        {{ $book->book_name }} <br>
+                                        <span class="mt-1 fw-light">
+                                            {{ $book->author }}
+                                        </span>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -134,55 +133,55 @@
                     </div>
                     <div class="modal-body">
                         <div class="text-center">
-                            <img alt="book" class="mb-3 card-img rounded-4" 
-                            style="width: 250px; height: 300px;" id="book-image">
+                            <img alt="book" class="mb-3 card-img rounded-4" style="width: 250px; height: 300px;"
+                                id="book-image">
                         </div>
                         <div class="">
-                                <table class="table table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <th>Buku</th>
-                                            <td><span id="book-name"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Peminatan</th>
-                                            <td><span id="book-spec"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Detail Minat</th>
-                                            <td><span id="book-spec_detail"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Kode Perpus</th>
-                                            <td><span id="book-lib"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Penerbit</th>
-                                            <td><span id="book-publisher"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Penulis</th>
-                                            <td><span id="book-author"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>ISBN-ISSN</th>
-                                            <td><span id="book-isbn_issn"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tahun Masuk</th>
-                                            <td><span id="book-year"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Kondisi</th>
-                                            <td><span id="book-condition"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Deskripsi</th>
-                                            <td><span id="book-desc"></span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Buku</th>
+                                        <td><span id="book-name"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Peminatan</th>
+                                        <td><span id="book-spec"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Detail Minat</th>
+                                        <td><span id="book-spec_detail"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kode Perpus</th>
+                                        <td><span id="book-lib"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Penerbit</th>
+                                        <td><span id="book-publisher"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Penulis</th>
+                                        <td><span id="book-author"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>ISBN-ISSN</th>
+                                        <td><span id="book-isbn_issn"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tahun Masuk</th>
+                                        <td><span id="book-year"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kondisi</th>
+                                        <td><span id="book-condition"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Deskripsi</th>
+                                        <td><span id="book-desc"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -215,7 +214,9 @@
                 $('#book-spec').text(data.specialization.desc);
                 $('#book-lib').text(data.lib_book_code);
                 $('#book-spec_detail').text(data.spec_detail.desc);
-                $('#book-image').attr("src", img);
+                // Set the image source
+                var imagePath = "{{ asset('storage/images/') }}/" + data.image;
+                $('#book-image').attr("src", imagePath);
             })
         });
     </script>
