@@ -18,7 +18,7 @@ class LoanController extends Controller
      */
     public function index(Request $request)
     {
-        $loan = Loan::with(['user', 'book'])->orderBy('created_at', 'desc')->get();
+        $loan2 = Loan::with(['user', 'book'])->orderBy('created_at', 'asc')->get();
 
         $users = User::with('role')->get();
 
@@ -41,7 +41,7 @@ class LoanController extends Controller
         $chartData = $this->loanChart($period);
 
         return view('admin.loan.index', [
-            'loans' => $loan,
+            'loans' => $loan2,
             'chartData' => $chartData,
             'period' => $period,
             'loanDrop' => $loanDrop,

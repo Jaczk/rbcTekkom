@@ -76,7 +76,7 @@
             libBookCodeInput.addEventListener("input", function () {
                 // Disable the input field after 12 characters
                 if (libBookCodeInput.value.trim().length >= 11) {
-                    libBookCodeInput.disabled = true;
+                    libBookCodeInput.readOnly = true;
                 }
             });
     
@@ -84,7 +84,7 @@
             $("#lib_book_code").keypress(function (e) {
                 if (e.which === 13) {
                     e.preventDefault();
-                    alert("Book details will be displayed here. User can review and proceed.");
+                    // alert("Book details will be displayed here. User can review and proceed.");
                     // You can add your logic here to display book details or take further action.
                 }
             });
