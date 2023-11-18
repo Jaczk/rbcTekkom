@@ -93,7 +93,7 @@
                                                         class="img-fluid" style="width: 180px" alt="Image">
                                                 </td>
                                                 <td class="text-center">
-                                                    <img src="{{ asset('storage/qr-images/' . $book->qr_code) }}" class="img-fluid"
+                                                    <img src="{{ asset('storage/qr-images/' . $book->qr_code) }}" class="img-fluid" 
                                                         style=" width:150px" alt="QR Code">
                                                 </td>
                                                 <td>

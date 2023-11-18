@@ -21,7 +21,7 @@ class LoanController extends Controller
         $loan = Loan::with(['user', 'book'])->orderBy('created_at', 'desc')->get();
 
         $users = User::with('role')->get();
-        
+
         foreach ($users as $user) {
             $loans = Loan::where('user_id', $user->id)->get();
 
@@ -173,6 +173,45 @@ class LoanController extends Controller
         Loan::create($data);
         return redirect()->route('admin.loans')->with('success', 'Berhasil membuat Peminjaman');
     }
+
+    public function QRcreate()
+    {
+        $userDrops = User::where('is_loan', 0)->get();
+        return view('admin.loan.qr-create', compact('userDrops'));
+    }
+
+    public function QRstore(Request $request)
+    {
+        $data = $request->validate([
+            'lib_book_code' => 'required|string',
+            'user_id' => 'required|numeric',
+        ]);
+
+        $book = Book::where('lib_book_code', $data['lib_book_code'])->first();
+
+        if ($book) {
+            // Update the book's availability
+            $book->update(['is_available' => 0]);
+
+            // Update the user's loan status
+            User::find($data['user_id'])->update(['is_loan' => 1]);
+
+            // Create a new loan record
+            $loanData = [
+                'book_id' => $book->id,
+                'user_id' => $data['user_id'],
+                'return_date' => now()->addDays(7),
+                'period' => now()->format('Ym'),
+            ];
+
+            Loan::create($loanData);
+
+            return redirect()->route('admin.loans')->with('success', 'Berhasil membuat Peminjaman');
+        } else {
+            return redirect()->route('admin.loans')->with('error', 'Book not found.');
+        }
+    }
+
 
     /**
      * Display the specified resource.

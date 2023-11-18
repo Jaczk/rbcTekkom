@@ -37,9 +37,6 @@
                     </div>
                 </div>
             </div>
-
-            
-
             <div class="card card-primary">
                 <div class="card-header" style="background-color: #6998AB">
                     <h3 class="card-title">Daftar Peminjaman</h3>
@@ -47,10 +44,16 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="mb-3 col-md-12">
+                        <div class="mb-3 col-md-auto">
                             <a href="{{ route('admin.loans.create') }}" class="btn btn-primary text-bold">+ Peminjaman</a>
                         </div>
+                        <div class="mb-3 col-md-auto">
+                            <a href="{{ route('admin.loans.qr-create') }}" class="btn btn-primary text-bold">+ Peminjaman
+                                dengan QR</a>
+                        </div>
                     </div>
+
+
 
                     @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -84,7 +87,7 @@
                                             <td></td>
                                             <td>{{ $lo->user->name }}</td>
                                             <td>
-                                                {{$lo->book->book_name}}
+                                                {{ $lo->book->book_name }}
                                             </td>
                                             <td class="text-bold">{{ date('F j, Y h:i A', strtotime($lo->created_at)) }}
 
@@ -97,7 +100,7 @@
                                                     {{ date('F j, Y h:i A', strtotime($lo->return_date)) }}</td>
                                             @endif {{-- date comparison --}}
 
-                                            @if (($lo->is_returned) === 1)
+                                            @if ($lo->is_returned === 1)
                                                 <td class="text-bold">
                                                     {{ date('F j, Y h:i A', strtotime($lo->updated_at)) }}</td>
                                             @else
@@ -117,13 +120,14 @@
                                                     @method('PUT')
                                                     @csrf
                                                     @if ($lo->is_returned === 0)
-                                                    <button type="submit" class="mx-1 btn btn-primary return-btn">
-                                                        <i class="fas fa-undo-alt"></i>
-                                                    </button>
+                                                        <button type="submit" class="mx-1 btn btn-primary return-btn">
+                                                            <i class="fas fa-undo-alt"></i>
+                                                        </button>
                                                     @else
-                                                    <button disabled type="submit" class="mx-1 btn btn-primary return-btn">
-                                                        <i class="fas fa-undo-alt"></i>
-                                                    </button>
+                                                        <button disabled type="submit"
+                                                            class="mx-1 btn btn-primary return-btn">
+                                                            <i class="fas fa-undo-alt"></i>
+                                                        </button>
                                                     @endif
                                                 </form>
                                                 {{-- <a href="https://wa.me/{{ $lo->user->phone }}" class="btn btn-success"
@@ -153,34 +157,38 @@
             var table = $('#loan').DataTable({
                 dom: 'lBfrtipl',
                 buttons: [{
-                            extend: 'copy',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] // Include columns 1 to 5 in the copy report
-                            }
-                        },
-                        {
-                            extend: 'excel',
-                            title: 'Daftar Peminjaman Perkantas',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] // Include columns 1 to 5in the Excel report
-                            }
-                        },
-                        {
-                            extend: 'pdf',
-                            title: 'Daftar Peminjaman Perkantas',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] // Include columns 1 to 5 in the PDF report
-                            }
-                        },
-                        {
-                            extend: 'print',
-                            title: 'Daftar Peminjaman Perkantas',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] // Include columns 1 to 5 in the printed report
-                            }
+                        extend: 'copy',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,
+                                9] // Include columns 1 to 5 in the copy report
                         }
-                    ],
-                    columnDefs: [{
+                    },
+                    {
+                        extend: 'excel',
+                        title: 'Daftar Peminjaman Perkantas',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,
+                                9] // Include columns 1 to 5in the Excel report
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        title: 'Daftar Peminjaman Perkantas',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,
+                                9] // Include columns 1 to 5 in the PDF report
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        title: 'Daftar Peminjaman Perkantas',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,
+                                9] // Include columns 1 to 5 in the printed report
+                        }
+                    }
+                ],
+                columnDefs: [{
                     searchable: false,
                     orderable: false,
                     targets: 0
@@ -299,5 +307,5 @@
             });
         });
     </script>
-    
+
 @endsection
