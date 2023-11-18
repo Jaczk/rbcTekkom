@@ -20,12 +20,16 @@
 </head>
 
 <body>
-    <div class="label" style="font-size: 14px;"> <!-- Adjust the font size as needed -->
-        <p>Ruang Baca Departemen Teknik Komputer</p>
+    <div class="label" style="font-size: 14px;">
+        <div class="row">
+            <img src="{{ public_path('assets/images/LOGO-UNDIP-1.png') }}" alt="" class="img-responsive" width="100px">
+            <p>Ruang Baca Departemen Teknik Komputer</p>
+        </div>
         <p>Universitas Diponegoro</p>
         <p>{{ $book->lib_book_code }}</p>
         <p>{{ strtoupper(substr($book->author, 0, 3)) }}</p>
         <p>{{ strtolower(substr($book->book_name, 0, 1)) }}</p>
     </div>
+    
 </body>
 </html>

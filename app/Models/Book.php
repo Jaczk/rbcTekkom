@@ -23,7 +23,8 @@ class Book extends Model
         'lib_book_code',
         'year_entry',
         'desc',
-        'image'
+        'image',
+        'qr_code'
     ];
 
     public function loan()

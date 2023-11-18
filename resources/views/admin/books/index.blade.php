@@ -52,12 +52,10 @@
                                             <th>Peminatan</th>
                                             <th>Detail Minat</th>
                                             <th>Kode Perpus</th>
-                                            {{-- <th>Penerbit</th>
-                                            <th>Penulis</th>
-                                            <th>Kondisi</th> --}}
                                             <th>Rekomendasi</th>
                                             <th>Ketersediaan</th>
                                             <th>Gambar</th>
+                                            <th>QR Code</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -70,11 +68,6 @@
                                                 <td>{{ $book->specialization->desc ?? '-' }}</td>
                                                 <td>{{ $book->specDetail->desc }}</td>
                                                 <td>{{ $book->lib_book_code }}</td>
-                                                {{-- <td>{{ $book->publisher ?? '-' }}</td>
-                                                <td>{{ $book->author }}</td>
-                                                <td>
-                                                    {{ $book->condition == 'new' ? 'BARU' : ($book->condition == 'normal' ? 'NORMAL' : 'RUSAK') }}
-                                                </td> --}}
                                                 @if ($book->is_recommended == 0)
                                                     <td class="text-center">
                                                         <i class="fas fa-times fa-lg" style="color: #e00043;"></i>
@@ -98,6 +91,10 @@
                                                 <td class="text-center">
                                                     <img src="{{ filter_var($book->image, FILTER_VALIDATE_URL) ? $book->image : asset('storage/images/' . $book->image) }}"
                                                         class="img-fluid" style="width: 180px" alt="Image">
+                                                </td>
+                                                <td class="text-center">
+                                                    <img src="{{ asset('storage/qr-images/' . $book->qr_code) }}" class="img-fluid"
+                                                        style=" width:150px" alt="QR Code">
                                                 </td>
                                                 <td>
                                                     <div class="flex-row d-flex">

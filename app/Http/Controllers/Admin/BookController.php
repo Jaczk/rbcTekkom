@@ -13,6 +13,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BookController extends Controller
 {
@@ -86,7 +87,14 @@ class BookController extends Controller
             $data['image'] = $ogImageName;
         }
 
-        Book::create($data);
+        // Generate and store QR code
+        $data['qr_code'] = $this->generateQRCode($data['lib_book_code']);
+
+        // Create book record
+        $book = new Book($data);
+        $book->qr_code = $data['qr_code'];
+        $book->save();
+
         Artisan::call('custom:storagelink');
 
         return redirect()->route('admin.book')->with('success', 'Buku berhasil ditambahkan');
@@ -139,6 +147,41 @@ class BookController extends Controller
 
         $book = Book::find($id);
 
+        if (!$book) {
+            return back()->with('error', 'Buku tidak ditemukan');
+        }
+
+        // Check if lib_book_code is being updated
+        if ($request->has('lib_book_code') && $request->lib_book_code !== $book->lib_book_code) {
+            // Delete the old QR code
+            if ($book->qr_code) {
+                $oldQrCodePath = public_path('storage/qr-images/' . $book->qr_code);
+                if (file_exists($oldQrCodePath)) {
+                    unlink($oldQrCodePath);
+                }
+            }
+
+            // Generate and store new QR code
+            $randomString = Str::random(6);
+            $qrCodeData = $request->lib_book_code;
+            $filename = $randomString . $request->lib_book_code . '.png';
+            $filePath = public_path('storage/qr-images/' . $filename);
+
+            QrCode::size(300)->format('png')->generate($qrCodeData, $filePath);
+
+            $data['qr_code'] = $filename;
+        } elseif (!$book->qr_code) {
+            // Generate and store QR code for the lib_book_code if it doesn't have one
+            $randomString = Str::random(6);
+            $qrCodeData = $book->lib_book_code;
+            $filename = $randomString . $book->lib_book_code . '.png';
+            $filePath = public_path('storage/qr-images/' . $filename);
+
+            QrCode::size(300)->format('png')->generate($qrCodeData, $filePath);
+
+            $data['qr_code'] = $filename;
+        }
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $ogImageName = Str::random(8) . $image->getClientOriginalName();
@@ -179,6 +222,20 @@ class BookController extends Controller
             }
         }
     }
+
+    public function generateQRCode($libBookCode)
+    {
+        // Generate a random string with 6 characters
+        $randomString = Str::random(6);
+
+        $qrCodeData = $libBookCode;
+        $filename = $randomString . $libBookCode . '.png';
+        $filePath = public_path('storage/qr-images/' . $filename);
+
+        QrCode::size(500)->format('png')->generate($qrCodeData, $filePath);
+
+        return $filename;
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -193,6 +250,7 @@ class BookController extends Controller
             return redirect()->route('admin.book')
                 ->with('error', 'Gagal menghapus item barang. Item barang masih dipinjam.');
         }
+        
 
         $book->forceDelete();
 
