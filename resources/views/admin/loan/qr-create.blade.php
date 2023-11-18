@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label for="publisher">Nama Peminjam</label> <br>
                             <select name="user_id" class="selectpicker" id="user_id" data-live-search="true"
-                                data-width="75%" data-size="6">
+                                data-width="50%" data-size="6">
                                 @foreach ($userDrops as $user)
                                     <option value="{{ $user->id }}">
                                         {{ old('user_id') == $user->id ? 'selected' : '' }}
@@ -69,17 +69,26 @@
         });
     </script> --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("lib_book_code").focus();
             var libBookCodeInput = document.getElementById("lib_book_code");
-
-            libBookCodeInput.addEventListener("input", function() {
+    
+            libBookCodeInput.addEventListener("input", function () {
                 // Disable the input field after 12 characters
-                if (libBookCodeInput.value.trim().length >= 12) {
+                if (libBookCodeInput.value.trim().length >= 11) {
                     libBookCodeInput.disabled = true;
                 }
             });
-
+    
+            // Prevent form submission when Enter key is pressed
+            $("#lib_book_code").keypress(function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    alert("Book details will be displayed here. User can review and proceed.");
+                    // You can add your logic here to display book details or take further action.
+                }
+            });
+    
             // Uncomment the following line if you want to disable the field after a certain event (e.g., form submission)
             // libBookCodeInput.disabled = true;
         });
