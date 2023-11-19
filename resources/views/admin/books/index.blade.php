@@ -93,8 +93,8 @@
                                                         class="img-fluid" style="width: 180px" alt="Image">
                                                 </td>
                                                 <td class="text-center">
-                                                    <img src="{{ asset('storage/qr-images/' . $book->qr_code) }}" class="img-fluid" 
-                                                        style=" width:150px" alt="QR Code">
+                                                    <img src="{{ asset('storage/qr-images/' . $book->qr_code) }}"
+                                                        class="img-fluid" style=" width:150px" alt="QR Code">
                                                 </td>
                                                 <td>
                                                     <div class="flex-row d-flex">
@@ -192,6 +192,10 @@
                                 <tr>
                                     <th>Deskripsi</th>
                                     <td><span id="book-desc"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>QR</th>
+                                    <td><span id="book-qrimage"></span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -362,8 +366,16 @@
                     $('#book-spec').text(data.specialization.desc);
                     $('#book-lib').text(data.lib_book_code);
                     $('#book-spec_detail').text(data.spec_detail.desc);
-                })
+
+                    // Set the source of the QR image
+                    var QRimagePath = "{{ asset('storage/qr-images/') }}/" + data.qr_code;
+
+                    // Append an <img> element to the corresponding <td>
+                    $('#book-qrimage').html('<img src="' + QRimagePath +
+                        '" class="img-fluid" style="width: 200px" alt="QR Code">');
+                });
             });
+
         });
         //-------------
     </script>

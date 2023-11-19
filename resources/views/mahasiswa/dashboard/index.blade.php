@@ -215,8 +215,7 @@
                 $('#book-lib').text(data.lib_book_code);
                 $('#book-spec_detail').text(data.spec_detail.desc);
                 // Set the image source
-                var imagePath = "{{ asset('storage/images/') }}/" + data.image;
-                $('#book-image').attr("src", imagePath);
+                v
             })
         });
     </script>
