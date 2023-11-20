@@ -100,6 +100,20 @@ class BookController extends Controller
         return redirect()->route('admin.book')->with('success', 'Buku berhasil ditambahkan');
     }
 
+    public function generateQRCode($libBookCode)
+    {
+        // Generate a random string with 6 characters
+        $randomString = Str::random(6);
+
+        $qrCodeData = $libBookCode;
+        $filename = $randomString . $libBookCode . '.png';
+        $filePath = storage_path('app/public/qr-images/' . $filename);
+
+        QrCode::size(500)->format('png')->generate($qrCodeData, $filePath);
+
+        return $filename;
+    }
+
     /**
      * Display the specified resource.
      */
@@ -155,7 +169,7 @@ class BookController extends Controller
         if ($request->has('lib_book_code') && $request->lib_book_code !== $book->lib_book_code) {
             // Delete the old QR code
             if ($book->qr_code) {
-                $oldQrCodePath = public_path('storage/qr-images/' . $book->qr_code);
+                $oldQrCodePath = storage_path('app/public/qr-images/' . $book->qr_code);
                 if (file_exists($oldQrCodePath)) {
                     unlink($oldQrCodePath);
                 }
@@ -165,7 +179,7 @@ class BookController extends Controller
             $randomString = Str::random(6);
             $qrCodeData = $request->lib_book_code;
             $filename = $randomString . $request->lib_book_code . '.png';
-            $filePath = public_path('storage/qr-images/' . $filename);
+            $filePath = storage_path('app/public/qr-images/' . $filename);
 
             QrCode::size(300)->format('png')->generate($qrCodeData, $filePath);
 
@@ -175,7 +189,7 @@ class BookController extends Controller
             $randomString = Str::random(6);
             $qrCodeData = $book->lib_book_code;
             $filename = $randomString . $book->lib_book_code . '.png';
-            $filePath = public_path('storage/qr-images/' . $filename);
+            $filePath = storage_path('app/public/qr-images/' . $filename);
 
             QrCode::size(300)->format('png')->generate($qrCodeData, $filePath);
 
@@ -223,19 +237,6 @@ class BookController extends Controller
         }
     }
 
-    public function generateQRCode($libBookCode)
-    {
-        // Generate a random string with 6 characters
-        $randomString = Str::random(6);
-
-        $qrCodeData = $libBookCode;
-        $filename = $randomString . $libBookCode . '.png';
-        $filePath = public_path('storage/qr-images/' . $filename);
-
-        QrCode::size(500)->format('png')->generate($qrCodeData, $filePath);
-
-        return $filename;
-    }
     /**
      * Remove the specified resource from storage.
      */
@@ -252,8 +253,11 @@ class BookController extends Controller
         }
         
 
+        Storage::delete('public/images/' . $book->image);
+        Storage::delete('public/qr-images/' . $book->qr_code);
+
         $book->forceDelete();
 
-        return redirect()->route('admin.donate')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('admin.book')->with('success', 'Data berhasil dihapus');
     }
 }

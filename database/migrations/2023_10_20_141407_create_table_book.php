@@ -26,6 +26,7 @@ return new class extends Migration
             $table->tinyInteger('is_recommended')->default(0);
             $table->string('desc')->nullable();
             $table->string('image')->nullable();
+            $table->string('qr_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
