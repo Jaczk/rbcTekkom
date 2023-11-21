@@ -94,6 +94,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('admin.shift') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-clock"></i>
+                        <p>
+                            Shift Layanan
+                        </p>
+                    </a>
+                </li>
+
                 <li class="cursor-default disabled">
                     <a href="#" class="cursor-default nav-link disabled">
                     </a>

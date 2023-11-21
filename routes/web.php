@@ -12,6 +12,7 @@
     use App\Http\Controllers\Admin\DonateController;
     use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\Admin\PublisherController;
+    use App\Http\Controllers\Admin\ShiftController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
     use App\Http\Controllers\User\CatalogController;
@@ -108,6 +109,14 @@
         Route::group(['prefix' => 'fine'], function () {
             Route::get('/edit', [FineController::class, 'edit'])->name('admin.fine.edit');
             Route::put('/update', [FineController::class, 'update'])->name('admin.fine.update');
+        });
+
+        Route::group(['prefix' => 'shift'], function () {
+            Route::get('/', [ShiftController::class, 'index'])->name('admin.shift');
+            Route::get('/edit/{id}', [ShiftController::class, 'edit'])->name('admin.shift.edit');
+            Route::get('/edit-time', [ShiftController::class, 'editTime'])->name('admin.shift.editTime');
+            Route::put('/update/{id}', [ShiftController::class, 'update'])->name('admin.shift.update');
+            Route::put('/update-time', [ShiftController::class, 'updateTime'])->name('admin.shift.updateTime');
         });
 
         Route::group(['prefix' => 'user'], function () {

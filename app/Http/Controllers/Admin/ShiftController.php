@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Shift;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 
 class ShiftController extends Controller
 {
@@ -12,7 +14,10 @@ class ShiftController extends Controller
      */
     public function index()
     {
-        //
+        $shifts = Shift::all()->slice(1);
+        $shiftFirst = Shift::first();
+
+        return view('admin.shift.index',['shifts' => $shifts, 'shiftFirst' => $shiftFirst]);
     }
 
     /**
@@ -28,7 +33,8 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+
     }
 
     /**
@@ -43,8 +49,20 @@ class ShiftController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    {   
+        $decryptId = Crypt::decryptString($id);
+        $shift =  Shift::find($decryptId);
+
+        return view('admin.shift.edit', ['shift' => $shift]);
+    
+    }
+
+    public function editTime()
+    {   
+        $shift = Shift::first();
+
+        return view('admin.shift.editTime',['shift'=> $shift]);
+    
     }
 
     /**
@@ -52,7 +70,38 @@ class ShiftController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->except('token');
+
+        $request->validate([
+            'day'=>'required|string',
+            's1'=>'required|string',
+            's2'=>'required|string',
+            's3'=>'required|string',
+        ]);
+
+        $shift = Shift::find($id);
+
+        $shift->update($data);
+
+        return redirect()->route('admin.shift')->with('success', 'Sukses memperbarui shift layanan');
+    }
+
+    public function updateTime(Request $request)
+    {
+        $data = $request->except('token');
+
+        $request->validate([
+            'day'=>'required|string',
+            's1'=>'required|string',
+            's2'=>'required|string',
+            's3'=>'required|string',
+        ]);
+
+        $shift = Shift::first();
+
+        $shift->update($data);
+
+        return redirect()->route('admin.shift')->with('success', 'Sukses memperbarui jam layanan RBC');
     }
 
     /**
