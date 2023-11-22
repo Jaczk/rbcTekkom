@@ -30,7 +30,7 @@
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0" href="#">Pustakawan</a></li>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Visi Misi</a></li>
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Jam Layanan</a>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.shift') }}">Jam Layanan</a>
                         </li>
                     </ul>
                 </li>
