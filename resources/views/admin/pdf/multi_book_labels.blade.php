@@ -43,7 +43,7 @@
         .border-title {
             border-bottom: 1px solid #000;
         }
-
+        
         .d-left {
             width: 65%;
         }
@@ -54,7 +54,7 @@
 
         p {
             line-height: 6px;
-
+            font-weight: 800
         }
 
         img {

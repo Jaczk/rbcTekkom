@@ -17,12 +17,10 @@ return new class extends Migration
             $table->string('publisher');
             $table->string('author');
             $table->string('isbn_issn');
-            $table->enum('condition', ['broken', 'new', 'normal']);
-            $table->tinyInteger('is_available')->default(1);
+            $table->integer('stock');
             $table->integer('spec_id');
             $table->integer('spec_detail_id');
             $table->string('lib_book_code')->unique();
-            $table->integer('year_entry');
             $table->tinyInteger('is_recommended')->default(0);
             $table->string('desc')->nullable();
             $table->string('image')->nullable();

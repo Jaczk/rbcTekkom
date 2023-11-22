@@ -27,7 +27,7 @@ class DashboardController extends Controller
 
         $inLoans = Loan::where('is_returned', 0)->count();
 
-        $brokenBook = Book::where('condition', 'broken')->count();
+        
 
         $noAdmin = User::where('role_id', '!=', 1)->count();
 
@@ -50,7 +50,7 @@ class DashboardController extends Controller
             'specBookChartData',
             'specBookDrop',
             'period',
-            'brokenBook',
+            
             'inLoans',
             'noAdmin'
         ));

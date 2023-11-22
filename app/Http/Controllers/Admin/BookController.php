@@ -26,13 +26,11 @@ class BookController extends Controller
 
         $specDrop = Specialization::all();
         $specDetailDrop = SpecDetail::all();
-        $yearEntries = Book::select('year_entry')->distinct()->get();
 
         return view('admin.books.index', [
             'books' => $books,
             'specDrops' => $specDrop,
             'specDetailDrops' => $specDetailDrop,
-            'yearEntries' => $yearEntries
         ]);
     }
 
@@ -58,12 +56,10 @@ class BookController extends Controller
             'author' => 'required|string',
             'publisher' => 'required|string',
             'isbn_issn' => 'required',
-            'condition' => ['required', 'string', 'in:new,normal,broken'],
             'lib_book_code' => 'required|string|unique:books,lib_book_code',
-            'year_entry' => 'required|numeric',
             'spec_id' => 'required',
             'spec_detail_id' => 'required',
-            'is_available' => 'nullable',
+            'stock' => 'required|numeric',
             'desc' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png|nullable',
 
@@ -148,13 +144,11 @@ class BookController extends Controller
             'author' => 'required|string',
             'publisher' => 'required|string',
             'isbn_issn' => 'required',
-            'condition' => ['required', 'string', 'in:new,normal,broken'],
-            'year_entry' => 'required|numeric',
             'lib_book_code' => 'required|string|unique:books,lib_book_code,' . $id,
             'spec_id' => 'required',
             'desc' => 'nullable',
             'spec_detail_id' => 'required',
-            'is_available' => 'nullable',
+            'stock' => 'required|numeric',
             'is_recommended' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png',
         ]);
@@ -251,8 +245,6 @@ class BookController extends Controller
             return redirect()->route('admin.book')
                 ->with('error', 'Gagal menghapus item barang. Item barang masih dipinjam.');
         }
-        
-
         Storage::delete('public/images/' . $book->image);
         Storage::delete('public/qr-images/' . $book->qr_code);
 

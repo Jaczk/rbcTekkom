@@ -44,18 +44,6 @@
     </div>
 
     <div class="d-flex row justify-content-between"> {{-- row 2 --}}
-        <div class="p-0 small-box bg-dark col">
-            <div class="inner">
-                <h3>{{ $brokenBook }}</h3>
-                <p>Buku Rusak</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-exchange-alt"></i>
-            </div>
-            <a href="{{ route('admin.book') }}" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
         <div class="p-0 mx-3 small-box bg-warning col">
             <div class="inner">
                 <h3>{{ $donates }}</h3>

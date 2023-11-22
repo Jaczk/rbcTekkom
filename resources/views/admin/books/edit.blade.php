@@ -61,18 +61,6 @@
                                 </div>
                             </div>
 
-                            <div class="col">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="year_entry">Tahun Masuk</label>
-                                        <input type="number" class="form-control" id="year_entry" name="year_entry"
-                                            placeholder="2023" value="{{ $books->year_entry }}">
-                                    </div>
-                                </div>
-                            </div>
-
-
-
                         </div>
 
                         <div class="form-row">
@@ -129,30 +117,8 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="condition" class="form-label">Kondisi Buku</label>
-                                    <select class="custom-select" name="condition">
-                                        <option value="">Pilih Kondisi</option>
-                                        <option value="new" @selected($books->condition == 'new') @class(['bg-warning text-white' => $books->condition == 'new'])>
-                                            BARU
-                                        </option>
-                                        <option value="normal" @selected($books->condition == 'normal') @class(['bg-warning text-white' => $books->condition == 'normal'])>
-                                            NORMAL
-                                        </option>
-                                        <option value="broken" @selected($books->condition == 'broken') @class(['bg-warning text-white' => $books->condition == 'broken'])>
-                                            RUSAK
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Ketersediaan</label>
-                                    <select class="custom-select" name="is_available">
-                                        <option value="1" {{ old('is_available') === '1' ? 'selected' : '' }}>Tersedia
-                                        </option>
-                                        <option value="0" {{ old('is_available') === '0' ? 'selected' : '' }}>Tidak
-                                            Tersedia
-                                        </option>
-                                    </select>
+                                    <input type="number" name="stock" id="stock" class="form-control"
+                                        value="{{ $books->stock }}" placeholder="1">
                                 </div>
                             </div>
                             <div class="col d-flex align-items-center">

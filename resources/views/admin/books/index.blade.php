@@ -53,9 +53,8 @@
                                             <th>Detail Minat</th>
                                             <th>Kode Perpus</th>
                                             <th>Rekomendasi</th>
-                                            <th>Ketersediaan</th>
+                                            <th>Stock</th>
                                             <th>Gambar</th>
-                                            <th>QR Code</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -77,25 +76,15 @@
                                                         <i class="fas fa-check fa-lg" style="color: #19942e;"></i>
                                                     </td>
                                                 @endif
-
-                                                @if ($book->is_available == 0)
-                                                    <td class="text-center">
-                                                        <p class="text-danger text-bold">Tidak Ada</p>
-                                                    </td>
-                                                @else
-                                                    <td class="text-center text-success font-weight-bold">
-                                                        <p class="text-success text-bold">Ada</p>
-                                                    </td>
-                                                @endif
                                                 {{-- <td>{{ $book->is_available == '0' ? "Not Available" : "Ready"}}</td> --}}
+                                                <td class="text-center">
+                                                    <p >{{ $book->stock }}</p>
+                                                </td>
                                                 <td class="text-center">
                                                     <img src="{{ filter_var($book->image, FILTER_VALIDATE_URL) ? $book->image : asset('storage/images/' . $book->image) }}"
                                                         class="img-fluid" style="width: 180px" alt="Image">
                                                 </td>
-                                                <td class="text-center">
-                                                    <img src="{{ asset('storage/qr-images/' . $book->qr_code) }}"
-                                                        class="img-fluid" style=" width:150px" alt="QR Code">
-                                                </td>
+                                                
                                                 <td>
                                                     <div class="flex-row d-flex">
                                                         <div class="mx-1">
@@ -186,8 +175,8 @@
                                     <td><span id="book-year"></span></td>
                                 </tr>
                                 <tr>
-                                    <th>Kondisi</th>
-                                    <td><span id="book-condition"></span></td>
+                                    <th>Stok</th>
+                                    <td><span id="book-stock"></span></td>
                                 </tr>
                                 <tr>
                                     <th>Deskripsi</th>
@@ -239,15 +228,6 @@
                                 @foreach ($specDetailDrops as $specd)
                                     <option value="{{ $specd->id }}">
                                         {{ $specd->desc }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <h5>Tahun Masuk</h5>
-                            <select name="yearEntry" id="yearEntry">
-                                <option value="">Pilih Tahun Masuk</option>
-                                @foreach ($yearEntries as $year)
-                                    <option value="{{ $year->year_entry }}">
-                                        {{ $year->year_entry }}
                                     </option>
                                 @endforeach
                             </select>
@@ -360,7 +340,7 @@
                     $('#book-publisher').text(data.publisher);
                     $('#book-author').text(data.author);
                     $('#book-isbn_issn').text(data.isbn_issn);
-                    $('#book-condition').text(data.condition);
+                    $('#book-stock').text(data.stock);
                     $('#book-year').text(data.year_entry);
                     $('#book-desc').text(data.desc);
                     $('#book-spec').text(data.specialization.desc);
@@ -385,25 +365,25 @@
         $('#all').change(function() {
             if ($(this).is(':checked')) {
                 // Checkbox is checked, disable other inputs
-                $('#specID, #specDetailID, #yearEntry').prop('disabled', true);
-                $('#specID, #specDetailID, #yearEntry').selectpicker('refresh');
+                $('#specID, #specDetailID').prop('disabled', true);
+                $('#specID, #specDetailID').selectpicker('refresh');
             } else {
                 // Checkbox is unchecked, enable other inputs
-                $('#specID, #specDetailID, #yearEntry').prop('disabled', false);
-                $('#specID, #specDetailID, #yearEntry').selectpicker('refresh');
+                $('#specID, #specDetailID').prop('disabled', false);
+                $('#specID, #specDetailID').selectpicker('refresh');
             }
         });
 
         // Disable the checkbox and other dropdowns when a dropdown is selected
-        $('#specID, #specDetailID, #yearEntry').change(function() {
+        $('#specID, #specDetailID').change(function() {
             if ($(this).val() !== '') {
                 // Dropdown is selected, disable the checkbox and other dropdowns
-                $('#all, #specID, #specDetailID, #yearEntry').not(this).prop('disabled', true);
-                $('#all, #specID, #specDetailID, #yearEntry').selectpicker('refresh');
+                $('#all, #specID, #specDetailID').not(this).prop('disabled', true);
+                $('#all, #specID, #specDetailID').selectpicker('refresh');
             } else {
                 // Dropdown is cleared, enable the checkbox and other dropdowns
-                $('#all, #specID, #specDetailID, #yearEntry').prop('disabled', false);
-                $('#all, #specID, #specDetailID, #yearEntry').selectpicker('refresh');
+                $('#all, #specID, #specDetailID').prop('disabled', false);
+                $('#all, #specID, #specDetailID').selectpicker('refresh');
             }
         });
     </script>

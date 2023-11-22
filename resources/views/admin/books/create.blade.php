@@ -50,6 +50,13 @@
                                         placeholder="PT. Elex Media Komputindo" value="{{ old('publisher') }}">
                                 </div>
                             </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="stock" class="form-label">Stok Buku</label>
+                                    <input type="number" class="form-control" id="stock" name="stock"
+                                    placeholder="1" value="{{ old('stock') }}">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-row">
@@ -62,11 +69,19 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="year_entry">Tahun Masuk</label>
-                                    <input type="number" class="form-control" id="year_entry" name="year_entry"
-                                        placeholder="2023" value="{{ old('year_entry') }}">
+                                    <label for="lib_book_code">Kode Perpustakaan</label>
+                                    <input type="varchar" class="form-control" id="lib_book_code" name="lib_book_code"
+                                        placeholder="P.21.22.001" value="{{ old('lib_book_code') }}">
                                 </div>
                             </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="isbn_issn">ISBN / ISSN</label>
+                                    <input type="varchar" class="form-control" id="isbn_issn" name="isbn_issn"
+                                        placeholder="978-602-8758-52-9" value="{{ old('isbn_issn') }}">
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="form-row">
@@ -99,59 +114,14 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="lib_book_code">Kode Perpustakaan</label>
-                                    <input type="varchar" class="form-control" id="lib_book_code" name="lib_book_code"
-                                        placeholder="P.21.22.001" value="{{ old('lib_book_code') }}">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="isbn_issn">ISBN / ISSN</label>
-                                    <input type="varchar" class="form-control" id="isbn_issn" name="isbn_issn"
-                                        placeholder="978-602-8758-52-9" value="{{ old('isbn_issn') }}">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-6">
-
-                                <div class="mb-3">
-                                    <label for="condition" class="form-label">Kondisi Buku</label>
-                                    <select class="custom-select" name="condition">
-                                        <option value="new" @selected(old('condition') == 'new') @class(['bg-warning text-white' => old('condition') == 'new'])>
-                                            BARU
-                                        </option>
-                                        <option value="normal" @selected(old('condition') == 'normal') @class(['bg-warning text-white' => old('condition') == 'normal'])>
-                                            NORMAL
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Ketersediaan</label>
-                                    <select class="custom-select" name="is_available)">
-                                        <option value="1" {{ old('is_available') === '1' ? 'selected' : '' }}>
-                                            Tersedia
-                                        </option>
-                                        <option value="0" {{ old('is_available') === '0' ? 'selected' : '' }}>Tidak
-                                            Tersedia
-                                        </option>
-                                    </select>
-                                </div>
-
-                            </div>
+                            
 
                         </div>
 
                         <div class="form-row">
                             <div class="col">
                                 <label for="image">Gambar</label>
-                                <img class="img-fluid mb-2 d-flex" id="img-preview" style="max-width: 200px">
+                                <img class="mb-2 img-fluid d-flex" id="img-preview" style="max-width: 200px">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="image" name="image"
                                         onchange="previewImage()">

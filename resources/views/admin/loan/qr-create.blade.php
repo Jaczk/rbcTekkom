@@ -5,22 +5,18 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-
-            {{-- Alert Here --}}
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Form Peminjaman Buku</h3>
                 </div>
+                @if (session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form enctype="multipart/form-data" method="POST" action="{{ route('admin.loans.QRstore') }}">
@@ -75,7 +71,7 @@
     
             libBookCodeInput.addEventListener("input", function () {
                 // Disable the input field after 12 characters
-                if (libBookCodeInput.value.trim().length >= 11) {
+                if (libBookCodeInput.value.trim().length >= 8) {
                     libBookCodeInput.readOnly = true;
                 }
             });

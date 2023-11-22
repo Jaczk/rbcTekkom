@@ -147,11 +147,10 @@ class LoanController extends Controller
      */
     public function create()
     {
-        $bookDrops = Book::where('is_available', 1)->get();
+        $bookDrops = Book::where('stock', '>=', 1)->get();
         $userDrops = User::where('is_loan', 0)->get();
         return view('admin.loan.create', compact('bookDrops', 'userDrops'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -164,7 +163,14 @@ class LoanController extends Controller
             'user_id' => 'required|numeric',
         ]);
 
-        Book::find($data['book_id'])->update(['is_available' => 0]);
+        $book = Book::find($data['book_id']);
+
+        if ($book->stock > 0) {
+            $book->update(['stock' => $book->stock - 1]);
+        } else {
+            return redirect()->route('admin.loans.qr-create')->with('error', 'Buku tidak tersedia atau masih dipinjam');
+        }
+
         User::find($data['user_id'])->update(['is_loan' => 1]);
 
         $data['return_date'] = Carbon::now()->addDays(7);
@@ -191,7 +197,11 @@ class LoanController extends Controller
 
         if ($book) {
             // Update the book's availability
-            $book->update(['is_available' => 0]);
+            if ($book->stock > 0) {
+                $book->update(['stock' => $book->stock - 1]);
+            } else {
+                return redirect()->route('admin.loans.qr-create')->with('error', 'Buku tidak tersedia atau masih dipinjam');
+            }
 
             // Update the user's loan status
             User::find($data['user_id'])->update(['is_loan' => 1]);
@@ -211,8 +221,6 @@ class LoanController extends Controller
             return redirect()->route('admin.loans')->with('error', 'Book not found.');
         }
     }
-
-
     /**
      * Display the specified resource.
      */
@@ -223,7 +231,7 @@ class LoanController extends Controller
 
         if ($loan && $loan->is_returned === 0) {
             // Update the related book and loan records
-            $loan->book->update(['is_available' => 1]);
+            $loan->book->update(['stock' => $loan->book->stock + 1]);
             $loan->update(['is_returned' => 1]);
             $loan->user->update(['is_loan' => 0]);
 
