@@ -53,7 +53,7 @@ use App\Models\TextEdit;
     Route::group(['prefix' => 'admin', 'middleware' => ['user.auth', 'user.acc:1']], function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-        Route::get('/chart/ajax/{period}', [DashboardController::class, 'procurementChartAjax'])->name('admin.chart.ajax');
+        // Route::get('/chart/ajax/{period}', [DashboardController::class, 'procurementChartAjax'])->name('admin.chart.ajax');
         Route::get('/specChart/ajax/{period}', [DashboardController::class, 'specBookChartAjax'])->name('admin.specChart.ajax');
 
         Route::group(['prefix' => 'book'], function () {
