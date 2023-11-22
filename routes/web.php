@@ -13,6 +13,7 @@
     use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\Admin\PublisherController;
     use App\Http\Controllers\Admin\ShiftController;
+    use App\Http\Controllers\User\ShiftController as UserShiftController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
     use App\Http\Controllers\User\CatalogController;
@@ -35,12 +36,14 @@
     Route::get('/show/{id}', [HomeController::class, 'show'])->name('book.show');
 
     Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
+    Route::get('/shift', [UserShiftController::class, 'index'])->name('user.shift');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('auth/login', [LoginController::class, 'authenticate'])->name('login.auth');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/specBook', [SpecBookController::class, 'index'])->name('user.specBook');
     Route::get('/book-spec/{id}', [SpecBookController::class, 'sortedBySpec'])->name('user.book.spec');
