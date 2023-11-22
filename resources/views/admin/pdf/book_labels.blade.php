@@ -29,32 +29,34 @@
 
         .left {
             width: 35%;
-            border-right: 1px solid #000
-                /* Add a semicolon here */
-                /* Set the left section width */
+            border-right: 1px solid #000;
         }
-
 
         .right {
             width: 65%;
-            /* Set the right section width */
         }
 
         .border-title {
             border-bottom: 1px solid #000;
         }
 
-        .d-left {
-            width: 65%;
+        .table {
+            display: table;
+            width: 100%;
         }
 
-        .d-right {
-            width: 35%;
+        .table-row {
+            display: table-row;
+        }
+
+        .table-cell {
+            display: table-cell;
+            padding: 3px;
         }
 
         p {
             line-height: 6px;
-
+            font-weight: 800
         }
 
         img {
@@ -65,19 +67,29 @@
 </head>
 
 <body>
-     <div class="label">
-            <div class="cell left">
-                <img src="{{ public_path('storage/qr-images/' . $book->qr_code) }}" alt="QR Code" width="120px">
+    <div class="label">
+        <div class="cell left">
+            <img src="{{ public_path('storage/qr-images/' . $book->qr_code) }}" alt="QR Code" width="120px">
+        </div>
+        <div class="cell right">
+            <div class="border-title">
+                <p>Ruang Baca Departemen Teknik Komputer</p>
+                <p>Universitas Diponegoro</p>
             </div>
-            <div class="cell right">
-                <div class="border-title">
-                    <p>Ruang Baca Departemen Teknik Komputer</p>
-                    <p>Universitas Diponegoro</p>
+            <div class="table">
+                <div class="table-row">
+                    <div class="table-cell">
+                        <p>{{ $book->lib_book_code }}</p>
+                        <p>{{ strtoupper(substr($book->author, 0, 3)) }}</p>
+                        <p>{{ strtolower(substr($book->book_name, 0, 1)) }}</p>
+                    </div>
+                    <div class="table-cell">
+                        <img src="{{ public_path('assets/images/logo-dipo.png') }}" alt="QR Code" width="60px">
+                    </div>
                 </div>
-                <p>{{ $book->lib_book_code }}</p>
-                <p>{{ strtoupper(substr($book->author, 0, 3)) }}</p>
-                <p>{{ strtolower(substr($book->book_name, 0, 1)) }}</p>
             </div>
         </div>
+    </div>
 </body>
+
 </html>
