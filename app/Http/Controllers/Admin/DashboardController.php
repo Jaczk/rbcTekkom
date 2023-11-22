@@ -26,9 +26,6 @@ class DashboardController extends Controller
             ->count();
 
         $inLoans = Loan::where('is_returned', 0)->count();
-
-        
-
         $noAdmin = User::where('role_id', '!=', 1)->count();
 
         $specBooks = Book::join('specializations', 'books.spec_id', '=', 'specializations.id')
@@ -50,7 +47,6 @@ class DashboardController extends Controller
             'specBookChartData',
             'specBookDrop',
             'period',
-            
             'inLoans',
             'noAdmin'
         ));
@@ -65,26 +61,32 @@ class DashboardController extends Controller
 
     public static function specBookChart($period)
     {
-        $data = Loan::where('period', $period)
-            ->join('books', 'loans.book_id', '=', 'books.id')
-            ->join('specializations', 'books.spec_id', '=', 'specializations.id')
-            ->groupBy('specializations.desc')
-            ->select('specializations.desc', DB::raw('COUNT(*) as count'))
-            ->get();
+        try {
+            $data = Loan::where('period', $period)
+                ->join('books as b', 'loans.book_id', '=', 'b.id')
+                ->join('specializations as s', 'b.spec_id', '=', 's.id')
+                ->groupBy('s.desc')
+                ->select('s.desc', DB::raw('COUNT(*) as count'))
+                ->get();
 
-        $specBookChartData = [
-            'labels' => $data->pluck('desc')->toArray(),
-            'datasets' => [
-                [
-                    'data' => $data->pluck('count')->toArray(),
-                    'backgroundColor' => [
-                        '#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de',
-                        '#9BE8D8', '#CBFFA9', '#9BCDD2', '#E1AEFF', '#0079FF', '#FDCEDF', '#B799FF',
-                        '#D25380', '#E3F2C1', '#6C9BCF', '#408E91'
+            $specBookChartData = [
+                'labels' => $data->pluck('desc')->toArray(),
+                'datasets' => [
+                    [
+                        'data' => $data->pluck('count')->toArray(),
+                        'backgroundColor' => [
+                            '#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de',
+                            '#9BE8D8', '#CBFFA9', '#9BCDD2', '#E1AEFF', '#0079FF', '#FDCEDF', '#B799FF',
+                            '#D25380', '#E3F2C1', '#6C9BCF', '#408E91'
+                        ]
                     ]
                 ]
-            ]
-        ];
-        return $specBookChartData;
+            ];
+
+            return $specBookChartData;
+        } catch (\Exception $e) {
+            // Handle the exception, log it, or return an error response
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

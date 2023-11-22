@@ -158,7 +158,7 @@
         var myChart2;
 
         function fetchDataAndRenderChart2(period) {
-            fetch('specChart/ajax/' + period)
+            fetch('admin/specChart/ajax/' + period)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not OK');
