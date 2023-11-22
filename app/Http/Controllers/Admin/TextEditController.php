@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\TextEdit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class TextEditController extends Controller
 {
@@ -12,7 +14,9 @@ class TextEditController extends Controller
      */
     public function index()
     {
-        //
+        $texts = TextEdit::all();
+
+        return view('admin.textEdit.index', ['texts' => $texts]);
     }
 
     /**
@@ -44,7 +48,10 @@ class TextEditController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $decryptId = Crypt::decryptString($id);
+        $text = TextEdit::find($decryptId);
+
+        return view('admin.textEdit.edit', ['text' => $text]);
     }
 
     /**
@@ -52,7 +59,19 @@ class TextEditController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->except('token');
+
+        $request->validate([
+            'title'=>'required|string',
+            'desc'=>'string',
+            'image'=>'string|nullable',
+        ]);
+
+        $text = TextEdit::find($id);
+
+        $text->update($data);
+
+        return redirect()->route('admin.text')->with('success', 'Sukses memperbarui data');
     }
 
     /**

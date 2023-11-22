@@ -13,12 +13,14 @@
     use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\Admin\PublisherController;
     use App\Http\Controllers\Admin\ShiftController;
+    use App\Http\Controllers\Admin\TextEditController;
     use App\Http\Controllers\User\ShiftController as UserShiftController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
     use App\Http\Controllers\User\CatalogController;
     use App\Http\Controllers\User\SpecBookController;
     use App\Models\Donate;
+use App\Models\TextEdit;
 
     /*
 |--------------------------------------------------------------------------
@@ -120,6 +122,14 @@
             Route::get('/edit-time', [ShiftController::class, 'editTime'])->name('admin.shift.editTime');
             Route::put('/update/{id}', [ShiftController::class, 'update'])->name('admin.shift.update');
             Route::put('/update-time', [ShiftController::class, 'updateTime'])->name('admin.shift.updateTime');
+        });
+
+        Route::group(['prefix' => 'textEdit'], function () {
+            Route::get('/', [TextEditController::class, 'index'])->name('admin.text');
+            Route::get('/edit/{id}', [TextEditController::class, 'edit'])->name('admin.text.edit');
+            Route::get('/edit-time', [TextEditController::class, 'editTime'])->name('admin.text.editTime');
+            Route::put('/update/{id}', [TextEditController::class, 'update'])->name('admin.text.update');
+            Route::put('/update-time', [TextEditController::class, 'updateTime'])->name('admin.text.updateTime');
         });
 
         Route::group(['prefix' => 'user'], function () {
