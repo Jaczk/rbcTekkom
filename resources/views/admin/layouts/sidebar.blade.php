@@ -103,6 +103,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('admin.text') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-clock"></i>
+                        <p>
+                            Edit FAQ | Fasilitas | etc
+                        </p>
+                    </a>
+                </li>
+
                 <li class="cursor-default disabled">
                     <a href="#" class="cursor-default nav-link disabled">
                     </a>
