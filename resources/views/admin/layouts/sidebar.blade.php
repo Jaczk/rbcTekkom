@@ -105,7 +105,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('admin.text') }}" class="nav-link" style="color: #ffffff;">
-                        <i class="nav-icon fas fa-clock"></i>
+                        <i class="nav-icon fas fa-user-edit"></i>
                         <p>
                             Edit FAQ | Fasilitas | etc
                         </p>

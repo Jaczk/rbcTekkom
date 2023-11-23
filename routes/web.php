@@ -13,8 +13,9 @@
     use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\Admin\PublisherController;
     use App\Http\Controllers\Admin\ShiftController;
-    use App\Http\Controllers\Admin\TextEditController;
     use App\Http\Controllers\User\ShiftController as UserShiftController;
+    use App\Http\Controllers\Admin\TextEditController;
+    use App\Http\Controllers\User\TextEditController as UserTextEditController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
     use App\Http\Controllers\User\CatalogController;
@@ -39,6 +40,8 @@ use App\Models\TextEdit;
 
     Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
     Route::get('/shift', [UserShiftController::class, 'index'])->name('user.shift');
+    Route::get('/faq', [UserTextEditController::class, 'faq'])->name('user.faq');
+    Route::get('/rule', [UserTextEditController::class, 'rule'])->name('user.rule');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('auth/login', [LoginController::class, 'authenticate'])->name('login.auth');
