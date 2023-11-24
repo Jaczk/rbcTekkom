@@ -44,6 +44,8 @@
                                         placeholder="Python For Beginner" value="{{ $books->book_name }}">
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="publisher">Penerbit</label>
@@ -51,8 +53,6 @@
                                         placeholder="PT. Elex Media Komputindo" value="{{ $books->publisher }}">
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="author">Penulis</label>
@@ -60,7 +60,43 @@
                                         placeholder="Suryadi" value="{{ $books->author }}">
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="condition" class="form-label">Stok Buku</label>
+                                    <input type="number" name="stock" id="stock" class="form-control"
+                                        value="{{ $books->stock }}" placeholder="1">
+                                </div>
+                            </div>
+                            <div class="col d-flex align-items-center">
+                                <div class="mb-2 form-check mt-4">
+                                    <input class="form-check-input" type="checkbox" id="is_recommended"
+                                        name="is_recommended" value="1"
+                                        @if ($books->is_recommended == 1) checked @endif>
+                                    <label class="form-check-label font-weight-bold" for="is_recommended">
+                                        Rekomendasi
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="isbn_issn">ISBN / ISSN</label>
+                                    <input type="varchar" class="form-control" id="isbn_issn" name="isbn_issn"
+                                        placeholder="978-602-8758-52-9" value="{{ $books->isbn_issn }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="lib_book_code">Kode Perpus</label>
+                                    <input type="varchar" class="form-control" id="lib_book_code" name="lib_book_code"
+                                        placeholder="978-602-8758-52-9" value="{{ $books->lib_book_code }}">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-row">
@@ -76,7 +112,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-
                             </div>
                             <div class="col">
                                 <div class="mb-3">
@@ -89,46 +124,6 @@
                                                 {{ $specDetail->desc }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-
-                                <div class="form-group">
-                                    <label for="isbn_issn">ISBN / ISSN</label>
-                                    <input type="varchar" class="form-control" id="isbn_issn" name="isbn_issn"
-                                        placeholder="978-602-8758-52-9" value="{{ $books->isbn_issn }}">
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="lib_book_code">Kode Perpus</label>
-                                    <input type="varchar" class="form-control" id="lib_book_code" name="lib_book_code"
-                                        placeholder="978-602-8758-52-9" value="{{ $books->lib_book_code }}">
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="condition" class="form-label">Kondisi Buku</label>
-                                    <input type="number" name="stock" id="stock" class="form-control"
-                                        value="{{ $books->stock }}" placeholder="1">
-                                </div>
-                            </div>
-                            <div class="col d-flex align-items-center">
-                                <div class="mb-2 form-check mt-4">
-                                    <input class="form-check-input" type="checkbox" id="is_recommended"
-                                        name="is_recommended" value="1"
-                                        @if ($books->is_recommended == 1) checked @endif>
-                                    <label class="form-check-label font-weight-bold" for="is_recommended">
-                                        Rekomendasi
-                                    </label>
                                 </div>
                             </div>
                         </div>

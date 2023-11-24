@@ -45,6 +45,9 @@
                     <h6>
                         Hari Tutup RBC: Sabtu dan Minggu serta setiap Hari Libur Nasional
                     </h6>
+                    <h6>
+                        {!! $cp->desc !!}
+                    </h6>
                 </div>
             </div>
         </div>

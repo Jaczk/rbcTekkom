@@ -46,7 +46,7 @@
                                         <tr>
                                             <td></td>
                                             <td>{{ $text->title }}</td>
-                                            <td>{{ $text->desc }}</td>
+                                            <td>{!! $text->desc !!}</td>
                                             <td>{{ $text->image }}</td>
                                             <td class="flex-row d-flex">
                                                 <a href="{{ route('admin.text.edit', Crypt::encryptString($text->id)) }}"

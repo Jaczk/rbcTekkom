@@ -50,16 +50,15 @@
                                         placeholder="PT. Elex Media Komputindo" value="{{ old('publisher') }}">
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="stock" class="form-label">Stok Buku</label>
-                                    <input type="number" class="form-control" id="stock" name="stock"
-                                    placeholder="1" value="{{ old('stock') }}">
+                                    <input type="number" class="form-control" id="stock" name="stock" placeholder="1"
+                                        value="{{ old('stock') }}">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="author">Penulis</label>
@@ -67,6 +66,8 @@
                                         placeholder="Suryadi" value="{{ old('author') }}">
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="lib_book_code">Kode Perpustakaan</label>
@@ -81,9 +82,7 @@
                                         placeholder="978-602-8758-52-9" value="{{ old('isbn_issn') }}">
                                 </div>
                             </div>
-
                         </div>
-
                         <div class="form-row">
                             <div class="col">
                                 <div class="mb-3">
@@ -112,12 +111,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-row">
-                            
-
-                        </div>
-
                         <div class="form-row">
                             <div class="col">
                                 <label for="image">Gambar</label>

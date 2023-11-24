@@ -62,12 +62,12 @@
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.gallery') }}">Ruang Baca</a>
                         </li>
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Tata Tertib</a>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.rule') }}">Tata Tertib</a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="mx-2 text-uppercase nav-link active fw-bold" href="#">FAQ</a>
+                    <a class="mx-2 text-uppercase nav-link active fw-bold" href="{{ route('user.faq') }}">FAQ</a>
                 </li>
 
             </ul>

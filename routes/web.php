@@ -14,8 +14,9 @@
     use App\Http\Controllers\Admin\FacilityController;
     use App\Http\Controllers\User\FacilityController as UserFacilityController;
     use App\Http\Controllers\Admin\ShiftController;
-    use App\Http\Controllers\Admin\TextEditController;
     use App\Http\Controllers\User\ShiftController as UserShiftController;
+    use App\Http\Controllers\Admin\TextEditController;
+    use App\Http\Controllers\User\TextEditController as UserTextEditController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
     use App\Http\Controllers\User\CatalogController;
@@ -40,6 +41,8 @@
 
     Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
     Route::get('/shift', [UserShiftController::class, 'index'])->name('user.shift');
+    Route::get('/faq', [UserTextEditController::class, 'faq'])->name('user.faq');
+    Route::get('/rule', [UserTextEditController::class, 'rule'])->name('user.rule');
 
     //Fasilitas
     Route::get('/gallery', [UserFacilityController::class, 'gallery'])->name('user.gallery');
