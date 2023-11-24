@@ -11,7 +11,8 @@
     use App\Http\Controllers\User\HomeController;
     use App\Http\Controllers\Admin\DonateController;
     use App\Http\Controllers\Admin\DashboardController;
-    use App\Http\Controllers\Admin\PublisherController;
+    use App\Http\Controllers\Admin\FacilityController;
+    use App\Http\Controllers\User\FacilityController as UserFacilityController;
     use App\Http\Controllers\Admin\ShiftController;
     use App\Http\Controllers\Admin\TextEditController;
     use App\Http\Controllers\User\ShiftController as UserShiftController;
@@ -20,7 +21,7 @@
     use App\Http\Controllers\User\CatalogController;
     use App\Http\Controllers\User\SpecBookController;
     use App\Models\Donate;
-use App\Models\TextEdit;
+    use App\Models\TextEdit;
 
     /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ use App\Models\TextEdit;
 
     Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
     Route::get('/shift', [UserShiftController::class, 'index'])->name('user.shift');
+
+    //Fasilitas
+    Route::get('/gallery', [UserFacilityController::class, 'gallery'])->name('user.gallery');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('auth/login', [LoginController::class, 'authenticate'])->name('login.auth');
@@ -114,6 +118,15 @@ use App\Models\TextEdit;
         Route::group(['prefix' => 'fine'], function () {
             Route::get('/edit', [FineController::class, 'edit'])->name('admin.fine.edit');
             Route::put('/update', [FineController::class, 'update'])->name('admin.fine.update');
+        });
+
+        Route::group(['prefix' => 'facility'], function () {
+            Route::get('/gallery', [FacilityController::class, 'gallery'])->name('admin.facility.gallery');
+            Route::get('/gallery/edit/{id}', [FacilityController::class, 'editGallery'])->name('admin.facility.gallery.edit');
+            Route::put('/gallery/update/{id}', [FacilityController::class, 'updateGallery'])->name('admin.facility.gallery.update');
+            Route::get('/gallery/create', [FacilityController::class, 'create'])->name('admin.facility.gallery.create');
+            Route::post('/gallery/store', [FacilityController::class, 'store'])->name('admin.facility.gallery.store');
+            Route::get('/gallery/destroy/{id}', [FacilityController::class, 'destroy'])->name('admin.facility.gallery.destroy');
         });
 
         Route::group(['prefix' => 'shift'], function () {

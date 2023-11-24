@@ -45,6 +45,11 @@
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/i18n/defaults-*.min.js"></script>
+
+    <!-- Add these lines to include MDB JavaScript and CSS files -->
+    <script src="https://cdn.jsdelivr.net/npm/mdb-ui-kit@3.11.0/dist/js/mdb.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/mdb-ui-kit@3.11.0/dist/css/mdb.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

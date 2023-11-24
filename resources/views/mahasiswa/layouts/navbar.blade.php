@@ -60,7 +60,7 @@
                     </a>
                     <ul class="mt-3 border-top border-info dropdown-menu drop2 border-3 rounded-0"
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Ruang Baca</a>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.gallery') }}">Ruang Baca</a>
                         </li>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Tata Tertib</a>
                         </li>

@@ -112,6 +112,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('admin.facility.gallery') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-clock"></i>
+                        <p>
+                            Fasilitas | Foto Galeri
+                        </p>
+                    </a>
+                </li>
+
                 <li class="cursor-default disabled">
                     <a href="#" class="cursor-default nav-link disabled">
                     </a>

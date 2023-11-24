@@ -2,50 +2,106 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Facility;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class FacilityController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function gallery()
     {
-        //
+        $gallery = Facility::all();
+        return view('admin.facility.gallery', compact('gallery'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function editGallery(string $id)
     {
-        //
+        $decryptId = Crypt::decryptString($id);
+        $gallery =  Facility::find($decryptId);
+
+        return view('admin.facility.edit-gallery', compact('gallery'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function updateGallery(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,jpeg,png',
+            'caption' => 'required|string'
+        ]);
+
+        $gallery = Facility::findOrFail($id);
+
+        // Check if the gallery has an existing image
+        if ($gallery->image) {
+            // Delete the old image
+            Storage::disk('public')->delete('facility/' . $gallery->image);
+        }
+
+        if ($request->hasFile('image')) {
+            // Upload and store the new image
+            $image = $request->file('image');
+            $filename = Str::random(8) . $image->getClientOriginalName();
+            Storage::disk('public')->put('facility/' . $filename, file_get_contents($image));
+
+            // Update the gallery with the new image and caption
+            $gallery->update([
+                'image' => $filename,
+                'caption' => $request->caption,
+            ]);
+        } else {
+            // Update the gallery with only the new caption
+            $gallery->update([
+                'caption' => $request->caption,
+            ]);
+        }
+
+        return redirect()->route('admin.facility.gallery')->with('success', 'Foto berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function create()
     {
-        //
+        return view('admin.facility.add-gallery');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,jpeg,png',
+            'caption' => 'required|string'
+        ]);
+
+        $image = $request->file('image');
+        $filename = Str::random(8) . $image->getClientOriginalName();
+        // Store the image in the public/storage/facility directory
+        Storage::disk('public')->put('facility/' . $filename, file_get_contents($image));
+
+        Facility::create([
+            'image' => $filename,
+            'caption' => $request->caption,
+            // Add other fields you want to store here
+        ]);
+
+        return redirect()->route('admin.facility.gallery')->with('success', 'Sukses memperbarui peminatan');
     }
+
 
     /**
      * Update the specified resource in storage.
