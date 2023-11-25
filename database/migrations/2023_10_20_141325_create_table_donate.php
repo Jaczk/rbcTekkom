@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('desc')->nullable();
             $table->string('publisher');
             $table->string('author');
+            $table->tinyInteger('is_fav')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
