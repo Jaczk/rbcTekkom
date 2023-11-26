@@ -10,8 +10,10 @@
     use App\Http\Controllers\User\RegisterController;
     use App\Http\Controllers\User\HomeController;
     use App\Http\Controllers\Admin\DonateController;
-    use App\Http\Controllers\User\DonateController as UserDonateController;
+    use App\Http\Controllers\Admin\LibrarianController;
+    use App\Http\Controllers\User\LibrarianController as UserLibrarianController;
     use App\Http\Controllers\Admin\DashboardController;
+    use App\Http\Controllers\User\DonateController as UserDonateController;
     use App\Http\Controllers\Admin\FacilityController;
     use App\Http\Controllers\User\FacilityController as UserFacilityController;
     use App\Http\Controllers\Admin\ShiftController;
@@ -22,8 +24,7 @@
     use App\Http\Controllers\Admin\SpecializationController;
     use App\Http\Controllers\User\CatalogController;
     use App\Http\Controllers\User\SpecBookController;
-    use App\Models\Donate;
-    use App\Models\TextEdit;
+
 
     /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@
     Route::get('/catalog', [CatalogController::class, 'index'])->name('user.catalog');
     Route::get('/donations', [UserDonateController::class, 'index'])->name('user.donate');
     Route::get('/show-donate/{id}', [UserDonateController::class, 'show'])->name('user.donate.show');
+    Route::get('/librarians', [UserLibrarianController::class, 'index'])->name('user.librarian');
 
     //Shift
     Route::get('/shift', [UserShiftController::class, 'index'])->name('user.shift');
@@ -150,9 +152,16 @@
         Route::group(['prefix' => 'textEdit'], function () {
             Route::get('/', [TextEditController::class, 'index'])->name('admin.text');
             Route::get('/edit/{id}', [TextEditController::class, 'edit'])->name('admin.text.edit');
-            Route::get('/edit-time', [TextEditController::class, 'editTime'])->name('admin.text.editTime');
             Route::put('/update/{id}', [TextEditController::class, 'update'])->name('admin.text.update');
-            Route::put('/update-time', [TextEditController::class, 'updateTime'])->name('admin.text.updateTime');
+        });
+
+        Route::group(['prefix' => 'librarian'], function () {
+            Route::get('/', [LibrarianController::class, 'index'])->name('admin.librarian');
+            Route::get('/create', [LibrarianController::class, 'create'])->name('admin.librarian.create');
+            Route::post('/store', [LibrarianController::class, 'store'])->name('admin.librarian.store');
+            Route::get('/edit/{id}', [LibrarianController::class, 'edit'])->name('admin.librarian.edit');
+            Route::put('/update/{id}', [LibrarianController::class, 'update'])->name('admin.librarian.update');
+            Route::delete('/destroy/{id}', [LibrarianController::class, 'destroy'])->name('admin.librarian.destroy');
         });
 
         Route::group(['prefix' => 'user'], function () {

@@ -28,7 +28,7 @@
                     </a>
                     <ul class="mt-3 border-top border-info dropdown-menu drop2 border-3 rounded-0"
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0" href="#">Pustakawan</a></li>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0" href="{{ route('user.librarian') }}">Pustakawan</a></li>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Visi Misi</a></li>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.shift') }}">Jam Layanan</a>
                         </li>

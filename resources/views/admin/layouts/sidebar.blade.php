@@ -114,9 +114,18 @@
 
                 <li class="nav-item">
                     <a href="{{ route('admin.facility.gallery') }}" class="nav-link" style="color: #ffffff;">
-                        <i class="nav-icon fas fa-clock"></i>
+                        <i class="nav-icon fas fa-image"></i>
                         <p>
                             Fasilitas | Foto Galeri
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.librarian') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-book-reader"></i>
+                        <p>
+                            Pustakawan
                         </p>
                     </a>
                 </li>
