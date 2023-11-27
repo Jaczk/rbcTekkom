@@ -61,6 +61,16 @@
                                         placeholder="Suryadi" value="{{ $donate->author }}">
                                 </div>
                             </div>
+                            <div class="col">
+                                <div class="mb-2 form-check mt-4 form-group">
+                                    <input type="hidden" name="is_fav" id="is_fav_hidden" value="{{ $donate->is_fav }}">
+                                    <input class="form-check-input" type="checkbox" id="is_fav" name="is_fav" value="1"
+                                           @if ($donate->is_fav == 1) checked @endif>
+                                    <label class="form-check-label font-weight-bold" for="is_fav">
+                                        Apakah Favorit?
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-row">
@@ -109,4 +119,16 @@
             image.src = URL.createObjectURL(event.target.files[0]);
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        document.getElementById('is_fav').addEventListener('change', function() {
+            // If the checkbox is checked, set the hidden input value to 1
+            if (this.checked) {
+                document.getElementById('is_fav_hidden').value = 1;
+            } else {
+                document.getElementById('is_fav_hidden').value = 0;
+            }
+        });
+    </script>
+    
 @endsection

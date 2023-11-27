@@ -62,6 +62,7 @@
                                         placeholder="Suryadi" value="{{ old('author') }}">
                                 </div>
                             </div>
+                            
                         </div>
 
                         <div class="form-row">
@@ -84,9 +85,9 @@
                         </div>
                     </div>
                     <!-- /.card-body -->
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
             </div>
             </form>
         </div>

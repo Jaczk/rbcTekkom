@@ -42,8 +42,12 @@ class DonateController extends Controller
             'publisher' => 'required|string',
             'price' => 'required|integer',
             'desc' => 'nullable',
+            'is_fav' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png|nullable',
         ]);
+
+        // Set is_fav to 1 if the checkbox is checked, otherwise set it to 0
+        $data['is_fav'] = $request->has('is_fav') ? 1 : 0;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -101,10 +105,14 @@ class DonateController extends Controller
             'publisher' => 'required|string',
             'price' => 'required|integer',
             'desc' => 'nullable',
+            'is_fav' => 'nullable',
             'image' => 'image|mimes:jpg,jpeg,png|nullable',
         ]);
 
         $donate = Donate::find($id);
+
+        // // Set is_fav to 1 if the checkbox is checked, otherwise set it to 0
+        // $data['is_fav'] = $request->has('is_fav') ? 1 : 0;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -128,7 +136,7 @@ class DonateController extends Controller
         }
 
 
-        $data['is_recommended'] = $request->has('is_recommended') ? 1 : 0;
+        $data['is_fav'] = $request->has('is_fav') ? 1 : 0;
 
         $donate->update($data);
 

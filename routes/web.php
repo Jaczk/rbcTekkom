@@ -23,7 +23,8 @@
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
     use App\Http\Controllers\User\CatalogController;
-    use App\Http\Controllers\User\SpecBookController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\SpecBookController;
 
 
     /*
@@ -60,6 +61,10 @@
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+    //Auth-Mahasiswa Only
+    Route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('user.profile');
+    Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile.update');
 
     //byCategoryPage
     Route::get('/specBook', [SpecBookController::class, 'index'])->name('user.specBook');

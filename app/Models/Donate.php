@@ -15,6 +15,7 @@ class Donate extends Model
         'price',
         'image',
         'desc',
+        'is_fav',
         'publisher',
         'author'
     ];

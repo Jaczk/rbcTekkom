@@ -50,6 +50,10 @@
     <script src="https://cdn.jsdelivr.net/npm/mdb-ui-kit@3.11.0/dist/js/mdb.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/mdb-ui-kit@3.11.0/dist/css/mdb.min.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
