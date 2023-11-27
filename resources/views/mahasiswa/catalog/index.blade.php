@@ -80,9 +80,15 @@
                     <a href="javascript:void(0)" class="" id="show-detail"
                         data-url="{{ route('book.show', $book->id) }}" style="width: 18rem; color: inherit;">
                         <div class="mx-3" style="width: 250px; height: 420px;">
+                            @if ($book->stock == 0)
+                            <img src="{{ asset('storage/images/' . $book->image) }}"
+                                class="card-img rounded-4 object-fit-cover" style="height: 300px; width: 100%; filter: grayscale(100%);"
+                                alt="bookImage">
+                            @else
                             <img src="{{ asset('storage/images/' . $book->image) }}"
                                 class="card-img rounded-4 object-fit-cover" style="height: 300px; width: 100%;"
                                 alt="bookImage">
+                            @endif
                             <div class="bg-transparent">
                                 <p class="mt-2 fw-medium">
                                     @if (Str::length($book->book_name) < 35)

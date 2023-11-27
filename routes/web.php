@@ -49,6 +49,7 @@
     //Shift
     Route::get('/shift', [UserShiftController::class, 'index'])->name('user.shift');
     Route::get('/faq', [UserTextEditController::class, 'faq'])->name('user.faq');
+    Route::get('/visi-misi', [UserTextEditController::class, 'visi'])->name('user.visi');
     Route::get('/rule', [UserTextEditController::class, 'rule'])->name('user.rule');
 
     //Fasilitas
