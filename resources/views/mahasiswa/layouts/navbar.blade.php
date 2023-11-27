@@ -41,8 +41,10 @@
                     </a>
                     <ul class="mt-3 border-top border-info dropdown-menu drop2 border-3 rounded-0"
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.catalog') }}">Koleksi Buku</a>
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.donate') }}">Daftar Buku Sumbangan</a>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 "
+                                href="{{ route('user.catalog') }}">Koleksi Buku</a>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 "
+                                href="{{ route('user.donate') }}">Daftar Buku Sumbangan</a>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Tugas Akhir
                                 Digital</a>
                         </li>
@@ -61,9 +63,11 @@
                     </a>
                     <ul class="mt-3 border-top border-info dropdown-menu drop2 border-3 rounded-0"
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.gallery') }}">Ruang Baca</a>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 "
+                                href="{{ route('user.gallery') }}">Ruang Baca</a>
                         </li>
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.rule') }}">Tata Tertib</a>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 "
+                                href="{{ route('user.rule') }}">Tata Tertib</a>
                         </li>
                     </ul>
                 </li>
@@ -83,15 +87,19 @@
                                     <path
                                         d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
                                 </svg>
+                                {{-- <img src="{{ asset('storage/profile/'. Auth::user()->profile_image) }}" class="rounded-circle me-2" style="width:30px; object-fit:cover" alt="profil"> --}}
                                 {{ Str::limit(auth()->user()->name, 10, '...') }}
+                                
                             </button>
                             <ul class="mt-3 dropdown-menu drop2 rounded-0 border-top border-info border-3"
                                 style="background-color: #001349;">
                                 @if (Auth::check() && Auth::user()->role_id == 1)
                                     <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dasbor</a></li>
                                 @endif
-                                <li><a class="dropdown-item" href="#">Profil</a>
-                                </li>
+                                @if (Auth::check() && Auth::user()->role_id == 2)
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('user.profile', ['id' => Auth::id()]) }}">Profil</a></li>
+                                @endif
                                 <li><a class="dropdown-item" href="#" onclick="confirmLogout(event)">Logout</a>
                                 </li>
                             </ul>
