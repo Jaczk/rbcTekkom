@@ -86,7 +86,7 @@ class SpecDetailController extends Controller
             dihapus karena masih memiliki buku aktif');
         }
 
-        $spec_detail->delete();
+        $spec_detail->forceDelete();
         return redirect()->route('admin.special')->with('success2', 'Detail Peminatan Berhasil Dihapus');
     }
 }

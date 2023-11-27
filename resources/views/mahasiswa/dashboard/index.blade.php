@@ -114,11 +114,13 @@
         </div>
         <div class="reccomended" style="overflow: hidden;">
             <div class="p-4">
-                <h2 class="my-3 text-black m fw-semibold">Recommended By Our Staff</h2>
+                <a href="{{ route('user.donate') }}" style="color: inherit;">
+                    <h2 class="my-3 text-black m fw-semibold">Coming Soon...</h2>
+                </a>
                 <div class="mx-2 mt-4 container-fluid row d-flex flex-nowrap" style="overflow-x: auto;">
                     @foreach ($books as $book)
                         <a href="javascript:void(0)" class="" id="show-detail"
-                            data-url="{{ route('book.show', $book->id) }}" style="width: 18rem; color: inherit;">
+                            data-url="{{ route('user.donate.show', $book->id) }}" style="width: 18rem; color: inherit;">
                             <div class="mx-3" style="width: 250px; height: 420px;">
                                 <img src="{{ asset('storage/images/' . $book->image) }}" class="card-img rounded-4"
                                     style="height: 300px; width: 100%;" alt="bookImage">
@@ -158,36 +160,12 @@
                                         <td><span id="book-name"></span></td>
                                     </tr>
                                     <tr>
-                                        <th>Peminatan</th>
-                                        <td><span id="book-spec"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Detail Minat</th>
-                                        <td><span id="book-spec_detail"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Kode Perpus</th>
-                                        <td><span id="book-lib"></span></td>
-                                    </tr>
-                                    <tr>
                                         <th>Penerbit</th>
                                         <td><span id="book-publisher"></span></td>
                                     </tr>
                                     <tr>
                                         <th>Penulis</th>
                                         <td><span id="book-author"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ISBN-ISSN</th>
-                                        <td><span id="book-isbn_issn"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tahun Masuk</th>
-                                        <td><span id="book-year"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Kondisi</th>
-                                        <td><span id="book-condition"></span></td>
                                     </tr>
                                     <tr>
                                         <th>Deskripsi</th>
@@ -221,15 +199,10 @@
                 $('#book-name').text(data.book_name);
                 $('#book-publisher').text(data.publisher);
                 $('#book-author').text(data.author);
-                $('#book-isbn_issn').text(data.isbn_issn);
-                $('#book-condition').text(data.condition);
-                $('#book-year').text(data.year_entry);
                 $('#book-desc').text(data.desc);
-                $('#book-spec').text(data.specialization.desc);
-                $('#book-lib').text(data.lib_book_code);
-                $('#book-spec_detail').text(data.spec_detail.desc);
                 // Set the image source
-                v
+                var imagePath = "{{ asset('storage/images/') }}/" + data.image;
+                $('#book-image').attr("src", imagePath);
             })
         });
     </script>
