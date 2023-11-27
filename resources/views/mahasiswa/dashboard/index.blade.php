@@ -47,19 +47,33 @@
             </button>
         </div> --}}
 
-        <div class="hero" style="background-image: linear-gradient(45deg, #F9FACB, #63A4E0); height: 800px">
-            <img src="{{ asset('assets/images/hero2.png') }}" style="top: 17%; left: 0" alt="hero2">
-            <img src="{{ asset('assets/images/hero.png') }}" class="position-absolute" style="top: 15%; right: 0"
-                alt="hero">
-            <div class="input-group position-absolute z-1 search-div" style="width: 35%; top: 63%; left: 7%;">
-                <input type="search" class="rounded form-control"
-                    placeholder="Enter book title, ISBN, author or publishers" aria-label="Search"
-                    aria-describedby="search-addon" style="height: 60px;" />
-                <button type="button" class="btn btn-primary">
-                    <i class="fas fa-search"></i>
-                </button>
+        <div id="carouselVideoExample" class="carousel carousel-fade" data-mdb-ride="carousel" >
+            <!-- Inner -->
+            <div class="carousel-inner">
+
+                <!-- Single item -->
+                <div class="carousel-item active">
+                    <div style="position: relative; overflow: hidden;">
+                        <video class="img-fluid" autoplay loop muted style="width:100%; object-fit: contain;">
+                            <source src="{{ asset('video/Drone.mp4') }}" type="video/mp4" />
+                        </video>
+                    </div>
+                    <div class="carousel-caption d-none d-md-block"
+                        style="top: 50%;
+                    transform: translateY(-50%);
+                    bottom: initial;">
+                        <h1>First slide label</h1>
+                        <p>
+                            Nulla vitae elit libero, a pharetra augue mollis interdum.
+                        </p>
+                    </div>
+                </div>
             </div>
+            <!-- Inner -->
         </div>
+
+
+        <!-- Carousel wrapper -->
         <div class="bg-image" style="height: 400px; position: relative;">
             <style>
                 .bg-image::before {
