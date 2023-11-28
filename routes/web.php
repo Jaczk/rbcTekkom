@@ -66,6 +66,8 @@ use App\Http\Controllers\User\SpecBookController;
     //Auth-Mahasiswa Only
     Route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('user.profile');
     Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile.update');
+    Route::get('/profile/theses/{id}', [ProfileController::class, 'openTheses'])->name('user.profile.theses');
+    Route::post('/profile/theses/{id}', [ProfileController::class, 'createTheses'])->name('user.profile.theses.create');
 
     //byCategoryPage
     Route::get('/specBook', [SpecBookController::class, 'index'])->name('user.specBook');

@@ -5,47 +5,6 @@
 @section('content')
 
     <div class="content poppins-text">
-        {{-- <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-            <div class="input-group position-absolute z-1" style="width: 30%; top: 55%; left: 35%;">
-                <input type="search" class="rounded form-control" style="height: 50px;" placeholder="Search"
-                    aria-label="Search" aria-describedby="search-addon" />
-                <button type="button" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1770&h=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="d-block w-100 object-fit-contain" alt="Slide 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?auto=format&fit=crop&q=80&w=1770&h=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="d-block w-100 object-fit-contain" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1434725039720-aaad6dd32dfe?auto=format&fit=crop&q=80&w=1942&h=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="d-block w-100 object-fit-contain" alt="Slide 3">
-                </div>
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div> --}}
 
         <div id="carouselVideoExample" class="carousel carousel-fade" data-mdb-ride="carousel" >
             <!-- Inner -->
@@ -55,17 +14,17 @@
                 <div class="carousel-item active">
                     <div style="position: relative; overflow: hidden;">
                         <video class="img-fluid" autoplay loop muted style="width:100%; object-fit: contain;">
-                            <source src="{{ asset('video/Drone.mp4') }}" type="video/mp4" />
+                            <source src="{{ asset('video/jalan.mp4') }}" type="video/mp4" />
                         </video>
                     </div>
                     <div class="carousel-caption d-none d-md-block"
                         style="top: 50%;
                     transform: translateY(-50%);
                     bottom: initial;">
-                        <h1>First slide label</h1>
-                        <p>
-                            Nulla vitae elit libero, a pharetra augue mollis interdum.
-                        </p>
+                        <h3>Ruang Baca</h3>
+                        <h5>
+                            Departemen Teknik Komputer
+                        </h5>
                     </div>
                 </div>
             </div>

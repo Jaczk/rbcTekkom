@@ -1,6 +1,6 @@
 @extends('mahasiswa.layouts.base')
 
-@section('title', 'Dasbor')
+@section('title', 'Profil')
 
 @section('content')
     <div class="container-xl p-4 mt-4">
@@ -8,7 +8,8 @@
         <nav class="nav nav-borders">
             <a class="nav-link active ms-0" href="{{ route('user.profile', ['id' => Auth::id()]) }}"
                 target="__blank">Profile</a>
-            <a class="nav-link" href="#" target="__blank">Upload Tugas Akhir</a>
+            <a class="nav-link" href="{{ route('user.profile.theses', ['id' => Auth::id()]) }}" target="__blank">
+                Upload Tugas Akhir</a>
             <a class="nav-link" href="#" target="__blank">Upload Capstone</a>
         </nav>
         <hr class="mt-0 mb-4">
@@ -32,21 +33,46 @@
                                     src="{{ asset('assets/images/profile.png') }}" alt="" id="profile_image">
                             @endif
                             <!-- Profile picture help block-->
-                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 2 MB</div>
                             <!-- Profile picture upload button-->
-                            <input type="file" class="btn btn-primary" id="profileImageInput" name="profile_image" onchange="previewImage(event)">
+                            <input type="file" class="btn btn-primary" id="profileImageInput" name="profile_image"
+                                onchange="previewImage(event)">
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-8">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header">Account Details</div>
+                        <div class="card-header">Detail Akun</div>
                         <div class="card-body">
+                            {{-- Alert Here --}}
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            @if (session()->has('error'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ session('error') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
                             <div class="mb-3">
-                                <label class="small mb-1" for="name">Nama Lengkap</label>
-                                <input class="form-control" id="name" type="text" placeholder="Masukkan nama anda! "
+                                <label class="small mb-1" for="name">Username</label>
+                                <input class="form-control" id="name" type="text" placeholder="Masukkan username anda "
                                     name="name" value="{{ $user->name }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="full_name">Nama Lengkap</label>
+                                <input class="form-control" id="full_name" type="text" placeholder="Masukkan nama lengkap anda! "
+                                    name="full_name" value="{{ $user->full_name }}">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="nim">NIM</label>
@@ -64,6 +90,16 @@
                                     placeholder="Masukkan no handphone (Whatsapp)" name="phone"
                                     value="{{ $user->phone }}">
                             </div>
+                            <div class="mb-3">
+                                <label for="ktm_image">Upload Foto KTM</label>
+                                <img src="{{ asset('storage/ktm/' . $user->ktm_image) }}" id="ktm-image" alt=""
+                                    class="mb-2 img-fluid d-flex" style="width: 250px">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="" name="ktm_image"
+                                        onchange="previewktm_image()">
+                                    {{-- <label class="custom-file-label" for="ktm_image"></label> --}}
+                                </div>
+                            </div>
                             <div class="mb-3 form-row">
                                 <button class="btn btn-primary" type="submit" onclick="confirmEditForm(event)">Save
                                     changes</button>
@@ -74,6 +110,69 @@
                 </div>
             </div>
         </form>
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card card-info">
+                    <div class="card-header">Riwayat Upload Tugas Akhir</div>
+                    <div class="card-body">
+                        {{-- Alert Here --}}
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        <table class="table table-striped table-hover" id="theses">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Judul Tugas Akhir</th>
+                                    <th>Nama Penulis</th>
+                                    <th>Pembimbing 1</th>
+                                    <th>Pembimbing 2</th>
+                                    <th>Tahun</th>
+                                    <th>File 1</th>
+                                    <th>File 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($theses as $t)
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>{{ $t->thesis_name }}</td>
+                                        <td>{{ $t->user->full_name }}</td>
+                                        <td>{{ $t->lecturer_1 }}</td>
+                                        <td>{{ $t->lecturer_2 }}</td>
+                                        <td>{{ $t->year }}</td>
+                                        <td>
+                                            <a href="{{ asset('storage/pdf-1/' . $t->file_1) }}"
+                                                target="_blank">{{ $t->file_1 }}</a>
+                                        </td>
+
+                                        <td><a href="{{ asset('storage/pdf-2/' . $t->file_2) }}"
+                                            target="_blank">{{ $t->file_2 }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -86,7 +185,7 @@
 
             Swal.fire({
                 title: 'Simpan perubahan?',
-                text: 'Data Buku akan diperbarui.',
+                text: 'Profil akan diperbarui.',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -100,10 +199,31 @@
                 }
             });
         }
+
         function previewImage() {
             const image = document.getElementById('profile_image');
             image.src = URL.createObjectURL(event.target.files[0]);
         }
+
+        // Get the custom file input element
+        const customFileInput = document.getElementById('ktm_image');
+        // Add event listener to update the label text with the selected file name
+        customFileInput.addEventListener('change', function() {
+            // Get the file name from the input value
+            const fileName = this.value.split('\\').pop();
+            // Update the label text with the file name
+            const labelElement = this.nextElementSibling;
+            labelElement.innerText = fileName;
+        });
+
+        function previewktm_image() {
+            const image = document.getElementById('ktm-image');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        $(document).ready(function() {
+            var table = $('#theses').DataTable();
+        });
     </script>
 
 @endsection
