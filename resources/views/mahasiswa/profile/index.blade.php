@@ -6,9 +6,9 @@
     <div class="container-xl p-4 mt-4">
         <!-- Account page navigation-->
         <nav class="nav nav-borders">
-            <a class="nav-link active ms-0" href="{{ route('user.profile', ['id' => Auth::id()]) }}"
+            <a class="nav-link active ms-0" href="{{ route('user.profile') }}"
                 target="__blank">Profile</a>
-            <a class="nav-link" href="{{ route('user.profile.theses', ['id' => Auth::id()]) }}" target="__blank">
+            <a class="nav-link" href="{{ route('user.profile.theses') }}" target="__blank">
                 Upload Tugas Akhir</a>
             <a class="nav-link" href="#" target="__blank">Upload Capstone</a>
         </nav>
@@ -66,13 +66,14 @@
                             @endif
                             <div class="mb-3">
                                 <label class="small mb-1" for="name">Username</label>
-                                <input class="form-control" id="name" type="text" placeholder="Masukkan username anda "
-                                    name="name" value="{{ $user->name }}">
+                                <input class="form-control" id="name" type="text"
+                                    placeholder="Masukkan username anda " name="name" value="{{ $user->name }}">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="full_name">Nama Lengkap</label>
-                                <input class="form-control" id="full_name" type="text" placeholder="Masukkan nama lengkap anda! "
-                                    name="full_name" value="{{ $user->full_name }}">
+                                <input class="form-control" id="full_name" type="text"
+                                    placeholder="Masukkan nama lengkap anda! " name="full_name"
+                                    value="{{ $user->full_name }}">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="nim">NIM</label>
@@ -146,6 +147,7 @@
                                     <th>Tahun</th>
                                     <th>File 1</th>
                                     <th>File 2</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -164,7 +166,14 @@
                                         </td>
 
                                         <td><a href="{{ asset('storage/pdf-2/' . $t->file_2) }}"
-                                            target="_blank">{{ $t->file_2 }}</td>
+                                                target="_blank">{{ $t->file_2 }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('user.profile.theses.edit', Crypt::encryptString($t->id)) }}"
+                                                class="btn btn-secondary">
+                                                <i class="fas fa-edit"></i>
+                                            </a> 
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -179,6 +188,53 @@
 
 
 @section('js')
+
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            var table = $('#theses').DataTable();
+            table
+                .on('order.dt search.dt', function() {
+                    var i = 1;
+
+                    table
+                        .cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        })
+                        .every(function(cell) {
+                            this.data(i++);
+                        });
+                })
+                .draw();
+
+
+            // Apply event listener to all delete buttons
+            $('#theses').on('click', '.delete-btn', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+
+                // Show SweetAlert confirmation dialog
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: 'Data TA akan dihapus dari tabel!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e31231',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, Hapus item!',
+                    cancelButtonText: 'Kembali'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Submit the form after confirmation
+                        form.submit();
+                    }
+                });
+            });
+        });
+        //-------------
+    </script>
+
     <script>
         function confirmEditForm(event) {
             event.preventDefault(); // Prevent default form submission
@@ -220,10 +276,6 @@
             const image = document.getElementById('ktm-image');
             image.src = URL.createObjectURL(event.target.files[0]);
         }
-
-        $(document).ready(function() {
-            var table = $('#theses').DataTable();
-        });
     </script>
 
 @endsection

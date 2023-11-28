@@ -51,17 +51,6 @@
                                     <trix-editor input="desc"></trix-editor>
                                 </div>
                             </div>
-                      
-
-                        {{-- <div class="col">
-                            <label for="image">Gambar</label>
-                            <img class="img-fluid mb-2 d-flex" id="img-preview" style="max-width: 200px">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="image" name="image"
-                                    onchange="previewImage()">
-                                <label class="custom-file-label" for="image">Choose file...</label>
-                            </div>
-                        </div> --}}
 
                     </div>
                     <!-- /.card-body -->

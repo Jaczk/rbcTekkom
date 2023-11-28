@@ -20,6 +20,7 @@
     use App\Http\Controllers\User\ShiftController as UserShiftController;
     use App\Http\Controllers\Admin\TextEditController;
     use App\Http\Controllers\User\TextEditController as UserTextEditController;
+    use App\Http\Controllers\User\ThesesController as UserThesesController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
     use App\Http\Controllers\User\CatalogController;
@@ -37,7 +38,7 @@ use App\Http\Controllers\User\SpecBookController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+    //Landing Page
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/access', [HomeController::class, 'access'])->name('access');
     Route::get('/show/{id}', [HomeController::class, 'show'])->name('book.show');
@@ -64,11 +65,13 @@ use App\Http\Controllers\User\SpecBookController;
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
     //Auth-Mahasiswa Only
-    Route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('user.profile');
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('user.profile');
     Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile.update');
-    Route::get('/profile/theses/{id}', [ProfileController::class, 'openTheses'])->name('user.profile.theses');
-    Route::post('/profile/theses/{id}', [ProfileController::class, 'createTheses'])->name('user.profile.theses.create');
-
+    //Theses
+    Route::get('/profile/theses', [UserThesesController::class, 'index'])->name('user.profile.theses');
+    Route::post('/profile/theses-create', [UserThesesController::class, 'create'])->name('user.profile.theses.create');
+    Route::get('/profile/theses-edit/{id}', [UserThesesController::class, 'edit'])->name('user.profile.theses.edit');
+    Route::put('/profile/theses-update/{id}', [UserThesesController::class, 'update'])->name('user.profile.theses.update');
     //byCategoryPage
     Route::get('/specBook', [SpecBookController::class, 'index'])->name('user.specBook');
     Route::get('/book-spec/{id}', [SpecBookController::class, 'sortedBySpec'])->name('user.book.spec');

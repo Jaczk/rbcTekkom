@@ -98,7 +98,7 @@
                                 @endif
                                 @if (Auth::check() && Auth::user()->role_id == 2)
                                     <li><a class="dropdown-item"
-                                            href="{{ route('user.profile', ['id' => Auth::id()]) }}">Profil</a></li>
+                                            href="{{ route('user.profile') }}">Profil</a></li>
                                 @endif
                                 <li><a class="dropdown-item" href="#" onclick="confirmLogout(event)">Logout</a>
                                 </li>
