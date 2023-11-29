@@ -17,6 +17,15 @@
                 </div>
             @endif
 
+            @if (session()->has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Tambah Buku Sumbangan</h3>

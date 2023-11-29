@@ -138,9 +138,23 @@ class DonateController extends Controller
 
         $data['is_fav'] = $request->has('is_fav') ? 1 : 0;
 
-        $donate->update($data);
+        $limitRecc = Donate::where('is_fav', 1)->count();
 
-        return redirect()->route('admin.donate')->with('success', 'Sukses Memperbarui Data Buku');
+        if ($limitRecc > 5) { //check if the donate is fav only 5
+            return back()->with('error', 'Buku Rekomendasi Maksimal 5')->withInput();
+        } else {
+            $donate->update($data);
+
+            $updatedLimitRecc = Donate::where('is_fav', 1)->count();
+
+            if ($updatedLimitRecc > 5) {
+                $data['is_fav'] = 0; // Set the donate as not fav
+                $donate->update($data);
+                return back()->with('error', 'Buku Rekomendasi Maksimal 5')->withInput();
+            } else {
+                return redirect()->route('admin.donate')->with('success', 'Sukses Memperbarui Data Buku');
+            }
+        }
     }
 
     /**
