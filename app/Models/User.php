@@ -65,4 +65,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Thesis::class, 'user_id')->latest();
     }
+
+    public function capstone()
+    {
+        return $this->hasMany(Capstone::class, 'user_id')->latest();
+    }
 }

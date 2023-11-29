@@ -6,11 +6,10 @@
     <div class="container-xl p-4 mt-4">
         <!-- Account page navigation-->
         <nav class="nav nav-borders">
-            <a class="nav-link active ms-0" href="{{ route('user.profile') }}"
-                target="__blank">Profile</a>
+            <a class="nav-link active ms-0" href="{{ route('user.profile') }}" target="__blank">Profile</a>
             <a class="nav-link" href="{{ route('user.profile.theses') }}" target="__blank">
                 Upload Tugas Akhir</a>
-            <a class="nav-link" href="#" target="__blank">Upload Capstone</a>
+            <a class="nav-link" href="{{ route('user.profile.capstone') }}" target="__blank">Upload Capstone</a>
         </nav>
         <hr class="mt-0 mb-4">
 
@@ -81,7 +80,7 @@
                                     name="nim" value="{{ $user->nim }}">
                             </div>
                             <div class="mb-3">
-                                <label class="small mb-1" for="email">Email address</label>
+                                <label class="small mb-1" for="email">Email</label>
                                 <input class="form-control" id="email" type="email"
                                     placeholder="Masukkan email aktif anda" name="email" value="{{ $user->email }}">
                             </div>
@@ -112,6 +111,23 @@
             </div>
         </form>
         <hr class="mt-0 mb-4">
+        {{-- Alert w/ session --}}
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+        @endif
+        @if (session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+        @endif
         <div class="row">
             <div class="col-xl-12">
                 <div class="card card-info">
@@ -161,18 +177,120 @@
                                         <td>{{ $t->lecturer_2 }}</td>
                                         <td>{{ $t->year }}</td>
                                         <td>
-                                            <a href="{{ asset('storage/pdf-1/' . $t->file_1) }}"
-                                                target="_blank">{{ $t->file_1 }}</a>
+                                            <a href="{{ asset('storage/pdf-1/' . $t->file_1) }}" target="_blank"><i
+                                                    class="fa-regular fa-file"></i></a>
                                         </td>
 
-                                        <td><a href="{{ asset('storage/pdf-2/' . $t->file_2) }}"
-                                                target="_blank">{{ $t->file_2 }}
+                                        <td><a href="{{ asset('storage/pdf-2/' . $t->file_2) }}" target="_blank"><i
+                                                    class="fa-regular fa-file"></i></a>
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.profile.theses.edit', Crypt::encryptString($t->id)) }}"
-                                                class="btn btn-secondary">
-                                                <i class="fas fa-edit"></i>
-                                            </a> 
+                                            <div class="flex-row d-flex">
+                                                <a href="{{ route('user.profile.theses.edit', Crypt::encryptString($t->id)) }}"
+                                                    class="btn btn-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form method="post"
+                                                    action="{{ route('user.profile.theses.destroy', $t->id) }}">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button type="submit" class="mx-1 btn btn-danger delete-btn">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-4 mb-4">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card card-info">
+                    <div class="card-header">Riwayat Upload Capstone</div>
+                    <div class="card-body">
+                        {{-- Alert Here --}}
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        <table class="table table-striped table-hover" id="capstone">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Judul Capstone</th>
+                                    <th>Kelompok</th>
+                                    <th>Pembimbing 1</th>
+                                    <th>Pembimbing 2</th>
+                                    <th>Tahun</th>
+                                    <th>c100</th>
+                                    <th>c200</th>
+                                    <th>c300</th>
+                                    <th>c400</th>
+                                    <th>c500</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($capstone as $t)
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>{{ $t->capstone_title }}</td>
+                                        <td>{{ $t->team_name }}</td>
+                                        <td>{{ $t->lecturer_1 }}</td>
+                                        <td>{{ $t->lecturer_2 }}</td>
+                                        <td>{{ $t->year }}</td>
+                                        <td><a href="{{ asset('storage/c100/' . $t->c100) }}" target="_blank"><i
+                                                    class="fa-regular fa-file"></i></a>
+                                        </td>
+                                        <td><a href="{{ asset('storage/c200/' . $t->c200) }}" target="_blank"><i
+                                                    class="fa-regular fa-file"></i>
+                                        </td>
+                                        <td><a href="{{ asset('storage/c300/' . $t->c300) }}" target="_blank"><i
+                                                    class="fa-regular fa-file"></i>
+                                        </td>
+                                        <td><a href="{{ asset('storage/c400/' . $t->c400) }}" target="_blank"><i
+                                                    class="fa-regular fa-file"></i>
+                                        </td>
+                                        <td><a href="{{ asset('storage/c500/' . $t->c500) }}" target="_blank"><i
+                                                    class="fa-regular fa-file"></i>
+                                        </td>
+                                        <td>
+                                            <div class="flex-row d-flex">
+                                                <a href="{{ route('user.profile.capstone.edit', Crypt::encryptString($t->id)) }}"
+                                                    class="btn btn-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form method="post"
+                                                    action="{{ route('user.profile.capstone.destroy', $t->id) }}">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button type="submit" class="mx-1 btn btn-danger delete-btn">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -185,10 +303,10 @@
     </div>
 @endsection
 
-
-
 @section('js')
-
+    <script>
+        $('textarea').val($('textarea').val().trim());
+    </script>
     <script>
         $(document).ready(function() {
             // Initialize DataTable
@@ -236,26 +354,67 @@
     </script>
 
     <script>
-        function confirmEditForm(event) {
-            event.preventDefault(); // Prevent default form submission
+        $(document).ready(function() {
+            // Initialize DataTable for #theses
+            var tableTheses = $('#theses').DataTable();
+            tableTheses
+                .on('order.dt search.dt', function() {
+                    var i = 1;
 
-            Swal.fire({
-                title: 'Simpan perubahan?',
-                text: 'Profil akan diperbarui.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Simpan',
-                cancelButtonText: 'Kembali',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // User confirmed, submit the form
-                    event.target.form.submit();
-                }
+                    tableTheses
+                        .cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        })
+                        .every(function(cell) {
+                            this.data(i++);
+                        });
+                })
+                .draw();
+
+            // Initialize DataTable for #capstone
+            var tableCapstone = $('#capstone').DataTable();
+            tableCapstone
+                .on('order.dt search.dt', function() {
+                    var i = 1;
+
+                    tableCapstone
+                        .cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        })
+                        .every(function(cell) {
+                            this.data(i++);
+                        });
+                })
+                .draw();
+
+            // Apply event listener to delete buttons for both tables
+            $('#theses, #capstone').on('click', '.delete-btn', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+
+                // Show SweetAlert confirmation dialog
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: 'Data Tugas Akhir akan dihapus dari tabel!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e31231',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, Hapus item!',
+                    cancelButtonText: 'Kembali'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Submit the form after confirmation
+                        form.submit();
+                    }
+                });
             });
-        }
+        });
+    </script>
 
+    <script>
         function previewImage() {
             const image = document.getElementById('profile_image');
             image.src = URL.createObjectURL(event.target.files[0]);

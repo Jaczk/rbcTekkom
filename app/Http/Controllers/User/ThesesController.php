@@ -33,7 +33,7 @@ class ThesesController extends Controller
     }
 
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'thesis_name' => 'required|string',
@@ -126,5 +126,16 @@ class ThesesController extends Controller
         $theses->update($data);
         // Redirect to the user profile page
         return redirect()->route('user.profile')->with('success', 'Sukses Memperbarui Data Tugas Akhir');
+    }
+
+    public function destroy($id) {
+        $theses = Thesis::find($id);
+
+        Storage::delete('public/pdf-1/' . $theses->file_1);
+        Storage::delete('public/pdf-2/' . $theses->file_2);
+
+        $theses->forceDelete();
+
+        return redirect()->route('user.profile')->with('success', 'Data berhasil dihapus');
     }
 }

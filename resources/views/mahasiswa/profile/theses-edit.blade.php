@@ -9,7 +9,7 @@
             <a class="nav-link active ms-0" href="{{ route('user.profile') }}" target="__blank">Profile</a>
             <a class="nav-link" href="{{ route('user.profile.theses') }}" target="__blank">
                 Upload Tugas Akhir</a>
-            <a class="nav-link" href="#" target="__blank">Upload Capstone</a>
+            <a class="nav-link" href="{{ route('user.profile.capstone') }}" target="__blank">Upload Capstone</a>
         </nav>
         <hr class="mt-0 mb-4">
         <form enctype="multipart/form-data" method="POST" action="{{ route('user.profile.theses.update', $theses->id) }}">

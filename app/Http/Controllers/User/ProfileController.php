@@ -4,23 +4,24 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User;
 use App\Models\Thesis;
+use App\Models\Capstone;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     public function profile()
     {
         $user = User::findOrFail(Auth::user()->id);
-
         $theses = Thesis::where('user_id', $user->id)->get();
+        $capstone = Capstone::where('user_id', $user->id)->get();
 
-        return view('mahasiswa.profile.index', compact('user', 'theses'));
+        return view('mahasiswa.profile.index', compact('user', 'theses', 'capstone'));
     }
 
     public function update(Request $request, string $id)

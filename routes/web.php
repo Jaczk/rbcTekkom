@@ -21,11 +21,12 @@
     use App\Http\Controllers\Admin\TextEditController;
     use App\Http\Controllers\User\TextEditController as UserTextEditController;
     use App\Http\Controllers\User\ThesesController as UserThesesController;
+    use App\Http\Controllers\User\CapstoneController as UserCapstoneController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
     use App\Http\Controllers\User\CatalogController;
-use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\User\SpecBookController;
+    use App\Http\Controllers\User\ProfileController;
+    use App\Http\Controllers\User\SpecBookController;
 
 
     /*
@@ -64,14 +65,24 @@ use App\Http\Controllers\User\SpecBookController;
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-    //Auth-Mahasiswa Only
+    //Auth-Mahasiswa Only (Profile)
     Route::get('/profile', [ProfileController::class, 'profile'])->name('user.profile');
     Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile.update');
+
     //Theses
     Route::get('/profile/theses', [UserThesesController::class, 'index'])->name('user.profile.theses');
-    Route::post('/profile/theses-create', [UserThesesController::class, 'create'])->name('user.profile.theses.create');
+    Route::post('/profile/theses-create', [UserThesesController::class, 'store'])->name('user.profile.theses.create');
     Route::get('/profile/theses-edit/{id}', [UserThesesController::class, 'edit'])->name('user.profile.theses.edit');
     Route::put('/profile/theses-update/{id}', [UserThesesController::class, 'update'])->name('user.profile.theses.update');
+    Route::delete('/profile/theses/destroy/{id}', [UserThesesController::class, 'destroy'])->name('user.profile.theses.destroy');
+
+    //Capstone
+    Route::get('/profile/capstone', [UserCapstoneController::class, 'index'])->name('user.profile.capstone');
+    Route::post('/profile/capstone-create', [UserCapstoneController::class, 'store'])->name('user.profile.capstone.create');
+    Route::get('/profile/capstone-edit/{id}', [UserCapstoneController::class, 'edit'])->name('user.profile.capstone.edit');
+    Route::put('/profile/capstone-update/{id}', [UserCapstoneController::class, 'update'])->name('user.profile.capstone.update');
+    Route::delete('/profile/capstone/destroy/{id}', [UserCapstoneController::class, 'destroy'])->name('user.profile.capstone.destroy');
+
     //byCategoryPage
     Route::get('/specBook', [SpecBookController::class, 'index'])->name('user.specBook');
     Route::get('/book-spec/{id}', [SpecBookController::class, 'sortedBySpec'])->name('user.book.spec');
