@@ -53,7 +53,7 @@
                             <div class="form-row">
                                 <div class="mb-3 d-flex justify-content-between">
                                     <select name="member1" class="selectpicker filt" data-live-search="true" id="member1"
-                                        data-size="5" data-width="25%" title="Anggota 1">
+                                        data-size="5" data-width="25%" title="Anggota 1" disabled>
                                         <style>
                                             .filt-drop {
                                                 background-color: #FFFFFF;
@@ -65,14 +65,13 @@
                                                 color: white;
                                             }
                                         </style>
+                                        {{-- <input type="hidden" name="user_id" value="{{ auth()->user()->id }}"> --}}
+                                        <option value="{{ auth()->user()->id }}" class="text-black filt-drop" selected>
+                                            {{ auth()->user()->name }}
+                                        </option>
 
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                {{ old('member1') == $user->id ? 'selected' : '' }}>
-                                                {{ $user->name }}
-                                            </option>
-                                        @endforeach
                                     </select>
+                                    <input type="hidden" name="member1" value="{{ auth()->user()->id }}">
 
                                     <select name="member2" class="selectpicker filt" data-live-search="true" id="member2"
                                         data-size="5" data-width="25%" title="Anggota 2">
@@ -89,11 +88,14 @@
                                         </style>
 
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                {{ old('member2') == $user->id ? 'selected' : '' }}>
-                                                {{ $user->name }}
-                                            </option>
+                                            @if ($user->id != auth()->user()->id)
+                                                <option value="{{ $user->id }}" class="text-black filt-drop"
+                                                    {{ old('member2') == $user->id ? 'selected' : '' }}>
+                                                    {{ $user->name }}
+                                                </option>
+                                            @endif
                                         @endforeach
+
                                     </select>
 
                                     <select name="member3" class="selectpicker filt " data-live-search="true" id="member3"
@@ -111,11 +113,14 @@
                                         </style>
 
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                {{ old('member3') == $user->id ? 'selected' : '' }}>
-                                                {{ $user->name }}
-                                            </option>
+                                            @if ($user->id != auth()->user()->id)
+                                                <option value="{{ $user->id }}" class="text-black filt-drop"
+                                                    {{ old('member2') == $user->id ? 'selected' : '' }}>
+                                                    {{ $user->name }}
+                                                </option>
+                                            @endif
                                         @endforeach
+
                                     </select>
                                 </div>
 
@@ -135,8 +140,8 @@
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="year">Tahun Capstone</label>
-                                <input class="form-control" id="year" type="number" placeholder="2023" name="year"
-                                    value="{{ old('year') }}">
+                                <input class="form-control" id="year" type="number" placeholder="2023"
+                                    name="year" value="{{ old('year') }}">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="c100">File C100 (PDF)</label>

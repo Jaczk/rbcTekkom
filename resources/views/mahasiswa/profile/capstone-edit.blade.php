@@ -12,7 +12,8 @@
             <a class="nav-link" href="#" target="__blank">Upload Capstone</a>
         </nav>
         <hr class="mt-0 mb-4">
-        <form enctype="multipart/form-data" method="POST" action="{{ route('user.profile.capstone.update', $theses->id) }}">
+        <form enctype="multipart/form-data" method="POST"
+            action="{{ route('user.profile.capstone.update', $theses->id) }}">
             @method('PUT')
             @csrf
             <div class="row">
@@ -43,7 +44,7 @@
                                 <label class="small mb-1" for="capstone_title">Judul Capstone</label>
                                 <input class="form-control" id="capstone_title" type="text"
                                     placeholder="Masukkan Judul Capstone anda " name="capstone_title"
-                                    value="{{ $theses->capstone_title}}">
+                                    value="{{ $theses->capstone_title }}">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="team_name">Kelompok</label>
@@ -53,125 +54,127 @@
                             <label class="small mb-1" for="team_name">Anggota Kelompok</label>
                             <div class="form-row">
                                 <div class="mb-3 d-flex justify-content-between">
-                                    <select name="member1" class="selectpicker filt" data-live-search="true" id="member1"
-                                        data-size="5" data-width="25%" title="Anggota 1">
-                                        <style>
-                                            .filt-drop {
-                                                background-color: #FFFFFF;
-                                                color: black;
-                                            }
 
-                                            .filt-drop:hover {
-                                                background-color: #D8D8D8;
-                                                color: white;
-                                            }
-                                        </style>
-
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                {{ $theses->member1 == $user->id ? 'selected' : '' }}>
-                                                {{ $user->name }}
+                                    @if ($theses->member1 == auth()->user()->id)
+                                        <input type="hidden" name="member1" value="{{ auth()->user()->id }}">
+                                        <select name="member1" class="selectpicker filt" data-live-search="true"
+                                            id="member1" data-size="5" data-width="25%" title="Anggota 1" disabled>
+                                            <option value="{{ auth()->user()->id }}" class="text-black filt-drop" selected>
+                                                {{ auth()->user()->name }}
                                             </option>
-                                        @endforeach
-                                    </select>
+                                        </select>
+                                    @else
+                                        <select name="member1" class="selectpicker filt" data-live-search="true"
+                                            id="member1" data-size="5" data-width="25%" title="Anggota 1">
+                                            @foreach ($users as $user)
+                                                @if ($user->id != auth()->user()->id)
+                                                    <option value="{{ $user->id }}" class="text-black filt-drop"
+                                                        {{ $theses->member1 == $user->id ? 'selected' : '' }}>
+                                                        {{ $user->name }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    @endif
 
-                                    <select name="member2" class="selectpicker filt" data-live-search="true" id="member2"
-                                        data-size="5" data-width="25%" title="Anggota 2">
-                                        <style>
-                                            .filt-drop {
-                                                background-color: #FFFFFF;
-                                                color: black;
-                                            }
-
-                                            .filt-drop:hover {
-                                                background-color: #D8D8D8;
-                                                color: white;
-                                            }
-                                        </style>
-
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                {{ $theses->member2 == $user->id ? 'selected' : '' }}>
-                                                {{ $user->name }}
+                                    @if ($theses->member2 == auth()->user()->id)
+                                        <input type="hidden" name="member2" value="{{ auth()->user()->id }}">
+                                        <select name="member2" class="selectpicker filt" data-live-search="true"
+                                            id="member2" data-size="5" data-width="25%" title="Anggota 2" disabled>
+                                            <option value="{{ auth()->user()->id }}" class="text-black filt-drop" selected>
+                                                {{ auth()->user()->name }}
                                             </option>
-                                        @endforeach
-                                    </select>
+                                        </select>
+                                    @else
+                                        <select name="member2" class="selectpicker filt" data-live-search="true"
+                                            id="member2" data-size="5" data-width="25%" title="Anggota 2">
+                                            @foreach ($users as $user)
+                                                @if ($user->id != auth()->user()->id)
+                                                    <option value="{{ $user->id }}" class="text-black filt-drop"
+                                                        {{ $theses->member2 == $user->id ? 'selected' : '' }}>
+                                                        {{ $user->name }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    @endif
 
-                                    <select name="member3" class="selectpicker filt " data-live-search="true" id="member3"
-                                        data-size="5" data-width="25%" title="Anggota 3">
-                                        <style>
-                                            .filt-drop {
-                                                background-color: #FFFFFF;
-                                                color: black;
-                                            }
-
-                                            .filt-drop:hover {
-                                                background-color: #D8D8D8;
-                                                color: white;
-                                            }
-                                        </style>
-
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                {{ $theses->member3 == $user->id ? 'selected' : '' }}>
-                                                {{ $user->name }}
+                                    @if ($theses->member3 == auth()->user()->id)
+                                        <input type="hidden" name="member3" value="{{ auth()->user()->id }}">
+                                        <select name="member3" class="selectpicker filt" data-live-search="true"
+                                            id="member3" data-size="5" data-width="25%" title="Anggota 3" disabled>
+                                            <option value="{{ auth()->user()->id }}" class="text-black filt-drop"
+                                                selected>
+                                                {{ auth()->user()->name }}
                                             </option>
-                                        @endforeach
-                                    </select>
+                                        </select>
+                                    @else
+                                        <select name="member3" class="selectpicker filt" data-live-search="true"
+                                            id="member3" data-size="5" data-width="25%" title="Anggota 3">
+                                            @foreach ($users as $user)
+                                                @if ($user->id != auth()->user()->id)
+                                                    <option value="{{ $user->id }}" class="text-black filt-drop"
+                                                        {{ $theses->member3 == $user->id ? 'selected' : '' }}>
+                                                        {{ $user->name }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    @endif
                                 </div>
-
                             </div>
+
 
                             <div class="mb-3">
                                 <label class="small mb-1" for="lecturer_1">Pembimbing 1</label>
                                 <input class="form-control" id="lecturer_1" type="text"
                                     placeholder="Masukkan nama pembimbing 1 " name="lecturer_1"
-                                    value="{{ $theses->lecturer_1}}">
+                                    value="{{ $theses->lecturer_1 }}">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="lecturer_2">Pembimbing 2</label>
                                 <input class="form-control" id="lecturer_2" type="text"
                                     placeholder="Masukkan nama pembimbing 2 " name="lecturer_2"
-                                    value="{{ $theses->lecturer_2}}">
+                                    value="{{ $theses->lecturer_2 }}">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="year">Tahun Capstone</label>
-                                <input class="form-control" id="year" type="number" placeholder="2023" name="year"
-                                    value="{{ $theses->year}}">
+                                <input class="form-control" id="year" type="number" placeholder="2023"
+                                    name="year" value="{{ $theses->year }}">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="c100">File C100 (PDF)</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="c100" name="c100"
-                                        value="{{ $theses->c100}}">
+                                        value="{{ $theses->c100 }}">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="c200">File C200 (PDF)</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="c200" name="c200"
-                                        value="{{ $theses->c200}}">
+                                        value="{{ $theses->c200 }}">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="c300">File C300 (PDF)</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="c300" name="c300"
-                                        value="{{ $theses->c300}}">
+                                        value="{{ $theses->c300 }}">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="c400">File C400 (PDF)</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="c400" name="c400"
-                                        value="{{ $theses->c400}}">
+                                        value="{{ $theses->c400 }}">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="c500">File C500 (PDF)</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="c500" name="c500"
-                                        value="{{ $theses->c500}}">
+                                        value="{{ $theses->c500 }}">
                                 </div>
                             </div>
 
