@@ -19,4 +19,14 @@ class Specialization extends Model
     {
         return $this->hasMany(Book::class);
     }
+
+    public function theses()
+    {
+        return $this->hasMany(Thesis::class,'spec_id');
+    }
+
+    public function capstone()
+    {
+        return $this->hasMany(Capstone::class,'spec_id');
+    }
 }

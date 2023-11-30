@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('theses', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->integer('spec_id');
             $table->string('thesis_name');
             $table->string('author');
-            $table->string('lecturer_1');
-            $table->string('lecturer_2');
+            $table->integer('lec1_id');
+            $table->integer('lec2_id');
             $table->integer('year');
             $table->text('abstract');
             $table->text('abs_keyword');

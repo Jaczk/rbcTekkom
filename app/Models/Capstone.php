@@ -12,13 +12,14 @@ class Capstone extends Model
 
     protected $fillable = [
         'user_id',
+        'spec_id',
         'capstone_title',
         'team_name',
         'member1',
         'member2',
         'member3',
-        'lecturer_1',
-        'lecturer_2',
+        'lec1_id',
+        'lec2_id',
         'year',
         'c100',
         'c200',
@@ -30,5 +31,19 @@ class Capstone extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function spec()
+    {
+        return $this->belongsTo(Specialization::class, 'spec_id');
+    }
+
+    public function lec1()
+    {
+        return $this->belongsTo(Lecturer::class, 'lec1_id');
+    }
+
+    public function lec2()
+    {
+        return $this->belongsTo(Lecturer::class, 'lec2_id');
     }
 }

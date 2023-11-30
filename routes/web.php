@@ -15,7 +15,8 @@
     use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\User\DonateController as UserDonateController;
     use App\Http\Controllers\Admin\FacilityController;
-    use App\Http\Controllers\User\FacilityController as UserFacilityController;
+use App\Http\Controllers\Admin\LecturerController;
+use App\Http\Controllers\User\FacilityController as UserFacilityController;
     use App\Http\Controllers\Admin\ShiftController;
     use App\Http\Controllers\User\ShiftController as UserShiftController;
     use App\Http\Controllers\Admin\TextEditController;
@@ -57,6 +58,9 @@
 
     //Fasilitas
     Route::get('/gallery', [UserFacilityController::class, 'gallery'])->name('user.gallery');
+
+    //Galeri Tugas Akhir
+    Route::get('/theses-gallery', [UserThesesController::class, 'thesesGallery'])->name('user.theses.gallery');
 
     //Auth
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -119,6 +123,12 @@
             Route::put('/return/{id}', [LoanController::class, 'return'])->name('admin.loans.return');
             Route::get('/chart/loan/{period}', [LoanController::class, 'loanChartAjax'])->name('admin.chart.loan.ajax');
             Route::delete('/destroy/{id}', [LoanController::class, 'destroy'])->name('admin.loans.destroy');
+        });
+
+        Route::group(['prefix' => 'lecturer'], function () {
+            Route::get('/', [LecturerController::class, 'index'])->name('admin.lecturer');
+            Route::get('/edit', [LecturerController::class, 'edit'])->name('admin.lecturer.edit');
+            Route::put('/update', [LecturerController::class, 'update'])->name('admin.lecturer.update');
         });
 
         Route::group(['prefix' => 'donate'], function () {

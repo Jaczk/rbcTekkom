@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('capstones', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->integer('spec_id');
             $table->string('capstone_title');
             $table->string('team_name');
             $table->integer('member1');
             $table->integer('member2');
             $table->integer('member3');
-            $table->string('lecturer_1');
-            $table->string('lecturer_2');
+            $table->integer('lec1_id');
+            $table->integer('lec2_id');
             $table->integer('year');
             $table->string('c100');
             $table->string('c200');

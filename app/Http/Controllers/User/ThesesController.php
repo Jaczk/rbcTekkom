@@ -138,4 +138,12 @@ class ThesesController extends Controller
 
         return redirect()->route('user.profile')->with('success', 'Data berhasil dihapus');
     }
+
+    public function thesesGallery(){
+        $theses = Thesis::all();
+        $years = Thesis::distinct()->pluck('year');
+    
+        return view('mahasiswa.theses.index', compact('theses', 'years'));
+    }
+    
 }

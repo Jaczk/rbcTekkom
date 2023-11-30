@@ -11,10 +11,11 @@ class Thesis extends Model
 
     protected $fillable = [
         'user_id',
+        'spec_id',
         'thesis_name',
         'author',
-        'lecturer_1',
-        'lecturer_2',
+        'lec1_id',
+        'lec2_id',
         'year',
         'abstract',
         'abs_keyword',
@@ -25,5 +26,20 @@ class Thesis extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function spec()
+    {
+        return $this->belongsTo(Specialization::class, 'spec_id');
+    }
+
+    public function lec1()
+    {
+        return $this->belongsTo(Lecturer::class, 'lec1_id');
+    }
+
+    public function lec2()
+    {
+        return $this->belongsTo(Lecturer::class, 'lec2_id');
     }
 }

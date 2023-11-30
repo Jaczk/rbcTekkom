@@ -28,9 +28,12 @@
                     </a>
                     <ul class="mt-3 border-top border-info dropdown-menu drop2 border-3 rounded-0"
                         style="background-color: #001349;" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0" href="{{ route('user.librarian') }}">Pustakawan</a></li>
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.visi') }}">Visi Misi</a></li>
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="{{ route('user.shift') }}">Jam Layanan</a>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0"
+                                href="{{ route('user.librarian') }}">Pustakawan</a></li>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 "
+                                href="{{ route('user.visi') }}">Visi Misi</a></li>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 "
+                                href="{{ route('user.shift') }}">Jam Layanan</a>
                         </li>
                     </ul>
                 </li>
@@ -45,7 +48,8 @@
                                 href="{{ route('user.catalog') }}">Koleksi Buku</a>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 "
                                 href="{{ route('user.donate') }}">Daftar Buku Sumbangan</a>
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Tugas Akhir
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 "
+                                href="{{ route('user.theses.gallery') }}">Tugas Akhir
                                 Digital</a>
                         </li>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Kerja Praktek
@@ -89,7 +93,7 @@
                                 </svg>
                                 {{-- <img src="{{ asset('storage/profile/'. Auth::user()->profile_image) }}" class="rounded-circle me-2" style="width:30px; object-fit:cover" alt="profil"> --}}
                                 {{ Str::limit(auth()->user()->name, 10, '...') }}
-                                
+
                             </button>
                             <ul class="mt-3 dropdown-menu drop2 rounded-0 border-top border-info border-3"
                                 style="background-color: #001349;">
@@ -97,8 +101,7 @@
                                     <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dasbor</a></li>
                                 @endif
                                 @if (Auth::check() && Auth::user()->role_id == 2)
-                                    <li><a class="dropdown-item"
-                                            href="{{ route('user.profile') }}">Profil</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('user.profile') }}">Profil</a></li>
                                 @endif
                                 <li><a class="dropdown-item" href="#" onclick="confirmLogout(event)">Logout</a>
                                 </li>
