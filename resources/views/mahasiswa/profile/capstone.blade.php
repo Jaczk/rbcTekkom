@@ -44,6 +44,36 @@
                                     placeholder="Masukkan Judul Capstone anda " name="capstone_title"
                                     value="{{ old('capstone_title') }}">
                             </div>
+
+                            <label class="small mb-1" for="team_name">Pilih Kategori</label>
+                            <div class="form-row">
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <select name="spec_id" class="selectpicker filt" data-live-search="true" id="spec_id"
+                                        data-size="5" data-width="100%" title="Pilih Kategori Capstone">
+                                        <style>
+                                            .filt-drop {
+                                                background-color: #FFFFFF;
+                                                color: black;
+                                            }
+
+                                            .filt-drop:hover {
+                                                background-color: #D8D8D8;
+                                                color: white;
+                                            }
+                                        </style>
+
+                                        @foreach ($spec as $l)
+                                                <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                    {{ old('spec_id') == $l->id ? 'selected' : '' }}>
+                                                    {{ $l->desc }}
+                                                </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                            </div>
+
                             <div class="mb-3">
                                 <label class="small mb-1" for="team_name">Kelompok</label>
                                 <input class="form-control" id="team_name" type="text" placeholder="S1T22K13"
@@ -53,7 +83,7 @@
                             <div class="form-row">
                                 <div class="mb-3 d-flex justify-content-between">
                                     <select name="member1" class="selectpicker filt" data-live-search="true" id="member1"
-                                        data-size="5" data-width="25%" title="Anggota 1" disabled>
+                                        data-size="5" data-width="32%" title="Anggota 1" disabled>
                                         <style>
                                             .filt-drop {
                                                 background-color: #FFFFFF;
@@ -74,7 +104,7 @@
                                     <input type="hidden" name="member1" value="{{ auth()->user()->id }}">
 
                                     <select name="member2" class="selectpicker filt" data-live-search="true" id="member2"
-                                        data-size="5" data-width="25%" title="Anggota 2">
+                                        data-size="5" data-width="32%" title="Anggota 2">
                                         <style>
                                             .filt-drop {
                                                 background-color: #FFFFFF;
@@ -99,7 +129,7 @@
                                     </select>
 
                                     <select name="member3" class="selectpicker filt " data-live-search="true" id="member3"
-                                        data-size="5" data-width="25%" title="Anggota 3">
+                                        data-size="5" data-width="32%" title="Anggota 3">
                                         <style>
                                             .filt-drop {
                                                 background-color: #FFFFFF;
@@ -126,18 +156,58 @@
 
                             </div>
 
-                            <div class="mb-3">
-                                <label class="small mb-1" for="lecturer_1">Pembimbing 1</label>
-                                <input class="form-control" id="lecturer_1" type="text"
-                                    placeholder="Masukkan nama pembimbing 1 " name="lecturer_1"
-                                    value="{{ old('lecturer_1') }}">
+                            <label class="small mb-1" for="team_name">Dosen Pembimbing</label>
+                            <div class="form-row">
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <select name="lec1_id" class="selectpicker filt" data-live-search="true" id="lec1_id"
+                                        data-size="5" data-width="48%" title="Dospem 1">
+                                        <style>
+                                            .filt-drop {
+                                                background-color: #FFFFFF;
+                                                color: black;
+                                            }
+
+                                            .filt-drop:hover {
+                                                background-color: #D8D8D8;
+                                                color: white;
+                                            }
+                                        </style>
+
+                                        @foreach ($lecturer as $l)
+                                                <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                    {{ old('lec1_id') == $l->id ? 'selected' : '' }}>
+                                                    {{ $l->name }}
+                                                </option>
+                                        @endforeach
+
+                                    </select>
+
+                                    <select name="lec2_id" class="selectpicker filt " data-live-search="true" id="lec2_id"
+                                        data-size="5" data-width="48%" title="Dospem 2">
+                                        <style>
+                                            .filt-drop {
+                                                background-color: #FFFFFF;
+                                                color: black;
+                                            }
+
+                                            .filt-drop:hover {
+                                                background-color: #D8D8D8;
+                                                color: white;
+                                            }
+                                        </style>
+
+                                        @foreach ($lecturer as $l)
+                                                <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                    {{ old('lec2_id') == $l->id ? 'selected' : '' }}>
+                                                    {{ $l->name }}
+                                                </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
                             </div>
-                            <div class="mb-3">
-                                <label class="small mb-1" for="lecturer_2">Pembimbing 2</label>
-                                <input class="form-control" id="lecturer_2" type="text"
-                                    placeholder="Masukkan nama pembimbing 2 " name="lecturer_2"
-                                    value="{{ old('lecturer_2') }}">
-                            </div>
+
                             <div class="mb-3">
                                 <label class="small mb-1" for="year">Tahun Capstone</label>
                                 <input class="form-control" id="year" type="number" placeholder="2023"

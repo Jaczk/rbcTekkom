@@ -70,4 +70,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Capstone::class, 'user_id')->latest();
     }
+
+    public function capstone1()
+    {
+        return $this->belongsToMany(Capstone::class, 'member1');
+    }
+
+    public function capstone2()
+    {
+        return $this->belongsToMany(Capstone::class, 'member2');
+    }
+
+    public function capstone3()
+    {
+        return $this->belongsToMany(Capstone::class, 'member3');
+    }
 }

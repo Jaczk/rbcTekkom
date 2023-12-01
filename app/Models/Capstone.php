@@ -46,4 +46,19 @@ class Capstone extends Model
     {
         return $this->belongsTo(Lecturer::class, 'lec2_id');
     }
+
+    public function member1()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function member2()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function member3()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

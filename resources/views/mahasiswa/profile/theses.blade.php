@@ -6,11 +6,10 @@
     <div class="container-xl p-4 mt-4">
         <!-- Account page navigation-->
         <nav class="nav nav-borders">
-            <a class="nav-link active ms-0" href="{{ route('user.profile') }}"
-                target="__blank">Profile</a>
+            <a class="nav-link active ms-0" href="{{ route('user.profile') }}" target="__blank">Profile</a>
             <a class="nav-link" href="{{ route('user.profile.theses') }}" target="__blank">
                 Upload Tugas Akhir</a>
-                <a class="nav-link" href="{{ route('user.profile.capstone') }}" target="__blank">Upload Capstone</a>
+            <a class="nav-link" href="{{ route('user.profile.capstone') }}" target="__blank">Upload Capstone</a>
         </nav>
         <hr class="mt-0 mb-4">
         <form enctype="multipart/form-data" method="POST" action="{{ route('user.profile.theses.create') }}">
@@ -45,6 +44,35 @@
                                     placeholder="Masukkan Judul Tugas Akhir anda " name="thesis_name"
                                     value="{{ old('thesis_name') }}">
                             </div>
+
+                            <label class="small mb-1" for="team_name">Pilih Kategori</label>
+                            <div class="form-row">
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <select name="spec_id" class="selectpicker filt" data-live-search="true" id="spec_id"
+                                        data-size="5" data-width="100%" title="Pilih Kategori Capstone">
+                                        <style>
+                                            .filt-drop {
+                                                background-color: #FFFFFF;
+                                                color: black;
+                                            }
+
+                                            .filt-drop:hover {
+                                                background-color: #D8D8D8;
+                                                color: white;
+                                            }
+                                        </style>
+
+                                        @foreach ($spec as $l)
+                                            <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                {{ old('spec_id') == $l->id ? 'selected' : '' }}>
+                                                {{ $l->desc }}
+                                            </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                            </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="author">Nama Penulis</label>
                                 <!-- Visible input field -->
@@ -53,18 +81,59 @@
                                 <!-- Hidden input field -->
                                 <input type="hidden" name="hidden_author" value="{{ $user->name }}">
                             </div>
-                            <div class="mb-3">
-                                <label class="small mb-1" for="lecturer_1">Pembimbing 1</label>
-                                <input class="form-control" id="lecturer_1" type="text"
-                                    placeholder="Masukkan nama pembimbing 1 " name="lecturer_1"
-                                    value="{{ old('lecturer_1') }}">
+
+                            <label class="small mb-1" for="team_name">Dosen Pembimbing</label>
+                            <div class="form-row">
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <select name="lec1_id" class="selectpicker filt" data-live-search="true" id="lec1_id"
+                                        data-size="5" data-width="48%" title="Dospem 1">
+                                        <style>
+                                            .filt-drop {
+                                                background-color: #FFFFFF;
+                                                color: black;
+                                            }
+
+                                            .filt-drop:hover {
+                                                background-color: #D8D8D8;
+                                                color: white;
+                                            }
+                                        </style>
+
+                                        @foreach ($lecturer as $l)
+                                            <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                {{ old('lec1_id') == $l->id ? 'selected' : '' }}>
+                                                {{ $l->name }}
+                                            </option>
+                                        @endforeach
+
+                                    </select>
+
+                                    <select name="lec2_id" class="selectpicker filt " data-live-search="true" id="lec2_id"
+                                        data-size="5" data-width="48%" title="Dospem 2">
+                                        <style>
+                                            .filt-drop {
+                                                background-color: #FFFFFF;
+                                                color: black;
+                                            }
+
+                                            .filt-drop:hover {
+                                                background-color: #D8D8D8;
+                                                color: white;
+                                            }
+                                        </style>
+
+                                        @foreach ($lecturer as $l)
+                                            <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                {{ old('lec2_id') == $l->id ? 'selected' : '' }}>
+                                                {{ $l->name }}
+                                            </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
                             </div>
-                            <div class="mb-3">
-                                <label class="small mb-1" for="lecturer_2">Pembimbing 2</label>
-                                <input class="form-control" id="lecturer_2" type="text"
-                                    placeholder="Masukkan nama pembimbing 2 " name="lecturer_2"
-                                    value="{{ old('lecturer_2') }}">
-                            </div>
+
                             <div class="mb-3">
                                 <label class="small mb-1" for="year">Tahun Tugas Akhir</label>
                                 <input class="form-control" id="year" type="number"
@@ -82,7 +151,8 @@
                                     value="{{ old('abs_keyword') }}">
                             </div>
                             <div class="mb-3">
-                                <label class="small mb-1" for="file_1">File Tugas Akhir (PDF) (Cover, Daftar, Bab 1 , dan Bab
+                                <label class="small mb-1" for="file_1">File Tugas Akhir (PDF) (Cover, Daftar, Bab 1 ,
+                                    dan Bab
                                     2)</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="file_1" name="file_1"
@@ -90,7 +160,8 @@
                                 </div>
                             </div>
                             <div class="mb-1">
-                                <label class="small mb-1" for="file_2">File Tugas Akhir (PDF) (Cover, Daftar, Bab 1 hingga Bab
+                                <label class="small mb-1" for="file_2">File Tugas Akhir (PDF) (Cover, Daftar, Bab 1
+                                    hingga Bab
                                     5 atau 6, beserta lampiran)</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="file_2" name="file_2"

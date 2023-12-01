@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Capstone;
+use App\Models\Lecturer;
+use App\Models\Specialization;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
@@ -18,8 +20,10 @@ class CapstoneController extends Controller
     public function index()
     {
         $users = User::where('role_id', 2)->get();
+        $lecturer = Lecturer::all();
+        $spec = Specialization::all();
 
-        return view('mahasiswa.profile.capstone', compact('users'));
+        return view('mahasiswa.profile.capstone', compact('users', 'lecturer', 'spec'));
     }
 
     public function edit($id)
@@ -39,9 +43,10 @@ class CapstoneController extends Controller
 
         $request->validate([
             'capstone_title' => 'required|string',
+            'spec_id' => 'required',
             'team_name' => 'required|string',
-            'lecturer_1' => 'required|string',
-            'lecturer_2' => 'required|string',
+            'lec1_id' => 'required',
+            'lec2_id' => 'required',
             'member1' => 'required',
             'member2' => 'required',
             'member3' => 'required',
@@ -121,9 +126,10 @@ class CapstoneController extends Controller
         $data = $request->except(['_token', '_method']);
         $request->validate([
             'capstone_title' => 'required|string',
+            'spec_id' => 'required',
             'team_name' => 'required|string',
-            'lecturer_1' => 'required|string',
-            'lecturer_2' => 'required|string',
+            'lec1_id' => 'required|string',
+            'lec2_id' => 'required|string',
             'member1' => 'required',
             'member2' => 'required',
             'member3' => 'required',

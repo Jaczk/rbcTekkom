@@ -173,8 +173,8 @@
                                         </td>
                                         <td>{{ $t->thesis_name }}</td>
                                         <td>{{ $t->user->full_name }}</td>
-                                        <td>{{ $t->lecturer_1 }}</td>
-                                        <td>{{ $t->lecturer_2 }}</td>
+                                        <td>{{ $t->lec1->name }}</td>
+                                        <td>{{ $t->lec2->name }}</td>
                                         <td>{{ $t->year }}</td>
                                         <td>
                                             <a href="{{ asset('storage/pdf-1/' . $t->file_1) }}" target="_blank"><i
@@ -258,8 +258,8 @@
                                         </td>
                                         <td>{{ $t->capstone_title }}</td>
                                         <td>{{ $t->team_name }}</td>
-                                        <td>{{ $t->lecturer_1 }}</td>
-                                        <td>{{ $t->lecturer_2 }}</td>
+                                        <td>{{ $t->lec1->name }}</td>
+                                        <td>{{ $t->lec2->name }}</td>
                                         <td>{{ $t->year }}</td>
                                         <td><a href="{{ asset('storage/c100/' . $t->c100) }}" target="_blank"><i
                                                     class="fa-regular fa-file"></i></a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\User;
 use App\Models\Thesis;
 use App\Models\Capstone;
+use App\Models\Lecturer;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,8 +19,8 @@ class ProfileController extends Controller
     public function profile()
     {
         $user = User::findOrFail(Auth::user()->id);
-        $theses = Thesis::where('user_id', $user->id)->get();
-        $capstone = Capstone::where('user_id', $user->id)->get();
+        $theses = Thesis::with(['lec1', 'lec2'])->where('user_id', $user->id)->get();
+        $capstone = Capstone::with(['lec1', 'lec2'])->where('user_id', $user->id)->get();
 
         return view('mahasiswa.profile.index', compact('user', 'theses', 'capstone'));
     }

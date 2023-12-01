@@ -20,8 +20,10 @@ class ThesesController extends Controller
     public function index()
     {
         $user = User::findOrFail(Auth::user()->id);
+        $lecturer = Lecturer::all();
+        $spec = Specialization::all();
 
-        return view('mahasiswa.profile.theses', compact('user'));
+        return view('mahasiswa.profile.theses', compact('user', 'lecturer', 'spec'));
     }
 
     public function edit($id)
@@ -39,8 +41,9 @@ class ThesesController extends Controller
     {
         $request->validate([
             'thesis_name' => 'required|string',
-            'lecturer_1' => 'required|string',
-            'lecturer_2' => 'required|string',
+            'spec_id' => 'required',
+            'lec1_id' => 'required',
+            'lec2_id' => 'required',
             'year' => 'required|numeric',
             'abstract' => 'required|string',
             'abs_keyword' => 'required|string',
@@ -62,6 +65,9 @@ class ThesesController extends Controller
         // Create Thesis instance
         $thesis = new Thesis([
             'user_id' => Auth::user()->id,
+            'spec_id' => $request->input('spec_id'),
+            'lec1_id' => $request->input('lec1_id'),
+            'lec2_id' => $request->input('lec2_id'),
             'thesis_name' => $request->input('thesis_name'),
             'author' => $request->input('hidden_author'), // You can directly use 'hidden_author'
             'lecturer_1' => $request->input('lecturer_1'),
@@ -88,8 +94,9 @@ class ThesesController extends Controller
         $data = $request->except('_token');
         $request->validate([
             'thesis_name' => 'required|string',
-            'lecturer_1' => 'required|string',
-            'lecturer_2' => 'required|string',
+            'spec_id' => 'required',
+            'lec1_id' => 'required',
+            'lec2_id' => 'required',
             'year' => 'required|numeric',
             'abstract' => 'required|string',
             'abs_keyword' => 'required|string',
