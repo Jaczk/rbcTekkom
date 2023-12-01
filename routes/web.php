@@ -61,6 +61,7 @@ use App\Http\Controllers\User\FacilityController as UserFacilityController;
 
     //Galeri Tugas Akhir
     Route::get('/theses-gallery', [UserThesesController::class, 'thesesGallery'])->name('user.theses.gallery');
+    Route::get('/detail-theses/{id}', [UserThesesController::class, 'thesesDetail'])->name('user.theses.detail');
 
     //Galeri Capstone
     Route::get('/capstone-gallery', [UserCapstoneController::class, 'capstoneGallery'])->name('user.capstone.gallery');

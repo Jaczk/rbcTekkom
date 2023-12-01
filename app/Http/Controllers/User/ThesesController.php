@@ -158,4 +158,14 @@ class ThesesController extends Controller
 
         return view('mahasiswa.theses.index', compact('theses', 'years', 'lecturers', 'specs'));
     }
+
+    public function thesesDetail($id)
+    {
+        $decryptId = Crypt::decryptString($id);
+        $theses = Thesis::with(['lec1', 'lec2', 'user', 'spec'])->find($decryptId);
+        
+        return view('mahasiswa.theses.detail', [
+            'theses' => $theses,
+        ]);
+    }
 }
