@@ -14,9 +14,6 @@
                         <div class="mx-2 mb-3">
                             <a href="{{ route('admin.facility.gallery.create') }}" class="btn btn-primary text-bold">+ Tambah Foto Galeri</a>
                         </div>
-                        <div class="mx-2 mb-3">
-                            <a href="{{ route('user.gallery') }}" class="btn btn-primary text-bold">User Galeri</a>
-                        </div>
                     </div>
                     @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">

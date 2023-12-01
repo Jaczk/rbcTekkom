@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lecturer;
+use App\Models\Specialization;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Thesis;
@@ -119,7 +121,7 @@ class ThesesController extends Controller
 
             Storage::delete('public/pdf-2/' . $theses->file_2);
         }
-        
+
         $data['user_id'] = Auth::user()->id;
 
         // Save the Thesis instance
@@ -128,7 +130,8 @@ class ThesesController extends Controller
         return redirect()->route('user.profile')->with('success', 'Sukses Memperbarui Data Tugas Akhir');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $theses = Thesis::find($id);
 
         Storage::delete('public/pdf-1/' . $theses->file_1);
@@ -139,11 +142,13 @@ class ThesesController extends Controller
         return redirect()->route('user.profile')->with('success', 'Data berhasil dihapus');
     }
 
-    public function thesesGallery(){
+    public function thesesGallery()
+    {
         $theses = Thesis::all();
         $years = Thesis::distinct()->pluck('year');
-    
-        return view('mahasiswa.theses.index', compact('theses', 'years'));
+        $lecturers = Lecturer::all();
+        $specs = Specialization::all();
+
+        return view('mahasiswa.theses.index', compact('theses', 'years', 'lecturers','specs'));
     }
-    
 }

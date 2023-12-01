@@ -127,8 +127,11 @@ use App\Http\Controllers\User\FacilityController as UserFacilityController;
 
         Route::group(['prefix' => 'lecturer'], function () {
             Route::get('/', [LecturerController::class, 'index'])->name('admin.lecturer');
-            Route::get('/edit', [LecturerController::class, 'edit'])->name('admin.lecturer.edit');
-            Route::put('/update', [LecturerController::class, 'update'])->name('admin.lecturer.update');
+            Route::get('/create', [LecturerController::class, 'create'])->name('admin.lecturer.create');
+            Route::post('/store', [LecturerController::class, 'store'])->name('admin.lecturer.store');
+            Route::get('/edit/{id}', [LecturerController::class, 'edit'])->name('admin.lecturer.edit');
+            Route::put('/update/{id}', [LecturerController::class, 'update'])->name('admin.lecturer.update');
+            Route::delete('/destroy/{id}', [LecturerController::class, 'destroy'])->name('admin.lecturer.destroy');
         });
 
         Route::group(['prefix' => 'donate'], function () {

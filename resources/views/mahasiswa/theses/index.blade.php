@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-xl-3">
-            <div class="fs-5">
+            <div class="fs-5 ">
                 Filter
             </div>
             <div class="flex-row d-flex mt-2">
@@ -53,8 +53,30 @@
                     @endforeach
                 </select>
             </div>
+            <div class="me-5 mt-2">
+                Sort Dosen
+            </div>
+            <div>
+                <select name="sortLecturer" id="sortLecturer" class="me-4">
+                    <option value="" disabled selected>Nama Dosen</option>
+                    @foreach ($lecturers as $lect)
+                        <option value="{{ $lect->id }}">{{ $lect->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="me-5 mt-2">
+                Sort Spesialisasi
+            </div>
+            <div>
+                <select name="sortSpec" id="sortSpec" class="me-4">
+                    <option value="" disabled selected>Jenis Spesialisasi</option>
+                    @foreach ($specs as $spec)
+                        <option value="{{ $spec->id }}">{{ $spec->desc }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="btn btn-primary mt-3">
-                Terapkan Tahun
+                Terapkan Filter
             </div>
             
         </div>

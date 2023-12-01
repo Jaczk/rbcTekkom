@@ -12,10 +12,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="mx-2 mb-3">
-                            <a href="{{ route('admin.facility.gallery.create') }}" class="btn btn-primary text-bold">+ Tambah Foto Galeri</a>
-                        </div>
-                        <div class="mx-2 mb-3">
-                            <a href="{{ route('user.gallery') }}" class="btn btn-primary text-bold">User Galeri</a>
+                            <a href="{{ route('admin.lecturer.create') }}" class="btn btn-primary text-bold">+ Dosen</a>
                         </div>
                     </div>
                     @if (session()->has('success'))
@@ -37,7 +34,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <table id="facility" class="table table-striped table-hover">
+                            <table id="lecturer" class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -48,18 +45,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($lecturer as  $g)
+                                    @foreach ($lecturer as $g)
                                         <tr>
                                             <td></td>
                                             <td class="text-center">{{ $g->name }}</td>
                                             <td class="text-center">{{ $g->nip }}</td>
+                                            <td class="text-center">
+                                                <img src="{{ $g->image }}" class="img-fluid" style="width: 180px"
+                                                    alt="Image">
+                                            </td>D
                                             <td></td>
                                             <td class="flex-row d-flex">
-                                                <a href="{{ route('admin.facility.gallery.edit', Crypt::encryptString($g->id)) }}"
+                                                <a href="{{ route('admin.lecturer.edit', Crypt::encryptString($g->id)) }}"
                                                     class="btn btn-secondary">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route('admin.facility.gallery.destroy', $g->id) }}" method="POST">
+                                                <form action="{{ route('admin.lecturer.destroy', $g->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="ml-2 btn btn-danger">
@@ -71,7 +72,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -85,7 +86,7 @@
     <script>
         $(document).ready(function() {
             // Apply event listener to all delete buttons
-            $('#facility').on('click', '.delete-btn', function(e) {
+            $('#lecturer').on('click', '.delete-btn', function(e) {
                 e.preventDefault();
                 var form = $(this).closest('form');
 
@@ -106,7 +107,7 @@
                     }
                 });
             });
-            var table = $('#facility').DataTable();
+            var table = $('#lecturer').DataTable();
             table
                 .on('order.dt search.dt', function() {
                     var i = 1;
