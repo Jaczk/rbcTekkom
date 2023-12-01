@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Capstone;
 use App\Models\Lecturer;
-use App\Models\Specialization;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Specialization;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use App\Models\User;
 
 class CapstoneController extends Controller
 {
@@ -37,8 +37,9 @@ class CapstoneController extends Controller
             'users' => $users,
         ]);
     }
-    
-    public function store(Request $request){
+
+    public function store(Request $request)
+    {
         $data = $request->except('_token');
 
         $request->validate([
@@ -122,7 +123,8 @@ class CapstoneController extends Controller
         return redirect()->route('user.profile')->with('success', 'Data Capstone berhasil ditambahkan');
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $data = $request->except(['_token', '_method']);
         $request->validate([
             'capstone_title' => 'required|string',
@@ -199,7 +201,7 @@ class CapstoneController extends Controller
 
             Storage::delete('public/c500/' . $capstone->c500);
         }
-        
+
         $data['user_id'] = Auth::user()->id;
         $data2 = $data;
         $data2['user_id'] = $request->input('member2');
@@ -216,7 +218,8 @@ class CapstoneController extends Controller
     }
 
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $capstone = Capstone::find($id);
         $capstone2 = Capstone::where('user_id', $capstone->member2);
         $capstone3 = Capstone::where('user_id', $capstone->member3);
@@ -233,5 +236,15 @@ class CapstoneController extends Controller
 
 
         return redirect()->route('user.profile')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function capstoneGallery()
+    {
+        $capstones = Capstone::all();
+        $years = Capstone::distinct()->pluck('year');
+        $lecturers = Lecturer::all();
+        $specs = Specialization::all();
+
+        return view('mahasiswa.capstone.index', compact('capstones', 'years', 'lecturers', 'specs'));
     }
 }

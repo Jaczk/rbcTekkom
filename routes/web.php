@@ -62,6 +62,9 @@ use App\Http\Controllers\User\FacilityController as UserFacilityController;
     //Galeri Tugas Akhir
     Route::get('/theses-gallery', [UserThesesController::class, 'thesesGallery'])->name('user.theses.gallery');
 
+    //Galeri Capstone
+    Route::get('/capstone-gallery', [UserCapstoneController::class, 'capstoneGallery'])->name('user.capstone.gallery');
+
     //Auth
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('auth/login', [LoginController::class, 'authenticate'])->name('login.auth');

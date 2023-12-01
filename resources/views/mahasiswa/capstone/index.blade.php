@@ -1,15 +1,15 @@
 @extends('mahasiswa.layouts.base')
 
-@section('title', 'Tugas Akhir')
+@section('title', 'Capstone')
 
 @section('content')
     <div class="row p-4 ms-4">
         <div id="theses-title">
             <div class="mt-4 title fs-3">
-                Katalog Tugas Akhir
+                Katalog Capstone
             </div>
             <div class="mt-2 fs-6">
-                <a href="{{ route('user.theses.gallery') }}">Home</a>
+                <a href="{{ route('user.capstone.gallery') }}">Home</a>
             </div>
             <!-- Search form -->
             <div class="active-cyan-4 mb-4 mt-3 w-25">
@@ -82,24 +82,24 @@
         </div>
         <div class="col-xl-8">
             <div class="row">
-                @if (empty($theses))
-                    <h2>Tidak ada Tugas Akhir</h2>
+                @if (empty($capstones))
+                    <h2>Tidak ada Capstone</h2>
                 @else
-                    @foreach ($theses as $t)
+                    @foreach ($capstones as $c)
                         <div class="col-md-10 mb-5">
                             <div class="border-bottom border-dark">
-                                {{ $t->thesis_name }}
+                                {{ $c->thesis_name }}
                             </div>
                             <div class="mt-2 d-flex flex-row">
                                 <i class="fa-solid fa-user mt-1"></i>
                                 <div class="ms-2">
-                                    {{ $t->author }}, {{ $t->lec1->name }}, {{ $t->lec2->name }}
+                                    {{ $c->author }}, {{ $c->lec1->name }}, {{ $c->lec2->name }}
                                 </div>
                             </div>
                             <div class="mt-2 d-flex flex-row">
                                 <i class="fa-regular fa-file mt-1"></i>
                                 <div class="ms-2">
-                                    {{ $t->year }}
+                                    {{ $c->year }}
                                 </div>
                             </div>
                         </div>

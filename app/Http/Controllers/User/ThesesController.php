@@ -156,6 +156,6 @@ class ThesesController extends Controller
         $lecturers = Lecturer::all();
         $specs = Specialization::all();
 
-        return view('mahasiswa.theses.index', compact('theses', 'years', 'lecturers','specs'));
+        return view('mahasiswa.theses.index', compact('theses', 'years', 'lecturers', 'specs'));
     }
 }
