@@ -1,6 +1,6 @@
 @extends('mahasiswa.layouts.base')
 
-@section('title', 'Tugas Akhir')
+@section('title', 'Edit Tugas Akhir')
 
 @section('content')
     <div class="container-xl p-4 mt-4">
@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-xl-8">
                     <div class="card mb-4">
-                        <div class="card-header">Capstone</div>
+                        <div class="card-header">Edit Tugas Akhir</div>
                         <div class="card-body">
                             {{-- Alert Here --}}
                             @if ($errors->any())
@@ -45,6 +45,36 @@
                                     placeholder="Masukkan Judul Tugas Akhir anda " name="thesis_name"
                                     value="{{ $theses->thesis_name }}">
                             </div>
+
+                            <label class="small mb-1" for="team_name">Pilih Kategori</label>
+                            <div class="form-row">
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <select name="spec_id" class="selectpicker filt" data-live-search="true" id="spec_id"
+                                        data-size="5" data-width="100%" title="Pilih Kategori Capstone">
+                                        <style>
+                                            .filt-drop {
+                                                background-color: #FFFFFF;
+                                                color: black;
+                                            }
+
+                                            .filt-drop:hover {
+                                                background-color: #D8D8D8;
+                                                color: white;
+                                            }
+                                        </style>
+
+                                        @foreach ($spec as $l)
+                                            <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                {{ $theses->spec_id == $l->id ? 'selected' : '' }}>
+                                                {{ $l->desc }}
+                                            </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                            </div>
+
                             <div class="mb-3">
                                 <label class="small mb-1" for="author">Nama Penulis</label>
                                 <!-- Visible input field -->
@@ -53,18 +83,60 @@
                                 <!-- Hidden input field -->
                                 <input type="hidden" name="hidden_author" value="{{ $theses->user->name }}">
                             </div>
-                            <div class="mb-3">
-                                <label class="small mb-1" for="lecturer_1">Pembimbing 1</label>
-                                <input class="form-control" id="lecturer_1" type="text"
-                                    placeholder="Masukkan nama pembimbing 1 " name="lecturer_1"
-                                    value="{{ $theses->lecturer_1 }}">
+
+
+                            <label class="small mb-1" for="team_name">Dosen Pembimbing</label>
+                            <div class="form-row">
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <select name="lec1_id" class="selectpicker filt" data-live-search="true" id="lec1_id"
+                                        data-size="5" data-width="48%" title="Dospem 1">
+                                        <style>
+                                            .filt-drop {
+                                                background-color: #FFFFFF;
+                                                color: black;
+                                            }
+
+                                            .filt-drop:hover {
+                                                background-color: #D8D8D8;
+                                                color: white;
+                                            }
+                                        </style>
+
+                                        @foreach ($lecturer as $l)
+                                            <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                {{ $theses->lec1_id == $l->id ? 'selected' : '' }}>
+                                                {{ $l->name }}
+                                            </option>
+                                        @endforeach
+
+                                    </select>
+
+                                    <select name="lec2_id" class="selectpicker filt " data-live-search="true" id="lec2_id"
+                                        data-size="5" data-width="48%" title="Dospem 2">
+                                        <style>
+                                            .filt-drop {
+                                                background-color: #FFFFFF;
+                                                color: black;
+                                            }
+
+                                            .filt-drop:hover {
+                                                background-color: #D8D8D8;
+                                                color: white;
+                                            }
+                                        </style>
+
+                                        @foreach ($lecturer as $l)
+                                            <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                {{ $theses->lec2_id == $l->id ? 'selected' : '' }}>
+                                                {{ $l->name }}
+                                            </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
                             </div>
-                            <div class="mb-3">
-                                <label class="small mb-1" for="lecturer_2">Pembimbing 2</label>
-                                <input class="form-control" id="lecturer_2" type="text"
-                                    placeholder="Masukkan nama pembimbing 2 " name="lecturer_2"
-                                    value="{{ $theses->lecturer_2 }}">
-                            </div>
+
                             <div class="mb-3">
                                 <label class="small mb-1" for="year">Tahun Tugas Akhir</label>
                                 <input class="form-control" id="year" type="number"
@@ -83,7 +155,8 @@
                                     value="{!! $theses->abs_keyword !!}">
                             </div>
                             <div class="mb-3">
-                                <label class="small mb-1" for="file_1">File Tugas Akhir (PDF) (Cover, Daftar, Bab 1 , dan
+                                <label class="small mb-1" for="file_1">File Tugas Akhir (PDF) (Cover, Daftar, Bab 1 ,
+                                    dan
                                     Bab
                                     2)</label>
                                 <div class="custom-file">

@@ -31,10 +31,14 @@ class CapstoneController extends Controller
         $decryptId = Crypt::decryptString($id);
         $theses = Capstone::find($decryptId);
         $users = User::where('role_id', 2)->get();
+        $spec = Specialization::all();
+        $lecturer = Lecturer::all();
 
         return view('mahasiswa.profile.capstone-edit', [
             'theses' => $theses,
             'users' => $users,
+            'spec' => $spec,
+            'lecturer' => $lecturer,
         ]);
     }
 

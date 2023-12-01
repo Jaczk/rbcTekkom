@@ -30,10 +30,10 @@ class ThesesController extends Controller
     {
         $decryptId = Crypt::decryptString($id);
         $theses = Thesis::find($decryptId);
+        $spec = Specialization::all();
+        $lecturer = Lecturer::all();
 
-        return view('mahasiswa.profile.theses-edit', [
-            'theses' => $theses,
-        ]);
+        return view('mahasiswa.profile.theses-edit', compact('theses', 'spec', 'lecturer'));
     }
 
 

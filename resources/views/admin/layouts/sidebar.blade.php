@@ -132,7 +132,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('admin.lecturer') }}" class="nav-link" style="color: #ffffff;">
-                        <i class="nav-icon fas fa-book-reader"></i>
+                        <i class="nav-icon fas fa-user-graduate"></i>
                         <p>
                             Dosen
                         </p>

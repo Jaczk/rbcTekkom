@@ -63,10 +63,10 @@
                                         </style>
 
                                         @foreach ($spec as $l)
-                                                <option value="{{ $l->id }}" class="text-black filt-drop"
-                                                    {{ old('spec_id') == $l->id ? 'selected' : '' }}>
-                                                    {{ $l->desc }}
-                                                </option>
+                                            <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                {{ old('spec_id') == $l->id ? 'selected' : '' }}>
+                                                {{ $l->desc }}
+                                            </option>
                                         @endforeach
 
                                     </select>
@@ -174,16 +174,16 @@
                                         </style>
 
                                         @foreach ($lecturer as $l)
-                                                <option value="{{ $l->id }}" class="text-black filt-drop"
-                                                    {{ old('lec1_id') == $l->id ? 'selected' : '' }}>
-                                                    {{ $l->name }}
-                                                </option>
+                                            <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                {{ old('lec1_id') == $l->id ? 'selected' : '' }}>
+                                                {{ $l->name }}
+                                            </option>
                                         @endforeach
 
                                     </select>
 
-                                    <select name="lec2_id" class="selectpicker filt " data-live-search="true" id="lec2_id"
-                                        data-size="5" data-width="48%" title="Dospem 2">
+                                    <select name="lec2_id" class="selectpicker filt " data-live-search="true"
+                                        id="lec2_id" data-size="5" data-width="48%" title="Dospem 2">
                                         <style>
                                             .filt-drop {
                                                 background-color: #FFFFFF;
@@ -197,10 +197,10 @@
                                         </style>
 
                                         @foreach ($lecturer as $l)
-                                                <option value="{{ $l->id }}" class="text-black filt-drop"
-                                                    {{ old('lec2_id') == $l->id ? 'selected' : '' }}>
-                                                    {{ $l->name }}
-                                                </option>
+                                            <option value="{{ $l->id }}" class="text-black filt-drop"
+                                                {{ old('lec2_id') == $l->id ? 'selected' : '' }}>
+                                                {{ $l->name }}
+                                            </option>
                                         @endforeach
 
                                     </select>

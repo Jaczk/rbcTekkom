@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-xl-8">
                     <div class="card mb-4">
-                        <div class="card-header">Capstone</div>
+                        <div class="card-header">Tugas Akhir</div>
                         <div class="card-body">
                             {{-- Alert Here --}}
                             @if ($errors->any())
