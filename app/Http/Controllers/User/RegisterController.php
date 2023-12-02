@@ -19,12 +19,14 @@ class RegisterController extends Controller
         $request->validate([
             'name' => 'required',
             'nim' => 'required|unique:users,nim',
+            'full_name' => 'required',
             'phone' => 'required|max:15|regex:/^\+62[1-9][0-9]*$/',
             'email' => 'required|email',
             'password' => 'required|min:6'
         ],[
-            'name.required' => 'Nama wajib diisi',
+            'name.required' => 'Username wajib diisi',
             'nim.required' => 'NIM wajib diisi',
+            'full_name.required' => 'Nama Lengkap wajib diisi',
             'nim.unique' => 'NIM sudah digunakan, silakan input NIM lain',
             'phone.required'=>'Nomor telepon wajib diisi',
             'phone.max'=>'Nomor telepon maksimal 15 karakter',

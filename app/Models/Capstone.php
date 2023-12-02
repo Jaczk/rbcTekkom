@@ -15,9 +15,9 @@ class Capstone extends Model
         'spec_id',
         'capstone_title',
         'team_name',
-        'member1',
-        'member2',
-        'member3',
+        'member1_id',
+        'member2_id',
+        'member3_id',
         'lec1_id',
         'lec2_id',
         'year',
@@ -49,16 +49,16 @@ class Capstone extends Model
 
     public function member1()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'member1_id');
     }
 
     public function member2()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'member2_id');
     }
 
     public function member3()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'member3_id');
     }
 }

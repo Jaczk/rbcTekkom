@@ -65,6 +65,7 @@ use App\Http\Controllers\User\FacilityController as UserFacilityController;
 
     //Galeri Capstone
     Route::get('/capstone-gallery', [UserCapstoneController::class, 'capstoneGallery'])->name('user.capstone.gallery');
+    Route::get('/detail-capstone/{id}', [UserCapstoneController::class, 'capstoneDetail'])->name('user.capstone.detail');
 
     //Auth
     Route::get('/login', [LoginController::class, 'index'])->name('login');

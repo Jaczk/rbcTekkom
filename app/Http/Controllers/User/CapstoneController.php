@@ -8,6 +8,7 @@ use App\Models\Lecturer;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Specialization;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -52,9 +53,9 @@ class CapstoneController extends Controller
             'team_name' => 'required|string',
             'lec1_id' => 'required',
             'lec2_id' => 'required',
-            'member1' => 'required',
-            'member2' => 'required',
-            'member3' => 'required',
+            'member1_id' => 'required',
+            'member2_id' => 'required',
+            'member3_id' => 'required',
             'year' => 'required|numeric',
             'c100' => 'nullable|mimes:pdf',
             'c200' => 'nullable|mimes:pdf',
@@ -110,9 +111,9 @@ class CapstoneController extends Controller
 
         $data['user_id'] = Auth::user()->id;
         $data2 = $data;
-        $data2['user_id'] = $request->input('member2');
+        $data2['user_id'] = $request->input('member2_id');
         $data3 = $data;
-        $data3['user_id'] = $request->input('member3');
+        $data3['user_id'] = $request->input('member3_id');
 
         $capstone = new Capstone($data);
         $capstone2 = new Capstone($data2);
@@ -136,9 +137,9 @@ class CapstoneController extends Controller
             'team_name' => 'required|string',
             'lec1_id' => 'required|string',
             'lec2_id' => 'required|string',
-            'member1' => 'required',
-            'member2' => 'required',
-            'member3' => 'required',
+            'member1_id' => 'required',
+            'member2_id' => 'required',
+            'member3_id' => 'required',
             'year' => 'required|numeric',
             'c100' => 'nullable|mimes:pdf',
             'c200' => 'nullable|mimes:pdf',
@@ -208,9 +209,9 @@ class CapstoneController extends Controller
 
         $data['user_id'] = Auth::user()->id;
         $data2 = $data;
-        $data2['user_id'] = $request->input('member2');
+        $data2['user_id'] = $request->input('member2_id');
         $data3 = $data;
-        $data3['user_id'] = $request->input('member3');
+        $data3['user_id'] = $request->input('member3_id');
 
         // Save the Thesis instance
         $capstone->update($data);
@@ -244,11 +245,25 @@ class CapstoneController extends Controller
 
     public function capstoneGallery()
     {
-        $capstones = Capstone::all();
+        $capstones = Capstone::groupBy('capstone_title', 'team_name', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
+            ->select('capstone_title', 'team_name', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
+            ->get();
         $years = Capstone::distinct()->pluck('year');
         $lecturers = Lecturer::all();
         $specs = Specialization::all();
-
         return view('mahasiswa.capstone.index', compact('capstones', 'years', 'lecturers', 'specs'));
+    }
+
+    public function capstoneDetail($id)
+    {
+        $decryptId = Crypt::decryptString($id);
+        $capstone = Capstone::with(['lec1', 'lec2', 'user', 'spec', 'member1', 'member2', 'member3'])
+            ->select('capstones.*') // Select all columns from the Capstone table
+            ->where('team_name', $decryptId)
+            ->distinct('team_name') // Consider distinct values based on team_name
+            ->first();
+        return view('mahasiswa.capstone.detail', [
+            'capstone' => $capstone,
+        ]);
     }
 }

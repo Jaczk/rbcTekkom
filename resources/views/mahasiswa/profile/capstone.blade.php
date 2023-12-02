@@ -101,9 +101,9 @@
                                         </option>
 
                                     </select>
-                                    <input type="hidden" name="member1" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" name="member1_id" value="{{ auth()->user()->id }}">
 
-                                    <select name="member2" class="selectpicker filt" data-live-search="true" id="member2"
+                                    <select name="member2_id" class="selectpicker filt" data-live-search="true" id="member2"
                                         data-size="5" data-width="32%" title="Anggota 2">
                                         <style>
                                             .filt-drop {
@@ -128,7 +128,7 @@
 
                                     </select>
 
-                                    <select name="member3" class="selectpicker filt " data-live-search="true" id="member3"
+                                    <select name="member3_id" class="selectpicker filt " data-live-search="true" id="member3"
                                         data-size="5" data-width="32%" title="Anggota 3">
                                         <style>
                                             .filt-drop {

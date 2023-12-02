@@ -3,7 +3,7 @@
 @section('title', 'Capstone')
 
 @section('content')
-    <div class="row p-4 ms-4">
+    <div class="p-4 row ms-4">
         <div id="theses-title">
             <div class="mt-4 title fs-3">
                 Katalog Capstone
@@ -12,99 +12,93 @@
                 <a href="{{ route('user.capstone.gallery') }}">Home</a>
             </div>
             <!-- Search form -->
-            <div class="active-cyan-4 mb-4 mt-3 w-25">
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <div class="mt-3 mb-4 active-cyan-4 w-75">
+                <input class="form-control" type="text" placeholder="Cari Judul Proyek Capstone" aria-label="Search">
             </div>
         </div>
-        <div class="col-xl-4">
+        <div class="col-xl-3">
             <div class="fs-5 ">
                 Filter
             </div>
-            <div class="flex-row d-flex mt-2">
-                <div class=" me-2">
-                    sort
-                </div>
+            <div class="mt-2 d-flex justify-content-between">
                 <div>
-                    <select name="sorted" id="sorted">
+                    <label for="" class="mb-2">Sort</label>
+                    <select name="sorted" id="sorted" class="form-select me-2">
                         <option selected value="1">Terbaru</option>
                         <option value="2">Terlama</option>
                     </select>
                 </div>
-            </div>
-            <div class="d-flex flex-row mt-2">
-                <div class="me-5">
-                    Dari Tahun
+                <div>
+                    <label for="" class="mb-2">Dari Tahun</label>
+                    <select name="startYear" id="startYear" class="me-2 form-select">
+                        <option value="" disabled selected>Tahun Awal</option>
+                        @foreach ($years as $year)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="ms-4">
-                    Hingga
+                <div>
+                    <label for="" class="mb-2">Hingga</label>
+                    <select name="endYear" id="endYear" class="form-select">
+                        <option value="" disabled selected>Tahun Akhir</option>
+                        @foreach ($years as $year)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            </div>
-            <div class="d-flex flex-row mt-2">
-                <select name="startYear" id="startYear" class="me-4">
-                    <option value="" disabled selected>Tahun Awal</option>
-                    @foreach ($years as $year)
-                        <option value="{{ $year }}">{{ $year }}</option>
-                    @endforeach
-                </select>
-                <select name="endYear" id="endYear" class="ms-4">
-                    <option value="" disabled selected>Tahun Akhir</option>
-                    @foreach ($years as $year)
-                        <option value="{{ $year }}">{{ $year }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="me-5 mt-2">
-                Sort Dosen
             </div>
             <div>
-                <select name="sortLecturer" id="sortLecturer" class="me-4">
+                <label for="" class="my-2">Sort nama Dosen</label>
+                <select name="sortLecturer" id="sortLecturer" class="me-4 form-control">
                     <option value="" disabled selected>Nama Dosen</option>
                     @foreach ($lecturers as $lect)
                         <option value="{{ $lect->id }}">{{ $lect->name }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="me-5 mt-2">
-                Sort Spesialisasi
-            </div>
             <div>
-                <select name="sortSpec" id="sortSpec" class="me-4">
+                <label for="" class="my-2">Sort Spesialisasi</label>
+                <select name="sortSpec" id="sortSpec" class="me-4 form-control">
                     <option value="" disabled selected>Jenis Spesialisasi</option>
                     @foreach ($specs as $spec)
                         <option value="{{ $spec->id }}">{{ $spec->desc }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="btn btn-primary mt-3">
+            <div class="my-3 btn btn-primary">
                 Terapkan Filter
             </div>
-
         </div>
-        <div class="col-xl-8">
-            <div class="row">
-                @if (empty($capstones))
-                    <h2>Tidak ada Capstone</h2>
-                @else
-                    @foreach ($capstones as $c)
-                        <div class="col-md-10 mb-5">
-                            <div class="border-bottom border-dark">
-                                {{ $c->thesis_name }}
-                            </div>
-                            <div class="mt-2 d-flex flex-row">
-                                <i class="fa-solid fa-user mt-1"></i>
-                                <div class="ms-2">
-                                    {{ $c->author }}, {{ $c->lec1->name }}, {{ $c->lec2->name }}
-                                </div>
-                            </div>
-                            <div class="mt-2 d-flex flex-row">
-                                <i class="fa-regular fa-file mt-1"></i>
-                                <div class="ms-2">
-                                    {{ $c->year }}
-                                </div>
+        <div class="col-xl-9">
+            <div class="row ms-2">
+                @foreach ($capstones as $c)
+                    <div class="mb-3 col-md-10">
+                        <div class="border-bottom border-dark">
+                            <a href="{{ route('user.capstone.detail', Crypt::encryptString($c->team_name)) }}">
+                                {{ $c->capstone_title }}
+                            </a>
+                        </div>
+                        <div class="flex-row mt-1 d-flex">
+                            <i class="mt-1 fa-solid fa-user"></i>
+                            <div class="ms-2">
+                                {{ $c->member1->full_name }} | {{ $c->member2->full_name }} |
+                                {{ $c->member3->full_name }}
                             </div>
                         </div>
-                    @endforeach
-                @endif
+                        <div class="flex-row mt-1 d-flex">
+                            <i class="nav-icon fas fa-user-graduate mt-1"></i>
+                            <div class="ms-2">
+                                {{ $c->lec1->name }} | {{ $c->lec2->name}}
+                            </div>
+                        </div>
+                        <div class="flex-row mt-2 d-flex">
+                            <i class="fa-solid fa-user-group mt-1"></i>
+                            <div class="ms-2">
+                                Kelompok {{ $c->team_name }} | {{ $c->year }}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

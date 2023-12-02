@@ -73,16 +73,16 @@ class User extends Authenticatable
 
     public function capstone1()
     {
-        return $this->belongsToMany(Capstone::class, 'member1');
+        return $this->hasMany(Capstone::class, 'member1');
     }
 
     public function capstone2()
     {
-        return $this->belongsToMany(Capstone::class, 'member2');
+        return $this->hasMany(Capstone::class, 'member2');
     }
 
     public function capstone3()
     {
-        return $this->belongsToMany(Capstone::class, 'member3');
+        return $this->hasMany(Capstone::class, 'member3');
     }
 }

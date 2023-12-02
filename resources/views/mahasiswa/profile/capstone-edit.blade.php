@@ -85,7 +85,7 @@
                             <div class="form-row">
                                 <div class="mb-3 d-flex justify-content-between">
 
-                                    @if ($theses->member1 == auth()->user()->id)
+                                    @if ($theses->member1->id == auth()->user()->id)
                                         <input type="hidden" name="member1" value="{{ auth()->user()->id }}">
                                         <select name="member1" class="selectpicker filt" data-live-search="true"
                                             id="member1" data-size="5" data-width="35%" title="Anggota 1" disabled>
@@ -99,7 +99,7 @@
                                             @foreach ($users as $user)
                                                 @if ($user->id != auth()->user()->id)
                                                     <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                        {{ $theses->member1 == $user->id ? 'selected' : '' }}>
+                                                        {{ $theses->member1->id == $user->id ? 'selected' : '' }}>
                                                         {{ $user->name }}
                                                     </option>
                                                 @endif
@@ -107,7 +107,7 @@
                                         </select>
                                     @endif
 
-                                    @if ($theses->member2 == auth()->user()->id)
+                                    @if ($theses->member2->id == auth()->user()->id)
                                         <input type="hidden" name="member2" value="{{ auth()->user()->id }}">
                                         <select name="member2" class="selectpicker filt" data-live-search="true"
                                             id="member2" data-size="5" data-width="35%" title="Anggota 2" disabled>
@@ -121,7 +121,7 @@
                                             @foreach ($users as $user)
                                                 @if ($user->id != auth()->user()->id)
                                                     <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                        {{ $theses->member2 == $user->id ? 'selected' : '' }}>
+                                                        {{ $theses->member2->id == $user->id ? 'selected' : '' }}>
                                                         {{ $user->name }}
                                                     </option>
                                                 @endif
@@ -129,7 +129,7 @@
                                         </select>
                                     @endif
 
-                                    @if ($theses->member3 == auth()->user()->id)
+                                    @if ($theses->member3->id == auth()->user()->id)
                                         <input type="hidden" name="member3" value="{{ auth()->user()->id }}">
                                         <select name="member3" class="selectpicker filt" data-live-search="true"
                                             id="member3" data-size="5" data-width="35%" title="Anggota 3" disabled>
@@ -144,7 +144,7 @@
                                             @foreach ($users as $user)
                                                 @if ($user->id != auth()->user()->id)
                                                     <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                        {{ $theses->member3 == $user->id ? 'selected' : '' }}>
+                                                        {{ $theses->member3->id == $user->id ? 'selected' : '' }}>
                                                         {{ $user->name }}
                                                     </option>
                                                 @endif

@@ -81,7 +81,7 @@
                         </div>
                     </div>
 
-                    <div class="px-5 mt-5 d-flex justify-content-center h-custom-2">
+                    <div class="px-5 mt-2 d-flex justify-content-center h-custom-2">
                         <form style="width: 23rem;" action="{{ route('register.store') }}" method="post">
                             @csrf
                             <h3 class="pb-3 mb-3 fw-normal text-dark" style="letter-spacing: 1px;">Register</h3>
@@ -94,23 +94,28 @@
                                     </ul>
                                 </div>
                             @endif
-                            <div class="mb-4 form-outline">
+                            <div class="mb-3 form-outline">
                                 <input name="name" type="text" class="form-control form-control-lg"
-                                    value="{{ old('name') }}" placeholder="Masukkan nama lengkap anda" />
-                                <label class="form-label">Nama</label>
+                                    value="{{ old('name') }}" placeholder="Masukkan username anda" />
+                                <label class="form-label">UserName</label>
                             </div>
-                            <div class="mb-4 form-outline">
+                            <div class="mb-3 form-outline">
                                 <input name="email" type="email" class="form-control form-control-lg"
                                     value="{{ old('email') }}" placeholder="Masukkan email yang ingin didaftarkan" />
                                 <label class="form-label">Email</label>
                             </div>
-                            <div class="mb-4 form-outline">
+                            <div class="mb-3 form-outline">
+                                <input name="full_name" type="text" class="form-control form-control-lg"
+                                    value="{{ old('full_name') }}" placeholder="Masukkan nama lengkap anda" />
+                                <label class="form-label">Nama Lengkap</label>
+                            </div>
+                            <div class="mb-3 form-outline">
                                 <input name="nim" type="text" class="form-control form-control-lg"
                                     value="{{ old('nim') }}" placeholder="Masukkan NIM/NIP anda" />
                                 <label class="form-label">NIM/NIP</label>
                             </div>
 
-                            <div class="mb-4 form-outline">
+                            <div class="mb-3 form-outline">
                                 <input name="phone" type="text" class="form-control form-control-lg"
                                     value="{{ old('phone') }}" placeholder="+628123456789" />
                                 <label class="form-label">Nomor Telepon</label>
@@ -133,7 +138,7 @@
                                 letters, numbers &
                                 symbols.
                             </div>
-                            <div class="pt-1 mb-4">
+                            <div class="pt-1 mb-3">
                                 <button class="btn btn-dark btn-lg btn-block" type="submit">register</button>
                             </div>
                             {{-- <p class="mb-5 small pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p> --}}

@@ -52,8 +52,8 @@
                                 href="{{ route('user.theses.gallery') }}">Tugas Akhir
                                 Digital</a>
                         </li>
-                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Kerja Praktek
-                                Digital</a>
+                        <li><a class="fw-bold dropdown-item text-uppercase rounded-0 "
+                                href="{{ route('user.capstone.gallery') }}">Dokumen Capstone Digital</a>
                         </li>
                         <li><a class="fw-bold dropdown-item text-uppercase rounded-0 " href="#">Karya Dosen
                                 Terindeks
