@@ -57,6 +57,24 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.theses') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-folder"></i>
+                        <p>
+                            Tugas Akhir
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.capstone') }}" class="nav-link" style="color: #ffffff;">
+                        <i class="nav-icon fas fa-folder-open"></i>
+                        <p>
+                            Capstone
+                        </p>
+                    </a>
+                </li>
                 
                 <li class="nav-item">
                     <a href="{{ route('admin.loans') }}" class="nav-link" style="color: #ffffff;">

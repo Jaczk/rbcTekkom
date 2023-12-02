@@ -21,7 +21,9 @@ use App\Http\Controllers\User\FacilityController as UserFacilityController;
     use App\Http\Controllers\User\ShiftController as UserShiftController;
     use App\Http\Controllers\Admin\TextEditController;
     use App\Http\Controllers\User\TextEditController as UserTextEditController;
+    use App\Http\Controllers\Admin\ThesesController;
     use App\Http\Controllers\User\ThesesController as UserThesesController;
+    use App\Http\Controllers\Admin\CapstoneController;
     use App\Http\Controllers\User\CapstoneController as UserCapstoneController;
     use App\Http\Controllers\Admin\SpecDetailController;
     use App\Http\Controllers\Admin\SpecializationController;
@@ -110,6 +112,26 @@ use App\Http\Controllers\User\FacilityController as UserFacilityController;
             Route::get('/show/{id}', [BookController::class, 'show'])->name('admin.book.show');
             Route::put('/update/{id}', [BookController::class, 'update'])->name('admin.book.update');
             Route::delete('/destroy/{id}', [BookController::class, 'destroy'])->name('admin.book.destroy');
+        });
+
+        Route::group(['prefix' => 'theses'], function () {
+            Route::get('/', [ThesesController::class, 'index'])->name('admin.theses');
+            Route::get('/create', [ThesesController::class, 'create'])->name('admin.theses.create');
+            Route::post('/store', [ThesesController::class, 'store'])->name('admin.theses.store');
+            Route::get('/edit/{id}', [ThesesController::class, 'edit'])->name('admin.theses.edit');
+            Route::get('/show/{id}', [ThesesController::class, 'show'])->name('admin.theses.show');
+            Route::put('/update/{id}', [ThesesController::class, 'update'])->name('admin.theses.update');
+            Route::delete('/destroy/{id}', [ThesesController::class, 'destroy'])->name('admin.theses.destroy');
+        });
+
+        Route::group(['prefix' => 'capstone'], function () {
+            Route::get('/', [CapstoneController::class, 'index'])->name('admin.capstone');
+            Route::get('/create', [CapstoneController::class, 'create'])->name('admin.capstone.create');
+            Route::post('/store', [CapstoneController::class, 'store'])->name('admin.capstone.store');
+            Route::get('/edit/{id}', [CapstoneController::class, 'edit'])->name('admin.capstone.edit');
+            Route::get('/show/{id}', [CapstoneController::class, 'show'])->name('admin.capstone.show');
+            Route::put('/update/{id}', [CapstoneController::class, 'update'])->name('admin.capstone.update');
+            Route::delete('/destroy/{id}', [CapstoneController::class, 'destroy'])->name('admin.capstone.destroy');
         });
 
         Route::group(['prefix' => 'bookLabel'], function () {

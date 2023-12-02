@@ -178,11 +178,11 @@
                                         <td>{{ $t->year }}</td>
                                         <td>
                                             <a href="{{ asset('storage/pdf-1/' . $t->file_1) }}" target="_blank"><i
-                                                    class="fa-regular fa-file"></i></a>
+                                                    class="fa-regular fa-file-pdf"></i></a>
                                         </td>
 
                                         <td><a href="{{ asset('storage/pdf-2/' . $t->file_2) }}" target="_blank"><i
-                                                    class="fa-regular fa-file"></i></a>
+                                                    class="fa-regular fa-file-pdf"></i></a>
                                         </td>
                                         <td>
                                             <div class="flex-row d-flex">
@@ -262,19 +262,19 @@
                                         <td>{{ $t->lec2->name }}</td>
                                         <td>{{ $t->year }}</td>
                                         <td><a href="{{ asset('storage/c100/' . $t->c100) }}" target="_blank"><i
-                                                    class="fa-regular fa-file"></i></a>
+                                                    class="fa-regular fa-file-pdf"></i></a>
                                         </td>
                                         <td><a href="{{ asset('storage/c200/' . $t->c200) }}" target="_blank"><i
-                                                    class="fa-regular fa-file"></i>
+                                                    class="fa-regular fa-file-pdf"></i>
                                         </td>
                                         <td><a href="{{ asset('storage/c300/' . $t->c300) }}" target="_blank"><i
-                                                    class="fa-regular fa-file"></i>
+                                                    class="fa-regular fa-file-pdf"></i>
                                         </td>
                                         <td><a href="{{ asset('storage/c400/' . $t->c400) }}" target="_blank"><i
-                                                    class="fa-regular fa-file"></i>
+                                                    class="fa-regular fa-file-pdf"></i>
                                         </td>
                                         <td><a href="{{ asset('storage/c500/' . $t->c500) }}" target="_blank"><i
-                                                    class="fa-regular fa-file"></i>
+                                                    class="fa-regular fa-file-pdf"></i>
                                         </td>
                                         <td>
                                             <div class="flex-row d-flex">
