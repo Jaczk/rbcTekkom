@@ -127,6 +127,7 @@ use App\Http\Controllers\User\FacilityController as UserFacilityController;
 
         Route::group(['prefix' => 'capstone'], function () {
             Route::get('/', [CapstoneController::class, 'index'])->name('admin.capstone');
+            Route::get('/capstone', [CapstoneController::class, 'all'])->name('admin.capstone.all');
             Route::get('/create', [CapstoneController::class, 'create'])->name('admin.capstone.create');
             Route::post('/store', [CapstoneController::class, 'store'])->name('admin.capstone.store');
             Route::get('/edit/{id}', [CapstoneController::class, 'edit'])->name('admin.capstone.edit');

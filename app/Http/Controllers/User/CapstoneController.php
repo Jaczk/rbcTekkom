@@ -55,7 +55,7 @@ class CapstoneController extends Controller
             'lec2_id' => 'required',
             'member1_id' => 'required',
             'member2_id' => 'required',
-            'member3_id' => 'required',
+            'member3_id' => 'nullable',
             'year' => 'required|numeric',
             'c100' => 'nullable|mimes:pdf',
             'c200' => 'nullable|mimes:pdf',
@@ -112,16 +112,19 @@ class CapstoneController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data2 = $data;
         $data2['user_id'] = $request->input('member2_id');
-        $data3 = $data;
-        $data3['user_id'] = $request->input('member3_id');
 
         $capstone = new Capstone($data);
         $capstone2 = new Capstone($data2);
-        $capstone3 = new Capstone($data3);
 
         $capstone->save();
         $capstone2->save();
-        $capstone3->save();
+
+        if ($request->input('member3_id')) {
+            $data3 = $data;
+            $data3['user_id'] = $request->input('member3_id');
+            $capstone3 = new Capstone($data3);
+            $capstone3->save();
+        }
 
         Artisan::call('custom:storagelink');
 
@@ -137,9 +140,9 @@ class CapstoneController extends Controller
             'team_name' => 'required|string',
             'lec1_id' => 'required|string',
             'lec2_id' => 'required|string',
-            'member1_id' => 'required',
-            'member2_id' => 'required',
-            'member3_id' => 'required',
+            'member1_id' => 'nullable',
+            'member2_id' => 'nullable',
+            'member3_id' => 'nullable',
             'year' => 'required|numeric',
             'c100' => 'nullable|mimes:pdf',
             'c200' => 'nullable|mimes:pdf',
@@ -149,8 +152,9 @@ class CapstoneController extends Controller
         ]);
 
         $capstone = Capstone::find($id);
-        $capstone2 = Capstone::where('user_id', $capstone->member2);
-        $capstone3 = Capstone::where('user_id', $capstone->member3);
+        $capstone2 = Capstone::where('user_id', $capstone->member2_id);
+        $capstone3 = Capstone::where('user_id', $capstone->member3_id);
+        $capstone4 = Capstone::where('user_id', $capstone->member1_id);
 
         if ($request->hasFile('c100')) {
             // Handle c100 upload
@@ -207,16 +211,33 @@ class CapstoneController extends Controller
             Storage::delete('public/c500/' . $capstone->c500);
         }
 
-        $data['user_id'] = Auth::user()->id;
-        $data2 = $data;
-        $data2['user_id'] = $request->input('member2_id');
-        $data3 = $data;
-        $data3['user_id'] = $request->input('member3_id');
+        // $data['user_id'] = Auth::user()->id;
+        // $data2 = $data;
+        // $data2['user_id'] = $request->input('member2_id');
+        // $data3 = $data;
+        // $data3['user_id'] = $request->input('member3_id');
+        // $data4 = $data;
+        // $data4['user_id'] = $request->input('member1_id');
 
-        // Save the Thesis instance
-        $capstone->update($data);
-        $capstone2->update($data2);
-        $capstone3->update($data3);
+        // // Save the Thesis instance
+        // $capstone->update($data);
+        // $capstone2->update($data2);
+        // $capstone3->update($data3);
+        // $capstone4->update($data4);
+        $userIds = [
+            Auth::user()->id,
+            $request->input('member2_id'),
+            $request->input('member1_id'),
+        ];
+        $capstones = [$capstone, $capstone2, $capstone4];
+        if ($request->input('member3_id')) {
+            $userIds[] = $request->input('member3_id');
+            $capstones[] = $capstone3;
+        }
+        foreach ($userIds as $index => $userId) {
+            $data['user_id'] = $userId;
+            $capstones[$index]->update($data);
+        }
 
         // Redirect to the user profile page
         return redirect()->route('user.profile')->with('success', 'Sukses Memperbarui Data Capstone');
@@ -226,8 +247,8 @@ class CapstoneController extends Controller
     public function destroy($id)
     {
         $capstone = Capstone::find($id);
-        $capstone2 = Capstone::where('user_id', $capstone->member2);
-        $capstone3 = Capstone::where('user_id', $capstone->member3);
+        $capstone2 = Capstone::where('user_id', $capstone->member2_id);
+        $capstone3 = Capstone::where('user_id', $capstone->member3_id);
 
         Storage::delete('public/c100/' . $capstone->c100);
         Storage::delete('public/c200/' . $capstone->c200);

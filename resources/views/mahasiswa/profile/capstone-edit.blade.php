@@ -85,72 +85,71 @@
                             <div class="form-row">
                                 <div class="mb-3 d-flex justify-content-between">
 
-                                    @if ($theses->member1->id == auth()->user()->id)
-                                        <input type="hidden" name="member1" value="{{ auth()->user()->id }}">
-                                        <select name="member1" class="selectpicker filt" data-live-search="true"
-                                            id="member1" data-size="5" data-width="35%" title="Anggota 1" disabled>
+                                    {{-- @if ($theses->member1_id == auth()->user()->id)
+                                        <input type="hidden" name="member1_id" value="{{ auth()->user()->id }}">
+                                        <select name="member1_id" class="selectpicker filt" data-live-search="true"
+                                            id="member1_id" data-size="5" data-width="35%" title="Anggota 1" disabled>
                                             <option value="{{ auth()->user()->id }}" class="text-black filt-drop" selected>
                                                 {{ auth()->user()->name }}
                                             </option>
                                         </select>
-                                    @else
-                                        <select name="member1" class="selectpicker filt" data-live-search="true"
-                                            id="member1" data-size="5" data-width="35%" title="Anggota 1">
+                                    @else --}}
+                                        <input type="hidden" name="member1_id" value="{{ $theses->member1_id }}">
+                                        <select name="member1_id" class="selectpicker filt" data-live-search="true"
+                                            id="member1_id" data-size="5" data-width="35%" title="Anggota 1" disabled>
                                             @foreach ($users as $user)
-                                                @if ($user->id != auth()->user()->id)
                                                     <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                        {{ $theses->member1->id == $user->id ? 'selected' : '' }}>
+                                                        {{ $theses->member1_id == $user->id ? 'selected' : '' }}>
                                                         {{ $user->name }}
                                                     </option>
-                                                @endif
                                             @endforeach
                                         </select>
-                                    @endif
+                                    {{-- @endif
 
-                                    @if ($theses->member2->id == auth()->user()->id)
-                                        <input type="hidden" name="member2" value="{{ auth()->user()->id }}">
-                                        <select name="member2" class="selectpicker filt" data-live-search="true"
-                                            id="member2" data-size="5" data-width="35%" title="Anggota 2" disabled>
+                                    @if ($theses->member2_id == auth()->user()->id)
+                                        <input type="hidden" name="member2_id" value="{{ auth()->user()->id }}">
+                                        <select name="member2_id" class="selectpicker filt" data-live-search="true"
+                                            id="member2_id" data-size="5" data-width="35%" title="Anggota 2" disabled>
                                             <option value="{{ auth()->user()->id }}" class="text-black filt-drop" selected>
                                                 {{ auth()->user()->name }}
                                             </option>
                                         </select>
-                                    @else
-                                        <select name="member2" class="selectpicker filt" data-live-search="true"
-                                            id="member2" data-size="5" data-width="35%" title="Anggota 2">
+                                    @else --}}
+                                        <input type="hidden" name="member2_id" value="{{ $theses->member2_id }}">
+                                        <select name="member2_id" class="selectpicker filt" data-live-search="true"
+                                            id="member2_id" data-size="5" data-width="35%" title="Anggota 2" disabled>
                                             @foreach ($users as $user)
-                                                @if ($user->id != auth()->user()->id)
                                                     <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                        {{ $theses->member2->id == $user->id ? 'selected' : '' }}>
+                                                        {{ $theses->member2_id == $user->id ? 'selected' : '' }}>
                                                         {{ $user->name }}
                                                     </option>
-                                                @endif
                                             @endforeach
                                         </select>
-                                    @endif
+                                    {{-- @endif
 
-                                    @if ($theses->member3->id == auth()->user()->id)
-                                        <input type="hidden" name="member3" value="{{ auth()->user()->id }}">
-                                        <select name="member3" class="selectpicker filt" data-live-search="true"
-                                            id="member3" data-size="5" data-width="35%" title="Anggota 3" disabled>
+                                    @if ($theses->member3_id == auth()->user()->id)
+                                        <input type="hidden" name="member3_id" value="{{ auth()->user()->id }}">
+                                        <select name="member3_id" class="selectpicker filt" data-live-search="true"
+                                            id="member3_id" data-size="5" data-width="35%" title="Anggota 3" disabled>
                                             <option value="{{ auth()->user()->id }}" class="text-black filt-drop"
                                                 selected>
                                                 {{ auth()->user()->name }}
                                             </option>
                                         </select>
-                                    @else
-                                        <select name="member3" class="selectpicker filt" data-live-search="true"
-                                            id="member3" data-size="5" data-width="35%" title="Anggota 3">
+                                    @else --}}
+                                        <input type="hidden" name="member3_id" value="{{ $theses->member3_id }}">
+                                        <select name="member3_id" class="selectpicker filt" data-live-search="true"
+                                            id="member3_id" data-size="5" data-width="35%" title="Anggota 3" disabled>
                                             @foreach ($users as $user)
-                                                @if ($user->id != auth()->user()->id)
+                                                {{-- @if ($user->id != auth()->user()->id) --}}
                                                     <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                        {{ $theses->member3->id == $user->id ? 'selected' : '' }}>
+                                                        {{ $theses->member3_id == $user->id ? 'selected' : '' }}>
                                                         {{ $user->name }}
                                                     </option>
-                                                @endif
+                                                {{-- @endif --}}
                                             @endforeach
                                         </select>
-                                    @endif
+                                    {{-- @endif --}}
                                 </div>
                             </div>
 

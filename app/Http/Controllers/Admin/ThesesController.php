@@ -31,8 +31,9 @@ class ThesesController extends Controller
         $theses = Thesis::find($decryptId);
         $spec = Specialization::all();
         $lecturer = Lecturer::all();
+        $user = User::where('role_id',2)->get();
 
-        return view('admin.theses.edit', compact('theses', 'spec', 'lecturer'));
+        return view('admin.theses.edit', compact('theses', 'spec', 'lecturer', 'user'));
     }
 
 

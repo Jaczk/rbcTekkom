@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header" style="background-color: #6998AB">
-                    <h3 class="card-title">Daftar Pengguna</h3>
+                    <h3 class="card-title">Daftar Tugas Akhir</h3>
                 </div>
                 <div class="card-body">
                     @if (session()->has('success'))
@@ -53,7 +53,11 @@
                                             <td>{{ $t->thesis_name }}</td>
                                             <td>{{ $t->spec->desc }}</td>
                                             <td>{{ $t->year }}</td>
+                                            @if ($t->user->full_name === null)
+                                            <td>{{ $t->user->name }}</td>
+                                            @else
                                             <td>{{ $t->user->full_name }}</td>
+                                            @endif
                                             <td>{{ $t->lec1->name }}</td>
                                             <td>{{ $t->lec2->name }}</td>
                                             <td>

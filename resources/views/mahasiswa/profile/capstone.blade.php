@@ -82,7 +82,7 @@
                             <label class="small mb-1" for="team_name">Anggota Kelompok</label>
                             <div class="form-row">
                                 <div class="mb-3 d-flex justify-content-between">
-                                    <select name="member1" class="selectpicker filt" data-live-search="true" id="member1"
+                                    <select name="member1_id" class="selectpicker filt" data-live-search="true" id="member1"
                                         data-size="5" data-width="32%" title="Anggota 1" disabled>
                                         <style>
                                             .filt-drop {

@@ -28,7 +28,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Edit Buku</h3>
+                    <h3 class="card-title">Edit Tugas Akhir</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
