@@ -247,18 +247,26 @@ class CapstoneController extends Controller
     public function destroy($id)
     {
         $capstone = Capstone::find($id);
-        $capstone2 = Capstone::where('user_id', $capstone->member2_id);
-        $capstone3 = Capstone::where('user_id', $capstone->member3_id);
 
-        Storage::delete('public/c100/' . $capstone->c100);
-        Storage::delete('public/c200/' . $capstone->c200);
-        Storage::delete('public/c300/' . $capstone->c300);
-        Storage::delete('public/c400/' . $capstone->c400);
-        Storage::delete('public/c500/' . $capstone->c500);
+        // Array of member IDs
+        $memberIds = [$capstone->member2_id, $capstone->member3_id, $capstone->member1_id];
 
-        $capstone->forceDelete();
-        $capstone2->forceDelete();
-        $capstone3->forceDelete();
+        // Loop through each member and delete files and force delete the Capstone instance
+        foreach ($memberIds as $memberId) {
+            $capstoneMember = Capstone::where('user_id', $memberId)->first();
+
+            if ($capstoneMember) {
+                Storage::delete([
+                    'public/c100/' . $capstoneMember->c100,
+                    'public/c200/' . $capstoneMember->c200,
+                    'public/c300/' . $capstoneMember->c300,
+                    'public/c400/' . $capstoneMember->c400,
+                    'public/c500/' . $capstoneMember->c500,
+                ]);
+
+                $capstoneMember->forceDelete();
+            }
+        }
 
 
         return redirect()->route('user.profile')->with('success', 'Data berhasil dihapus');

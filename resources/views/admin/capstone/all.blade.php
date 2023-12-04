@@ -11,11 +11,6 @@
                     <h3 class="card-title">Daftar Capstone</h3>
                 </div>
                 <div class="card-body">
-                    {{-- <div class="row">
-                        <div class="mx-2 mb-3">
-                            <a href="{{ route('admin.capstone.all') }}" class="btn btn-primary text-bold">Edit Capstone</a>
-                        </div>
-                    </div> --}}
                     @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}
@@ -43,7 +38,6 @@
                                         <th>Kategori</th>
                                         <th>Tahun</th>
                                         <th>Tim</th>
-                                        <th>Anggota</th>
                                         <th>Dosen Pembimbing 1</th>
                                         <th>Dosen Pembimbing 2</th>
                                         <th>c100</th>
@@ -51,22 +45,18 @@
                                         <th>c300</th>
                                         <th>c400</th>
                                         <th>c500</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($capstones as $t)
+                                    @foreach ($capstone as $t)
                                         <tr>
                                             <td></td>
                                             <td>{{ $t->capstone_title }}</td>
                                             <td>{{ $t->spec->desc }}</td>
                                             <td>{{ $t->year }}</td>
                                             <td>{{ $t->team_name }}</td>
-                                            <td>
-                                                {{ $t->member1->name }} <br>
-                                                {{ $t->member2->name }} <br>
-                                                {{ $t->member3->name }} 
-                                            </td>
                                             <td>{{ $t->lec1->name }}</td>
                                             <td>{{ $t->lec2->name }}</td>
                                             <td>
@@ -85,7 +75,7 @@
                                             <td><a href="{{ asset('storage/c500/' . $t->c500) }}" target="_blank"><i
                                                         class="fas fa-file-pdf"></i></a>
                                             </td>
-                                            {{-- <td class="flex-row d-flex">
+                                            <td class="flex-row d-flex">
                                                 <a href="{{ route('admin.capstone.edit', Crypt::encryptString($t->id)) }}"
                                                     class="btn btn-secondary">
                                                     <i class="fas fa-edit"></i>
@@ -99,7 +89,7 @@
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
