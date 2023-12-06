@@ -53,8 +53,7 @@
                                             <td class="text-center">
                                                 <img src="{{ $g->image }}" class="img-fluid" style="width: 180px"
                                                     alt="Image">
-                                            </td>D
-                                            <td></td>
+                                            </td>
                                             <td class="flex-row d-flex">
                                                 <a href="{{ route('admin.lecturer.edit', Crypt::encryptString($g->id)) }}"
                                                     class="btn btn-secondary">
