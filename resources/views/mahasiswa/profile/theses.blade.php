@@ -204,4 +204,8 @@
         }
     </script>
 
+    <script>
+        $('textarea').val($('textarea').val().trim());
+    </script>
+
 @endsection

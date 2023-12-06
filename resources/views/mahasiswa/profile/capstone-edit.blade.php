@@ -94,16 +94,16 @@
                                             </option>
                                         </select>
                                     @else --}}
-                                        <input type="hidden" name="member1_id" value="{{ $theses->member1_id }}">
-                                        <select name="member1_id" class="selectpicker filt" data-live-search="true"
-                                            id="member1_id" data-size="5" data-width="35%" title="Anggota 1" disabled>
-                                            @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                        {{ $theses->member1_id == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->name }}
-                                                    </option>
-                                            @endforeach
-                                        </select>
+                                    <input type="hidden" name="member1_id" value="{{ $theses->member1_id }}">
+                                    <select name="member1_id" class="selectpicker filt" data-live-search="true"
+                                        id="member1_id" data-size="5" data-width="35%" title="Anggota 1" disabled>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}" class="text-black filt-drop"
+                                                {{ $theses->member1_id == $user->id ? 'selected' : '' }}>
+                                                {{ $user->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     {{-- @endif
 
                                     @if ($theses->member2_id == auth()->user()->id)
@@ -115,16 +115,16 @@
                                             </option>
                                         </select>
                                     @else --}}
-                                        <input type="hidden" name="member2_id" value="{{ $theses->member2_id }}">
-                                        <select name="member2_id" class="selectpicker filt" data-live-search="true"
-                                            id="member2_id" data-size="5" data-width="35%" title="Anggota 2" disabled>
-                                            @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                        {{ $theses->member2_id == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->name }}
-                                                    </option>
-                                            @endforeach
-                                        </select>
+                                    <input type="hidden" name="member2_id" value="{{ $theses->member2_id }}">
+                                    <select name="member2_id" class="selectpicker filt" data-live-search="true"
+                                        id="member2_id" data-size="5" data-width="35%" title="Anggota 2" disabled>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}" class="text-black filt-drop"
+                                                {{ $theses->member2_id == $user->id ? 'selected' : '' }}>
+                                                {{ $user->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     {{-- @endif
 
                                     @if ($theses->member3_id == auth()->user()->id)
@@ -137,18 +137,18 @@
                                             </option>
                                         </select>
                                     @else --}}
-                                        <input type="hidden" name="member3_id" value="{{ $theses->member3_id }}">
-                                        <select name="member3_id" class="selectpicker filt" data-live-search="true"
-                                            id="member3_id" data-size="5" data-width="35%" title="Anggota 3" disabled>
-                                            @foreach ($users as $user)
-                                                {{-- @if ($user->id != auth()->user()->id) --}}
-                                                    <option value="{{ $user->id }}" class="text-black filt-drop"
-                                                        {{ $theses->member3_id == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->name }}
-                                                    </option>
-                                                {{-- @endif --}}
-                                            @endforeach
-                                        </select>
+                                    <input type="hidden" name="member3_id" value="{{ $theses->member3_id }}">
+                                    <select name="member3_id" class="selectpicker filt" data-live-search="true"
+                                        id="member3_id" data-size="5" data-width="35%" title="Anggota 3" disabled>
+                                        @foreach ($users as $user)
+                                            {{-- @if ($user->id != auth()->user()->id) --}}
+                                            <option value="{{ $user->id }}" class="text-black filt-drop"
+                                                {{ $theses->member3_id == $user->id ? 'selected' : '' }}>
+                                                {{ $user->name }}
+                                            </option>
+                                            {{-- @endif --}}
+                                        @endforeach
+                                    </select>
                                     {{-- @endif --}}
                                 </div>
                             </div>
@@ -211,6 +211,12 @@
                                 <label class="small mb-1" for="year">Tahun Capstone</label>
                                 <input class="form-control" id="year" type="number" placeholder="2023"
                                     name="year" value="{{ $theses->year }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="summary">Ringkasan Proyek Capstone</label>
+                                <textarea class="form-control" id="summary" rows="5" name="summary">
+                                {!! $theses->summary !!}
+                            </textarea>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="c100">File C100 (PDF)</label>
@@ -282,6 +288,10 @@
                 }
             });
         }
+    </script>
+
+    <script>
+        $('textarea').val($('textarea').val().trim());
     </script>
 
 @endsection

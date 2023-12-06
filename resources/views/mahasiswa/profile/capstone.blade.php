@@ -82,8 +82,8 @@
                             <label class="small mb-1" for="team_name">Anggota Kelompok</label>
                             <div class="form-row">
                                 <div class="mb-3 d-flex justify-content-between">
-                                    <select name="member1_id" class="selectpicker filt" data-live-search="true" id="member1"
-                                        data-size="5" data-width="32%" title="Anggota 1" disabled>
+                                    <select name="member1_id" class="selectpicker filt" data-live-search="true"
+                                        id="member1" data-size="5" data-width="32%" title="Anggota 1" disabled>
                                         <style>
                                             .filt-drop {
                                                 background-color: #FFFFFF;
@@ -103,8 +103,8 @@
                                     </select>
                                     <input type="hidden" name="member1_id" value="{{ auth()->user()->id }}">
 
-                                    <select name="member2_id" class="selectpicker filt" data-live-search="true" id="member2"
-                                        data-size="5" data-width="32%" title="Anggota 2">
+                                    <select name="member2_id" class="selectpicker filt" data-live-search="true"
+                                        id="member2" data-size="5" data-width="32%" title="Anggota 2">
                                         <style>
                                             .filt-drop {
                                                 background-color: #FFFFFF;
@@ -128,8 +128,8 @@
 
                                     </select>
 
-                                    <select name="member3_id" class="selectpicker filt " data-live-search="true" id="member3"
-                                        data-size="5" data-width="32%" title="Anggota 3">
+                                    <select name="member3_id" class="selectpicker filt " data-live-search="true"
+                                        id="member3" data-size="5" data-width="32%" title="Anggota 3">
                                         <style>
                                             .filt-drop {
                                                 background-color: #FFFFFF;
@@ -214,6 +214,11 @@
                                     name="year" value="{{ old('year') }}">
                             </div>
                             <div class="mb-3">
+                                <label class="small mb-1" for="summary">Ringkasan Proyek Capstone</label>
+                                <textarea class="form-control" id="summary" rows="5" name="summary" value="{{ old('summary') }}">
+                            </textarea>
+                            </div>
+                            <div class="mb-3">
                                 <label class="small mb-1" for="c100">File C100 (PDF)</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="c100" name="c100"
@@ -283,6 +288,10 @@
                 }
             });
         }
+    </script>
+
+    <script>
+        $('textarea').val($('textarea').val().trim());
     </script>
 
 @endsection
