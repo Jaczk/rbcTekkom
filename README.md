@@ -9,12 +9,13 @@ Easy book loan and return for ruang baca staff.
 Generate book label with lib book code on each label for easy book management.
 
 ### Student
+![image](https://github.com/Jaczk/rbcTekkom/assets/83487454/8e85e395-97d9-4fb8-9b30-06542c710e42)
+![image](https://github.com/Jaczk/rbcTekkom/assets/83487454/4ea761d2-b882-4415-bd6f-b88e68a0935f)
 Find Book, Theses, and Capstone Document that available in reading room Computer Engineering Diponegoro University
 See Ruang Baca shift hours
 Ruang Baca Gallery
 
-### QR Management
+### QR Usage
 QR was used for this system to differentiate each book title or lib book code for easy book loan.
 This features was made using [SimpleSoftwareIO/simple-qrcode](https://github.com/SimpleSoftwareIO/simple-qrcode)
-
 
