@@ -79,7 +79,7 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <section class="content">
+            <section class="content poppins-text">
                 <div>
                     @yield('content')
                 </div><!-- /.container-fluid -->

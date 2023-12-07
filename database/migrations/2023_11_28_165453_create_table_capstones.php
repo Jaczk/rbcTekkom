@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('spec_id');
             $table->string('capstone_title');
             $table->string('team_name');
+            $table->text('summary');
             $table->integer('member1_id');
             $table->integer('member2_id');
             $table->integer('member3_id');

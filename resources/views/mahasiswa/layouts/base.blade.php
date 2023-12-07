@@ -65,7 +65,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+    <div class="wrapper poppins-text">
 
         {{-- navbar here --}}
         @include('mahasiswa.layouts.navbar')

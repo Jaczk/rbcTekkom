@@ -37,7 +37,7 @@ class FacilityController extends Controller
     public function updateGallery(Request $request, string $id)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpg,jpeg,png',
+            'image' => 'image|mimes:jpg,jpeg,png',
             'caption' => 'required|string'
         ]);
 

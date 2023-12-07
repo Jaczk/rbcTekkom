@@ -15,6 +15,7 @@ class Capstone extends Model
         'spec_id',
         'capstone_title',
         'team_name',
+        'summary',
         'member1_id',
         'member2_id',
         'member3_id',

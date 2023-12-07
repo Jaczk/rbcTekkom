@@ -169,7 +169,7 @@ class ThesesController extends Controller
         } elseif ($sort == 1) {
             $query->orderBy('updated_at', 'desc');
         }
-        
+
 
         if ($startYear && $endYear) {
             $query->whereBetween('year', [$startYear, $endYear]);
@@ -195,8 +195,9 @@ class ThesesController extends Controller
                     ->orWhere('author', 'like', "%{$searchInput}%");
             });
         }
-
-        $theses = $query->get();
+        // Use paginate instead of get to enable pagination
+        $perPage = 8; // Set the number of items per page as needed
+        $theses = $query->paginate($perPage);
 
         return view('mahasiswa.theses.index', compact('theses', 'years', 'lecturers', 'specs'));
     }

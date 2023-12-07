@@ -3,7 +3,7 @@
 @section('title', 'Tugas Akhir')
 
 @section('content')
-    <div class="p-2 row ms-4">
+    <div class="p-2 row col-xl-7 mx-auto">
         <div id="theses-title">
             <div class="mt-4 title fs-3">
                 Detail Tugas Akhir
@@ -30,7 +30,7 @@
             </div>
         </div>
         <!-- Nav pills -->
-        <div class="mt-2 col-md-6">
+        <div class="mt-2 col-md-12">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"

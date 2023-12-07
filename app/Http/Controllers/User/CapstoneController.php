@@ -323,8 +323,11 @@ class CapstoneController extends Controller
 
 
         $capstones = $query->groupBy('capstone_title', 'team_name', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
-            ->select('capstone_title', 'team_name', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
-            ->get();
+            ->select('capstone_title', 'team_name', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500');
+
+        // Use paginate instead of get to enable pagination
+        $perPage = 8; // Set the number of items per page as needed
+        $capstones = $capstones->paginate($perPage);
 
         return view('mahasiswa.capstone.index', compact('capstones', 'years', 'lecturers', 'specs'));
     }

@@ -3,7 +3,8 @@
 @section('title', 'Tugas Akhir')
 
 @section('content')
-    <div class="row p-2 ms-4">
+
+    <div class="col-xl-7 row mx-auto">
         <div id="theses-title">
             <div class="mt-4 title fs-3">
                 Katalog Tugas Akhir
@@ -11,7 +12,7 @@
             <div class="mt-2 fs-6">
                 <a href="{{ route('user.theses.gallery') }}">Home</a>
             </div>
-            <form action="" class="w-75 me-4">
+            <form action="" class="w-100 me-4">
                 <div class="p-1 my-4 border input-group rounded-2 w-100">
                     <input type="search" placeholder="Masukkan Judul Tugas Akhir atau Nama Penulis"
                         aria-describedby="button-addon3" class="border-0 form-control bg-none" id="search">
@@ -22,7 +23,9 @@
                 </div>
             </form>
         </div>
-        <div class="col-xl-3">
+
+        {{-- Filter --}}
+        <div class="col-xl-4">
             <div class="fs-4 ">
                 Filter
             </div>
@@ -79,14 +82,18 @@
             </div>
 
         </div>
-        <div class="col-xl-8 ms-5">
-            <div class="row">
+
+        {{-- Theses Content --}}
+        <div class="col-xl-8">
+            <div class="ms-5">
+
                 @forelse ($theses as $t)
-                    <div class="col-md-10 mb-3">
-                        <div class="border-bottom border-dark">
-                            <a href="{{ route('user.theses.detail', Crypt::encryptString($t->id)) }}">
+                    <div class="col-md-12 mb-3">
+                        <div class="border-bottom border-dark border-2">
+                            <a href="{{ route('user.theses.detail', Crypt::encryptString($t->id)) }}" class="fs-5">
                                 {{ $t->thesis_name }}
                             </a>
+    
                         </div>
                         <div class="mt-2 d-flex flex-row">
                             <i class="fa-solid fa-user mt-1"></i>
@@ -104,9 +111,30 @@
                 @empty
                     <h2>Maaf Tugas Akhir yang anda cari tidak ada...</h2>
                 @endforelse
+    
+                @if ($theses->hasPages())
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            @if ($theses->currentPage() > 1)
+                                <li class="page-item"><a class="page-link" href="{{ $theses->previousPageUrl() }}">Previous</a>
+                                </li>
+                            @endif
+    
+                            @for ($i = max(1, $theses->currentPage() - 1); $i <= min($theses->lastPage(), $theses->currentPage() + 1); $i++)
+                                <li class="page-item {{ $i == $theses->currentPage() ? 'active' : '' }}"><a class="page-link"
+                                        href="{{ $theses->url($i) }}">{{ $i }}</a></li>
+                            @endfor
+    
+                            @if ($theses->currentPage() < $theses->lastPage())
+                                <li class="page-item"><a class="page-link" href="{{ $theses->nextPageUrl() }}">Next</a></li>
+                            @endif
+                        </ul>
+                    </nav>
+                @endif
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('js')
@@ -132,7 +160,7 @@
 
                 // Construct the URL with selected filter values
                 const url = "{{ route('user.theses.gallery') }}?sortSpec=" + specId +
-                    "&sort=" + sort + "&sortLec=" + lecturerId + "&search=" + searchValue "&startYear=" +
+                    "&sort=" + sort + "&sortLec=" + lecturerId + "&search=" + searchValue + "&startYear=" +
                     startYear + "&endYear=" + endYear;
 
                 // Perform a page reload with the updated URL

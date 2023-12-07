@@ -3,7 +3,7 @@
 @section('title', 'Capstone')
 
 @section('content')
-    <div class="p-2 row ms-4">
+    <div class="col-xl-7 row mx-auto">
         <div id="theses-title">
             <div class="mt-4 title fs-3">
                 Katalog Capstone
@@ -11,7 +11,7 @@
             <div class="mt-2 fs-6">
                 <a href="{{ route('user.capstone.gallery') }}">Home</a>
             </div>
-            <form action="" class="w-75 me-4">
+            <form action="" class="w-100 me-4">
                 <div class="p-1 my-4 border input-group rounded-2 w-100">
                     <input type="search" placeholder="Cari Judul Proyek Capstone atau kode Tim Capstone"
                         aria-describedby="button-addon3" class="border-0 form-control bg-none" id="search">
@@ -22,7 +22,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-xl-3">
+        <div class="col-xl-4">
             <div class="fs-5 ">
                 Filter
             </div>
@@ -75,12 +75,12 @@
                 Terapkan Filter
             </div>
         </div>
-        <div class="col-xl-9">
+        <div class="col-xl-8">
             <div class="row ms-2">
                 @forelse ($capstones as $c)
-                    <div class="mb-3 col-md-10">
+                    <div class="mb-3 col-md-12">
                         <div class="border-bottom border-dark">
-                            <a href="{{ route('user.capstone.detail', Crypt::encryptString($c->team_name)) }}">
+                            <a class="fs-5" href="{{ route('user.capstone.detail', Crypt::encryptString($c->team_name)) }}">
                                 {{ $c->capstone_title }}
                             </a>
                         </div>
@@ -108,6 +108,25 @@
                     <h2>Maaf Dokumen Capstone yang anda cari tidak ada...</h2>
                 @endforelse
             </div>
+            @if ($capstones->hasPages())
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @if ($capstones->currentPage() > 1)
+                            <li class="page-item"><a class="page-link" href="{{ $capstones->previousPageUrl() }}">Previous</a>
+                            </li>
+                        @endif
+
+                        @for ($i = max(1, $capstones->currentPage() - 1); $i <= min($capstones->lastPage(), $capstones->currentPage() + 1); $i++)
+                            <li class="page-item {{ $i == $capstones->currentPage() ? 'active' : '' }}"><a class="page-link"
+                                    href="{{ $capstones->url($i) }}">{{ $i }}</a></li>
+                        @endfor
+
+                        @if ($capstones->currentPage() < $capstones->lastPage())
+                            <li class="page-item"><a class="page-link" href="{{ $capstones->nextPageUrl() }}">Next</a></li>
+                        @endif
+                    </ul>
+                </nav>
+            @endif
         </div>
     </div>
 @endsection
