@@ -274,14 +274,58 @@ class CapstoneController extends Controller
         return redirect()->route('user.profile')->with('success', 'Data berhasil dihapus');
     }
 
-    public function capstoneGallery()
+    public function capstoneGallery(Request $request)
     {
-        $capstones = Capstone::groupBy('capstone_title', 'team_name', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
-            ->select('capstone_title', 'team_name', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
-            ->get();
+        $query = Capstone::query();
         $years = Capstone::distinct()->pluck('year');
         $lecturers = Lecturer::all();
         $specs = Specialization::all();
+
+        $sort = $request->input('sort');
+        $startYear = $request->input('startYear');
+        $endYear = $request->input('endYear');
+        $sortLec = $request->input('sortLec');
+        $sortSpec = $request->input('sortSpec');
+
+        $searchInput = $request->input('search');
+
+        if ($sort == 2) {
+            $query->orderBy('updated_at');
+        } elseif ($sort == 1) {
+            $query->orderBy('updated_at', 'desc');
+        }
+
+
+        if ($startYear && $endYear) {
+            $query->whereBetween('year', [$startYear, $endYear]);
+        } elseif ($startYear) {
+            $query->where('year', '>=', $startYear);
+        } elseif ($endYear) {
+            $query->where('year', '<=', $endYear);
+        }
+
+        if ($sortLec) {
+            $query->where(function ($q) use ($sortLec) {
+                $q->where('lec1_id', $sortLec)->orWhere('lec2_id', $sortLec);
+            });
+        }
+
+        if ($sortSpec) {
+            $query->where('spec_id', $sortSpec);
+        }
+
+        if ($searchInput) {
+            $query->where(function ($q) use ($searchInput) {
+                $q->where('capstone_title', 'like', "%{$searchInput}%")
+                    ->orWhere('team_name', 'like', "%{$searchInput}%");
+            });
+        }
+
+
+        $capstones = $query->groupBy('capstone_title', 'team_name', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
+            ->select('capstone_title', 'team_name', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
+            ->get();
+
         return view('mahasiswa.capstone.index', compact('capstones', 'years', 'lecturers', 'specs'));
     }
 

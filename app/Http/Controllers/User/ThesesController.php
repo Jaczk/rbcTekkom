@@ -149,12 +149,54 @@ class ThesesController extends Controller
         return redirect()->route('user.profile')->with('success', 'Data berhasil dihapus');
     }
 
-    public function thesesGallery()
+    public function thesesGallery(Request $request)
     {
-        $theses = Thesis::all();
+        $query = Thesis::query();
         $years = Thesis::distinct()->pluck('year');
         $lecturers = Lecturer::all();
         $specs = Specialization::all();
+
+        $sort = $request->input('sort');
+        $startYear = $request->input('startYear');
+        $endYear = $request->input('endYear');
+        $sortLec = $request->input('sortLec');
+        $sortSpec = $request->input('sortSpec');
+
+        $searchInput = $request->input('search');
+
+        if ($sort == 2) {
+            $query->orderBy('updated_at');
+        } elseif ($sort == 1) {
+            $query->orderBy('updated_at', 'desc');
+        }
+        
+
+        if ($startYear && $endYear) {
+            $query->whereBetween('year', [$startYear, $endYear]);
+        } elseif ($startYear) {
+            $query->where('year', '>=', $startYear);
+        } elseif ($endYear) {
+            $query->where('year', '<=', $endYear);
+        }
+
+        if ($sortLec) {
+            $query->where(function ($q) use ($sortLec) {
+                $q->where('lec1_id', $sortLec)->orWhere('lec2_id', $sortLec);
+            });
+        }
+
+        if ($sortSpec) {
+            $query->where('spec_id', $sortSpec);
+        }
+
+        if ($searchInput) {
+            $query->where(function ($q) use ($searchInput) {
+                $q->where('thesis_name', 'like', "%{$searchInput}%")
+                    ->orWhere('author', 'like', "%{$searchInput}%");
+            });
+        }
+
+        $theses = $query->get();
 
         return view('mahasiswa.theses.index', compact('theses', 'years', 'lecturers', 'specs'));
     }
@@ -163,7 +205,7 @@ class ThesesController extends Controller
     {
         $decryptId = Crypt::decryptString($id);
         $theses = Thesis::with(['lec1', 'lec2', 'user', 'spec'])->find($decryptId);
-        
+
         return view('mahasiswa.theses.detail', [
             'theses' => $theses,
         ]);

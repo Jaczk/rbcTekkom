@@ -11,10 +11,16 @@
             <div class="mt-2 fs-6">
                 <a href="{{ route('user.theses.gallery') }}">Home</a>
             </div>
-            <!-- Search form -->
-            <div class="active-cyan-4 mb-4 mt-3 w-75">
-                <input class="form-control" type="text" placeholder="Cari Judul Tugas Akhir" aria-label="Search">
-            </div>
+            <form action="" class="w-75 me-4">
+                <div class="p-1 my-4 border input-group rounded-2 w-100">
+                    <input type="search" placeholder="Masukkan Judul Tugas Akhir atau Nama Penulis"
+                        aria-describedby="button-addon3" class="border-0 form-control bg-none" id="search">
+                    <div class="border-0 input-group-append">
+                        <button id="searchbtn" type="button" class="btn btn-link text-success"><i
+                                class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="col-xl-3">
             <div class="fs-4 ">
@@ -47,8 +53,8 @@
                     </select>
                 </div>
             </div>
-            
-            
+
+
             <div>
                 <label for="" class="my-2">Sort nama Dosen</label>
                 <select name="sortLecturer" id="sortLecturer" class="me-4 form-control">
@@ -68,39 +74,115 @@
                     @endforeach
                 </select>
             </div>
-            <div class="btn btn-primary my-3">
+            <div class="btn btn-primary my-3"id="filterButton">
                 Terapkan Filter
             </div>
 
         </div>
         <div class="col-xl-8 ms-5">
             <div class="row">
-                @if (empty($theses))
-                    <h2>Tidak ada Tugas Akhir</h2>
-                @else
-                    @foreach ($theses as $t)
-                        <div class="col-md-10 mb-3">
-                            <div class="border-bottom border-dark">
-                                <a href="{{ route('user.theses.detail', Crypt::encryptString($t->id)) }}">
-                                    {{ $t->thesis_name }}
-                                </a>
-                            </div>
-                            <div class="mt-2 d-flex flex-row">
-                                <i class="fa-solid fa-user mt-1"></i>
-                                <div class="ms-2" style="color: #071952">
-                                    {{ $t->author }} | {{ $t->lec1->name }} | {{ $t->lec2->name }}
-                                </div>
-                            </div>
-                            <div class="mt-2 d-flex flex-row">
-                                <i class="fa-regular fa-file mt-1"></i>
-                                <div class="ms-2">
-                                    {{ $t->year }}
-                                </div>
+                @forelse ($theses as $t)
+                    <div class="col-md-10 mb-3">
+                        <div class="border-bottom border-dark">
+                            <a href="{{ route('user.theses.detail', Crypt::encryptString($t->id)) }}">
+                                {{ $t->thesis_name }}
+                            </a>
+                        </div>
+                        <div class="mt-2 d-flex flex-row">
+                            <i class="fa-solid fa-user mt-1"></i>
+                            <div class="ms-2" style="color: #071952">
+                                {{ $t->author }} | {{ $t->lec1->name }} | {{ $t->lec2->name }}
                             </div>
                         </div>
-                    @endforeach
-                @endif
+                        <div class="mt-2 d-flex flex-row">
+                            <i class="fa-regular fa-file mt-1"></i>
+                            <div class="ms-2">
+                                {{ $t->year }}
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <h2>Maaf Tugas Akhir yang anda cari tidak ada...</h2>
+                @endforelse
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortSelect = document.getElementById('sorted');
+            const startYearSelect = document.getElementById('startYear');
+            const endYearSelect = document.getElementById('endYear');
+            const lecturerSelect = document.getElementById('sortLecturer');
+            const specSelect = document.getElementById('sortSpec');
+            const filterButton = document.getElementById('filterButton');
+            const searchInput = document.getElementById('search');
+            const searchButton = document.getElementById('searchbtn');
+
+            filterButton.addEventListener('click', function() {
+                // Get selected values from the dropdowns
+                const specId = specSelect.value;
+                const sort = sortSelect.value;
+                const startYear = startYearSelect.value;
+                const endYear = endYearSelect.value;
+                const lecturerId = lecturerSelect.value;
+                const searchValue = searchInput.value;
+
+                // Construct the URL with selected filter values
+                const url = "{{ route('user.theses.gallery') }}?sortSpec=" + specId +
+                    "&sort=" + sort + "&sortLec=" + lecturerId + "&search=" + searchValue "&startYear=" +
+                    startYear + "&endYear=" + endYear;
+
+                // Perform a page reload with the updated URL
+                window.location.href = url;
+            });
+            // Add event listener for keypress events on the search input
+            searchInput.addEventListener('keypress', function(event) {
+                // Check if the pressed key is Enter (key code 13)
+                if (event.key === 'Enter') {
+                    // Prevent the default form submission behavior
+                    event.preventDefault();
+
+                    // Get the search input value
+                    const searchValue = event.target.value;
+                    const specId = specSelect.value;
+                    const sort = sortSelect.value;
+                    const startYear = startYearSelect.value;
+                    const endYear = endYearSelect.value;
+                    const lecturerId = lecturerSelect.value;
+
+                    // Construct the URL with the search filter value
+                    const url = "{{ route('user.theses.gallery') }}?search=" + searchValue +
+                        "&sort=" + sort + "&sortLec=" + lecturerId + "&sortSpec=" + specId +
+                        "&startYear=" + startYear + "&endYear=" + endYear;
+
+                    // Perform a page reload with the updated URL
+                    window.location.href = url;
+                }
+            });
+
+            searchButton.addEventListener('click', function(event) {
+                // Get the search input value
+                const searchValue = searchInput.value;
+                const specId = specSelect.value;
+                const sort = sortSelect.value;
+                const startYear = startYearSelect.value;
+                const endYear = endYearSelect.value;
+                const lecturerId = lecturerSelect.value;
+
+                // Construct the URL with the search filter value
+                const url = "{{ route('user.theses.gallery') }}?search=" + searchValue +
+                    "&sort=" + sort + "&sortLec=" + lecturerId + "&sortSpec=" + specId +
+                    "&startYear=" + startYear + "&endYear=" + endYear;
+
+                // Perform a page reload with the updated URL
+                window.location.href = url;
+            });
+
+
+        });
+    </script>
+
 @endsection

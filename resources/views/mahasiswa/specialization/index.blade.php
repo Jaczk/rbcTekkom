@@ -11,8 +11,6 @@
                 @if ($books->isNotEmpty())
                     <h2>Berdasarkan Kategori: <span class="text-dark">{{ $books[0]->specialization->desc }}</span></h2>
                     <a class="btn btn-primary btn-lg ml-2" href="{{ route('home') }}">Kembali</a>
-                @else
-                    <h1>Tidak ada Barang Pada Kategori ini</h1>
                 @endif
             </div>
             {{-- <a class="btn btn-primary btn-lg align-self-center mr-4" href="{{ route('home') }}">Kembali</a> --}}

@@ -17,6 +17,9 @@
                 {{ $theses->thesis_name }}
             </div>
             <div class="mt-2">
+                <span class="fw-semibold">Spesialisasi</span> : {{ $theses->spec->desc }}
+            </div>
+            <div class="mt-2">
                 <span class="fw-semibold">Penulis</span> : {{ $theses->author }}
             </div>
             <div class="mt-2">
