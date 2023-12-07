@@ -1,18 +1,19 @@
-![image](https://github.com/Jaczk/rbcTekkom/assets/83487454/d20aa925-0833-4c21-925e-f28b0a8eb184)#Ruang Baca Teknik Komputer Universitas Diponegoro
+# Ruang Baca Teknik Komputer Universitas Diponegoro
 Book Information System that made for Computer Engineering Diponegoro University for easy loan and return book in reading room for Computer Engineering Diponegoro University. This system also let active student in Computer Engineering Diponegoro University to access Theses and Capstone document project from previous alumni. This system was made using Laravel Framework with MySQL as databases.
 
-##Features
-###Admin
+## Features
+### Admin
+![image](https://github.com/Jaczk/rbcTekkom/assets/83487454/d20aa925-0833-4c21-925e-f28b0a8eb184)
 Ruang Baca Teknik Komputer was made using AdminLTE Bootstrap 5 Admin Dasboard for user, book, document, gallery and many management on the database.
 Easy book loan and return for ruang baca staff.
 Generate book label with lib book code on each label for easy book management.
 
-###Student
+### Student
 Find Book, Theses, and Capstone Document that available in reading room Computer Engineering Diponegoro University
 See Ruang Baca shift hours
 Ruang Baca Gallery
 
-###QR Management
+### QR Management
 QR was used for this system to differentiate each book title or lib book code for easy book loan.
 This features was made using [SimpleSoftwareIO/simple-qrcode](https://github.com/SimpleSoftwareIO/simple-qrcode)
 
