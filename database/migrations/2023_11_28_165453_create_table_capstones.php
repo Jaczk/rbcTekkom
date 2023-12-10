@@ -24,7 +24,6 @@ return new class extends Migration
             $table->integer('lec1_id');
             $table->integer('lec2_id');
             $table->integer('year');
-            $table->text('summary');
             $table->string('c100');
             $table->string('c200');
             $table->string('c300');
