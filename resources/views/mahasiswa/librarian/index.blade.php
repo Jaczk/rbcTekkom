@@ -8,14 +8,14 @@
 
         <div class="row">
             <div class="col-md-6 mx-auto text-center">
-                <div class="mt-4 title fs-2 mb-4">
+                <div class="mt-4 title fs-2 mb-4 fw-semibold">
                     Daftar Pustakawan
                 </div>
             </div>
         </div>
 
         <div class="form-row">
-            <div class="col-md-6 mx-auto">
+            <div class="col-md-8 mx-auto">
                 <div class="row row-cols-1 row-cols-md-2 g-3">
                     @foreach ($librarians as $librarian )
                     <div class="col">
@@ -23,7 +23,7 @@
                             <div class="card-body">
                                 <div class="d-flex text-black">
                                     <div class="flex-shrink-0">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                        <img src="{{ asset('assets/images/profile.png') }}"
                                             alt="Generic placeholder image" class="img-fluid"
                                             style="width: 100px; border-radius: 10px;">
                                     </div>

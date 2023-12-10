@@ -3,7 +3,7 @@
 @section('title', 'Tugas Akhir')
 
 @section('content')
-    <div class="p-2 row col-xl-7 mx-auto">
+    <div class="p-2 row col-xl-8 mx-auto">
         <div id="theses-title">
             <div class="mt-4 title fs-3">
                 Detail Tugas Akhir

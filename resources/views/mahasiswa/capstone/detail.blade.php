@@ -3,7 +3,7 @@
 @section('title', 'Detail Capstone')
 
 @section('content')
-    <div class="p-2 row ms-4">
+    <div class="col-xl-8 row mx-auto">
         <div id="theses-title">
             <div class="mt-4 title fs-3">
                 Detail Capstone
