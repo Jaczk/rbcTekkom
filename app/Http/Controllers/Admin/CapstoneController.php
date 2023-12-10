@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Specialization;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
@@ -22,10 +23,22 @@ class CapstoneController extends Controller
         $users = User::where('role_id', 2)->get();
         $lecturer = Lecturer::all();
         $spec = Specialization::all();
-        // $capstones = Capstone::groupBy('capstone_title', 'team_name', 'spec_id', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
-        //     ->select('capstone_title', 'team_name', 'spec_id', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
-        //     ->get();
-        $capstones = Capstone::select('capstone_title', 'team_name', 'spec_id', 'member1_id', 'member2_id', 'member3_id', 'lec1_id', 'lec2_id', 'year', 'c100', 'c200', 'c300', 'c400', 'c500')
+        $capstones = Capstone::select(
+            'capstone_title',
+            'team_name',
+            'spec_id',
+            'member1_id',
+            'member2_id',
+            'member3_id',
+            'lec1_id',
+            'lec2_id',
+            'year',
+            'c100',
+            'c200',
+            'c300',
+            'c400',
+            'c500'
+        )
             ->distinct()
             ->get();
 
@@ -92,7 +105,8 @@ class CapstoneController extends Controller
             // Handle c100 upload
             $file1 = $request->file('c100');
             $file1Name = Str::random(8) . $file1->getClientOriginalName();
-            $file1->storeAs('public/c100/', $file1Name);
+            // Move the file to public/store/c100
+            $file1->move(public_path('store/c100'), $file1Name);
 
             $data['c100'] =  $file1Name;
         }
@@ -101,7 +115,8 @@ class CapstoneController extends Controller
             // Handle c200 upload
             $file2 = $request->file('c200');
             $file2Name = Str::random(8) . $file2->getClientOriginalName();
-            $file2->storeAs('public/c200/', $file2Name);
+            // Move the file to public/store/c200
+            $file1->move(public_path('store/2100'), $file2Name);
 
             $data['c200'] =  $file2Name;
         }
@@ -110,7 +125,8 @@ class CapstoneController extends Controller
             // Handle c300 upload
             $file3 = $request->file('c300');
             $file3Name = Str::random(8) . $file3->getClientOriginalName();
-            $file3->storeAs('public/c300/', $file3Name);
+            // Move the file to public/store/c300
+            $file1->move(public_path('store/c300'), $file3Name);
 
             $data['c300'] =  $file3Name;
         }
@@ -119,7 +135,8 @@ class CapstoneController extends Controller
             // Handle c400 upload
             $file4 = $request->file('c400');
             $file4Name = Str::random(8) . $file4->getClientOriginalName();
-            $file4->storeAs('public/c400/', $file4Name);
+            // Move the file to public/store/c400
+            $file1->move(public_path('store/c400'), $file4Name);
 
             $data['c400'] =  $file4Name;
         }
@@ -128,7 +145,8 @@ class CapstoneController extends Controller
             // Handle c500 upload
             $file5 = $request->file('c500');
             $file5Name = Str::random(8) . $file5->getClientOriginalName();
-            $file5->storeAs('public/c500/', $file5Name);
+            // Move the file to public/store/c500
+            $file1->move(public_path('store/c500'), $file5Name);
 
             $data['c500'] =  $file5Name;
         }
@@ -146,8 +164,6 @@ class CapstoneController extends Controller
         $capstone->save();
         $capstone2->save();
         $capstone3->save();
-
-        Artisan::call('custom:storagelink');
 
         return redirect()->route('user.profile')->with('success', 'Data Capstone berhasil ditambahkan');
     }
@@ -180,55 +196,60 @@ class CapstoneController extends Controller
             // Handle c100 upload
             $file1 = $request->file('c100');
             $file1Name = Str::random(8) . $file1->getClientOriginalName();
-            $file1->storeAs('public/c100/', $file1Name);
+            // Move the file to public/store/c100
+            $file1->move(public_path('store/c100'), $file1Name);
 
             $data['c100'] =  $file1Name;
-
-            Storage::delete('public/c100/' . $capstone->c100);
+            File::delete(public_path('store/c100/' . $capstone->c100));
+            
         }
 
         if ($request->hasFile('c200')) {
             // Handle c200 upload
             $file2 = $request->file('c200');
             $file2Name = Str::random(8) . $file2->getClientOriginalName();
-            $file2->storeAs('public/c200/', $file2Name);
+            // Move the file to public/store/c200
+            $file1->move(public_path('store/c200'), $file2Name);
 
             $data['c200'] =  $file2Name;
 
-            Storage::delete('public/c200/' . $capstone->c200);
+            File::delete(public_path('store/c200/' . $capstone->c200));
         }
 
         if ($request->hasFile('c300')) {
             // Handle c300 upload
             $file3 = $request->file('c300');
             $file3Name = Str::random(8) . $file3->getClientOriginalName();
-            $file3->storeAs('public/c300/', $file3Name);
+            // Move the file to public/store/c300
+            $file1->move(public_path('store/c300'), $file3Name);
 
             $data['c300'] =  $file3Name;
 
-            Storage::delete('public/c300/' . $capstone->c300);
+            File::delete(public_path('store/c300/' . $capstone->c300));
         }
 
         if ($request->hasFile('c400')) {
             // Handle c400 upload
             $file4 = $request->file('c400');
             $file4Name = Str::random(8) . $file4->getClientOriginalName();
-            $file4->storeAs('public/c400/', $file4Name);
+            // Move the file to public/store/c400
+            $file1->move(public_path('store/c400'), $file4Name);
 
             $data['c400'] =  $file4Name;
 
-            Storage::delete('public/c400/' . $capstone->c400);
+            File::delete(public_path('store/c400/' . $capstone->c400));
         }
 
         if ($request->hasFile('c500')) {
             // Handle c500 upload
             $file5 = $request->file('c500');
             $file5Name = Str::random(8) . $file5->getClientOriginalName();
-            $file5->storeAs('public/c500/', $file5Name);
+            // Move the file to public/store/c500
+            $file1->move(public_path('store/c500'), $file5Name);
 
             $data['c500'] =  $file5Name;
 
-            Storage::delete('public/c500/' . $capstone->c500);
+            File::delete(public_path('store/c500/' . $capstone->c500));
         }
 
         $data['user_id'] = $request->input('member1_id');
@@ -253,11 +274,11 @@ class CapstoneController extends Controller
         $capstone2 = Capstone::where('user_id', $capstone->member2_id);
         $capstone3 = Capstone::where('user_id', $capstone->member3_id);
 
-        Storage::delete('public/c100/' . $capstone->c100);
-        Storage::delete('public/c200/' . $capstone->c200);
-        Storage::delete('public/c300/' . $capstone->c300);
-        Storage::delete('public/c400/' . $capstone->c400);
-        Storage::delete('public/c500/' . $capstone->c500);
+        File::delete(public_path('store/c100/' . $capstone->c100));
+        File::delete(public_path('store/c200/' . $capstone->c200));
+        File::delete(public_path('store/c300/' . $capstone->c300));
+        File::delete(public_path('store/c400/' . $capstone->c400));
+        File::delete(public_path('store/c500/' . $capstone->c500));
 
         $capstone->forceDelete();
         $capstone2->forceDelete();

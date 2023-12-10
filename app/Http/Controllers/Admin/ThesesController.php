@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Lecturer;
-use App\Models\Specialization;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Thesis;
+use App\Models\Lecturer;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\Specialization;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 
 class ThesesController extends Controller
 {
@@ -55,12 +56,12 @@ class ThesesController extends Controller
         // Handle file_1 upload
         $file1 = $request->file('file_1');
         $file1Name = Str::random(8) . $file1->getClientOriginalName();
-        $file1->storeAs('public/pdf-1/', $file1Name);
+        $file1->move(public_path('store/pdf-1'), $file1Name);
 
         // Handle file_2 upload
         $file2 = $request->file('file_2');
         $file2Name = Str::random(8) . $file2->getClientOriginalName();
-        $file2->storeAs('public/pdf-2/', $file2Name);
+        $file2->move(public_path('store/pdf-2'), $file2Name);
 
         // Create Thesis instance
         $thesis = new Thesis([
@@ -81,9 +82,6 @@ class ThesesController extends Controller
 
         // Save the Thesis instance
         $thesis->save();
-
-        // Assuming you have a 'custom:storagelink' Artisan command for creating storage links
-        Artisan::call('custom:storagelink');
 
         // Redirect to the user profile page
         return redirect()->route('admin.theses')->with('success', 'Sukses Mengupload Tugas Akhir');
@@ -111,25 +109,23 @@ class ThesesController extends Controller
             // Handle file_1 upload
             $file1 = $request->file('file_1');
             $file1Name = Str::random(8) . $file1->getClientOriginalName();
-            $file1->storeAs('public/pdf-1/', $file1Name);
+            $file1->move(public_path('store/pdf-1'), $file1Name);
 
             $data['file_1'] =  $file1Name;
 
-            Storage::delete('public/pdf-1/' . $theses->file_1);
+            File::delete(public_path('store/pdf-1/' . $theses->file_1));
         }
 
         if ($request->hasFile('file_2')) {
             // Handle file_2 upload
             $file2 = $request->file('file_2');
             $file2Name = Str::random(8) . $file2->getClientOriginalName();
-            $file2->storeAs('public/pdf-2/', $file2Name);
+            $file2->move(public_path('store/pdf-2'), $file2Name);
 
             $data['file_2'] =  $file2Name;
 
-            Storage::delete('public/pdf-2/' . $theses->file_2);
+            File::delete(public_path('store/pdf-2/' . $theses->file_2));
         }
-
-        // $data['user_id'] = Auth::user()->id;
 
         // Save the Thesis instance
         $theses->update($data);
@@ -141,8 +137,8 @@ class ThesesController extends Controller
     {
         $theses = Thesis::find($id);
 
-        Storage::delete('public/pdf-1/' . $theses->file_1);
-        Storage::delete('public/pdf-2/' . $theses->file_2);
+        File::delete(public_path('store/pdf-1/' . $theses->file_1));
+        File::delete(public_path('store/pdf-2/' . $theses->file_2));
 
         $theses->forceDelete();
 

@@ -7,12 +7,13 @@ use App\Models\SpecDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Specialization;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BookController extends Controller
@@ -78,7 +79,7 @@ class BookController extends Controller
                 ->encode('webp', 75); // Convert to WebP format
 
             // Save the compressed and converted image
-            $compressedImage->save(storage_path('app/public/images/' . $ogImageName));
+            $compressedImage->save(public_path('store/images/' . $ogImageName));
 
             $data['image'] = $ogImageName;
         }
@@ -91,8 +92,6 @@ class BookController extends Controller
         $book->qr_code = $data['qr_code'];
         $book->save();
 
-        Artisan::call('custom:storagelink');
-
         return redirect()->route('admin.book')->with('success', 'Buku berhasil ditambahkan');
     }
 
@@ -103,7 +102,7 @@ class BookController extends Controller
 
         $qrCodeData = $libBookCode;
         $filename = $randomString . $libBookCode . '.png';
-        $filePath = storage_path('app/public/qr-images/' . $filename);
+        $filePath = public_path('store/qr-images/' . $filename);
 
         QrCode::size(500)->format('png')->generate($qrCodeData, $filePath);
 
@@ -163,7 +162,7 @@ class BookController extends Controller
         if ($request->has('lib_book_code') && $request->lib_book_code !== $book->lib_book_code) {
             // Delete the old QR code
             if ($book->qr_code) {
-                $oldQrCodePath = storage_path('app/public/qr-images/' . $book->qr_code);
+                $oldQrCodePath = public_path('store/qr-images/' . $book->qr_code);
                 if (file_exists($oldQrCodePath)) {
                     unlink($oldQrCodePath);
                 }
@@ -173,7 +172,7 @@ class BookController extends Controller
             $randomString = Str::random(6);
             $qrCodeData = $request->lib_book_code;
             $filename = $randomString . $request->lib_book_code . '.png';
-            $filePath = storage_path('app/public/qr-images/' . $filename);
+            $filePath = public_path('store/qr-images/' . $filename);
 
             QrCode::size(300)->format('png')->generate($qrCodeData, $filePath);
 
@@ -183,7 +182,7 @@ class BookController extends Controller
             $randomString = Str::random(6);
             $qrCodeData = $book->lib_book_code;
             $filename = $randomString . $book->lib_book_code . '.png';
-            $filePath = storage_path('app/public/qr-images/' . $filename);
+            $filePath = public_path('store/qr-images/' . $filename);
 
             QrCode::size(300)->format('png')->generate($qrCodeData, $filePath);
 
@@ -203,12 +202,12 @@ class BookController extends Controller
                 ->encode('webp', 75); // Convert to WebP format
 
             // Save the compressed and converted image
-            $compressedImage->save(storage_path('app/public/images/' . $ogImageName));
+            $compressedImage->save(public_path('store/images/' . $ogImageName));
 
             $data['image'] = $ogImageName;
 
             // Delete the old image
-            Storage::delete('public/images/' . $book->image);
+            File::delete(public_path('store/images/' . $book->image));
         }
         $data['is_recommended'] = $request->has('is_recommended') ? 1 : 0;
 
@@ -245,8 +244,18 @@ class BookController extends Controller
             return redirect()->route('admin.book')
                 ->with('error', 'Gagal menghapus item barang. Item barang masih dipinjam.');
         }
-        Storage::delete('public/images/' . $book->image);
-        Storage::delete('public/qr-images/' . $book->qr_code);
+
+        // Delete the image
+        $imagePath = public_path('images/' . $book->image);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        // Delete the QR code
+        $qrCodePath = public_path('qr-images/' . $book->qr_code);
+        if (file_exists($qrCodePath)) {
+            unlink($qrCodePath);
+        }
 
         $book->forceDelete();
 

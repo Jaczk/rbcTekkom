@@ -6,6 +6,7 @@ use App\Models\Donate;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
@@ -62,12 +63,11 @@ class DonateController extends Controller
                 ->encode('webp', 75); // Convert to WebP format
 
             // Save the compressed and converted image
-            $compressedImage->save(storage_path('app/public/images/' . $ogImageName));
+            $compressedImage->save(public_path('store/images/' . $ogImageName));
 
             $data['image'] = $ogImageName;
         }
         Donate::create($data);
-        Artisan::call('custom:storagelink');
 
         return redirect()->route('admin.donate')->with('success', 'Buku berhasil ditambahkan');
     }
@@ -111,9 +111,6 @@ class DonateController extends Controller
 
         $donate = Donate::find($id);
 
-        // // Set is_fav to 1 if the checkbox is checked, otherwise set it to 0
-        // $data['is_fav'] = $request->has('is_fav') ? 1 : 0;
-
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $ogImageName = Str::random(8) . $image->getClientOriginalName();
@@ -127,12 +124,12 @@ class DonateController extends Controller
                 ->encode('webp', 75); // Convert to WebP format
 
             // Save the compressed and converted image
-            $compressedImage->save(storage_path('app/public/images/' . $ogImageName));
+            $compressedImage->save(public_path('store/images/' . $ogImageName));
 
             $data['image'] = $ogImageName;
 
             // Delete the old image
-            Storage::delete('public/images/' . $donate->image);
+            File::delete(public_path('store/images/' . $donate->image));
         }
 
 
@@ -163,6 +160,8 @@ class DonateController extends Controller
     public function destroy(string $id)
     {
         $donate = Donate::find($id);
+
+        File::delete(public_path('store/images/' . $donate->image));
 
         $donate->forceDelete();
 

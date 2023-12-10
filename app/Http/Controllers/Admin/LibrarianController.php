@@ -16,7 +16,7 @@ class LibrarianController extends Controller
     }
 
     public function edit(string $id)
-    {   
+    {
         $decryptId = Crypt::decryptString($id);
         $librarian =  Librarian::find($decryptId);
 

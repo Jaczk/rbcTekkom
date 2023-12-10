@@ -68,17 +68,7 @@ class BookLabelController extends Controller
         // Define the filename for the generated PDF
         $pdfFileName = 'book_labels_' . time() . '.pdf';
 
-        // Save the PDF to a temporary file for printing
-        $tempPdfFilePath = storage_path('app/temp/' . $pdfFileName);
-        $pdf->save($tempPdfFilePath);
-
-        // Create a BinaryFileResponse with appropriate headers
-        $response = response()->file($tempPdfFilePath, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => "attachment; filename=$pdfFileName", // Download the PDF
-        ])->deleteFileAfterSend(true);
-
-        return $response;
+        return $pdf->download($pdfFileName);
     }
 
 }

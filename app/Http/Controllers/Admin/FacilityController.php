@@ -6,6 +6,7 @@ use App\Models\Facility;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,14 +47,16 @@ class FacilityController extends Controller
         // Check if the gallery has an existing image
         if ($gallery->image) {
             // Delete the old image
-            Storage::disk('public')->delete('facility/' . $gallery->image);
+            File::delete(public_path('store/facility/' . $gallery->image));
         }
 
         if ($request->hasFile('image')) {
             // Upload and store the new image
             $image = $request->file('image');
             $filename = Str::random(8) . $image->getClientOriginalName();
-            Storage::disk('public')->put('facility/' . $filename, file_get_contents($image));
+
+            // Move the file to public/store/c100
+            $image->move(public_path('store/facility'), $filename);
 
             // Update the gallery with the new image and caption
             $gallery->update([
@@ -91,7 +94,7 @@ class FacilityController extends Controller
         $image = $request->file('image');
         $filename = Str::random(8) . $image->getClientOriginalName();
         // Store the image in the public/storage/facility directory
-        Storage::disk('public')->put('facility/' . $filename, file_get_contents($image));
+        $image->move(public_path('store/facility'), $filename);
 
         Facility::create([
             'image' => $filename,
