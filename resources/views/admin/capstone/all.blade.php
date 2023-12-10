@@ -60,19 +60,19 @@
                                             <td>{{ $t->lec1->name }}</td>
                                             <td>{{ $t->lec2->name }}</td>
                                             <td>
-                                                <a href="{{ asset('storage/c100/' . $t->c100) }}" target="_blank"><i
+                                                <a href="{{ asset('store/c100/' . $t->c100) }}" target="_blank"><i
                                                         class="fas fa-file-pdf"></i></a>
                                             </td>
-                                            <td><a href="{{ asset('storage/c200/' . $t->c200) }}" target="_blank"><i
+                                            <td><a href="{{ asset('store/c200/' . $t->c200) }}" target="_blank"><i
                                                         class="fas fa-file-pdf"></i></a>
                                             </td>
-                                            <td><a href="{{ asset('storage/c300/' . $t->c300) }}" target="_blank"><i
+                                            <td><a href="{{ asset('store/c300/' . $t->c300) }}" target="_blank"><i
                                                         class="fas fa-file-pdf"></i></a>
                                             </td>
-                                            <td><a href="{{ asset('storage/c400/' . $t->c400) }}" target="_blank"><i
+                                            <td><a href="{{ asset('store/c400/' . $t->c400) }}" target="_blank"><i
                                                         class="fas fa-file-pdf"></i></a>
                                             </td>
-                                            <td><a href="{{ asset('storage/c500/' . $t->c500) }}" target="_blank"><i
+                                            <td><a href="{{ asset('store/c500/' . $t->c500) }}" target="_blank"><i
                                                         class="fas fa-file-pdf"></i></a>
                                             </td>
                                             <td class="flex-row d-flex">

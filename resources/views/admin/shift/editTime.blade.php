@@ -36,38 +36,38 @@
                     @csrf
                     @method('PUT')
                     <div class="card-body">
-                      <div class="form-row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="title">Hari</label>
-                                <input type="text" class="form-control" id="day" name="day"
-                                    placeholder="Senin" value="{{ $shift->day }}">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="title">Hari</label>
+                                    <input type="text" class="form-control" id="day" name="day"
+                                        placeholder="Senin" value="{{ $shift->day }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="title">Jam Layanan Shift 1</label>
+                                    <input type="text" class="form-control" id="s1" name="s1"
+                                        placeholder="Jam Layanan Pustakawan Shift 1" value="{{ $shift->s1 }}">
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="title">Jam Layanan Shift 1</label>
-                                <input type="text" class="form-control" id="s1" name="s1"
-                                    placeholder="Jam Layanan Pustakawan Shift 1" value="{{ $shift->s1 }}">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="title">Jam Layanan Shift 2</label>
+                                    <input type="text" class="form-control" id="s2" name="s2"
+                                        placeholder="Jam Layanan Shift 2" value="{{ $shift->s2 }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="title">Jam Layanan Shift 3</label>
+                                    <input type="text" class="form-control" id="s3" name="s3"
+                                        placeholder="Jam Layanan Shift 3" value="{{ $shift->s3 }}">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="title">Jam Layanan Shift 2</label>
-                                <input type="text" class="form-control" id="s2" name="s2"
-                                    placeholder="Jam Layanan Shift 2" value="{{ $shift->s2 }}">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="title">Jam Layanan Shift 3</label>
-                                <input type="text" class="form-control" id="s3" name="s3"
-                                    placeholder="Jam Layanan Shift 3" value="{{ $shift->s3 }}">
-                            </div>
-                        </div>
-                    </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">

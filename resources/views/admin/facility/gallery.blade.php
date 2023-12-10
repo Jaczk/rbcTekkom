@@ -48,7 +48,7 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td class="text-center">{{ $g->caption }}</td>
-                                            <td class="text-center"><img src="{{ asset('storage/facility/' . $g->image) }}" class="img-fluid"
+                                            <td class="text-center"><img src="{{ asset('store/facility/' . $g->image) }}" class="img-fluid"
                                                     style="width: 180px" alt="Image"></td>
                                             <td class="flex-row d-flex">
                                                 <a href="{{ route('admin.facility.gallery.edit', Crypt::encryptString($g->id)) }}"

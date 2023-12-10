@@ -61,10 +61,10 @@
                                             <td>{{ $t->lec1->name }}</td>
                                             <td>{{ $t->lec2->name }}</td>
                                             <td>
-                                                <a href="{{ asset('storage/pdf-1/' . $t->file_1) }}" target="_blank"><i
+                                                <a href="{{ asset('store/pdf-1/' . $t->file_1) }}" target="_blank"><i
                                                         class="fas fa-file-pdf"></i></a>
                                             </td>
-                                            <td><a href="{{ asset('storage/pdf-2/' . $t->file_2) }}" target="_blank"><i
+                                            <td><a href="{{ asset('store/pdf-2/' . $t->file_2) }}" target="_blank"><i
                                                         class="fas fa-file-pdf"></i></a>
                                             </td>
                                             <td class="flex-row d-flex">

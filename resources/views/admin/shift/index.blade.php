@@ -58,15 +58,6 @@
                                                     class="btn btn-secondary">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <!-- Button trigger modal -->
-                                                {{-- <form method="post" 
-                                                    action="{{ route('admin.shift.destroy', $shift->id) }}">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button type="submit" class="mx-2 btn btn-danger delete-btn">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form> --}}
                                             </td>
                                         </tr>
                                     @endforeach

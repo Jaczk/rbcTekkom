@@ -122,7 +122,7 @@
                                 <div class="mb-3">
                                     <label class="mb-1" for="abstract">Abstrak</label>
                                     <textarea class="form-control" id="abstract" rows="5" name="abstract">
-                                  {!! $theses->abstract !!}
+                                        {!! $theses->abstract !!}
                             </textarea>
                                 </div>
                             </div>

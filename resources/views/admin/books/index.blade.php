@@ -81,7 +81,7 @@
                                                     <p >{{ $book->stock }}</p>
                                                 </td>
                                                 <td class="text-center">
-                                                    <img src="{{ filter_var($book->image, FILTER_VALIDATE_URL) ? $book->image : asset('storage/images/' . $book->image) }}"
+                                                    <img src="{{ asset('store/images/' . $book->image) }}"
                                                         class="img-fluid" style="width: 180px" alt="Image">
                                                 </td>
                                                 
@@ -348,7 +348,7 @@
                     $('#book-spec_detail').text(data.spec_detail.desc);
 
                     // Set the source of the QR image
-                    var QRimagePath = "{{ asset('storage/qr-images/') }}/" + data.qr_code;
+                    var QRimagePath = "{{ asset('store/qr-images/') }}/" + data.qr_code;
 
                     // Append an <img> element to the corresponding <td>
                     $('#book-qrimage').html('<img src="' + QRimagePath +

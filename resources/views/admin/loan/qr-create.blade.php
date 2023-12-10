@@ -80,13 +80,8 @@
             $("#lib_book_code").keypress(function (e) {
                 if (e.which === 13) {
                     e.preventDefault();
-                    // alert("Book details will be displayed here. User can review and proceed.");
-                    // You can add your logic here to display book details or take further action.
                 }
             });
-    
-            // Uncomment the following line if you want to disable the field after a certain event (e.g., form submission)
-            // libBookCodeInput.disabled = true;
         });
     </script>
 

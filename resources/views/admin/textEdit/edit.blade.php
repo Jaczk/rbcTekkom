@@ -36,21 +36,21 @@
                     @csrf
                     @method('PUT')
                     <div class="card-body">
-                        
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="name">Nama Halaman</label>
-                                    <input type="text" class="form-control" id="book_name" name="title"
-                                        placeholder="Python For Beginner" value="{{ $text->title }}">
-                                </div>
-                            </div>
 
-                            <div class="col">
-                                <div class="form-group">
-                                    <input id="desc" type="hidden" name="desc" value="{{ old('desc', $text->desc) }}">
-                                    <trix-editor input="desc"></trix-editor>
-                                </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="name">Nama Halaman</label>
+                                <input type="text" class="form-control" id="book_name" name="title"
+                                    placeholder="Python For Beginner" value="{{ $text->title }}">
                             </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <input id="desc" type="hidden" name="desc" value="{{ old('desc', $text->desc) }}">
+                                <trix-editor input="desc"></trix-editor>
+                            </div>
+                        </div>
 
                     </div>
                     <!-- /.card-body -->
@@ -88,9 +88,9 @@
     </script>
 
     <script>
-      document.addEventListener('trix-file-accept', function() {
-        e.preventDefault(); // Prevent
-      })
+        document.addEventListener('trix-file-accept', function() {
+            e.preventDefault(); // Prevent
+        })
     </script>
 
     <script>

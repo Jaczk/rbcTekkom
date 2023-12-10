@@ -69,7 +69,7 @@
 <body>
     <div class="label">
         <div class="cell left">
-            <img src="{{ public_path('storage/qr-images/' . $book->qr_code) }}" alt="QR Code" width="120px">
+            <img src="{{ public_path('store/qr-images/' . $book->qr_code) }}" alt="QR Code" width="120px">
         </div>
         <div class="cell right">
             <div class="border-title">

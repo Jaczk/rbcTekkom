@@ -73,8 +73,8 @@
                             <div class="col">
                                 <div class="mb-2 form-check mt-4 form-group">
                                     <input type="hidden" name="is_fav" id="is_fav_hidden" value="{{ $donate->is_fav }}">
-                                    <input class="form-check-input" type="checkbox" id="is_fav" name="is_fav" value="1"
-                                           @if ($donate->is_fav == 1) checked @endif>
+                                    <input class="form-check-input" type="checkbox" id="is_fav" name="is_fav"
+                                        value="1" @if ($donate->is_fav == 1) checked @endif>
                                     <label class="form-check-label font-weight-bold" for="is_fav">
                                         Apakah Favorit?
                                     </label>
@@ -139,5 +139,5 @@
             }
         });
     </script>
-    
+
 @endsection
