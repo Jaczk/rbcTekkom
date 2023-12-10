@@ -60,9 +60,9 @@
         <div class="portfolio-item row mt-5 p-4 ">
             @foreach ($photos1 as $p)
                 <div class="item selfie col-lg-3 col-md-4 col-6 col-sm">
-                    <a href="{{ asset('storage/facility/' . $p->image) }}" class="fancylight popup-btn"
+                    <a href="{{ asset('store/facility/' . $p->image) }}" class="fancylight popup-btn"
                         data-fancybox-group="light">
-                        <img class="img-fluid" src="{{ asset('storage/facility/' . $p->image) }}" alt="">
+                        <img class="img-fluid" src="{{ asset('store/facility/' . $p->image) }}" alt="">
                     </a>
                 </div>
             @endforeach

@@ -61,28 +61,28 @@
                         <div class="mt-3">
                             <div>
                                 <a class="link-underline link-underline-opacity-0"
-                                    href="{{ asset('storage/c100/' . $capstone->c100) }}" target="_blank"><i
+                                    href="{{ asset('store/c100/' . $capstone->c100) }}" target="_blank"><i
                                         class="fa-regular fa-file me-2 mt-2"></i>Dokumen C100</a>
                             </div>
                             <div>
                                 <a class="link-underline link-underline-opacity-0"
-                                    href="{{ asset('storage/c200/' . $capstone->c200) }}" target="_blank"><i
+                                    href="{{ asset('store/c200/' . $capstone->c200) }}" target="_blank"><i
                                         class="fa-regular fa-file me-2 mt-2"></i>Dokumen C200</a>
                             </div>
                             @if (Auth::check() && Auth::user()->role_id == 3)
                                 <div>
                                     <a class="link-underline link-underline-opacity-0"
-                                        href="{{ asset('storage/c300/' . $capstone->c300) }}" target="_blank"><i
+                                        href="{{ asset('store/c300/' . $capstone->c300) }}" target="_blank"><i
                                             class="fa-regular fa-file me-2"></i>Dokumen C300</a>
                                 </div>
                                 <div>
                                     <a class="link-underline link-underline-opacity-0"
-                                        href="{{ asset('storage/c400/' . $capstone->c400) }}" target="_blank"><i
+                                        href="{{ asset('store/c400/' . $capstone->c400) }}" target="_blank"><i
                                             class="fa-regular fa-file me-2"></i>Dokumen C400</a>
                                 </div>
                                 <div>
                                     <a class="link-underline link-underline-opacity-0"
-                                        href="{{ asset('storage/c500/' . $capstone->c500) }}" target="_blank"><i
+                                        href="{{ asset('store/c500/' . $capstone->c500) }}" target="_blank"><i
                                             class="fa-regular fa-file me-2"></i>Dokumen C500</a>
                                 </div>
                             @endif

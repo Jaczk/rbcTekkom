@@ -81,11 +81,11 @@
                         data-url="{{ route('book.show', $book->id) }}" style="width: 18rem; color: inherit;">
                         <div class="mx-3" style="width: 250px; height: 420px;">
                             @if ($book->stock == 0)
-                            <img src="{{ asset('storage/images/' . $book->image) }}"
+                            <img src="{{ asset('store/images/' . $book->image) }}"
                                 class="card-img rounded-4 object-fit-cover" style="height: 300px; width: 100%; filter: grayscale(100%);"
                                 alt="bookImage">
                             @else
-                            <img src="{{ asset('storage/images/' . $book->image) }}"
+                            <img src="{{ asset('store/images/' . $book->image) }}"
                                 class="card-img rounded-4 object-fit-cover" style="height: 300px; width: 100%;"
                                 alt="bookImage">
                             @endif
@@ -241,7 +241,7 @@
         $('body').on('click', '#show-detail', function() {
             var userURL = $(this).data('url');
             $.get(userURL, function(data) {
-                // var img = text("/storage/app/public/images/") + text(data.image);
+                // var img = text("/store/app/public/images/") + text(data.image);
                 $('#userShowModal').modal('show');
                 $('#book-name').text(data.book_name);
                 $('#book-publisher').text(data.publisher);
@@ -254,7 +254,7 @@
                 $('#book-lib').text(data.lib_book_code);
                 $('#book-spec_detail').text(data.spec_detail.desc);
                 // Set the image source
-                var imagePath = "{{ asset('storage/images/') }}/" + data.image;
+                var imagePath = "{{ asset('store/images/') }}/" + data.image;
                 $('#book-image').attr("src", imagePath);
             })
         });

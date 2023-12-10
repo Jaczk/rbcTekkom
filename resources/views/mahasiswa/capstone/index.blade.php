@@ -80,7 +80,8 @@
                 @forelse ($capstones as $c)
                     <div class="mb-3 col-md-12">
                         <div class="border-bottom border-dark">
-                            <a class="fs-5" href="{{ route('user.capstone.detail', Crypt::encryptString($c->team_name)) }}">
+                            <a class="fs-5"
+                                href="{{ route('user.capstone.detail', Crypt::encryptString($c->team_name)) }}">
                                 {{ $c->capstone_title }}
                             </a>
                         </div>
@@ -112,13 +113,14 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         @if ($capstones->currentPage() > 1)
-                            <li class="page-item"><a class="page-link" href="{{ $capstones->previousPageUrl() }}">Previous</a>
+                            <li class="page-item"><a class="page-link"
+                                    href="{{ $capstones->previousPageUrl() }}">Previous</a>
                             </li>
                         @endif
 
                         @for ($i = max(1, $capstones->currentPage() - 1); $i <= min($capstones->lastPage(), $capstones->currentPage() + 1); $i++)
-                            <li class="page-item {{ $i == $capstones->currentPage() ? 'active' : '' }}"><a class="page-link"
-                                    href="{{ $capstones->url($i) }}">{{ $i }}</a></li>
+                            <li class="page-item {{ $i == $capstones->currentPage() ? 'active' : '' }}"><a
+                                    class="page-link" href="{{ $capstones->url($i) }}">{{ $i }}</a></li>
                         @endfor
 
                         @if ($capstones->currentPage() < $capstones->lastPage())

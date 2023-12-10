@@ -25,7 +25,7 @@
                             <!-- Profile picture image-->
                             @if ($user->profile_image)
                                 <img class="img-account-profile rounded-2 mb-2" style="width: 100%"
-                                    src="{{ asset('storage/profile/' . $user->profile_image) }}" alt=""
+                                    src="{{ asset('store/profile/' . $user->profile_image) }}" alt=""
                                     id="profile_image">
                             @else
                                 <img class="img-account-profile rounded-2 mb-2" style="width: 100%"
@@ -92,7 +92,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="ktm_image">Upload Foto KTM</label>
-                                <img src="{{ asset('storage/ktm/' . $user->ktm_image) }}" id="ktm-image" alt=""
+                                <img src="{{ asset('store/ktm/' . $user->ktm_image) }}" id="ktm-image" alt=""
                                     class="mb-2 img-fluid d-flex" style="width: 250px">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="" name="ktm_image"
@@ -177,11 +177,11 @@
                                         <td>{{ $t->lec2->name }}</td>
                                         <td>{{ $t->year }}</td>
                                         <td>
-                                            <a href="{{ asset('storage/pdf-1/' . $t->file_1) }}" target="_blank"><i
+                                            <a href="{{ asset('store/pdf-1/' . $t->file_1) }}" target="_blank"><i
                                                     class="fa-regular fa-file-pdf"></i></a>
                                         </td>
 
-                                        <td><a href="{{ asset('storage/pdf-2/' . $t->file_2) }}" target="_blank"><i
+                                        <td><a href="{{ asset('store/pdf-2/' . $t->file_2) }}" target="_blank"><i
                                                     class="fa-regular fa-file-pdf"></i></a>
                                         </td>
                                         <td>
@@ -261,19 +261,19 @@
                                         <td>{{ $t->lec1->name }}</td>
                                         <td>{{ $t->lec2->name }}</td>
                                         <td>{{ $t->year }}</td>
-                                        <td><a href="{{ asset('storage/c100/' . $t->c100) }}" target="_blank"><i
+                                        <td><a href="{{ asset('store/c100/' . $t->c100) }}" target="_blank"><i
                                                     class="fa-regular fa-file-pdf"></i></a>
                                         </td>
-                                        <td><a href="{{ asset('storage/c200/' . $t->c200) }}" target="_blank"><i
+                                        <td><a href="{{ asset('store/c200/' . $t->c200) }}" target="_blank"><i
                                                     class="fa-regular fa-file-pdf"></i>
                                         </td>
-                                        <td><a href="{{ asset('storage/c300/' . $t->c300) }}" target="_blank"><i
+                                        <td><a href="{{ asset('store/c300/' . $t->c300) }}" target="_blank"><i
                                                     class="fa-regular fa-file-pdf"></i>
                                         </td>
-                                        <td><a href="{{ asset('storage/c400/' . $t->c400) }}" target="_blank"><i
+                                        <td><a href="{{ asset('store/c400/' . $t->c400) }}" target="_blank"><i
                                                     class="fa-regular fa-file-pdf"></i>
                                         </td>
-                                        <td><a href="{{ asset('storage/c500/' . $t->c500) }}" target="_blank"><i
+                                        <td><a href="{{ asset('store/c500/' . $t->c500) }}" target="_blank"><i
                                                     class="fa-regular fa-file-pdf"></i>
                                         </td>
                                         <td>

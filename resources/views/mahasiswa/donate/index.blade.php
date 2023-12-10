@@ -28,7 +28,7 @@
                     <a href="javascript:void(0)" class="" id="show-detail"
                         data-url="{{ route('user.donate.show', $book->id) }}" style="width: 18rem; color: inherit;">
                         <div class="mx-3" style="width: 250px; height: 420px;">
-                            <img src="{{ asset('storage/images/' . $book->image) }}"
+                            <img src="{{ asset('store/images/' . $book->image) }}"
                                 class="card-img rounded-4 object-fit-cover" style="height: 300px; width: 100%;"
                                 alt="bookImage">
                             <div class="bg-transparent">
@@ -152,7 +152,7 @@
         $('body').on('click', '#show-detail', function() {
             var userURL = $(this).data('url');
             $.get(userURL, function(data) {
-                // var img = text("/storage/app/public/images/") + text(data.image);
+                // var img = text("/store/app/public/images/") + text(data.image);
                 $('#userShowModal').modal('show');
                 $('#book-name').text(data.book_name);
                 $('#book-publisher').text(data.publisher);
@@ -160,7 +160,7 @@
                 $('#book-desc').text(data.desc);
                 $('#book-price').text(data.price);
                 // Set the image source
-                var imagePath = "{{ asset('storage/images/') }}/" + data.image;
+                var imagePath = "{{ asset('store/images/') }}/" + data.image;
                 $('#book-image').attr("src", imagePath);
             })
         });

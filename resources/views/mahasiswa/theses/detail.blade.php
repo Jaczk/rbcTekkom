@@ -60,12 +60,12 @@
                     <div class="mt-2 mb-4">
                         @if (Auth::check() && Auth::user()->role_id == 3)
                         <div>
-                            <a class="link-underline link-underline-opacity-0" href="{{ asset('storage/pdf-2/' . $theses->file_2) }}" target="_blank"><i
+                            <a class="link-underline link-underline-opacity-0" href="{{ asset('store/pdf-2/' . $theses->file_2) }}" target="_blank"><i
                                     class="fa-regular fa-file me-2"></i>Cover, Bab 1 hingga Bab 5 atau 6</a>
                         </div>
                         @else
                         <div>
-                            <a class="link-underline link-underline-opacity-0" href="{{ asset('storage/pdf-1/' . $theses->file_1) }}" target="_blank"><i
+                            <a class="link-underline link-underline-opacity-0" href="{{ asset('store/pdf-1/' . $theses->file_1) }}" target="_blank"><i
                                     class="fa-regular fa-file me-2"></i>Cover, Bab 1, dan Bab 2</a>
                         </div>
                         @endif
