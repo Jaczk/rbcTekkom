@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
@@ -54,11 +55,11 @@ class ProfileController extends Controller
                 ->encode('webp', 75);
 
             // Save the compressed and converted image
-            $compressedImage->save(storage_path('app/public/profile/' . $ogImageName));
+            $compressedImage->save(public_path('store/profile/' . $ogImageName));
 
             // Delete the old image
             if ($user->profile_image) {
-                Storage::delete('public/profile/' . $user->profile_image);
+                File::delete(public_path('store/profile/' . $user->profile_image));
             }
 
             // Update the user's profile with the new image name
@@ -77,13 +78,12 @@ class ProfileController extends Controller
                     $constraint->upsize();
                 })
                 ->encode('webp', 75);
-
             // Save the compressed and converted image
-            $kcompressedImage->save(storage_path('app/public/ktm/' . $kogImageName));
+            $kcompressedImage->save(public_path('store/ktm/' . $kogImageName));
 
             // Delete the old image
             if ($user->ktm_image) {
-                Storage::delete('public/ktm/' . $user->ktm_image);
+                File::delete(public_path('store/ktm/' . $user->ktm_image));
             }
 
             // Update the user's profile with the new image name
@@ -105,5 +105,4 @@ class ProfileController extends Controller
 
         return redirect()->route('user.profile')->with('success', 'Sukses Memperbarui Profil');
     }
-
 }

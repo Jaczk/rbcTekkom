@@ -23,13 +23,13 @@ class RegisterController extends Controller
             'phone' => 'required|max:15|regex:/^\+62[1-9][0-9]*$/',
             'email' => 'required|email',
             'password' => 'required|min:6'
-        ],[
+        ], [
             'name.required' => 'Username wajib diisi',
             'nim.required' => 'NIM wajib diisi',
             'full_name.required' => 'Nama Lengkap wajib diisi',
             'nim.unique' => 'NIM sudah digunakan, silakan input NIM lain',
-            'phone.required'=>'Nomor telepon wajib diisi',
-            'phone.max'=>'Nomor telepon maksimal 15 karakter',
+            'phone.required' => 'Nomor telepon wajib diisi',
+            'phone.max' => 'Nomor telepon maksimal 15 karakter',
             'phone.regex' => 'Penulisan nomor telepon diawali dengan +62',
             'email.required' => 'Email harus diisi dan valid',
             'password.required' => 'Password wajib diisi',
