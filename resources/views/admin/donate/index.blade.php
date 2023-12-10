@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div>
                 <div class="card-header" style="background-color: #6998AB">
-                    <h3 class="card-title">Daftar Buku Sumbangan</h3>
+                    <h3 class="card-title text-white">Daftar Buku Sumbangan</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">

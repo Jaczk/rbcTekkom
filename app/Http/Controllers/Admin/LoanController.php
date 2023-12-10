@@ -148,7 +148,7 @@ class LoanController extends Controller
     public function create()
     {
         $bookDrops = Book::where('stock', '>=', 1)->get();
-        $userDrops = User::where('is_loan', 0)->get();
+        $userDrops = User::where('role_id', 2)->where('is_loan', 0)->get();
         return view('admin.loan.create', compact('bookDrops', 'userDrops'));
     }
     /**

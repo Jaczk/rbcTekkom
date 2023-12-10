@@ -61,7 +61,7 @@ class ThesesController extends Controller
         // Handle file_2 upload
         $file2 = $request->file('file_2');
         $file2Name = Str::random(8) . $file2->getClientOriginalName();
-        $file1->move(public_path('store/pdf-2'), $file2Name);
+        $file2->move(public_path('store/pdf-2'), $file2Name);
 
         // Create Thesis instance
         $thesis = new Thesis([
